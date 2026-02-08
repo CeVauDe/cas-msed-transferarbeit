@@ -1,0 +1,50 @@
+[project]
+name = "mcp-chatbot-workspace"
+version = "0.1.0"
+description = "Workspace for MCP Chatbot PoC"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["apps/*"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "pre-commit>=4.0.0",
+    "ruff>=0.8.0",
+    "ty>=0.0.1a6",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["apps/chatbot/src", "apps/mcp_server/src"]
+
+[tool.ruff.lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # Pyflakes
+    "I",      # isort
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "UP",     # pyupgrade
+    "ARG",    # flake8-unused-arguments
+    "SIM",    # flake8-simplify
+]
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["chatbot", "mcp_server"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["apps"]
+pythonpath = ["apps/chatbot/src", "apps/mcp_server/src"]
+
+[tool.ty.environment]
+python-version = "3.14"
+extra-paths = ["apps/chatbot/src", "apps/mcp_server/src"]
