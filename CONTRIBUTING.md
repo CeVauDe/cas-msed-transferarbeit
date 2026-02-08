@@ -11,7 +11,7 @@ This is the thesis of the CAS Modern Software Engineering & Development of the L
 ├── .vscode/
 │   └── settings.json           # Shared VS Code settings
 ├── poc/                        # Proof of concept documentation
-│   └── poc.md 
+│   └── README.md
 ├── thesis/                     # Source code ot the thesis written in LaTeX
 │   └── thesis.md
 └── ...
@@ -19,7 +19,5 @@ This is the thesis of the CAS Modern Software Engineering & Development of the L
 
 For more detailed instructions on the specific sections, please refer to the following documentation files:
 
-- [poc/poc.md](poc/poc.md)
+- [poc/README.md](poc/README.md)
 - [thesis/thesis.md](thesis/thesis.md)
-
-
