@@ -1,0 +1,62 @@
+# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Type checking
+.mypy_cache/
+.ty_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+.env.example
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Docker (don't copy docker files into the image)
+docker/
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Pre-commit
+.pre-commit-config.yaml
+
+# GitHub
+.github/
+
+# Thesis files (not needed in containers)
+../thesis/

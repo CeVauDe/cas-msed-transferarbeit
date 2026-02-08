@@ -1,0 +1,26 @@
+services:
+  chatbot:
+    build:
+      context: .
+      dockerfile: docker/chatbot/Dockerfile
+    container_name: mcp-chatbot
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ./apps/chatbot/src:/app/apps/chatbot/src:ro
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mcp-server
+
+  mcp-server:
+    build:
+      context: .
+      dockerfile: docker/mcp_server/Dockerfile
+    container_name: mcp-server
+    ports:
+      - "8080:8080"
+    environment:
+      - MCP_SERVER_PORT=8080
+    volumes:
+      - ./apps/mcp_server/src:/app/apps/mcp_server/src:ro
