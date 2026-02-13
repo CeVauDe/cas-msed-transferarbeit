@@ -22,7 +22,7 @@ repos:
     hooks:
       - id: ty
         name: ty (type checking)
-        entry: bash -c "cd poc && ~/.local/bin/uv run ty check"
+        entry: bash -c "cd poc && uv run ty check"
         language: system
         types: [python]
         pass_filenames: false
