@@ -1,0 +1,30 @@
+== Ergebnisse
+Präsentieren Sie hier Ihre Ergebnisse. In diesem Kapitel werden die Beobachtungen und Daten aus dem Proof-of-Concept detailliert ausgewertet. Die Ergebnisse zeigen, dass die Implementierung von MCP-Servern zu einer signifikanten Reduktion der Kopplung zwischen den beteiligten KI-Agenten führt.
+
+=== Quantitative Analyse
+Die durchgeführten Lasttests ergaben, dass das System auch bei einer hohen Anzahl gleichzeitiger Anfragen stabil bleibt. Die Latenzzeiten lagen im Durchschnitt unter 150ms, was für die meisten Echtzeit-Anwendungen ausreichend ist.
+
+Sie können Gleichungen als STEM-Blöcke einfügen, um mathematische Zusammenhänge präzise darzustellen. Zum Beispiel die berühmte Formel von Einstein:
+
+[stem]
+++++
+E = mc^2
+++++
+
+Diese Gleichung dient hier nur als Platzhalter für komplexere mathematische Modelle, die im Verlauf der Arbeit entwickelt wurden. Die Modellierung der Systemlast lässt sich beispielsweise durch eine lineare Funktion beschreiben, die den Zusammenhang zwischen Nutzeranzahl und Ressourcenverbrauch verdeutlicht.
+
+=== Visualisierung der Daten
+Ein zentraler Aspekt der Ergebnisse ist das Wachstum der Interaktionen im Multi-Vendor-Ökosystem. Die folgende Abbildung illustriert diesen Trend über das aktuelle Geschäftsjahr hinweg. Es wird deutlich, dass insbesondere im dritten Quartal (Q3) ein signifikanter Anstieg zu verzeichnen war.
+
+[[fig-wachstum,Abbildung 2]]
+.Wachstumsanalyse über das aktuelle Geschäftsjahr
+image::generated/sample-chart.svg[Beispiel Wachstumsdiagramm, align="center"]
+
+Das Diagramm verdeutlicht, dass die Skalierbarkeit der Architektur durch die gewählten Mechanismen erfolgreich adressiert werden konnte. 
+
+=== Qualitative Erkenntnisse
+Neben den messbaren Werten lieferte die Evaluation des PoC auch qualitative Einsichten. Die Entwickler berichteten von einer deutlichen Verbesserung der Developer Experience (DX), da die modulare Struktur die Einarbeitungszeit in neue Service-Komponenten verkürzte.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Zusammenfassend lässt sich sagen, dass der PoC die theoretischen Annahmen weitgehend bestätigt hat. Die Flexibilität des Systems gegenüber Änderungen in den Datenquellen war bemerkenswert und unterstreicht das Potenzial von MCP als Brückentechnologie in heterogenen Umgebungen.

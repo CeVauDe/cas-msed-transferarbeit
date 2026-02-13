@@ -1,0 +1,24 @@
+:lang: de
+= Titel der Transferarbeit
+Autor Name
+:doctype: book
+include::config/config.adoc[]
+:chapter-label: Kapitel
+:!chapter-signifier:
+
+[preface]
+== Zusammenfassung
+// include::text/abstract.adoc[]
+Some sample text for the abstract. This section provides a brief overview of the research question, methodology, and key findings of the transfer thesis. The abstract should be concise and informative, giving readers a clear understanding of the scope and significance of the work.
+
+[preface]
+== Abbildungsverzeichnis
+list-of::image[enhanced_rendering=true]
+
+include::text/introduction.adoc[]
+
+include::text/methods.adoc[]
+
+include::text/results.adoc[]
+
+include::text/conclusion.adoc[]

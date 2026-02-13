@@ -233,3 +233,7 @@ __marimo__/
 *.bcf
 *.run.xml
 *.pdf
+
+# Asciidoctor generated files
+thesis/generated/
+stem-*.svg

@@ -1,0 +1,13 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+== Verzeichnisse
+
+[[image-directory]]
+=== Abbildungsverzeichnis
+// Works only with images they have a caption
+list-of::image[enhanced_rendering=true]
+
+[[table-directory]]
+=== Tabellenverzeichnis
+// Works only with tables they have a caption
+list-of::table[enhanced_rendering=true]

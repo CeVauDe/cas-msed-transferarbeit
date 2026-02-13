@@ -1,0 +1,1 @@
+Dies ist ein minimales Arbeitsbeispiel für den Übergang zu AsciiDoc. Es zeigt, wie die Struktur einer akademischen Arbeit mit modernen Werkzeugen wie Asciidoctor und Docker effizient verwaltet werden kann.

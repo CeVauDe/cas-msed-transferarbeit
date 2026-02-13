@@ -1,0 +1,17 @@
+== Fazit
+Fassen Sie hier Ihre Ergebnisse zusammen. In der vorliegenden Arbeit wurde untersucht, wie eine Transition von monolithischen zu modularen Architekturen mithilfe des Model Context Protocols (MCP) gestaltet werden kann. Die Kombination aus theoretischer Analyse und praktischer Umsetzung im Proof-of-Concept hat gezeigt, dass dieser Ansatz gangbar und zukunftsträchtig ist.
+
+=== Beantwortung der Forschungsfragen
+Die eingangs gestellten Forschungsfragen konnten im Rahmen der Untersuchung positiv beantwortet werden. Es zeigte sich, dass eine klar definierte Transition-Architektur die Steuerungsfähigkeit in komplexen Ökosystemen maßgeblich erhöht. Die Entkopplung von Diensten durch standardisierte Protokolle ermöglicht es Unternehmen, schneller auf technologische Neuerungen zu reagieren, ohne das Gesamtsystem zu gefährden.
+
+=== Limitationen der Arbeit
+Trotz der positiven Ergebnisse weist die vorliegende Untersuchung einige Limitationen auf. Der entwickelte PoC konzentriert sich auf ein spezifisches Szenario und deckt nicht die gesamte Breite möglicher Anwendungsfälle ab. Zudem wurden Sicherheitsaspekte, wie die feingranulare Autorisierung zwischen Agenten, nur oberflächlich behandelt. Wie in <<fig-wachstum>> zu sehen ist, beschränkt sich die Analyse auf das aktuelle Geschäftsjahr.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+=== Ausblick
+Zukünftige Forschungsarbeiten sollten sich verstärkt der Integration von KI-Sicherheitsmechanismen in MCP-Umgebungen widmen. Auch die Untersuchung der langfristigen Wartbarkeit von Multi-Vendor-Ökosystemen bei sich stetig ändernden Anbietern bietet interessantes Forschungspotenzial.
+
+Die Ergebnisse dieser Arbeit bilden eine solide Basis für weiterführende Projekte im Bereich der modernen Softwarearchitektur. Es bleibt festzuhalten, dass die Softwareindustrie am Beginn einer neuen Ära der vernetzten Intelligenz steht, in der Interoperabilität und Offenheit zu den wichtigsten Wettbewerbsvorteilen zählen werden.
+
+Abschließend lässt sich festhalten, dass der Wechsel zu AsciiDoc als Dokumentationswerkzeug die Erstellung dieser Arbeit erheblich erleichtert hat. Die Trennung von Inhalt und Formatierung sowie die nahtlose Integration in den Entwicklungsprozess sind wesentliche Vorteile, die wir auch in zukünftigen Projekten beibehalten wollen.

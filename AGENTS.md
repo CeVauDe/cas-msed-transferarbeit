@@ -8,18 +8,18 @@ This repository contains a **CAS MSED Transfer Thesis** project with two main co
 
 | Directory | Purpose |
 |-----------|---------|
-| `thesis/` | LaTeX thesis document |
+| `thesis/` | AsciiDoc thesis document |
 | `poc/` | Proof of Concept implementation (Python/uv workspace) |
 
 ## Thesis (`thesis/`)
 
-LaTeX document for the academic thesis.
+AsciiDoc document for the academic thesis.
 
 ### Building
 A GitHub Actions workflow at `.github/workflows/build-pdf.yml` builds the PDF automatically.
 
 ### Key Files
-- `thesis/main.tex` - Main LaTeX document
+- `thesis/main.adoc` - Main AsciiDoc document
 
 ## Proof of Concept (`poc/`)
 

@@ -1,19 +1,25 @@
-# Thesis (Transferarbeit) written in LaTeX
+# Thesis (Transferarbeit) written in AsciiDoc
 
-This direcory contains all the source files of the thesis written in LaTeX using TeXlive.
+This directory contains all the source files of the thesis written in AsciiDoc using Asciidoctor.
 
-## How to setup TeXLive
+## How to setup Asciidoctor
 
-This installation instructions are based on using [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) for VSCode and use a docker image to run the actual TeXlive for easy installation.
+These installation instructions are based on using the [AsciiDoc extension](https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode) for VSCode and use a Docker image to run the actual Asciidoctor toolchain for easy installation and PDF generation.
 
 ### Requirements
 - A recent version of VSCode
-- [LaTeX Workshop Extension](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+- [AsciiDoc VSCode Extension](https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode)
 - Docker (Desktop)
 
-### Setup
-1. Install the LaTex Workshop extension, if you haven't already
-2. Open the `main.tex` file. In the top right across the editor should appear a green `play` button (The same that is used to run scripts/applications)
-3. Press the arrow and wait for it to pull the texlive image and create the pdf. While this is ongoing, there is the `Build` indicator active at the left in the bottom status bar of VSCode.
-4. Open the pdf preview (one of the icons next to the `play` button)
-5. Change some text and see the changes appear in the pdf after a few seconds. If you have not enables autosave, you need to first save the changes for them to appear
+### Setup & Usage
+1. Install the **AsciiDoc** extension.
+2. Open [thesis/main.adoc](thesis/main.adoc).
+3. To preview the document, use the "Open Preview to the Side" button in the top right corner.
+4. To build the PDF manually, run the provided build script from the repository root:
+   ```bash
+   ./thesis/build.sh
+   ```
+5. The resulting [thesis/main.pdf](thesis/main.pdf) will be created.
+
+### Continuous Integration
+Any changes pushed to the `main` branch will automatically trigger a build via GitHub Actions, and the PDF will be available as a build artifact.

@@ -12,7 +12,7 @@ This is the thesis of the CAS Modern Software Engineering & Development of the L
 │   └── settings.json           # Shared VS Code settings
 ├── poc/                        # Proof of concept documentation
 │   └── README.md
-├── thesis/                     # Source code ot the thesis written in LaTeX
+├── thesis/                     # Source code ot the thesis written in AsciiDoc
 │   └── thesis.md
 └── ...
 ```

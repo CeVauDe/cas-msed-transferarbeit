@@ -1,0 +1,31 @@
+== Methoden
+In diesem Abschnitt werden die verwendeten Methoden beschrieben. Die methodische Herangehensweise dieser Arbeit kombiniert theoretische Analysen mit einem konstruktiven Prototyping-Ansatz.
+
+=== Forschungsansatz
+Der gewählte Ansatz folgt dem Design Science Research (DSR) Paradigma. Hierbei steht die Entwicklung eines Artefakts – in diesem Fall der MCP-basierte PoC – im Vordergrund. Durch die iterative Entwicklung und anschließende Evaluation werden neue Erkenntnisse über die Eignung der Architektur gewonnen.
+
+=== Beispiel für einen Unterabschnitt
+Sie können Unterabschnitte wie diesen erstellen, um komplexe Themenbereiche zu gliedern. In der Softwareentwicklung ist es üblich, Methoden in verschiedene Phasen zu unterteilen: Analyse, Design, Implementierung und Test.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+=== Datenerhebung und Analyse
+Zur Erhebung der Anforderungen wurden Experteninterviews mit Software-Architekten und Entwicklern durchgeführt. Die daraus resultierenden User Stories bildeten die Grundlage für das Systemdesign. Die Analyse der Daten erfolgte durch qualitative Inhaltsanalyse, wobei wiederkehrende Muster und Herausforderungen identifiziert wurden.
+
+Zusätzlich wurden quantitative Messungen während der Testphase des PoC durchgeführt, um die Performance des MCP-Servers unter Last zu evaluieren. Hierbei wurden insbesondere Latenzzeiten und Durchsatzraten der Schnittstellen protokolliert.
+
+==== Implementierungsumgebung
+Die Implementierung des PoC erfolgt mit modernen Technologien. Als Programmiersprache kommt Python 3.13+ zum Einsatz, wobei das `uv` Toolset zur Verwaltung von Abhängigkeiten und Umgebungen genutzt wird. Die Containerisierung mittels Docker ermöglicht eine konsistente Ausführung über verschiedene Zielsysteme hinweg.
+
+Spezifische Frameworks und Bibliotheken, die im Rahmen der methodischen Umsetzung verwendet wurden, umfassen:
+
+* FastAPI für die Bereitstellung von Web-Schnittstellen
+* Pydantic für die Datenvalidierung
+* Pytest für die automatisierte Qualitätssicherung
+
+Durch die Verwendung dieser Technologien wird sichergestellt, dass der entwickelte Prototyp den aktuellen Industriestandards entspricht und eine hohe Übertragbarkeit auf reale Szenarien aufweist. Die Dokumentation des Codes erfolgt parallel zur Entwicklung, um eine hohe Wartbarkeit zu gewährleisten.
+
+[[fig-architektur,Abbildung 1]]
+.Architekturüberblick der Testumgebung
+image::generated/sample-chart.svg[Architektur Diagramm, align="center"]
+
