@@ -1,0 +1,22 @@
+== Einleitung
+Dies ist der Abschnitt Einleitung. Hier wird der Kontext der Forschungsarbeit dargelegt. In der heutigen digitalen Ära stehen Unternehmen vor der Herausforderung, ihre Software-Architekturen kontinuierlich an sich ändernde Marktbedingungen anzupassen. Die Transition von monolithischen Systemen hin zu modularisierten Microservices-Architekturen ist dabei ein zentrales Thema.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+=== Problemstellung
+Ein zentrales Problem bei der Migration komplexer IT-Landschaften ist die Sicherstellung der Datenkonsistenz über verschiedene Domänen hinweg. Oftmals fehlen standardisierte Protokolle für den Datenaustausch, was zu isolierten "Daten-Silos" führt. Diese Arbeit untersucht, wie das Model Context Protocol (MCP) dazu beitragen kann, diese Barrieren abzubauen.
+
+In der Praxis zeigt sich, dass traditionelle Methoden der Softwareentwicklung oft an ihre Grenzen stoßen, wenn es um die Skalierbarkeit und Wartbarkeit von Systemen in Multi-Vendor-Ökosystemen geht. Die Komplexität steigt exponentiell mit der Anzahl der beteiligten Akteure und Schnittstellen.
+
+=== Zielsetzung der Arbeit
+Das Hauptziel dieser Arbeit ist die Entwicklung eines Proof-of-Concept (PoC), der die Vorteile einer modularen Architektur unter Verwendung von MCP-Servern demonstriert. Dabei soll insbesondere die Interoperabilität zwischen verschiedenen KI-Agenten und Datenquellen im Fokus stehen.
+
+Dazu werden folgende Forschungsfragen adressiert:
+
+1. Wie lässt sich eine Transition-Architektur definieren, die sowohl Stabilität als auch Agilität gewährleistet?
+2. Welche technischen Voraussetzungen müssen für den Einsatz von MCP in einer produktiven Umgebung erfüllt sein?
+3. Inwiefern verbessert die Entkopplung von Diensten die allgemeine Steuerungsfähigkeit digitaler Ökosysteme?
+
+Weitere Aspekte, die in dieser Einleitung berücksichtigt werden könnten, umfassen die Relevanz des Themas für die aktuelle Softwareindustrie sowie eine kurze Übersicht über den Stand der Technik. Es wird erwartet, dass die Ergebnisse dieser Untersuchung wertvolle Einblicke für Architekten und Entscheidungsträger liefern, die vor ähnlichen Transformationsprozessen stehen.
+
+Durch die detaillierte Analyse der bestehenden Infrastruktur und die Identifikation von Schwachstellen wird ein Fundament für die anschließende Konzeption des PoC gelegt. Die Einleitung schließt mit einer Übersicht über den weiteren Aufbau der Arbeit, um dem Leser eine klare Orientierung zu bieten.

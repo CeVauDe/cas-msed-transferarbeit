@@ -8,18 +8,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: registry.gitlab.com/islandoftex/images/texlive:TL2025-2026-02-08-medium
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX
-        working-directory: thesis
+      - name: Install pdftotext dependency
         run: |
-          pdflatex main.tex
-          pdflatex main.tex  # Run twice for TOC/references
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Build thesis PDF via script
+        run: |
+          bash thesis/build.sh
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4

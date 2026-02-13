@@ -1,4 +1,5 @@
 {
-    "latex-workshop.docker.enabled": true,
-    "latex-workshop.docker.image.latex": "registry.gitlab.com/islandoftex/images/texlive:TL2025-2026-02-08-medium",
+    "asciidoc.preview.attributes": {
+        "pdf-theme": "theme.yml"
+    }
 }

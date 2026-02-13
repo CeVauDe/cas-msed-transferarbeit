@@ -1,0 +1,24 @@
+:reproducible:
+:toc:
+:sectnums:
+:stem: latexmath
+:xrefstyle: short
+:pdf-theme: theme.yml
+:mathematical-format: svg
+:imagesoutdir: generated/
+:imagesdir: .
+
+// Localization (German)
+:hyphens: de
+:table-caption: Tabelle
+:caution-caption: Achtung
+:important-caption: Wichtig
+:note-caption: Hinweis
+:tip-caption: Tipp
+:warning-caption: Warnung
+:appendix-caption: Anhang
+:example-caption: Beispiel
+:figure-caption: Abbildung
+:toc-title: Inhaltsverzeichnis
+:appendix-refsig: Anhang
+:section-refsig: Abschnitt
