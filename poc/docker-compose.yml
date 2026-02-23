@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: docker/chatbot/Dockerfile
     container_name: mcp-chatbot
-    environment:
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    # environment:
+    #   - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
     volumes:
       - ./apps/chatbot/src:/app/apps/chatbot/src:ro
     stdin_open: true
@@ -22,5 +22,10 @@ services:
       - "8080:8080"
     environment:
       - MCP_SERVER_PORT=8080
+      - MCP_SERVER_HOST=0.0.0.0
+      - MCP_SERVER_TRANSPORT=streamable-http
+      - MCP_SERVER_LOG_LEVEL=INFO
+      - MCP_DEBUG_ENRICHMENT=false
+      - MCP_DATA_PARQUET_PATH=/app/apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet
     volumes:
       - ./apps/mcp_server/src:/app/apps/mcp_server/src:ro

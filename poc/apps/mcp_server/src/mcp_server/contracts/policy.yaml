@@ -1,0 +1,34 @@
+version: v1
+dataset: jahresbericht_normalized
+
+filterable:
+  Zeitschienen: [eq, in]
+  Facts: [eq, in]
+  Aktivitäten: [eq, in]
+  Zielgruppe: [eq, in]
+  Region: [eq, in]
+  Jahr: [eq, in, gte, lte]
+  Zeitintervall: [eq, in]
+  Sender: [eq, in]
+
+groupable:
+  - Zeitschienen
+  - Facts
+  - Aktivitäten
+  - Zielgruppe
+  - Region
+  - Jahr
+  - Zeitintervall
+  - Sender
+
+sortable:
+  - Zeitschienen
+  - Jahr
+  - Wert
+
+aggregates:
+  Wert: [sum, avg, min, max, count]
+
+limits:
+  default_limit: 20
+  max_limit: 200

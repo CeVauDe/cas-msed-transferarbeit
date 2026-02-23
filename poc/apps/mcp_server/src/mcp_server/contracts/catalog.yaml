@@ -1,0 +1,47 @@
+version: v1
+columns:
+  Zeitschienen:
+    description_de: Zeitfenster des Programms (z. B. 07:00:00 - 07:15:00).
+    type: string
+    allowed_examples: ["07:00:00 - 07:15:00"]
+    aliases_de: [Zeitfenster, Sendezeit]
+  Facts:
+    description_de: Kennzahltyp aus dem Jahresbericht (z. B. Rt-T).
+    type: string
+    allowed_examples: ["Rt-T"]
+    aliases_de: [Metrik, Kennzahl]
+  Aktivitäten:
+    description_de: Aktivitätsfenster wie Overnight+7.
+    type: string
+    allowed_examples: ["Overnight+7"]
+    aliases_de: [Aktivitaet, Aktivitätsart]
+  Zielgruppe:
+    description_de: Zielgruppe der Auswertung (z. B. Personen 3+).
+    type: string
+    allowed_examples: ["Personen 3+"]
+    aliases_de: [Altersgruppe, Audience]
+  Region:
+    description_de: Region der Auswertung (z. B. Deutsche Schweiz).
+    type: string
+    allowed_examples: ["Deutsche Schweiz"]
+    aliases_de: [Gebiet, Sprachregion]
+  Jahr:
+    description_de: Kalenderjahr der Messung.
+    type: integer
+    allowed_examples: ["2021"]
+    aliases_de: [Year]
+  Zeitintervall:
+    description_de: Intervallbreite der Messung (z. B. 15 min).
+    type: string
+    allowed_examples: ["15 min"]
+    aliases_de: [Intervall]
+  Sender:
+    description_de: Sendername (SRF 1, SRF zwei, SRF info, RTS 1, RSI LA 1, Andere Sender).
+    type: string
+    allowed_examples: ["SRF 1", "SRF zwei"]
+    aliases_de: [Kanal]
+  Wert:
+    description_de: Numerischer Messwert je Kombination von Dimensionen und Sender.
+    type: number
+    allowed_examples: ["6.03"]
+    aliases_de: [Wertzahl, Measure]

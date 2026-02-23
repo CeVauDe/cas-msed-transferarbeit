@@ -139,6 +139,89 @@ Usage notes:
 - Use `Sendergruppen` to roll up to higher levels (e.g., `SRF Total`, `SRG SSR Total`) by exploding the list column in your query engine.
 - Keep rows with `Wert = null` unless you explicitly run with `--drop-na-values`.
 
+## MCP Server (Constrained Data Access)
+
+The MCP server exposes **read-only tools** for the normalized dataset and blocks arbitrary SQL.
+
+### Run locally
+
+From `poc/`:
+
+```bash
+uv run --package mcp-server python -m mcp_server.main
+```
+
+### Docker Compose runtime
+
+The Compose setup runs two services:
+
+- `chatbot`
+- `mcp-server`
+
+MCP server runtime environment variables:
+
+- `MCP_SERVER_HOST` (default: `0.0.0.0`)
+- `MCP_SERVER_PORT` (default: `8080`)
+- `MCP_SERVER_TRANSPORT` (default: `streamable-http`, allowed: `stdio|sse|streamable-http`)
+- `MCP_SERVER_LOG_LEVEL` (default: `INFO`)
+- `MCP_DEBUG_ENRICHMENT` (default: `false`)
+- `MCP_DATA_PARQUET_PATH` (path to normalized parquet snapshot)
+
+### MCP tools
+
+- `query_data(template)`
+  - validates request against schema and policy
+  - plans and executes read-only query on normalized Parquet via DuckDB
+  - returns structured data payload (debug enrichment only when globally enabled)
+- `get_catalog(term=None)`
+  - returns glossary/catalog metadata for allowed columns
+  - when `term` is unknown, returns top-3 candidates and requires caller selection
+
+### Query template format
+
+The template supports:
+
+- `metrics`: list of `{column, aggregate, alias}`
+- `filters`: list of `{column, op, value}`
+- `group_by`: list of columns
+- `sort`: list of `{column, direction}`
+- `limit`: optional positive integer (defaults via policy)
+
+Valid example:
+
+```json
+{
+  "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
+  "filters": [{"column": "Region", "op": "eq", "value": "Deutsche Schweiz"}],
+  "group_by": ["Zeitschienen"],
+  "sort": [{"column": "wert_sum", "direction": "desc"}]
+}
+```
+
+Invalid example (`like` not allowed):
+
+```json
+{
+  "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
+  "filters": [{"column": "Region", "op": "like", "value": "Deutsch%"}],
+  "group_by": [],
+  "sort": []
+}
+```
+
+### Error codes
+
+- `SCHEMA_VALIDATION_ERROR` — input schema invalid
+- `POLICY_VIOLATION` — column/operator/aggregate/group/sort/limit not allowed
+- `GLOSSARY_TERM_AMBIGUOUS` — unknown glossary term, candidate selection required
+- `EXECUTION_ERROR` — validated query failed during execution
+
+### Troubleshooting
+
+- Missing runtime artifacts (`schema`, `policy`, `catalog`, parquet): verify files in `apps/mcp_server/src/mcp_server/contracts` and `apps/mcp_server/data`.
+- Empty responses: validate filter values against `get_catalog` output.
+- Debug fields missing: `MCP_DEBUG_ENRICHMENT` is global and defaults to `false`.
+
 ## Development Workflow
 
 ### Running Code Quality Checks
