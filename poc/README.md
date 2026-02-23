@@ -94,6 +94,51 @@ uv run python -m chatbot.main
 uv run ty check
 ```
 
+## Data Transformation (Jahresbericht SRF-DS)
+
+Normalize the source CSV into a long-format dataset for DB ingestion and analytics.
+
+Run from `poc/`:
+
+```bash
+# Parquet output (recommended, preserves list-type Sendergruppen)
+uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py
+
+# Parquet + optional CSV output
+uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py \
+  --output apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet \
+  --output-csv apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.csv
+
+# Optional: drop rows where sender value is missing
+uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py \
+  --drop-na-values
+```
+
+Output files:
+- `apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet`
+- Optional CSV: `apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.csv`
+
+### Parquet Structure (for further usage)
+
+The normalized Parquet file stores one row per original timeslot/metric row and sender.
+
+Main columns:
+- `Zeitschienen` (string): source timeslot label (kept unchanged)
+- `Facts` (string): tracked metric (e.g., `MA-%`, `VD Ø [Sekunden]`)
+- `Aktivitäten` (string)
+- `Zielgruppe` (string)
+- `Region` (string)
+- `Jahr` (int)
+- `Zeitintervall` (string)
+- `Sender` (string): one of `SRF 1`, `SRF zwei`, `SRF info`, `RTS 1`, `RSI LA 1`, `Andere Sender`
+- `Wert` (float): numeric sender value
+- `Sendergruppen` (list[string]): group memberships used for rollups
+
+Usage notes:
+- Aggregate by `Sender`, `Facts`, `Jahr`, `Zeitintervall`, and/or `Zeitschienen` for standard reporting.
+- Use `Sendergruppen` to roll up to higher levels (e.g., `SRF Total`, `SRG SSR Total`) by exploding the list column in your query engine.
+- Keep rows with `Wert = null` unless you explicitly run with `--drop-na-values`.
+
 ## Development Workflow
 
 ### Running Code Quality Checks

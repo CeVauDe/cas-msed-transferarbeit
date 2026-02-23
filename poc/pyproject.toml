@@ -48,3 +48,9 @@ pythonpath = ["apps/chatbot/src", "apps/mcp_server/src"]
 [tool.ty.environment]
 python-version = "3.14"
 extra-paths = ["apps/chatbot/src", "apps/mcp_server/src"]
+
+[dependency-groups]
+dev = [
+    "pandas>=3.0.1",
+    "pyarrow>=23.0.1",
+]
