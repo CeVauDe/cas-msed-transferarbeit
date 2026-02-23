@@ -4,14 +4,18 @@ services:
       context: .
       dockerfile: docker/chatbot/Dockerfile
     container_name: mcp-chatbot
-    # environment:
-    #   - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
+      - MCP_SERVER_URL=http://mcp-server:8080/mcp
     volumes:
       - ./apps/chatbot/src:/app/apps/chatbot/src:ro
     stdin_open: true
     tty: true
+    restart: on-failure
     depends_on:
-      - mcp-server
+      mcp-server:
+        condition: service_healthy
 
   mcp-server:
     build:
@@ -29,3 +33,9 @@ services:
       - MCP_DATA_PARQUET_PATH=/app/apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet
     volumes:
       - ./apps/mcp_server/src:/app/apps/mcp_server/src:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; s=socket.create_connection(('127.0.0.1', 8080), 2); s.close()"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 5s

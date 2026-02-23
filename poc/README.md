@@ -5,7 +5,7 @@ This section includes the implementation details of the proof of concept: a chat
 ## Project Overview
 
 The PoC demonstrates:
-- A Python-based chatbot using the Anthropic Claude API
+- A Python-based chatbot using the OpenAI API
 - Integration with MCP servers for tool execution
 - Docker Compose setup for easy deployment
 - Code quality enforcement with pre-commit hooks and CI/CD
@@ -77,8 +77,8 @@ uv run pre-commit run --all-files
 # Copy the example environment file
 cp .env.example .env
 
-# Edit .env and add your Anthropic API key
-# ANTHROPIC_API_KEY=your-api-key-here
+# Edit .env and add your OpenAI API key
+# OPENAI_API_KEY=your-api-key-here
 ```
 
 ### 4. Verify the Setup
