@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from difflib import get_close_matches
+from uuid import uuid4
 
 from mcp_server.config import AppConfig
 from mcp_server.contracts.catalog_models import CatalogColumnModel
+from mcp_server.logging import bind_request_context, get_logger
 from mcp_server.services.loaders import load_catalog
 
 
@@ -23,11 +25,19 @@ def _build_alias_index(catalog_columns: dict[str, CatalogColumnModel]) -> dict[s
 
 
 def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dict[str, object]:
+    # Initialize logger and bind request context
+    request_id = str(uuid4())
+    log = get_logger(__name__)
+    log = bind_request_context(log, request_id=request_id)
+
+    log.info("request_received", tool="get_catalog", term=term)
+
     catalog_path = context.config.contracts_dir / "catalog.yaml"
     catalog = load_catalog(catalog_path)
     columns = catalog.columns
 
     if term is None:
+        log.info("catalog_full_returned", column_count=len(columns))
         return {
             "ok": True,
             "catalog_version": catalog.version,
@@ -36,6 +46,7 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
 
     normalized_term = term.strip().lower()
     if normalized_term == "":
+        log.info("catalog_full_returned", column_count=len(columns))
         return {
             "ok": True,
             "catalog_version": catalog.version,
@@ -44,6 +55,7 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
 
     for column_name, column_info in columns.items():
         if normalized_term == column_name.lower():
+            log.info("exact_match_found", term=term, column=column_name)
             return {
                 "ok": True,
                 "catalog_version": catalog.version,
@@ -55,6 +67,7 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
     alias_index = _build_alias_index(columns)
     alias_hit = alias_index.get(normalized_term)
     if alias_hit is not None:
+        log.info("alias_match_found", term=term, column=alias_hit)
         return {
             "ok": True,
             "catalog_version": catalog.version,
@@ -73,6 +86,7 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
             resolved_candidates.append(alias_index[match])
 
     deduped_candidates = sorted(set(resolved_candidates))
+    log.warning("term_ambiguous", term=term, candidates=deduped_candidates)
     return {
         "ok": False,
         "selection_required": True,
