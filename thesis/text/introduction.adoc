@@ -4,12 +4,12 @@ Dies ist der Abschnitt Einleitung. Hier wird der Kontext der Forschungsarbeit da
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 === Problemstellung
-Ein zentrales Problem bei der Migration komplexer IT-Landschaften ist die Sicherstellung der Datenkonsistenz über verschiedene Domänen hinweg. Oftmals fehlen standardisierte Protokolle für den Datenaustausch, was zu isolierten "Daten-Silos" führt. Diese Arbeit untersucht, wie das Model Context Protocol (MCP) dazu beitragen kann, diese Barrieren abzubauen.
+Ein zentrales Problem bei der Migration komplexer IT-Landschaften ist die Sicherstellung der Datenkonsistenz über verschiedene Domänen hinweg. Oftmals fehlen standardisierte Protokolle für den Datenaustausch, was zu isolierten "Daten-Silos" führt. Diese Arbeit untersucht, wie das Model Context Protocol (MCP) dazu beitragen kann, diese Barrieren abzubauen cite:[example2026] Hi.
 
 In der Praxis zeigt sich, dass traditionelle Methoden der Softwareentwicklung oft an ihre Grenzen stoßen, wenn es um die Skalierbarkeit und Wartbarkeit von Systemen in Multi-Vendor-Ökosystemen geht. Die Komplexität steigt exponentiell mit der Anzahl der beteiligten Akteure und Schnittstellen.
 
 === Zielsetzung der Arbeit
-Das Hauptziel dieser Arbeit ist die Entwicklung eines Proof-of-Concept (PoC), der die Vorteile einer modularen Architektur unter Verwendung von MCP-Servern demonstriert. Dabei soll insbesondere die Interoperabilität zwischen verschiedenen KI-Agenten und Datenquellen im Fokus stehen.
+Das Hauptziel dieser Arbeit ist die Entwicklung eines Proof-of-Concept (PoC) cite:[gao2024empowering], der die Vorteile einer modularen Architektur unter Verwendung von MCP-Servern demonstriert. Dabei soll insbesondere die Interoperabilität zwischen verschiedenen KI-Agenten und Datenquellen im Fokus stehen.
 
 Dazu werden folgende Forschungsfragen adressiert:
 
