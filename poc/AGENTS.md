@@ -37,6 +37,12 @@ uv sync --all-extras           # Install all dependencies
 uv run pre-commit install      # Set up git hooks
 ```
 
+### Data Setup
+```bash
+# Download raw Excel files from GitHub Release data-v1 → apps/mcp_server/data/raw/
+uv run --package mcp-server python apps/mcp_server/src/tools/download_data.py
+```
+
 ### Running Applications
 ```bash
 uv run --package chatbot python -m chatbot.main

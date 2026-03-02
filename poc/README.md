@@ -94,6 +94,20 @@ uv run python -m chatbot.main
 uv run ty check
 ```
 
+## Data Setup (Raw Jahresbericht Excel Files)
+
+The 24 raw `.xlsx` source files are distributed as a single archive attached to the
+[`data-v1` GitHub Release](https://github.com/CeVauDe/cas-msed-transferarbeit/releases/tag/data-v1).
+Run the download script once before any transformation or Parquet generation step:
+
+```bash
+# Download and extract into apps/mcp_server/data/raw/
+uv run --package mcp-server python apps/mcp_server/src/tools/download_data.py
+```
+
+This places 24 `Jahresbericht*.xlsx` files into `apps/mcp_server/data/raw/`.
+The directory is git-ignored; re-run the script on any fresh checkout.
+
 ## Data Transformation (Jahresbericht SRF-DS)
 
 Normalize the source CSV into a long-format dataset for DB ingestion and analytics.
