@@ -25,7 +25,7 @@ def build_runtime_table(policy: PolicyModel) -> TableClause:
     )
     if "Wert" not in columns:
         columns.add("Wert")
-    return table("jahresbericht_normalized", *[column(name) for name in sorted(columns)])
+    return table("jahresbericht", *[column(name) for name in sorted(columns)])
 
 
 def _aggregate_expression(

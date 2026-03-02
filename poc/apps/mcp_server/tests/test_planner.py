@@ -19,7 +19,7 @@ def test_planner_builds_statement_and_runs_on_duckdb() -> None:
 
     template: dict[str, object] = {
         "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
-        "filters": [{"column": "Region", "op": "eq", "value": "Deutsche Schweiz"}],
+        "filters": [{"column": "Region", "op": "eq", "value": "DS"}],
         "group_by": ["Sender"],
         "sort": [{"column": "wert_sum", "direction": "desc"}],
         "limit": 5,
@@ -35,14 +35,14 @@ def test_planner_builds_statement_and_runs_on_duckdb() -> None:
     parquet_path = (
         Path(__file__).resolve().parents[1]
         / "data"
-        / "Jahresbericht21_SRF-DS.normalized.parquet"
+        / "Jahresbericht_all.parquet"
     )
     escaped_path = str(parquet_path).replace("'", "''")
     engine = create_engine("duckdb:///:memory:")
     with engine.begin() as connection:
         connection.execute(
             text(
-                "CREATE VIEW jahresbericht_normalized "
+                "CREATE VIEW jahresbericht "
                 f"AS SELECT * FROM read_parquet('{escaped_path}')"
             )
         )

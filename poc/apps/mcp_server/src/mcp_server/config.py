@@ -31,7 +31,7 @@ def load_config() -> AppConfig:
     app_root = package_root.parent.parent
 
     contracts_dir = app_root / "src" / "mcp_server" / "contracts"
-    data_default = app_root / "data" / "Jahresbericht21_SRF-DS.normalized.parquet"
+    data_default = app_root / "data" / "Jahresbericht_all.parquet"
 
     host = os.environ.get("MCP_SERVER_HOST", "0.0.0.0")
     port = int(os.environ.get("MCP_SERVER_PORT", "8080"))

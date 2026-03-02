@@ -30,7 +30,7 @@ services:
       - MCP_SERVER_TRANSPORT=streamable-http
       - MCP_SERVER_LOG_LEVEL=INFO
       - MCP_DEBUG_ENRICHMENT=false
-      - MCP_DATA_PARQUET_PATH=/app/apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet
+      - MCP_DATA_PARQUET_PATH=/app/apps/mcp_server/data/Jahresbericht_all.parquet
     volumes:
       - ./apps/mcp_server/src:/app/apps/mcp_server/src:ro
     healthcheck:

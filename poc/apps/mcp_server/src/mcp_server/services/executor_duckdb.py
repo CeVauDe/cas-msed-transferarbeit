@@ -19,7 +19,7 @@ def execute_statement(
     with engine.begin() as connection:
         connection.execute(
             text(
-                "CREATE VIEW jahresbericht_normalized "
+                "CREATE VIEW jahresbericht "
                 f"AS SELECT * FROM read_parquet('{escaped_path}')"
             )
         )

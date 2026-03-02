@@ -20,9 +20,9 @@ def test_validate_template_accepts_valid_payload() -> None:
     policy = _load_policy()
     template: dict[str, object] = {
         "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
-        "filters": [{"column": "Region", "op": "eq", "value": "Deutsche Schweiz"}],
-        "group_by": ["Zeitschienen"],
-        "sort": [{"column": "Zeitschienen", "direction": "asc"}],
+        "filters": [{"column": "Region", "op": "eq", "value": "DS"}],
+        "group_by": ["timeslot_start"],
+        "sort": [{"column": "timeslot_start", "direction": "asc"}],
     }
 
     result = validate_template(raw_template=template, policy=policy)
@@ -35,7 +35,7 @@ def test_validate_template_rejects_invalid_operator() -> None:
     policy = _load_policy()
     template: dict[str, object] = {
         "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
-        "filters": [{"column": "Region", "op": "gte", "value": "Deutsche Schweiz"}],
+        "filters": [{"column": "Region", "op": "gte", "value": "DS"}],
         "group_by": [],
         "sort": [],
         "limit": 10,
@@ -51,7 +51,7 @@ def test_validate_template_rejects_limit_above_max() -> None:
     policy = _load_policy()
     template: dict[str, object] = {
         "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
-        "filters": [],
+        "filters": [{"column": "Region", "op": "eq", "value": "DS"}],
         "group_by": [],
         "sort": [],
         "limit": policy.limits.max_limit + 1,

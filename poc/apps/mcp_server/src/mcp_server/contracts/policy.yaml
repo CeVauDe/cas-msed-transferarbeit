@@ -1,29 +1,29 @@
 version: v1
-dataset: jahresbericht_normalized
+dataset: jahresbericht
 
 filterable:
-  Zeitschienen: [eq, in]
-  Facts: [eq, in]
-  Aktivitäten: [eq, in]
-  Zielgruppe: [eq, in]
-  Region: [eq, in]
   Jahr: [eq, in, gte, lte]
-  Zeitintervall: [eq, in]
+  Region: [eq]
+  timeslot_start: [eq, in, gte, lte]
+  timeslot_end: [eq, in, gte, lte]
+  timeslot_duration_minutes: [eq, in, gte, lte]
+  Metrik: [eq, in]
   Sender: [eq, in]
 
 groupable:
-  - Zeitschienen
-  - Facts
-  - Aktivitäten
-  - Zielgruppe
-  - Region
   - Jahr
-  - Zeitintervall
+  - Region
+  - timeslot_start
+  - timeslot_end
+  - timeslot_duration_minutes
+  - Metrik
   - Sender
 
 sortable:
-  - Zeitschienen
   - Jahr
+  - timeslot_start
+  - timeslot_end
+  - timeslot_duration_minutes
   - Wert
 
 aggregates:

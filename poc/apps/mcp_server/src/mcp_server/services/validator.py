@@ -122,6 +122,19 @@ def validate_template(raw_template: dict[str, object], policy: PolicyModel) -> V
         if filter_error is not None:
             return filter_error
 
+    # --- Assumption: Cross-region aggregation is not valid ---
+    # Each region has a different sender set and audience base.
+    # Require exactly one Region eq-filter per query.
+    region_eq_filters = [
+        f for f in parsed_template.filters if f.column == "Region" and f.op.value == "eq"
+    ]
+    if len(region_eq_filters) != 1:
+        return _error(
+            "POLICY_VIOLATION",
+            "Exactly one 'Region' filter with operator 'eq' is required.",
+            {"field": "filters", "column": "Region"},
+        )
+
     group_violations = [name for name in parsed_template.group_by if name not in policy.groupable]
     if group_violations:
         return _error(
