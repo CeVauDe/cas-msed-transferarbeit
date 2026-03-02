@@ -18,10 +18,7 @@ def execute_statement(
     escaped_path = str(parquet_path).replace("'", "''")
     with engine.begin() as connection:
         connection.execute(
-            text(
-                "CREATE VIEW jahresbericht "
-                f"AS SELECT * FROM read_parquet('{escaped_path}')"
-            )
+            text(f"CREATE VIEW jahresbericht AS SELECT * FROM read_parquet('{escaped_path}')")
         )
         rows = connection.execute(statement).mappings().all()
     return [dict(row) for row in rows]

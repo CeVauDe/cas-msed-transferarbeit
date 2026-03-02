@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script converts SVGs to PNGs as a safety measure for backends 
+# This script converts SVGs to PNGs as a safety measure for backends
 # that do not support SVG natively or render it incorrectly.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

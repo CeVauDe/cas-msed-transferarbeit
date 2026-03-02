@@ -28,4 +28,3 @@ Durch die Verwendung dieser Technologien wird sichergestellt, dass der entwickel
 [[fig-architektur,Abbildung 1]]
 .Architekturüberblick der Testumgebung
 image::generated/sample-chart.svg[Architektur Diagramm, align="center"]
-

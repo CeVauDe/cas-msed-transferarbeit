@@ -1,14 +1,13 @@
-
 import re
 from pathlib import Path
 from typing import NamedTuple
 
 import pandas as pd
 
-
 # ---------------------------------------------------------------------------
 # Named return types
 # ---------------------------------------------------------------------------
+
 
 class FileMeta(NamedTuple):
     jahr: int
@@ -49,7 +48,7 @@ def parse_filename_metadata(file_path: Path) -> FileMeta:
 # Two summary rows at the bottom of each file use special labels:
 _SPECIAL_TIMESLOTS: dict[str, Timeslot] = {
     "Whole day": Timeslot("02:00:00", "26:00:00", 24 * 60),
-    "18-23h":    Timeslot("18:00:00", "23:00:00",  5 * 60),
+    "18-23h": Timeslot("18:00:00", "23:00:00", 5 * 60),
 }
 
 
@@ -58,7 +57,7 @@ def parse_timeslot(value: str) -> Timeslot:
         return _SPECIAL_TIMESLOTS[value]
     start_str, end_str = value.split(" - ", maxsplit=1)
     start_h, start_m, _ = (int(x) for x in start_str.strip().split(":"))
-    end_h,   end_m,   _ = (int(x) for x in end_str.strip().split(":"))
+    end_h, end_m, _ = (int(x) for x in end_str.strip().split(":"))
     duration_minutes = (end_h * 60 + end_m) - (start_h * 60 + start_m)
     return Timeslot(start_str.strip(), end_str.strip(), duration_minutes)
 
@@ -66,6 +65,7 @@ def parse_timeslot(value: str) -> Timeslot:
 # ---------------------------------------------------------------------------
 # Single-file transformation
 # ---------------------------------------------------------------------------
+
 
 # Raw Excel layout (102 rows × 65 or 100 cols):
 #   row 0:    title string – dropped
@@ -122,7 +122,7 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
     # After dropping col 0 from df, value column k (1..n) in df_wide maps to
     # header_rows column k+1 (the original sheet column before the drop).
     value_col_indices = list(range(1, df.shape[1]))
-    metric_map  = {k: header_rows.iloc[1, k + 1] for k in value_col_indices}
+    metric_map = {k: header_rows.iloc[1, k + 1] for k in value_col_indices}
     station_map = {k: header_rows.iloc[2, k + 1] for k in value_col_indices}
 
     timeslot_id_vars = ["timeslot_start", "timeslot_end", "timeslot_duration_minutes"]
@@ -135,13 +135,10 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
     df_melted["Metrik"] = df_melted["col_idx"].map(metric_map)
     df_melted["Sender"] = df_melted["col_idx"].map(station_map)
 
-    df_long = (
-        df_melted
-        .drop(columns=["col_idx"])
-        .reset_index(drop=True)
-        [timeslot_id_vars + ["Metrik", "Sender", "Wert"]]
-    )
-    df_long.insert(0, "Jahr",   meta.jahr)
+    df_long = df_melted.drop(columns=["col_idx"]).reset_index(drop=True)[
+        timeslot_id_vars + ["Metrik", "Sender", "Wert"]
+    ]
+    df_long.insert(0, "Jahr", meta.jahr)
     df_long.insert(1, "Region", meta.region)
 
     return df_long
@@ -150,6 +147,7 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
 # ---------------------------------------------------------------------------
 # Multi-file loader
 # ---------------------------------------------------------------------------
+
 
 def load_all_files(raw_dir: Path) -> pd.DataFrame:
     """Load all Jahresbericht Excel files in raw_dir and concatenate into one DataFrame."""
@@ -164,9 +162,10 @@ def load_all_files(raw_dir: Path) -> pd.DataFrame:
 # Entry-point
 # ---------------------------------------------------------------------------
 
+
 def main() -> None:
     data_dir = Path(__file__).parent.parent.parent / "data"
-    raw_dir  = data_dir / "raw"
+    raw_dir = data_dir / "raw"
     out_path = data_dir / "Jahresbericht_all.parquet"
 
     df = load_all_files(raw_dir)

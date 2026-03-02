@@ -6,11 +6,7 @@ from mcp_server.services.validator import validate_template
 
 def _load_policy():
     policy_path = (
-        Path(__file__).resolve().parents[1]
-        / "src"
-        / "mcp_server"
-        / "contracts"
-        / "policy.yaml"
+        Path(__file__).resolve().parents[1] / "src" / "mcp_server" / "contracts" / "policy.yaml"
     )
     return load_policy(policy_path)
 
@@ -47,7 +43,7 @@ def test_rejects_query_without_region_filter() -> None:
     assert result.valid is False
     assert result.error is not None
     assert result.error["error_code"] == "POLICY_VIOLATION"
-    assert "Region" in result.error["message"]
+    assert "Region" in str(result.error["message"])
 
 
 def test_accepts_query_with_single_region_eq_filter() -> None:

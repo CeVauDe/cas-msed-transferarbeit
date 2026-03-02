@@ -58,15 +58,16 @@ def download_and_extract(release_url: str, raw_dir: Path) -> None:
 
     if len(xlsx_files) < EXPECTED_FILE_COUNT:
         print(
-            f"\nWARNING: expected {EXPECTED_FILE_COUNT} files, "
-            f"found {len(xlsx_files)}.",
+            f"\nWARNING: expected {EXPECTED_FILE_COUNT} files, found {len(xlsx_files)}.",
             file=sys.stderr,
         )
         sys.exit(1)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument(
         "--release-url",
         default=DEFAULT_RELEASE_URL,

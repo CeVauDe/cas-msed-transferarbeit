@@ -20,7 +20,7 @@ Ein zentraler Aspekt der Ergebnisse ist das Wachstum der Interaktionen im Multi-
 .Wachstumsanalyse über das aktuelle Geschäftsjahr
 image::generated/sample-chart.svg[Beispiel Wachstumsdiagramm, align="center"]
 
-Das Diagramm verdeutlicht, dass die Skalierbarkeit der Architektur durch die gewählten Mechanismen erfolgreich adressiert werden konnte. 
+Das Diagramm verdeutlicht, dass die Skalierbarkeit der Architektur durch die gewählten Mechanismen erfolgreich adressiert werden konnte.
 
 === Qualitative Erkenntnisse
 Neben den messbaren Werten lieferte die Evaluation des PoC auch qualitative Einsichten. Die Entwickler berichteten von einer deutlichen Verbesserung der Developer Experience (DX), da die modulare Struktur die Einarbeitungszeit in neue Service-Komponenten verkürzte.

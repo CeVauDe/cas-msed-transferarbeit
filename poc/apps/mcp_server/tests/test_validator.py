@@ -7,11 +7,7 @@ from mcp_server.services.validator import validate_template
 
 def _load_policy() -> PolicyModel:
     policy_path = (
-        Path(__file__).resolve().parents[1]
-        / "src"
-        / "mcp_server"
-        / "contracts"
-        / "policy.yaml"
+        Path(__file__).resolve().parents[1] / "src" / "mcp_server" / "contracts" / "policy.yaml"
     )
     return load_policy(policy_path)
 

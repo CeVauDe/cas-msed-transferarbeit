@@ -7,7 +7,6 @@ import json
 import os
 from typing import Any
 
-
 SYSTEM_PROMPT = """\
 Du bist ein Datenassistent für die Analyse von TV-Nutzungsdaten aus den \
 Jahresberichten der Schweizer Mediapulse-Erhebung.
@@ -99,11 +98,9 @@ def _load_openai_client() -> Any:
         raise RuntimeError("OPENAI_API_KEY is required.")
 
     try:
-        from openai import OpenAI
+        from openai import OpenAI  # ty: ignore[unresolved-import]
     except ImportError as exc:  # pragma: no cover - dependency/runtime guard
-        raise RuntimeError(
-            "Missing dependency 'openai'. Run: uv sync --all-extras"
-        ) from exc
+        raise RuntimeError("Missing dependency 'openai'. Run: uv sync --all-extras") from exc
 
     return OpenAI(api_key=api_key)
 
@@ -207,14 +204,16 @@ async def main() -> None:
     mcp_server_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080/mcp")
 
     try:
-        async with streamable_http_client(mcp_server_url) as (
-            read_stream,
-            write_stream,
-            _,
+        async with (
+            streamable_http_client(mcp_server_url) as (
+                read_stream,
+                write_stream,
+                _,
+            ),
+            ClientSession(read_stream, write_stream) as session,
         ):
-            async with ClientSession(read_stream, write_stream) as session:
-                await session.initialize()
-                await _run_chat_loop(session)
+            await session.initialize()
+            await _run_chat_loop(session)
     except Exception as exc:
         reason = _describe_exception(exc)
         print(
