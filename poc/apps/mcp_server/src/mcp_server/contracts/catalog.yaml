@@ -1,0 +1,124 @@
+version: v1
+columns:
+  Jahr:
+    description_de: Kalenderjahr der Messung.
+    type: integer
+    allowed_values: ["2018", "2019", "2020", "2021"]
+    aliases_de: [Year]
+  Region:
+    description_de: Sprachregion (DS = Deutsche Schweiz, SR = Suisse Romande, SI = Svizzera Italiana).
+    type: string
+    allowed_values: ["DS", "SR", "SI"]
+    aliases_de: [Gebiet, Sprachregion]
+  timeslot_start:
+    description_de: Startzeit des Zeitfensters (HH:MM:SS, Sendetag 02:00-26:00).
+    type: string
+    allowed_examples: ["07:00:00", "20:00:00"]
+    aliases_de: [Startzeit, Zeitfenster Start]
+  timeslot_end:
+    description_de: Endzeit des Zeitfensters (HH:MM:SS, Sendetag 02:00-26:00).
+    type: string
+    allowed_examples: ["07:15:00", "20:15:00"]
+    aliases_de: [Endzeit, Zeitfenster Ende]
+  timeslot_duration_minutes:
+    description_de: Dauer des Zeitfensters in Minuten (siehe unten für Details zu jedem Intervall).
+    type: integer
+    allowed_values: ["15", "300", "1440"]
+    aliases_de: [Dauer, Intervall, Duration]
+  Metrik:
+    description_de: Kennzahltyp der Messung (siehe unten für Details zu jedem Metrik).
+    type: string
+    allowed_values: ["Rt-T", "Rt-%", "NRw-T", "NRw-%", "MA-%", "SD Ø", "VD Ø"]
+    aliases_de: [Facts, Kennzahl, Metric]
+  Sender:
+    description_de: Sendername.
+    type: string
+    allowed_values:
+      - SRG SSR Total
+      - SRF Total
+      - SRF 1
+      - SRF zwei
+      - SRF info
+      - RTS Un
+      - RSI LA 1
+      - Restliche SRG SSR
+      - Andere Sender
+      - RSI Total
+      - RSI LA 2
+      - RTS Total
+      - RTS Deux
+      - ARD
+      - ZDF
+      - ORF Eins
+      - ORF 2
+      - 3sat
+      - ARTE
+      - RTL_T
+      - RTL II_T
+      - SAT.1_T
+      - ProSieben_T
+      - kabel eins_T
+      - Private CH
+      - Rai 1
+      - Rai 2
+      - Rai 3
+      - Canale 5
+      - Italia 1
+      - Rete 4
+      - LA 7
+      - France 2
+      - France 3
+      - TV5 Monde
+      - TF1_T
+      - M6_T
+      - RTL9_T
+      - W9_T
+      - TCM
+      - RTS 1
+      - RTS 2
+      - RTLZWEI_T
+      - Rai 1 - (IT)
+      - Rai 2 - (IT)
+      - teleticino - (IT)
+      - France 2 - (FR)
+      - France 3 (Alsace & Paris) - (FR)
+    aliases_de: [Kanal, Station]
+  Wert:
+    description_de: Numerischer Messwert der Metrik.
+    type: number
+    allowed_examples: ["6.03", "12.5", "15.2"]
+    aliases_de: [Wertzahl, Measure, Value]
+
+metrics:
+  Rt-T:
+    description_de: Reichweite in Tausend. Anzahl der Zuschauer/innen in Tausend Personen.
+    unit: "1000 Personen"
+  Rt-%:
+    description_de: Reichweite in Prozent. Anteil der Zuschauer/innen in Prozent der Zielgruppe.
+    unit: "%"
+  NRw-T:
+    description_de: Netto-Reichweite in Tausend. Anzahl unterschiedlicher Zuschauer/innen in Tausend Personen.
+    unit: "1000 Personen"
+  NRw-%:
+    description_de: Netto-Reichweite in Prozent. Anteil unterschiedlicher Zuschauer/innen in Prozent der Zielgruppe.
+    unit: "%"
+  MA-%:
+    description_de: Marktanteil in Prozent. Anteil der Zuschauer/innen dieses Senders bezüglich aller Zuschauer/innen (Gesamtmarkt).
+    unit: "%"
+  SD Ø:
+    description_de: Sehdauer Durchschnitt. Durchschnittliche Verweildauer der Zuschauer/innen in Minuten.
+    unit: Minuten
+  VD Ø:
+    description_de: Verweildauer Durchschnitt. Durchschnittliche Sehdauer der Zuschauer/innen in Minuten.
+    unit: Minuten
+
+timeslot_durations:
+  "15":
+    description_de: Detailliertes 15-Minuten-Interval. Standardintervall für granulare Sehzeitanalysen über den gesamten Sendetag (02:00-26:00).
+    note: 96 Intervalle pro Sendetag
+  "300":
+    description_de: Primetime-Intervall (5 Stunden). Summarische Auswertung für den Abend von 18:00 bis 23:00 Uhr.
+    note: Zusammengefasstes Intervall für die Primetime-Analyse
+  "1440":
+    description_de: Ganztägiges Intervall (24 Stunden). Summarische Auswertung über den gesamten Sendetag von 02:00 bis 26:00 Uhr.
+    note: Gesamtangebot Sendetag

@@ -5,6 +5,9 @@ Autor Name
 include::config/config.adoc[]
 :chapter-label: Kapitel
 :!chapter-signifier:
+:bibtex-file: references.bib
+:bibtex-style: apa
+:bibtex-locale: de
 
 [preface]
 == Zusammenfassung
@@ -22,3 +25,8 @@ include::text/methods.adoc[]
 include::text/results.adoc[]
 
 include::text/conclusion.adoc[]
+
+[bibliography]
+== Literaturverzeichnis
+
+bibliography::[]

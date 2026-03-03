@@ -1,6 +1,6 @@
 """Tests for the MCP server module."""
 
-from mcp_server import main as mcp_main
+from mcp_server.main import main, run_server
 
 
 class TestMCPServer:
@@ -8,5 +8,5 @@ class TestMCPServer:
 
     def test_module_exists(self) -> None:
         """Test that the mcp_server module exists."""
-        assert hasattr(mcp_main, "run_server")
-        assert hasattr(mcp_main, "main")
+        assert callable(run_server)
+        assert callable(main)

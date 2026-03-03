@@ -1,0 +1,34 @@
+version: v1
+dataset: jahresbericht
+
+filterable:
+  Jahr: [eq, in, gte, lte]
+  Region: [eq]
+  timeslot_start: [eq, in, gte, lte]
+  timeslot_end: [eq, in, gte, lte]
+  timeslot_duration_minutes: [eq, in, gte, lte]
+  Metrik: [eq, in]
+  Sender: [eq, in]
+
+groupable:
+  - Jahr
+  - Region
+  - timeslot_start
+  - timeslot_end
+  - timeslot_duration_minutes
+  - Metrik
+  - Sender
+
+sortable:
+  - Jahr
+  - timeslot_start
+  - timeslot_end
+  - timeslot_duration_minutes
+  - Wert
+
+aggregates:
+  Wert: [sum, avg, min, max, count]
+
+limits:
+  default_limit: 20
+  max_limit: 200
