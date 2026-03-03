@@ -21,7 +21,7 @@ dev = [
 [tool.ruff]
 line-length = 100
 target-version = "py314"
-src = ["apps/chatbot/src", "apps/mcp_server/src", "apps/meteo_mcp_server/src", "apps/meteo_chatbot/src"]
+src = ["apps/chatbot/src", "apps/mcp_server/src"]
 
 [tool.ruff.lint]
 select = [
@@ -38,16 +38,16 @@ select = [
 ignore = []
 
 [tool.ruff.lint.isort]
-known-first-party = ["chatbot", "mcp_server", "meteo_mcp_server", "meteo_chatbot"]
+known-first-party = ["chatbot", "mcp_server"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["apps"]
-pythonpath = ["apps/chatbot/src", "apps/mcp_server/src", "apps/meteo_mcp_server/src", "apps/meteo_chatbot/src"]
+pythonpath = ["apps/chatbot/src", "apps/mcp_server/src"]
 
 [tool.ty.environment]
 python-version = "3.14"
-extra-paths = ["apps/chatbot/src", "apps/mcp_server/src", "apps/meteo_mcp_server/src", "apps/meteo_chatbot/src"]
+extra-paths = ["apps/chatbot/src", "apps/mcp_server/src"]
 
 [tool.ty.rules]
 unresolved-import = "ignore"
