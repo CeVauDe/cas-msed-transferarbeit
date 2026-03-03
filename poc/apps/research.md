@@ -9,10 +9,10 @@
 
 The system has two components that work together:
 
-| App | Role | Protocol |
-|-----|------|----------|
+| App          | Role                                 | Protocol                            |
+| ------------ | ------------------------------------ | ----------------------------------- |
 | `mcp_server` | Policy-controlled data query backend | MCP (Model Context Protocol) server |
-| `chatbot` | Interactive CLI agent | MCP client + OpenAI tool-calling |
+| `chatbot`    | Interactive CLI agent                | MCP client + OpenAI tool-calling    |
 
 The architecture separates user-facing interaction (chatbot) from data access (mcp_server), mediated by the MCP protocol. The agent (OpenAI LLM) orchestrates tool calls autonomously without ever generating raw SQL.
 
@@ -33,21 +33,24 @@ Python ≥3.14
 ├── duckdb ≥1.4.1        — In-process SQL engine for Parquet queries
 ├── duckdb-engine ≥0.17.0 — SQLAlchemy dialect for DuckDB
 ├── sqlalchemy ≥2.0.43   — SQL query builder (prevents SQL injection)
-└── pyyaml ≥6.0.2        — Loads policy and catalog configuration
+├── pyyaml ≥6.0.2        — Loads policy and catalog configuration
+└── structlog ≥24.1.0    — Structured JSON logging
 ```
 
 ### 2.3 Configuration
 
 All configuration is via environment variables:
 
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `MCP_SERVER_HOST` | `0.0.0.0` | Bind address |
-| `MCP_SERVER_PORT` | `8080` | Bind port |
-| `MCP_SERVER_TRANSPORT` | `streamable-http` | Transport: `stdio`, `sse`, `streamable-http` |
-| `MCP_SERVER_LOG_LEVEL` | `INFO` | Logging verbosity |
-| `MCP_DEBUG_ENRICHMENT` | `false` | Enable debug fields in responses |
-| `MCP_DATA_PARQUET_PATH` | bundled default | Path to Parquet data file |
+| Variable                | Default                          | Purpose                                      |
+| ----------------------- | -------------------------------- | -------------------------------------------- |
+| `MCP_SERVER_HOST`       | `0.0.0.0`                        | Bind address                                 |
+| `MCP_SERVER_PORT`       | `8080`                           | Bind port                                    |
+| `MCP_SERVER_TRANSPORT`  | `streamable-http`                | Transport: `stdio`, `sse`, `streamable-http` |
+| `MCP_SERVER_LOG_LEVEL`  | `INFO`                           | Logging verbosity                            |
+| `MCP_DEBUG_ENRICHMENT`  | `false`                          | Enable debug fields in responses             |
+| `MCP_DATA_PARQUET_PATH` | `data/Jahresbericht_all.parquet` | Path to Parquet data file                    |
+
+The `AppConfig` dataclass also carries a `contracts_dir: Path` field (resolved automatically from the package root; not configurable via env var) pointing to `src/mcp_server/contracts/`.
 
 ### 2.4 MCP Tools Exposed
 
@@ -66,6 +69,7 @@ A glossary lookup tool for discovering column names and their meanings.
 This tool enforces a controlled vocabulary — the agent is expected to call it when user phrasing is ambiguous before constructing a query.
 
 Response shape (success):
+
 ```json
 {
   "ok": true,
@@ -82,6 +86,7 @@ Response shape (success):
 ```
 
 Response shape (ambiguous, requires agent to prompt user):
+
 ```json
 {
   "ok": false,
@@ -99,14 +104,11 @@ Response shape (ambiguous, requires agent to prompt user):
 The main analytics query tool. Accepts a structured "query template" (not SQL), validates it, builds a SQL query via SQLAlchemy, and executes it on DuckDB against the Parquet file.
 
 Template structure:
+
 ```json
 {
-  "metrics": [
-    { "column": "Wert", "aggregate": "sum", "alias": "wert_sum" }
-  ],
-  "filters": [
-    { "column": "Region", "op": "eq", "value": "Deutsche Schweiz" }
-  ],
+  "metrics": [{ "column": "Wert", "aggregate": "sum", "alias": "wert_sum" }],
+  "filters": [{ "column": "Region", "op": "eq", "value": "Deutsche Schweiz" }],
   "group_by": ["Sender"],
   "sort": [{ "column": "wert_sum", "direction": "desc" }],
   "limit": 50
@@ -161,23 +163,30 @@ The policy (`contracts/policy.yaml`) is the core security mechanism. It declarat
 
 Any violation results in a structured `POLICY_VIOLATION` error returned to the agent, not a server exception.
 
+Additionally, the validator enforces a **cross-region guard**: every query must include exactly one `Region` filter with operator `eq`. This prevents cross-region aggregation, which is statisticaly invalid because each region has a different sender set and audience base.
+
 ### 2.7 Data Catalog
 
 The catalog (`contracts/catalog.yaml`) describes the 9 dataset columns in German:
 
-| Column | Type | Meaning |
-|--------|------|---------|
-| `Zeitschienen` | string | 15-minute broadcast time slots (e.g., `"07:00:00 - 07:15:00"`) |
-| `Facts` | string | Metric type identifier (e.g., `"Rt-T"`) |
-| `Aktivitäten` | string | Activity measurement window (e.g., `"Overnight+7"`) |
-| `Zielgruppe` | string | Target audience group (e.g., `"Personen 3+"`) |
-| `Region` | string | Swiss language region (e.g., `"Deutsche Schweiz"`) |
-| `Jahr` | integer | Calendar year |
-| `Zeitintervall` | string | Measurement interval (e.g., `"15 min"`) |
-| `Sender` | string | TV channel name (e.g., `"SRF 1"`, `"SRF zwei"`) |
-| `Wert` | number | Numeric measurement value |
+| Column          | Type    | Meaning                                                        |
+| --------------- | ------- | -------------------------------------------------------------- |
+| `Zeitschienen`  | string  | 15-minute broadcast time slots (e.g., `"07:00:00 - 07:15:00"`) |
+| `Facts`         | string  | Metric type identifier (e.g., `"Rt-T"`)                        |
+| `Aktivitäten`   | string  | Activity measurement window (e.g., `"Overnight+7"`)            |
+| `Zielgruppe`    | string  | Target audience group (e.g., `"Personen 3+"`)                  |
+| `Region`        | string  | Swiss language region (e.g., `"Deutsche Schweiz"`)             |
+| `Jahr`          | integer | Calendar year                                                  |
+| `Zeitintervall` | string  | Measurement interval (e.g., `"15 min"`)                        |
+| `Sender`        | string  | TV channel name (e.g., `"SRF 1"`, `"SRF zwei"`)                |
+| `Wert`          | number  | Numeric measurement value                                      |
 
-Each column entry also includes German aliases (e.g., `Sender` → `["Kanal"]`) and example values for agent guidance.
+Each column entry includes German aliases, allowed values (exact enum list when finite), example values, and a description.
+
+The catalog also includes two optional lookup sections:
+
+- **`metrics`**: Maps `Facts` code values (e.g., `Rt-T`, `MA-%`) to human-readable descriptions and units
+- **`timeslot_durations`**: Maps `timeslot_duration_minutes` values to descriptions
 
 ### 2.8 Data Layer
 
@@ -186,6 +195,7 @@ Each column entry also includes German aliases (e.g., `Sender` → `["Kanal"]`) 
 - **Transformation script**: `src/tools/transform_jahresbericht.py`
 
 The transformation:
+
 1. Melts sender columns (`SRF 1`, `SRF zwei`, etc.) into a single `Sender` + `Wert` pair per row
 2. Drops summary aggregate columns (`SRG SSR Total`, `SRF Total`, `Restliche SRG SSR`)
 3. Adds a `Sendergruppen` column (list of group membership per sender)
@@ -196,28 +206,34 @@ The server never reads the CSV directly; it always reads the normalized Parquet 
 
 ### 2.9 Logging
 
-Structured JSON logging via `log_event()`. Each request lifecycle emits events:
+Structured JSON logging via `structlog`. The module (`logging.py`) provides:
 
-| Event | Meaning |
-|-------|---------|
-| `request_received` | Tool call received |
+- `configure_logging(log_level)` — sets up structlog with JSON renderer, ISO timestamps, stdlib backend
+- `get_logger(name)` — returns a `FilteringBoundLogger` instance
+- `bind_request_context(logger, request_id, ...)` — binds request-scoped fields to a logger for trace correlation
+
+Each tool handler creates a new request ID (`uuid4`), binds it on entry, and logs lifecycle events:
+
+| Event               | Meaning                            |
+| ------------------- | ---------------------------------- |
+| `request_received`  | Tool call received                 |
 | `validation_failed` | Schema or policy validation failed |
-| `validated` | Template passed validation |
-| `planned` | SQL plan built |
-| `executed` | SQL execution completed |
-| `response_sent` | Response returned to client |
+| `validated`         | Template passed validation         |
+| `planned`           | SQL plan built                     |
+| `executed`          | SQL execution completed            |
+| `response_sent`     | Response returned to client        |
 
-Each event includes `timestamp` (ms since epoch), `event`, `request_id`, and optional additional fields.
+Each event includes ISO timestamp, log level, logger name, `request_id`, and any additional bound fields.
 
 ### 2.10 Tests
 
-| Test file | What it tests |
-|-----------|---------------|
-| `test_validator.py` | Valid queries pass; invalid operator rejected; limit exceeded rejected |
-| `test_planner.py` | Full pipeline: validate → plan → execute against real Parquet data |
-| `test_response_builder.py` | Default vs debug mode response shape |
-| `test_policy_enforcement.py` | Non-aggregatable columns rejected in metrics |
-| `test_mcp_server.py` | Module-level existence/import tests |
+| Test file                    | What it tests                                                          |
+| ---------------------------- | ---------------------------------------------------------------------- |
+| `test_validator.py`          | Valid queries pass; invalid operator rejected; limit exceeded rejected |
+| `test_planner.py`            | Full pipeline: validate → plan → execute against real Parquet data     |
+| `test_response_builder.py`   | Default vs debug mode response shape                                   |
+| `test_policy_enforcement.py` | Non-aggregatable columns rejected in metrics                           |
+| `test_mcp_server.py`         | Module-level existence/import tests                                    |
 
 ---
 
@@ -225,63 +241,70 @@ Each event includes `timestamp` (ms since epoch), `event`, `request_id`, and opt
 
 ### 3.1 Purpose
 
-An interactive command-line chatbot that connects to the MCP server, fetches its tool definitions, and orchestrates an OpenAI LLM as an agent to answer natural-language queries about the Jahresbericht data.
+A web-based chatbot that connects to the MCP server, fetches its tool definitions, and orchestrates an OpenAI LLM as an agent to answer natural-language queries about the Jahresbericht data. The UI is a [Gradio](https://gradio.app) `ChatInterface` served over HTTP.
 
 ### 3.2 Technology Stack
 
 ```
 Python ≥3.14
 ├── openai ≥2.0.0   — Chat completion API with tool calling
-└── mcp ≥1.0.0      — MCP client (fetches tool specs from server)
+├── mcp ≥1.0.0      — MCP client (fetches tool specs from server)
+└── gradio ≥5.0.0   — Web chat UI (ChatInterface)
 ```
 
 ### 3.3 Configuration
 
-| Variable | Default | Purpose |
-|----------|---------|---------|
-| `OPENAI_API_KEY` | (required) | OpenAI authentication |
-| `OPENAI_MODEL` | `gpt-4o-mini` | Model for chat completions |
-| `MCP_SERVER_URL` | `http://localhost:8080/mcp` | MCP server endpoint |
+| Variable         | Default                     | Purpose                    |
+| ---------------- | --------------------------- | -------------------------- |
+| `OPENAI_API_KEY` | (required)                  | OpenAI authentication      |
+| `OPENAI_MODEL`   | `gpt-4o-mini`               | Model for chat completions |
+| `MCP_SERVER_URL` | `http://localhost:8080/mcp` | MCP server endpoint        |
+| `GRADIO_PORT`    | `7860`                      | Port for Gradio web UI     |
 
 ### 3.4 System Prompt
 
-```
-You are a data assistant for Jahresbericht analytics.
-Never generate SQL. Only use the provided tools.
-Use get_catalog first when user terms are unclear.
-If a glossary term is ambiguous and selection_required is true, ask the user to choose.
-In final answers, mention the filters and dimensions you used.
-```
+The system prompt is written in German and includes:
 
-This constrains the LLM to tool-only operation and enforces a specific workflow: catalog lookup → query.
+- A strict no-SQL rule (tool-only operation)
+- A catalog-first workflow: call `get_catalog` for unknown terms; if `selection_required=true`, ask the user to clarify
+- A no-interpretation rule: report facts only, no trends or predictions
+- A region requirement: every query must include exactly one region (DS, SR, or SI); ask the user if missing
+- A data-scope description: Mediapulse panel data 2018–2021, "Personen 3+" only, structured TV metrics per sender/region/time slot
+- A list of unavailable data (demographics, individual shows, streaming, etc.) with a standard fallback phrase
+
+This constrains the LLM to tool-only operation and enforces a specific workflow: catalog lookup → query, while setting accurate user expectations about data availability.
 
 ### 3.5 Agent Loop
 
-The chatbot implements a standard agentic loop:
+The chatbot implements a Gradio-driven agentic loop:
 
 ```
-1. Connect to MCP server → fetch available tools
-2. Convert MCP tool specs → OpenAI function-calling format
-3. Print welcome message
+Startup:
+  1. Load OpenAI client
+  2. Build Gradio ChatInterface with respond() callback
+  3. Launch Gradio server (HTTP on GRADIO_PORT)
 
-Loop:
-  a. Read user input (or exit on "exit"/"quit")
-  b. Add user message to conversation history
-  c. Inner loop:
-       - POST to OpenAI: system prompt + history + tools
-       - If response has no tool_calls: print text, break inner loop
+Per user message (respond(message, history)):
+  1. Open a fresh MCP session to MCP_SERVER_URL
+  2. Fetch available tools → convert to OpenAI function-calling format
+  3. Build OpenAI messages: system prompt + history + new user message
+  4. Inner loop (up to _MAX_TOOL_ROUNDS=15 iterations):
+       - POST to OpenAI: messages + tool specs
+       - If no tool_calls: return final text to Gradio
        - For each tool_call:
-           - Print "calling tool: <name>" to user
-           - Call corresponding MCP tool with arguments
-           - Append tool result to conversation history
+           - Parse arguments
+           - Call MCP tool via session
+           - Append tool result to messages
        - Continue inner loop (feed results back to LLM)
+  5. If max rounds reached: return error message
 ```
 
-The inner loop is key: the LLM can chain multiple tool calls (e.g., first `get_catalog`, then `query_data`) before producing a final text response.
+The inner loop is key: the LLM can chain multiple tool calls (e.g., first `get_catalog`, then `query_data`) before producing a final text response. Conversation history across turns is managed by Gradio and passed as `history` to each `respond()` call. A new MCP session is opened per turn.
 
 ### 3.6 Tool Conversion
 
 MCP tools are converted to OpenAI function-calling format:
+
 ```python
 {
   "type": "function",
@@ -299,8 +322,10 @@ The LLM uses these to decide which tool to call and with what arguments.
 
 - **Temperature = 1**: Maximum randomness — the LLM has freedom in how it chooses and chains tool calls
 - **No streaming**: Waits for full completions before processing tool calls
-- **Conversation state**: Full message history accumulated in memory per session (not persisted)
-- **Error surface**: If OpenAI or MCP connections fail, friendly error messages are printed rather than raw exceptions
+- **Conversation state**: Managed by Gradio; passed as `history: list[dict[str, str]]` per turn. Not persisted across server restarts.
+- **MCP session per turn**: A fresh `streamable_http_client` session is opened for each `respond()` call; stateless design matches Gradio's callback model
+- **Max tool rounds**: `_MAX_TOOL_ROUNDS = 15` prevents infinite loops in the inner tool-calling loop
+- **Error surface**: If OpenAI or MCP connections fail, the error is returned as a Gradio chat reply rather than crashing the server
 - **`_to_jsonable()`**: Recursively converts Pydantic model instances to plain dicts for JSON serialization before passing tool results back to OpenAI
 
 ### 3.8 Tests
@@ -315,16 +340,16 @@ Minimal — only the `greet()` utility function is tested (default greeting, cus
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                        User (CLI)                            │
+│                    User (Web Browser)                        │
 └──────────────────────────────┬───────────────────────────────┘
                                │ natural language
                                ▼
 ┌──────────────────────────────────────────────────────────────┐
-│                    Chatbot (MCP Client)                      │
+│                Chatbot (Gradio Web App + MCP Client)         │
 │                                                              │
 │  ┌─────────────┐    ┌────────────────┐    ┌──────────────┐  │
-│  │ Conversation│    │  OpenAI Agent  │    │  MCP Client  │  │
-│  │  History    │◄──►│  (gpt-4o-mini) │◄──►│  (tool proxy)│  │
+│  │ Gradio Chat │    │  OpenAI Agent  │    │  MCP Client  │  │
+│  │  Interface  │◄──►│  (gpt-4o-mini) │◄──►│ (per-turn)   │  │
 │  └─────────────┘    └────────────────┘    └──────┬───────┘  │
 └──────────────────────────────────────────────────┼──────────┘
                                                    │ HTTP / streamable-http
@@ -373,6 +398,7 @@ Minimal — only the `greet()` utility function is tested (default greeting, cus
 ### 5.1 No Raw SQL Exposure
 
 The most fundamental design choice: the LLM never sees or generates SQL. It only works with a declarative `QueryTemplateModel`. This:
+
 - Prevents SQL injection entirely at the architecture level
 - Keeps the LLM's action space small and auditable
 - Allows the server to enforce access policies on every query
@@ -388,6 +414,7 @@ The `get_catalog` tool forces structured term resolution before querying. The ag
 ### 5.4 DuckDB + Parquet
 
 Using DuckDB with a Parquet file provides:
+
 - Zero infrastructure (no database server)
 - Columnar compression (47 KB vs 131 KB CSV)
 - Fast analytical queries via vectorized execution
@@ -396,6 +423,7 @@ Using DuckDB with a Parquet file provides:
 ### 5.5 SQLAlchemy as Query Builder
 
 SQLAlchemy is used only as a SQL builder (not as ORM), with DuckDB as the execution engine. This provides:
+
 - Parameterized queries (no string interpolation — SQL injection safe)
 - A clean programmatic API for building SELECT statements
 - Type safety via Python objects rather than string manipulation
@@ -403,6 +431,7 @@ SQLAlchemy is used only as a SQL builder (not as ORM), with DuckDB as the execut
 ### 5.6 MCP as the Integration Layer
 
 Using the Model Context Protocol allows:
+
 - Protocol-level separation between LLM client and data server
 - Potential for multiple different clients (Claude, GPT, custom) connecting to the same server
 - Standard tool discovery and invocation semantics
@@ -430,6 +459,7 @@ Using the Model Context Protocol allows:
 5. **Temperature=1 for agent**: Maximum randomness for tool-calling may produce inconsistent behavior in production.
 6. **Single year of data**: Only 2021 data is bundled — multi-year analysis or update pipelines are not addressed.
 7. **No streaming responses**: The chatbot waits for full completions, which means long tool chains feel slow.
+8. **MCP session per turn**: Re-establishing the HTTP connection on every Gradio turn adds latency; a pooled session would be more efficient for production use.
 
 ### Extensibility Hooks
 
@@ -445,26 +475,26 @@ Using the Model Context Protocol allows:
 ```
 poc/apps/
 ├── mcp_server/
-│   ├── pyproject.toml                        — Project config, deps (Python ≥3.14)
+│   ├── pyproject.toml                        — Project config, deps (Python ≥3.14, structlog)
 │   ├── data/
-│   │   ├── Jahresbericht21_SRF-DS.csv         — Raw source data (131 KB)
-│   │   └── Jahresbericht21_SRF-DS.normalized.parquet — Normalized query data (47 KB)
+│   │   ├── raw/                               — Raw source CSV files
+│   │   └── Jahresbericht_all.parquet          — Normalized multi-year query data
 │   ├── src/
 │   │   ├── mcp_server/
 │   │   │   ├── main.py                        — Entry point, FastMCP setup, tool registration
-│   │   │   ├── config.py                      — AppConfig dataclass, env var loading
-│   │   │   ├── logging.py                     — Structured JSON event logger
+│   │   │   ├── config.py                      — AppConfig dataclass, env var loading (incl. contracts_dir)
+│   │   │   ├── logging.py                     — structlog configuration, get_logger, bind_request_context
 │   │   │   ├── contracts/
 │   │   │   │   ├── models.py                  — QueryTemplateModel, MetricModel, FilterModel, etc.
-│   │   │   │   ├── catalog_models.py          — CatalogModel, CatalogColumnModel
+│   │   │   │   ├── catalog_models.py          — CatalogModel, CatalogColumnModel, MetricDefinitionModel, TimeslotDurationModel
 │   │   │   │   ├── policy_models.py           — PolicyModel, LimitsModel
-│   │   │   │   ├── catalog.yaml               — Column descriptions, aliases, examples
+│   │   │   │   ├── catalog.yaml               — Column descriptions, aliases, allowed values, metric/timeslot lookups
 │   │   │   │   ├── policy.yaml                — Access policy (filterable, groupable, etc.)
 │   │   │   │   └── query_template.schema.json — JSON Schema for QueryTemplateModel
 │   │   │   ├── services/
-│   │   │   │   ├── validator.py               — Template + policy validation
+│   │   │   │   ├── validator.py               — Template + policy validation (incl. Region guard)
 │   │   │   │   ├── planner.py                 — SQLAlchemy query plan builder
-│   │   │   │   ├── executor_duckdb.py         — DuckDB execution engine
+│   │   │   │   ├── executor_duckdb.py         — DuckDB execution engine (view: jahresbericht)
 │   │   │   │   ├── response_builder.py        — Response assembly
 │   │   │   │   └── loaders.py                 — Policy/catalog YAML loaders, schema export
 │   │   │   └── tools/
@@ -479,10 +509,10 @@ poc/apps/
 │       ├── test_policy_enforcement.py         — Policy enforcement tests
 │       └── test_mcp_server.py                 — Basic module tests
 └── chatbot/
-    ├── pyproject.toml                         — Project config, deps (openai, mcp)
+    ├── pyproject.toml                         — Project config, deps (openai, mcp, gradio)
     ├── src/
     │   └── chatbot/
-    │       └── main.py                        — Agent loop, OpenAI integration, CLI
+    │       └── main.py                        — Gradio ChatInterface, agent loop, OpenAI integration
     └── tests/
         └── test_main.py                       — greet() function tests only
 ```

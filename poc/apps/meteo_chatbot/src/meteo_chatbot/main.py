@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 from collections.abc import Callable, Coroutine
+from typing import Any, cast
 
 import gradio as gr
 from mcp import ClientSession
@@ -56,8 +57,8 @@ def _describe_exception(exc: BaseException) -> str:
     return str(exc) or exc.__class__.__name__
 
 
-def _build_openai_tools(mcp_tools: list[object]) -> list[dict[str, object]]:
-    specs: list[dict[str, object]] = []
+def _build_openai_tools(mcp_tools: list[object]) -> list[dict[str, Any]]:
+    specs: list[dict[str, Any]] = []
     for tool in mcp_tools:
         input_schema = getattr(tool, "inputSchema", None)
         if input_schema is None:
@@ -106,7 +107,7 @@ async def _agent_turn(
             model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
             temperature=0,
             messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
-            tools=tool_specs,
+            tools=cast(list[Any], tool_specs),
         )
 
         assistant_message = response.choices[0].message
@@ -125,8 +126,9 @@ async def _agent_turn(
         )
 
         for call in tool_calls:
-            tool_name = str(getattr(call.function, "name", ""))
-            arguments_raw = getattr(call.function, "arguments", "{}")
+            func = getattr(call, "function", None)
+            tool_name = str(getattr(func, "name", ""))
+            arguments_raw = getattr(func, "arguments", "{}")
             try:
                 tool_input = json.loads(arguments_raw) if arguments_raw else {}
             except json.JSONDecodeError:

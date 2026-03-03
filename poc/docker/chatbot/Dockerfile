@@ -14,5 +14,7 @@ COPY apps/chatbot/ ./apps/chatbot/
 # Install dependencies for the chatbot package
 RUN uv sync --no-dev --package chatbot
 
+EXPOSE 7860
+
 # Run the chatbot
 CMD ["uv", "run", "--package", "chatbot", "python", "-m", "chatbot.main"]

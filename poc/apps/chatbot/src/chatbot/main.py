@@ -1,11 +1,14 @@
-"""Minimal CLI chatbot using OpenAI tool-calling and an MCP server."""
+"""Web chatbot using Gradio UI, OpenAI tool-calling, and an MCP server."""
 
 from __future__ import annotations
 
-import asyncio
 import json
 import os
+from collections.abc import Callable, Coroutine
 from typing import Any
+
+import gradio as gr
+from openai.types.chat import ChatCompletionMessageParam
 
 SYSTEM_PROMPT = """\
 Du bist ein Datenassistent für die Analyse von TV-Nutzungsdaten aus den \
@@ -61,6 +64,8 @@ Informationen vor. Die Daten umfassen ausschliesslich aggregierte \
 TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, \
 Region und Zeitfenster für die Zielgruppe Personen 3+.»
 """
+
+_MAX_TOOL_ROUNDS = 15
 
 
 def greet(name: str = "World") -> str:
@@ -125,103 +130,126 @@ def _build_openai_tools(mcp_tools: list[Any]) -> list[dict[str, Any]]:
     return tool_specs
 
 
-async def _run_chat_loop(session: Any) -> None:
-    openai_client = _load_openai_client()
+def _history_to_openai(
+    history: list[dict[str, str]],
+) -> list[ChatCompletionMessageParam]:
+    messages: list[ChatCompletionMessageParam] = []
+    for turn in history:
+        role = turn.get("role", "")
+        content = turn.get("content", "")
+        if role == "user":
+            messages.append({"role": "user", "content": content})
+        elif role == "assistant":
+            messages.append({"role": "assistant", "content": content})
+    return messages
 
+
+async def _agent_turn(
+    message: str,
+    history: list[dict[str, str]],
+    session: Any,
+    openai_client: Any,
+) -> str:
     tools_result = await session.list_tools()
     tool_specs = _build_openai_tools(list(tools_result.tools))
 
-    print(greet())
-    print("Connected to MCP server. Type 'exit' to quit.")
+    messages: list[ChatCompletionMessageParam] = []
+    messages.extend(_history_to_openai(history))
+    messages.append({"role": "user", "content": message})
 
-    messages: list[dict[str, Any]] = []
-    while True:
-        user_input = input("\nYou: ").strip()
-        if user_input.lower() in {"exit", "quit"}:
-            print("Goodbye.")
-            return
-        if not user_input:
-            continue
+    for _ in range(_MAX_TOOL_ROUNDS):
+        response = openai_client.chat.completions.create(
+            model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
+            temperature=1,
+            messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
+            tools=tool_specs,
+        )
 
-        messages.append({"role": "user", "content": user_input})
+        assistant_message = response.choices[0].message
+        tool_calls = assistant_message.tool_calls or []
 
-        while True:
-            response = openai_client.chat.completions.create(
-                model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
-                temperature=1,
-                messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
-                tools=tool_specs,
-            )
+        if not tool_calls:
+            return _extract_text(assistant_message.content) or "[Keine Antwort]"
 
-            assistant_message = response.choices[0].message
-            assistant_dict: dict[str, Any] = {
+        messages.append(
+            {
                 "role": "assistant",
                 "content": assistant_message.content or "",
+                "tool_calls": [call.model_dump(mode="json") for call in tool_calls],
             }
-
-            tool_calls = assistant_message.tool_calls or []
-            if tool_calls:
-                assistant_dict["tool_calls"] = [call.model_dump(mode="json") for call in tool_calls]
-
-            messages.append(assistant_dict)
-
-            if not tool_calls:
-                final_text = _extract_text(assistant_message.content)
-                print(f"Assistant: {final_text or '[No text output]'}")
-                break
-
-            for call in tool_calls:
-                tool_name = str(getattr(call.function, "name", ""))
-                arguments_raw = getattr(call.function, "arguments", "{}")
-                try:
-                    tool_input = json.loads(arguments_raw) if arguments_raw else {}
-                except json.JSONDecodeError:
-                    tool_input = {}
-
-                print(f"Assistant is calling tool: {tool_name}")
-                tool_result = await session.call_tool(name=tool_name, arguments=tool_input)
-
-                messages.append(
-                    {
-                        "role": "tool",
-                        "tool_call_id": str(getattr(call, "id", "")),
-                        "content": json.dumps(
-                            _to_jsonable(tool_result.content),
-                            ensure_ascii=False,
-                        ),
-                    }
-                )
-
-
-async def main() -> None:
-    try:
-        from mcp import ClientSession
-        from mcp.client.streamable_http import streamable_http_client
-    except ImportError as exc:  # pragma: no cover - dependency/runtime guard
-        print("Missing dependencies for MCP client. Run: uv sync --all-extras")
-        raise SystemExit(1) from exc
-
-    mcp_server_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080/mcp")
-
-    try:
-        async with (
-            streamable_http_client(mcp_server_url) as (
-                read_stream,
-                write_stream,
-                _,
-            ),
-            ClientSession(read_stream, write_stream) as session,
-        ):
-            await session.initialize()
-            await _run_chat_loop(session)
-    except Exception as exc:
-        reason = _describe_exception(exc)
-        print(
-            "Failed to start chatbot. "
-            f"Reason: {reason}. "
-            f"Check MCP_SERVER_URL ({mcp_server_url}) and ensure the MCP server is running."
         )
+
+        for call in tool_calls:
+            tool_name = str(getattr(call.function, "name", ""))
+            arguments_raw = getattr(call.function, "arguments", "{}")
+            try:
+                tool_input = json.loads(arguments_raw) if arguments_raw else {}
+            except json.JSONDecodeError:
+                tool_input = {}
+
+            tool_result = await session.call_tool(name=tool_name, arguments=tool_input)
+            messages.append(
+                {
+                    "role": "tool",
+                    "tool_call_id": str(getattr(call, "id", "")),
+                    "content": json.dumps(
+                        _to_jsonable(tool_result.content),
+                        ensure_ascii=False,
+                    ),
+                }
+            )
+
+    return "[Maximale Tool-Runden erreicht ohne abschliessende Antwort]"
+
+
+def _make_respond_fn(
+    openai_client: Any, mcp_server_url: str
+) -> Callable[[str, list[dict[str, str]]], Coroutine[Any, Any, str]]:
+    async def respond(message: str, history: list[dict[str, str]]) -> str:
+        try:
+            from mcp import ClientSession
+            from mcp.client.streamable_http import streamable_http_client
+
+            async with (
+                streamable_http_client(mcp_server_url) as (read, write, _),
+                ClientSession(read, write) as session,
+            ):
+                await session.initialize()
+                return await _agent_turn(message, history, session, openai_client)
+        except Exception as exc:
+            reason = _describe_exception(exc)
+            return f"MCP-Server unter `{mcp_server_url}` nicht erreichbar. Grund: {reason}"
+
+    return respond
+
+
+def main() -> None:
+    openai_client = _load_openai_client()
+    mcp_server_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080/mcp")
+    respond = _make_respond_fn(openai_client, mcp_server_url)
+
+    demo = gr.ChatInterface(
+        fn=respond,
+        title="SRF Jahresbericht Chat",
+        description=(
+            "Stellen Sie Fragen zu den TV-Nutzungsdaten der Schweizer "
+            "Mediapulse-Jahresberichte (2018–2021). "
+            "Datenquelle: SRF/SRG Jahresbericht, Panel-basierte TV-Messung."
+        ),
+        examples=[
+            "Was war der durchschnittliche Marktanteil von SRF 1 in der Deutschen Schweiz 2021?",
+            "Zeige mir die Reichweite aller Sender in der Deutschen Schweiz für 2020.",
+            "Welcher Sender hatte den höchsten Marktanteil in der Suisse Romande 2019?",
+            "Wie war die Sehdauer für SRF zwei in der Deutschen Schweiz in der Primetime 2021?",
+        ],
+        cache_examples=False,
+    )
+
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("GRADIO_PORT", "7860")),
+    )
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
