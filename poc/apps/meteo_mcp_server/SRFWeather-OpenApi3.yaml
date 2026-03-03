@@ -1,0 +1,1050 @@
+openapi: 3.0.0
+info:
+  title: SRF Weather
+  description: SRF Meteo serves weather forecast for over 100'000 locations within Switzerland
+  contact:
+    name: API Developer
+    url: https://developer.srgssr.ch
+    email: api@srgssr.ch
+  version: '2.0.1'
+servers:
+- url: https://api.srgssr.ch/srf-meteo/v2
+  variables: {}
+- url: https://api.srgssr.ch/oauth/v1
+  variables: {}
+paths:
+  /forecastpoint/{geolocationId}:
+    get:
+      tags:
+      - Forecast
+      summary: getForecastWeekByGeoLocation
+      description: Returns forecast data grouped by day-intervals, 3hour-intervals (threeHours) and hours interval
+      operationId: getForecastWeekByGeoLocation
+      parameters:
+      - name: geolocationId
+        in: path
+        description: id of geolocation object ('[lat],[lon]' rounded to 4 digits)
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForecastPointWeek'
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+  /colors:
+    get:
+      tags:
+      - Forecast
+      summary: List of temperature colormappings
+      description: Returns the complete list of temperature-color mappings
+      operationId: Listoftemperaturecolormappings
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/min_maxcolor'
+                description: ''
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+  /geolocations/{id}:
+    get:
+      tags:
+      - Geo
+      summary: Geolocation by Id
+      description: Returns a single geolocation object including its geolocationNames
+      operationId: GeolocationbyId
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'Specify access token for API in the given format: Bearer [access_token].'
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/geolocations_ID'
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+  /geolocationNames/{id}:
+    get:
+      tags:
+      - Geo
+      summary: Geolocationnames by Id
+      description: Returns a singe geolocationName object
+      operationId: GeolocationnamesbyId
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'Specify access token for API in the given format: Bearer [access_token].'
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/geolocationNames_ID'
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+  /geolocations:
+    get:
+      tags:
+      - Geo
+      summary: Geolocation by latitude and longitude
+      description: Returns a collection of geolocation objects within a distance of 10km of latitude and longitude
+      operationId: Geolocationbylatitudeandlongitude
+      parameters:
+      - name: latitude
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: longitude
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: 'Specify access token for API in the given format: Bearer [access_token].'
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/geolocation'
+                description: ''
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+  /geolocationNames:
+    get:
+      tags:
+      - Geo
+      summary: GeolocationNames by name or zip
+      description: Searches geolocationNames by given name or zip
+      operationId: GeolocationNamesbynameorzip
+      parameters:
+      - name: Authorization
+        in: header
+        description: 'Specify access token for API in the given format: Bearer [access_token].'
+        style: simple
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: zip
+        in: query
+        description: ''
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/geolocationNames_search'
+        '400':
+          description: Invalid request
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '401':
+          description: Invalid or expired access token
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+        '404':
+          description: Resource not found
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/m400'
+      deprecated: false
+components:
+  schemas:
+    min_maxcolor:
+      title: min_maxcolor
+      required:
+      - temperature
+      - background_color
+      - text_color
+      type: object
+      properties:
+        temperature:
+          type: integer
+          format: int32
+        background_color:
+          type: string
+        text_color:
+          type: string
+    geolocation:
+      title: geolocation
+      required:
+      - id
+      - lat
+      - lon
+      - station_id
+      - timezone
+      - default_name
+      - alarm_region_id
+      - alarm_region_name
+      - district
+      - geolocation_names
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        lat:
+          type: integer
+          format: int32
+        lon:
+          type: integer
+          format: int32
+        station_id:
+          type: string
+        timezone:
+          type: string
+        default_name:
+          type: string
+        alarm_region_id:
+          type: string
+        alarm_region_name:
+          type: string
+        district:
+          type: string
+        geolocation_names:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeolocationName'
+          description: ''
+    poi_type1:
+      title: poi_type1
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+    geolocations_ID:
+      title: geolocations_ID
+      required:
+      - id
+      - lat
+      - lon
+      - station_id
+      - timezone
+      - default_name
+      - district
+      - geolocation_names
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        lat:
+          type: integer
+          format: int32
+        lon:
+          type: integer
+          format: int32
+        station_id:
+          type: string
+        timezone:
+          type: string
+        default_name:
+          type: string
+        district:
+          type: string
+        geolocation_names:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeolocationName1'
+          description: ''
+    geolocationNames_ID:
+      title: geolocationNames_ID
+      required:
+      - district
+      - id
+      - geolocation
+      - location_id
+      - type
+      - poi_type
+      - language
+      - translation_type
+      - name
+      - country
+      - height
+      - ch
+      type: object
+      properties:
+        district:
+          type: string
+        id:
+          type: integer
+          format: int32
+        geolocation:
+          allOf:
+          - $ref: '#/components/schemas/geolocationNamesObj'
+          - {}
+        location_id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        poi_type:
+          allOf:
+          - $ref: '#/components/schemas/poi_type1'
+          - {}
+        default_name:
+          type: string
+        language:
+          type: string
+        translation_type:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        height:
+          type: integer
+          format: int32
+        ch:
+          type: string
+    geolocationNamesObj:
+      title: geolocationNamesObj
+      required:
+      - id
+      - lat
+      - lon
+      - station_id
+      - timezone
+      - default_name
+      - district
+      - geolocation_names
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        lat:
+          type: integer
+          format: int32
+        lon:
+          type: integer
+          format: int32
+        station_id:
+          type: string
+        timezone:
+          type: string
+        default_name:
+          type: string
+        district:
+          type: string
+        geolocation_names:
+          type: array
+          items:
+            type: object
+          description: ''
+    geolocationNames_search:
+      title: geolocationNames_search
+      required:
+      - district
+      - id
+      - geolocation
+      - location_id
+      - type
+      - language
+      - translation_type
+      - name
+      - country
+      - province
+      - inhabitants
+      - height
+      - ch
+      type: object
+      properties:
+        district:
+          type: string
+        id:
+          type: integer
+          format: int32
+        geolocation:
+          allOf:
+          - $ref: '#/components/schemas/geolocation'
+          - {}
+        location_id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        default_name:
+          type: string
+        language:
+          type: string
+        translation_type:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        province:
+          type: string
+        inhabitants:
+          type: string
+        height:
+          type: integer
+          format: int32
+        ch:
+          type: string
+    m400:
+      title: m400
+      required:
+      - code
+      - message
+      - info
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+          example: Invalid Input Parameters, please verify
+        info:
+          type: string
+          example: https://developer.srgssr.ch
+    GeolocationName1:
+      title: GeolocationName1
+      required:
+      - district
+      - id
+      - location_id
+      - type
+      - poi_type
+      - language
+      - translation_type
+      - name
+      - country
+      - height
+      - ch
+      type: object
+      properties:
+        district:
+          type: string
+        id:
+          type: string
+        location_id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        poi_type:
+          allOf:
+          - $ref: '#/components/schemas/poi_type1'
+          - {}
+        language:
+          type: string
+        translation_type:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        province:
+          type: string
+        inhabitants:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        ch:
+          type: integer
+          format: int32
+    ForecastPointWeek:
+      title: ForecastPointWeek
+      required:
+      - days
+      - three_hours
+      - hours
+      - geolocation
+      type: object
+      properties:
+        days:
+          type: array
+          items:
+            $ref: '#/components/schemas/DayForecastInterval'
+          description: ''
+        three_hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThreeHourForecastInterval'
+          description: ''
+        hours:
+          type: array
+          items:
+            $ref: '#/components/schemas/OneHourForecastInterval'
+          description: ''
+        geolocation:
+          allOf:
+          - $ref: '#/components/schemas/Geolocation1'
+          - {}
+    DayForecastInterval:
+      title: DayForecastInterval
+      required:
+      - date_time
+      - symbol_code
+      - symbol24_code
+      - PROBPCP_PERCENT
+      - RRR_MM
+      - FF_KMH
+      - FX_KMH
+      - DD_DEG
+      - SUNSET
+      - SUNRISE
+      - SUN_H
+      - TX_C
+      - TN_C
+      - min_color
+      - max_color
+      type: object
+      properties:
+        date_time:
+          type: string
+          format: date-time
+        symbol_code:
+          type: integer
+          format: int32
+        symbol24_code:
+          type: integer
+          format: int32
+        PROBPCP_PERCENT:
+          type: integer
+          description: probability of rain in %
+          format: int32
+        RRR_MM:
+          type: number
+          description: total rainfall in mm
+        FF_KMH:
+          type: integer
+          description: avg. wind speed in km/h
+          format: int32
+        FX_KMH:
+          type: integer
+          description: gust speed in km/h
+          format: int32
+        DD_DEG:
+          type: integer
+          description: 'direction of wind, -1 means: turning winds'
+          format: int32
+        SUNSET:
+          type: string
+          description: datetime of sunset, null if no sunset on that point/day
+          format: date-time
+        SUNRISE:
+          type: string
+          description: datetime of sunrise, null if no sunrise on that point/day
+          format: date-time
+        SUN_H:
+          maximum: 25
+          minimum: 0
+          type: integer
+          description: hours of sunshine
+          format: int32
+        UVI:
+          maximum: 20
+          minimum: 0
+          type: integer
+          description: UV index
+          format: int32
+        TX_C:
+          type: integer
+          description: expected max temperature in celsius
+          format: int32
+        TN_C:
+          type: integer
+          description: expected min temperature in celsius
+          format: int32
+        min_color:
+          allOf:
+          - $ref: '#/components/schemas/Color'
+          - {}
+        max_color:
+          allOf:
+          - $ref: '#/components/schemas/Color'
+          - {}
+    ThreeHourForecastInterval:
+      title: ThreeHourForecastInterval
+      required:
+      - date_time
+      - symbol_code
+      - symbol24_code
+      - PROBPCP_PERCENT
+      - RRR_MM
+      - FF_KMH
+      - FX_KMH
+      - DD_DEG
+      - TTT_C
+      - SUN_MIN
+      - cur_color
+      type: object
+      properties:
+        date_time:
+          type: string
+          format: date-time
+        symbol_code:
+          type: integer
+          format: int32
+        symbol24_code:
+          type: integer
+          format: int32
+        PROBPCP_PERCENT:
+          type: integer
+          description: probability of rain in %
+          format: int32
+        RRR_MM:
+          type: number
+          description: total rainfall in mm
+        FF_KMH:
+          type: integer
+          description: avg. wind speed in km/h
+          format: int32
+        FX_KMH:
+          type: integer
+          description: gust speed in km/h
+          format: int32
+        DD_DEG:
+          type: integer
+          description: 'direction of wind, -1 means: turning winds'
+          format: int32
+        TTT_C:
+          type: integer
+          description: expected temperature in celsius
+          format: int32
+        TTL_C:
+          type: number
+          description: lower bound of expected temperature range in celsius
+        TTH_C:
+          type: number
+          description: upper bound of expected temperature range in celsius
+        DEWPOINT_C:
+          type: number
+          description: Dewpoint
+        RELHUM_PERCENT:
+          type: integer
+          description: Relative air humidity
+          format: int32
+        FRESHSNOW_MM:
+          type: integer
+          description: Fresh snow in the hour before event
+          format: int32
+        PRESSURE_HPA:
+          type: integer
+          description: Barometric pressure
+          format: int32
+        SUN_MIN:
+          type: integer
+          description: Sunshine duration in the hour before event
+          format: int32
+        IRRADIANCE_WM2:
+          type: integer
+          description: Global irradiance
+          format: int32
+        TTTFEEL_C:
+          type: integer
+          description: felt temperature
+          format: int32
+        cur_color:
+          allOf:
+          - $ref: '#/components/schemas/Color'
+          - {}
+    OneHourForecastInterval:
+      title: OneHourForecastInterval
+      required:
+      - date_time
+      - symbol_code
+      - symbol24_code
+      - PROBPCP_PERCENT
+      - RRR_MM
+      - FF_KMH
+      - FX_KMH
+      - DD_DEG
+      - TTT_C
+      - SUN_MIN
+      - cur_color
+      type: object
+      properties:
+        date_time:
+          type: string
+          format: date-time
+        symbol_code:
+          type: integer
+          format: int32
+        symbol24_code:
+          type: integer
+          format: int32
+        PROBPCP_PERCENT:
+          type: integer
+          description: probability of rain in %
+          format: int32
+        RRR_MM:
+          type: number
+          description: total rainfall in mm
+        FF_KMH:
+          type: integer
+          description: avg. wind speed in km/h
+          format: int32
+        FX_KMH:
+          type: integer
+          description: gust speed in km/h
+          format: int32
+        DD_DEG:
+          type: integer
+          description: 'direction of wind, -1 means: turning winds'
+          format: int32
+        TTT_C:
+          type: integer
+          description: expected temperature in celsius
+          format: int32
+        TTL_C:
+          type: number
+          description: lower bound of expected temperature range in celsius
+        TTH_C:
+          type: number
+          description: upper bound of expected temperature range in celsius
+        DEWPOINT_C:
+          type: number
+          description: Dewpoint
+        RELHUM_PERCENT:
+          type: integer
+          description: Relative air humidity
+          format: int32
+        FRESHSNOW_MM:
+          type: integer
+          description: Fresh snow in the hour before event
+          format: int32
+        PRESSURE_HPA:
+          type: integer
+          description: Barometric pressure
+          format: int32
+        SUN_MIN:
+          type: integer
+          description: Sunshine duration in the hour before event
+          format: int32
+        IRRADIANCE_WM2:
+          type: integer
+          description: Global irradiance
+          format: int32
+        TTTFEEL_C:
+          type: integer
+          description: felt temperature
+          format: int32
+        cur_color:
+          allOf:
+          - $ref: '#/components/schemas/Color'
+          - {}
+    Geolocation1:
+      title: Geolocation1
+      required:
+      - id
+      - lat
+      - lon
+      - station_id
+      - timezone
+      - default_name
+      type: object
+      properties:
+        id:
+          type: string
+        lat:
+          type: number
+        lon:
+          type: number
+        station_id:
+          type: string
+        timezone:
+          type: string
+        default_name:
+          type: string
+        alarm_region_id:
+          type: string
+          description: only swiss (or nearby) forecasts
+        alarm_region_name:
+          type: string
+          description: only on swiss (or nearby) forecsats
+        district:
+          type: string
+        geolocation_names:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeolocationName'
+          description: ''
+    Color:
+      title: Color
+      required:
+      - temperature
+      - background_color
+      - text_color
+      type: object
+      properties:
+        temperature:
+          type: integer
+          format: int32
+        background_color:
+          type: string
+        text_color:
+          type: string
+    GeolocationName:
+      title: GeolocationName
+      required:
+      - description_short
+      - description_long
+      - id
+      - location_id
+      - type
+      - language
+      - name
+      - ch
+      type: object
+      properties:
+        description_short:
+          type: string
+        description_long:
+          type: string
+        id:
+          type: string
+        geolocation:
+          allOf:
+          - $ref: '#/components/schemas/Geolocation1'
+          - {}
+        location_id:
+          type: string
+        type:
+          type: string
+        poi_type:
+          allOf:
+          - $ref: '#/components/schemas/PoiType'
+          - {}
+        language:
+          type: integer
+          format: int32
+        translation_type:
+          type: string
+        name:
+          type: string
+        country:
+          type: string
+        province:
+          type: string
+        inhabitants:
+          type: integer
+          format: int32
+        height:
+          type: integer
+          format: int32
+        plz:
+          type: integer
+          format: int32
+        ch:
+          type: integer
+          format: int32
+    PoiType:
+      title: PoiType
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+  securitySchemes:
+    auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.srgssr.ch/oauth/v1/accesstoken?grant_type=client_credentials
+          scopes: {}
+security:
+- auth: []
+tags:
+- name: Forecast
+  description: ''
+- name: Geo
+  description: ''

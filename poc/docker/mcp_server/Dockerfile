@@ -12,7 +12,7 @@ COPY pyproject.toml uv.lock* README.md ./
 COPY apps/mcp_server/ ./apps/mcp_server/
 
 # Install dependencies for the mcp-server package
-RUN uv sync --frozen --no-dev --package mcp-server
+RUN uv sync --no-dev --package mcp-server
 
 EXPOSE 8080
 

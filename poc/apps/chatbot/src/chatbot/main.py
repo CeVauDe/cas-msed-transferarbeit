@@ -98,7 +98,7 @@ def _load_openai_client() -> Any:
         raise RuntimeError("OPENAI_API_KEY is required.")
 
     try:
-        from openai import OpenAI  # ty: ignore[unresolved-import]
+        from openai import OpenAI
     except ImportError as exc:  # pragma: no cover - dependency/runtime guard
         raise RuntimeError("Missing dependency 'openai'. Run: uv sync --all-extras") from exc
 
