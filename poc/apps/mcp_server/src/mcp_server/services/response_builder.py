@@ -21,6 +21,6 @@ def build_response(
     if debug_enrichment:
         response["mode"] = "debug"
         response["template_echo"] = template.model_dump(mode="python")
-        response["sample_rows"] = rows[:5]
+        response["sample_rows"] = rows[: min(5, len(rows))]
 
     return response

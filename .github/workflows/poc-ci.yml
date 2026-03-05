@@ -50,5 +50,11 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
 
+      - name: Download data
+        run: uv run --package mcp-server python apps/mcp_server/src/tools/download_data.py
+
+      - name: Transform data
+        run: uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py
+
       - name: Run tests
         run: uv run pytest -v --tb=short

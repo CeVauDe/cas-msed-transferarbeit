@@ -116,15 +116,15 @@ Run from `poc/`:
 
 ```bash
 # Parquet output (recommended, preserves list-type Sendergruppen)
-uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py
+uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py
 
 # Parquet + optional CSV output
-uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py \
+uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py \
   --output apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet \
   --output-csv apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.csv
 
 # Optional: drop rows where sender value is missing
-uv run --package mcp-server python apps/mcp_server/src/tools/transform_jahresbericht.py \
+uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py \
   --drop-na-values
 ```
 
