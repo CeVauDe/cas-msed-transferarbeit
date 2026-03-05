@@ -9,6 +9,10 @@ dependencies = []
 [tool.uv.workspace]
 members = ["apps/*"]
 
+[tool.uv.sources]
+chatbot = { workspace = true }
+"mcp-server" = { workspace = true }
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
@@ -16,6 +20,10 @@ dev = [
     "pre-commit>=4.0.0",
     "ruff>=0.8.0",
     "ty>=0.0.1a6",
+]
+test = [
+    "chatbot",
+    "mcp-server",
 ]
 
 [tool.ruff]
