@@ -8,6 +8,9 @@ WORKDIR /app
 # Copy workspace config
 COPY pyproject.toml uv.lock* README.md ./
 
+# Copy workspace stubs for other members so uv can resolve the workspace
+COPY apps/chatbot/pyproject.toml ./apps/chatbot/pyproject.toml
+
 # Copy only the mcp-server app
 COPY apps/mcp_server/ ./apps/mcp_server/
 
