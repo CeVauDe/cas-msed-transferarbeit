@@ -50,35 +50,19 @@ footer:
       content: $footer-recto-right-content
     left:
       content: ''
-title_page:
+title-page:
   align: center
+  margin: [50mm, 0mm, 0mm, 0mm]
+  logo:
+    image: image:logo.png[top=0mm,pdfwidth=21.7cm]
   title:
-    font_size: 28
-    font_style: bold
-    margin_top: 50.8mm
+    font-size: 28
+    font-style: bold
+    margin-top: 20mm
+  subtitle:
+    font-size: 20
+    margin-top: 10mm
   authors:
-    margin_top: 12.7mm
+    margin-top: 10mm
   date:
-    margin_top: 6.35mm
-
-role:
-  text-center:
-    align: center
-  title-main-title:
-    line-height: 1.0
-    font-size: 32
-    font-style: bold
-  title-authors:
-    line-height: 1.0
-    font-size: 12
-    font-style: bold
-    margin-bottom: 50
-  title-subtitle:
-    font-size: 20
-    font-style: bold
-  title-context:
-    line-height: 1.0
-    font-size: 14
-  title-pre-word-title:
-    font-size: 20
-    font-style: bold
+    margin-top: 6.35mm
