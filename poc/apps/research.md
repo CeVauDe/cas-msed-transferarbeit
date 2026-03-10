@@ -12,7 +12,7 @@ The system has two components that work together:
 | App          | Role                                 | Protocol                            |
 | ------------ | ------------------------------------ | ----------------------------------- |
 | `mcp_server` | Policy-controlled data query backend | MCP (Model Context Protocol) server |
-| `chatbot`    | Interactive CLI agent                | MCP client + OpenAI tool-calling    |
+| `chatbot`    | Gradio web chatbot                   | MCP client + OpenAI tool-calling    |
 
 The architecture separates user-facing interaction (chatbot) from data access (mcp_server), mediated by the MCP protocol. The agent (OpenAI LLM) orchestrates tool calls autonomously without ever generating raw SQL.
 
@@ -22,7 +22,7 @@ The architecture separates user-facing interaction (chatbot) from data access (m
 
 ### 2.1 Purpose
 
-Exposes a constrained, policy-validated interface to query the SRF Jahresbericht 2021 dataset. AI agents can call its tools, but they cannot execute arbitrary SQL — every query is expressed as a declarative "query template" and validated against a policy before execution.
+Exposes a constrained, policy-validated interface to query the SRF/SRG Jahresbericht dataset (2018–2021). AI agents can call its tools, but they cannot execute arbitrary SQL — every query is expressed as a declarative "query template" and validated against a policy before execution.
 
 ### 2.2 Technology Stack
 
@@ -108,7 +108,7 @@ Template structure:
 ```json
 {
   "metrics": [{ "column": "Wert", "aggregate": "sum", "alias": "wert_sum" }],
-  "filters": [{ "column": "Region", "op": "eq", "value": "Deutsche Schweiz" }],
+  "filters": [{ "column": "Region", "op": "eq", "value": "DS" }],
   "group_by": ["Sender"],
   "sort": [{ "column": "wert_sum", "direction": "desc" }],
   "limit": 50
@@ -157,7 +157,7 @@ The policy (`contracts/policy.yaml`) is the core security mechanism. It declarat
 
 - **`filterable`**: Which operators are allowed per column (e.g., `Jahr` allows `gte`/`lte` for ranges; string columns only allow `eq`/`in`)
 - **`groupable`**: Which columns can appear in `group_by` (all descriptor columns; `Wert` excluded)
-- **`sortable`**: Which columns allow sorting (`Zeitschienen`, `Jahr`, `Wert`)
+- **`sortable`**: Which columns allow sorting (`Jahr`, `timeslot_start`, `timeslot_end`, `timeslot_duration_minutes`, `Wert`)
 - **`aggregates`**: Which aggregate functions are allowed per column (only `Wert` can be aggregated)
 - **`limits`**: `default_limit: 20`, `max_limit: 200`
 
@@ -167,42 +167,58 @@ Additionally, the validator enforces a **cross-region guard**: every query must 
 
 ### 2.7 Data Catalog
 
-The catalog (`contracts/catalog.yaml`) describes the 9 dataset columns in German:
+The catalog (`contracts/catalog.yaml`) describes the **8 dataset columns** in German:
 
-| Column          | Type    | Meaning                                                        |
-| --------------- | ------- | -------------------------------------------------------------- |
-| `Zeitschienen`  | string  | 15-minute broadcast time slots (e.g., `"07:00:00 - 07:15:00"`) |
-| `Facts`         | string  | Metric type identifier (e.g., `"Rt-T"`)                        |
-| `Aktivitäten`   | string  | Activity measurement window (e.g., `"Overnight+7"`)            |
-| `Zielgruppe`    | string  | Target audience group (e.g., `"Personen 3+"`)                  |
-| `Region`        | string  | Swiss language region (e.g., `"Deutsche Schweiz"`)             |
-| `Jahr`          | integer | Calendar year                                                  |
-| `Zeitintervall` | string  | Measurement interval (e.g., `"15 min"`)                        |
-| `Sender`        | string  | TV channel name (e.g., `"SRF 1"`, `"SRF zwei"`)                |
-| `Wert`          | number  | Numeric measurement value                                      |
+| Column                      | Type    | Meaning                                                                                        |
+| --------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `Jahr`                      | integer | Calendar year (2018, 2019, 2020, 2021)                                                         |
+| `Region`                    | string  | Language region code: `DS` (Deutsche Schweiz), `SR` (Suisse Romande), `SI` (Svizzera Italiana) |
+| `timeslot_start`            | string  | Slot start time (HH:MM:SS, broadcast day 02:00–26:00)                                          |
+| `timeslot_end`              | string  | Slot end time (HH:MM:SS, broadcast day 02:00–26:00)                                            |
+| `timeslot_duration_minutes` | integer | Slot duration: `15` (quarter-hour), `300` (primetime 18–23h), `1440` (full day)                |
+| `Metrik`                    | string  | Metric type: `Rt-T`, `Rt-%`, `NRw-T`, `NRw-%`, `MA-%`, `SD Ø`, `VD Ø`                          |
+| `Sender`                    | string  | TV channel name (e.g., `SRF 1`, `SRF zwei`, `RTS Un`, `RSI LA 1`, `ARD`, `ZDF`)                |
+| `Wert`                      | number  | Numeric measurement value                                                                      |
+
+Note: the raw Excel files also contain a `Zielgruppen` (audience) column and an `Aktivitäten` column, but both are constant across all rows (`Personen 3+` and `Overnight+7` respectively) and are dropped during transformation — they do not appear in the Parquet file or catalog.
+
+The broadcast day uses an extended time notation: it runs from `02:00:00` to `26:00:00` to keep times monotonically increasing across the midnight boundary. Python's `datetime.time` cannot represent hours ≥ 24, so start/end times are stored as plain strings.
 
 Each column entry includes German aliases, allowed values (exact enum list when finite), example values, and a description.
 
 The catalog also includes two optional lookup sections:
 
-- **`metrics`**: Maps `Facts` code values (e.g., `Rt-T`, `MA-%`) to human-readable descriptions and units
-- **`timeslot_durations`**: Maps `timeslot_duration_minutes` values to descriptions
+- **`metrics`**: Maps `Metrik` code values (e.g., `Rt-T`, `MA-%`) to human-readable German descriptions and units
+- **`timeslot_durations`**: Maps `timeslot_duration_minutes` values (15, 300, 1440) to descriptions
 
 ### 2.8 Data Layer
 
-- **Source**: `data/Jahresbericht21_SRF-DS.csv` (131 KB) — raw wide-format CSV with one column per sender
-- **Transformed**: `data/Jahresbericht21_SRF-DS.normalized.parquet` (47 KB) — melted to long format (one row per sender per time slot)
-- **Transformation script**: `src/tools/transform_jahresbericht.py`
+- **Source**: 24 Excel files in `data/raw/` — downloaded from the GitHub Release `data-v1` archive (`jahresberichte-raw-data.zip`)
+- **Filename pattern**: `Jahresbericht{YY}_{SRF|nonSRF}-{DS|SI|SR}_{date}_FB.xlsx` — covers years 2018–2021 for all three language regions in both SRF and non-SRF variants
+- **Transformed**: `data/Jahresbericht_all.parquet` — all 24 files concatenated into long format (one row per sender per time slot per year/region)
+- **Download script**: `src/tools/download_data.py` — fetches the zip archive from GitHub Releases and extracts it into `data/raw/`
+- **Transformation script**: `src/tools/load_jahresbericht.py` — loads and transforms each Excel file, then concatenates them
+
+Raw Excel layout per file (102 rows × 65 or 100 columns):
+
+- Row 0: title string (dropped)
+- Row 1: L1 header (`Overnight+7`) — forward-filled across columns (constant, dropped after parsing)
+- Row 2: metric names (Rt-T, Rt-%, NRw-T, NRw-%, MA-%, SD Ø, VD Ø) — forward-filled
+- Row 3: station (Sender) names — SRF files have 9 stations per metric group; nonSRF files have 14
+- Rows 4–99: 96 × 15-minute timeslot data rows (02:00–26:00)
+- Row 100: "Whole day" summary (02:00–26:00, 1440 minutes)
+- Row 101: "18-23h" summary (18:00–23:00, 300 minutes)
 
 The transformation:
 
-1. Melts sender columns (`SRF 1`, `SRF zwei`, etc.) into a single `Sender` + `Wert` pair per row
-2. Drops summary aggregate columns (`SRG SSR Total`, `SRF Total`, `Restliche SRG SSR`)
-3. Adds a `Sendergruppen` column (list of group membership per sender)
-4. Converts values to float, optionally drops NaN rows
-5. Outputs normalized Parquet
+1. Parses year and region from the filename (e.g., `Jahresbericht21_SRF-DS_...` → `Jahr=2021`, `Region=DS`)
+2. Drops the title row and the constant `Zielgruppen` column (always `Personen 3+`)
+3. Forward-fills sparse metric/station headers
+4. Parses timeslot strings (e.g., `"07:00:00 - 07:15:00"`) into `timeslot_start`, `timeslot_end`, and `timeslot_duration_minutes`; maps `"Whole day"` and `"18-23h"` to their canonical values
+5. Melts the wide matrix into long format: each (timeslot × metric × sender) cell → one row with columns `Jahr, Region, timeslot_start, timeslot_end, timeslot_duration_minutes, Metrik, Sender, Wert`
+6. Concatenates all 24 files; outputs a single `Jahresbericht_all.parquet`
 
-The server never reads the CSV directly; it always reads the normalized Parquet through a DuckDB in-memory view created fresh per query.
+The server never reads the Excel files directly; it always reads `Jahresbericht_all.parquet` through a DuckDB in-memory view (`jahresbericht`) created fresh per query.
 
 ### 2.9 Logging
 
@@ -385,8 +401,8 @@ Minimal — only the `greet()` utility function is tested (default greeting, cus
 
 1. User types: _"What was the average viewership for SRF 1 in prime time?"_
 2. OpenAI decides to call `get_catalog(term="viewership")` → MCP server returns column definition for `Wert`
-3. OpenAI decides to call `get_catalog(term="prime time")` → MCP server returns fuzzy candidates including `Zeitschienen`
-4. OpenAI calls `query_data` with a structured template (metrics: avg Wert, filters: Sender eq "SRF 1", group_by: Zeitschienen)
+3. OpenAI decides to call `get_catalog(term="prime time")` → MCP server returns fuzzy candidates including `timeslot_duration_minutes` and `timeslot_start`
+4. OpenAI calls `query_data` with a structured template (metrics: avg Wert, filters: Region eq "DS", Sender eq "SRF 1", group_by: timeslot_start)
 5. MCP server validates template against policy → builds SQL → executes on DuckDB → returns rows
 6. OpenAI formats a natural-language answer referencing the filters and dimensions used
 7. User sees the final text response
@@ -452,12 +468,12 @@ Using the Model Context Protocol allows:
 
 ### Limitations / Gaps
 
-1. **Single dataset**: The system is hard-wired to one Parquet file and one table (`jahresbericht_normalized`). Adding a second dataset would require significant extension.
+1. **Single dataset**: The system is hard-wired to one Parquet file and one table (`jahresbericht`). Adding a second dataset would require significant extension.
 2. **No auth on MCP server**: The HTTP transport has no authentication — any client that can reach the port can query data.
 3. **In-memory DuckDB per request**: A new DuckDB connection is created for every `query_data` call. For high concurrency this would be inefficient (though fine for PoC).
 4. **Minimal chatbot tests**: The agent loop is entirely untested in automated tests.
 5. **Temperature=1 for agent**: Maximum randomness for tool-calling may produce inconsistent behavior in production.
-6. **Single year of data**: Only 2021 data is bundled — multi-year analysis or update pipelines are not addressed.
+6. **Four-year dataset, update pipeline absent**: Data covers 2018–2021 but the transformation pipeline must be re-run manually to add new years; there is no automated refresh or incremental update mechanism.
 7. **No streaming responses**: The chatbot waits for full completions, which means long tool chains feel slow.
 8. **MCP session per turn**: Re-establishing the HTTP connection on every Gradio turn adds latency; a pooled session would be more efficient for production use.
 
@@ -477,7 +493,7 @@ poc/apps/
 ├── mcp_server/
 │   ├── pyproject.toml                        — Project config, deps (Python ≥3.14, structlog)
 │   ├── data/
-│   │   ├── raw/                               — Raw source CSV files
+│   │   ├── raw/                               — Raw source Excel files (24 .xlsx files, downloaded via download_data.py)
 │   │   └── Jahresbericht_all.parquet          — Normalized multi-year query data
 │   ├── src/
 │   │   ├── mcp_server/
@@ -501,7 +517,8 @@ poc/apps/
 │   │   │       ├── get_catalog.py             — get_catalog MCP tool handler
 │   │   │       └── query_data.py              — query_data MCP tool handler
 │   │   └── tools/
-│   │       └── transform_jahresbericht.py     — CSV → Parquet normalization script
+│   │       ├── download_data.py           — Downloads raw Excel zip from GitHub Release data-v1 → data/raw/
+│   │       └── load_jahresbericht.py      — Loads & transforms all Excel files → Jahresbericht_all.parquet
 │   └── tests/
 │       ├── test_validator.py                  — Validator unit tests
 │       ├── test_planner.py                    — Planner integration test (real Parquet)
