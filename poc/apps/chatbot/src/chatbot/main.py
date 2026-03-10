@@ -245,9 +245,11 @@ def main() -> None:
         cache_examples=False,
     )
 
+    port = int(os.environ.get("GRADIO_PORT", "7860"))
+    print(f"\n  Open the chatbot: \033[4;94mhttp://localhost:{port}\033[0m\n", flush=True)
     demo.launch(
         server_name="0.0.0.0",
-        server_port=int(os.environ.get("GRADIO_PORT", "7860")),
+        server_port=port,
     )
 
 
