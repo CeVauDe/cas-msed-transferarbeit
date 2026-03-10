@@ -1,8 +1,10 @@
+= Praxistauglichkeit von Large Language Models in der Datenexploration: Ein Design Science Research Ansatz zur Entwicklung eines Text-to-Data Prototyps
+Markus Gruber; Christian Vetter
 :lang: de
-= Titel der Transferarbeit
-Autor Name
 :doctype: book
 include::config/config.adoc[]
+ifdef::backend-pdf[]
+endif::[]
 :chapter-label: Kapitel
 :!chapter-signifier:
 :bibtex-file: references.bib
