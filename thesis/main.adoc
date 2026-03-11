@@ -18,6 +18,8 @@ Some sample text for the abstract. This section provides a brief overview of the
 == Abbildungsverzeichnis
 list-of::image[enhanced_rendering=true]
 
+include::text/proof-of-concept.adoc[]
+
 include::text/introduction.adoc[]
 
 include::text/methods.adoc[]
