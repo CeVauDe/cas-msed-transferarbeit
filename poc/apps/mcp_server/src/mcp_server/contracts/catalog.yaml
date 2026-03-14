@@ -29,7 +29,7 @@ columns:
     description_de: Kennzahltyp der Messung (siehe unten für Details zu jedem Metrik).
     type: string
     allowed_values: ["Rt-T", "Rt-%", "NRw-T", "NRw-%", "MA-%", "SD Ø", "VD Ø"]
-    aliases_de: [Facts, Kennzahl, Metric]
+    aliases_de: [Reichweite, Marktanteil, Sehdauer, Verweildauer, Netto-Reichweite, Facts, Kennzahl, Metric]
   Sender:
     description_de: Sendername.
     type: string
@@ -106,11 +106,11 @@ metrics:
     description_de: Marktanteil in Prozent. Anteil der Zuschauer/innen dieses Senders bezüglich aller Zuschauer/innen (Gesamtmarkt).
     unit: "%"
   SD Ø:
-    description_de: Sehdauer Durchschnitt. Durchschnittliche Verweildauer der Zuschauer/innen in Minuten.
-    unit: Minuten
+    description_de: Sehdauer Durchschnitt. Durchschnittliche Sehdauer aller Personen 3+ in Sekunden.
+    unit: Sekunden
   VD Ø:
-    description_de: Verweildauer Durchschnitt. Durchschnittliche Sehdauer der Zuschauer/innen in Minuten.
-    unit: Minuten
+    description_de: Verweildauer Durchschnitt. Durchschnittliche Sehdauer der tatsächlichen Zuschauer/innen in Sekunden.
+    unit: Sekunden
 
 timeslot_durations:
   "15":
