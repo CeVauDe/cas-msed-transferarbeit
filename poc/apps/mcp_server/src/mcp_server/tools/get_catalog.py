@@ -36,22 +36,28 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
     catalog = load_catalog(catalog_path)
     columns = catalog.columns
 
-    if term is None:
-        log.info("catalog_full_returned", column_count=len(columns))
+    def _full_catalog_response() -> dict[str, object]:
         return {
             "ok": True,
             "catalog_version": catalog.version,
             "columns": {name: item.model_dump(mode="python") for name, item in columns.items()},
+            "metrics": {
+                name: item.model_dump(mode="python") for name, item in catalog.metrics.items()
+            },
+            "timeslot_durations": {
+                key: item.model_dump(mode="python")
+                for key, item in catalog.timeslot_durations.items()
+            },
         }
+
+    if term is None:
+        log.info("catalog_full_returned", column_count=len(columns))
+        return _full_catalog_response()
 
     normalized_term = term.strip().lower()
     if normalized_term == "":
         log.info("catalog_full_returned", column_count=len(columns))
-        return {
-            "ok": True,
-            "catalog_version": catalog.version,
-            "columns": {name: item.model_dump(mode="python") for name, item in columns.items()},
-        }
+        return _full_catalog_response()
 
     for column_name, column_info in columns.items():
         if normalized_term == column_name.lower():

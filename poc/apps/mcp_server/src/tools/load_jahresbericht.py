@@ -141,6 +141,13 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
     df_long.insert(0, "Jahr", meta.jahr)
     df_long.insert(1, "Region", meta.region)
 
+    # Normalise string columns: strip surrounding whitespace and known unit
+    # suffixes that are Excel artefacts (e.g. "SD Ø [Sekunden]" → "SD Ø").
+    df_long["Sender"] = df_long["Sender"].str.strip()
+    df_long["Metrik"] = (
+        df_long["Metrik"].str.strip().str.replace(r"\s*\[Sekunden\]$", "", regex=True)
+    )
+
     return df_long
 
 
