@@ -18,6 +18,7 @@ RUNTIME_THEME="$SCRIPT_DIR/.theme-runtime.yml"
 PROBE_PDF="$SCRIPT_DIR/main.probe.pdf"
 PROBE_TEXT="$SCRIPT_DIR/.main.probe.txt"
 BUNDLE_CACHE_DIR="$SCRIPT_DIR/.asciidoctor-bundle"
+COVER_PDF="$SCRIPT_DIR/cover-page.pdf"
 
 create_theme_with_start_at() {
   local input_theme="$1"
@@ -69,6 +70,17 @@ build_pdf_with_theme() {
     main.adoc"
 }
 
+echo "Building cover page PDF..."
+mkdir -p "$BUNDLE_CACHE_DIR"
+docker run --rm \
+  -v "$SCRIPT_DIR":/documents \
+  -v "$BUNDLE_CACHE_DIR":/usr/local/bundle \
+  asciidoctor/docker-asciidoctor \
+  asciidoctor-pdf \
+    -a pdf-theme=cover-theme.yml \
+    -o cover-page.pdf \
+    cover-page.adoc
+
 echo "Calibrating page numbering so Einleitung starts at 1..."
 # We do a probe build first because Asciidoctor PDF cannot dynamically start arabic
 # page numbering at the first real chapter. The probe detects the page where
@@ -108,7 +120,14 @@ create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$RUNTIME_THEME" "$INTRO_STAR
 echo "Building final thesis PDF..."
 build_pdf_with_theme "$RUNTIME_THEME" "$SCRIPT_DIR/main.pdf"
 
-rm -f "$PROBE_THEME" "$RUNTIME_THEME" "$PROBE_PDF" "$PROBE_TEXT"
+echo "Reordering pages (move Eidesstattliche Erklärung before ToC)..."
+docker run --rm \
+  -v "$SCRIPT_DIR":/documents \
+  asciidoctor/docker-asciidoctor \
+  sh -c "apk add --no-cache qpdf >/dev/null 2>&1 && qpdf main.pdf --pages main.pdf 1 main.pdf 3 main.pdf 2 main.pdf 4-z -- main.reordered.pdf"
+mv "$SCRIPT_DIR/main.reordered.pdf" "$SCRIPT_DIR/main.pdf"
+
+rm -f "$PROBE_THEME" "$RUNTIME_THEME" "$PROBE_PDF" "$PROBE_TEXT" "$SCRIPT_DIR/main.reordered.pdf" #"$COVER_PDF"
 
 if [ $? -eq 0 ]; then
   echo "Build successful! PDF created at thesis/main.pdf"

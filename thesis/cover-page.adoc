@@ -1,0 +1,87 @@
+= {blank}
+:nofooter:
+:pdf-theme: cover-theme.yml
+:imagesdir: .
+:submission-date: 31. März 2026
+
+{blank} +
+{blank} +
+
+[.course-of-study]
+CAS Modern Software Engineering & Development
+
+{blank} +
+
+[.thesis-type]
+Transferarbeit
+
+{blank} +
+{blank} +
+{blank} +
+{blank} +
+
+[.title]
+Praxistauglichkeit von Large Language Models in der Datenexploration
+
+{blank} +
+
+[.subtitle]
+Ein Design Science Research Ansatz zur Entwicklung eines Text-to-Data Prototyps
+
+{blank} +
+{blank} +
+{blank} +
+{blank} +
+{blank} +
+{blank} +
+
+[.authors]
+Markus Gruber, Christian Vetter
+
+{blank} +
+
+[.date]
+{submission-date}
+
+
+<<<
+[distinct]
+==== Transferarbeit an der Hochschule Luzern – Informatik
+
+{blank} +
+
+*Titel:* Praxistauglichkeit von Large Language Models in der Datenexploration
+
+*Teilnehmer:* Markus Gruber
+
+*Teilnehmer:* Christian Vetter
+
+*Programm:* CAS Modern Software Engineering & Development
+
+*Zeitraum:* 09. Januar 2026 - 31. März 2026
+
+*Programmleitung:* Björn Näf
+
+*Betreuung/Referat:* Björn Näf
+
+{blank} +
+
+*Codierung / Klassifizierung der Arbeit:* +
+[x] Öffentlich (Normalfall) +
+[ ] Vertraulich
+
+{blank} +
+
+*Eidesstattliche Erklärung* +
+Ich erkläre hiermit, dass ich/wir die vorliegende Arbeit selbständig und ohne unerlaubte fremde Hilfe angefertigt habe/n. Alle verwendeten Quellen, Literatur und Hilfsmittel (insbesondere künstliche Intelligenz oder sonstige verwendete Instrumente) wurden urheberrechts- und datenschutzkonform verwendet und wörtlich oder inhaltlich entnommene Stellen als solche kenntlich gemacht. Das Vertraulichkeitsinteresse des Auftraggebers wurde gewahrt und die Urheberrechtsbestimmungen der Hochschule Luzern respektiert.
+
+Ich nehme zur Kenntnis, dass meine verfassten Arbeiten mit elektronischen Hilfsmitteln auf Plagiate überprüft werden können. Ich bin bei begründetem Verdacht auf eine unerlaubte oder nicht gekennzeichnete Anwendung auf Einladung hin verpflichtet, an der Klärung des Verdachts mitzuwirken, z.B. durch Teilnahme an einem Gespräch.
+
+Ort / Datum, Unterschrift	+______________________________________________________+
+
+Ort / Datum, Unterschrift	+______________________________________________________+
+
+
+{blank} +
+
+_Geistiges Eigentum gemäss der https://srl.lu.ch/app/de/texts_of_law/521/versions/3884[Studienordnung] für die Ausbildung an der Hochschule Luzern, FH Zentralschweiz._

@@ -50,19 +50,7 @@ footer:
       content: $footer-recto-right-content
     left:
       content: ''
-title-page:
-  align: center
-  margin: [50mm, 0mm, 0mm, 0mm]
-  logo:
-    image: image:logo.png[top=0mm,pdfwidth=21.7cm]
-  title:
-    font-size: 28
-    font-style: bold
-    margin-top: 20mm
-  subtitle:
-    font-size: 20
-    margin-top: 10mm
-  authors:
-    margin-top: 10mm
-  date:
-    margin-top: 6.35mm
+title-page: false
+cover:
+  front:
+    image: cover-page.pdf
