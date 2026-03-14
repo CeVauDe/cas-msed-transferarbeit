@@ -39,14 +39,57 @@ uv run pre-commit install      # Set up git hooks
 
 ### Data Setup
 ```bash
-# Download raw Excel files from GitHub Release data-v1 → apps/mcp_server/data/raw/
+# 1. Download raw Excel files from GitHub Release data-v1 → apps/mcp_server/data/raw/
 uv run --package mcp-server python apps/mcp_server/src/tools/download_data.py
+
+# 2. Transform raw Excel files → normalized Parquet (required before running the server)
+uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py
+# Output: apps/mcp_server/data/Jahresbericht_all.parquet
 ```
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OPENAI_API_KEY` | *(required)* | OpenAI API key for the chatbot |
+| `OPENAI_MODEL` | `gpt-4o-mini` | OpenAI model used by the chatbot |
+| `MCP_SERVER_URL` | `http://localhost:8080/mcp` | MCP server endpoint (chatbot reads this) |
+| `MCP_SERVER_HOST` | `0.0.0.0` | Bind address for the MCP server |
+| `MCP_SERVER_PORT` | `8080` | Port for the MCP server |
+| `MCP_SERVER_TRANSPORT` | `streamable-http` | Transport protocol (`stdio\|sse\|streamable-http`) |
+| `MCP_SERVER_LOG_LEVEL` | `INFO` | Log verbosity |
+| `MCP_DEBUG_ENRICHMENT` | `false` | Include debug fields in MCP responses |
+| `MCP_DATA_PARQUET_PATH` | `apps/mcp_server/data/Jahresbericht_all.parquet` | Path to the normalized dataset |
+| `GRADIO_PORT` | `7860` | Port for the Gradio web UI |
 
 ### Running Applications
 ```bash
 uv run --package chatbot python -m chatbot.main
 uv run --package mcp-server python -m mcp_server.main
+```
+
+### Accessing the Chatbot
+
+**Web UI (Gradio):** After `docker compose up` or running the chatbot locally, open:
+```
+http://localhost:7860
+```
+
+**CLI / scripted testing inside the running Docker container:**
+```bash
+# Execute a Python snippet inside the running container
+docker exec -i mcp-chatbot python -c "..."
+
+# Or attach an interactive shell
+docker exec -it mcp-chatbot bash
+```
+
+**Gradio REST API** (useful for automated testing):
+```bash
+# Gradio exposes a /run/predict endpoint while the container is running
+curl -X POST http://localhost:7860/run/predict \
+  -H "Content-Type: application/json" \
+  -d '{"data": ["Was ist der Marktanteil von SRF 1 in der DS 2020?", []]}'
 ```
 
 ### Quality Checks
