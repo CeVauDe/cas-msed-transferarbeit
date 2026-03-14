@@ -17,9 +17,14 @@ AsciiDoc document for the academic thesis.
 
 ### Building
 A GitHub Actions workflow at `.github/workflows/build-pdf.yml` builds the PDF automatically.
+A local build script is also available: `bash thesis/build.sh`.
 
 ### Key Files
-- `thesis/main.adoc` - Main AsciiDoc document
+- `thesis/main.adoc` — Main AsciiDoc entry point (includes sub-documents from `thesis/text/`)
+- `thesis/generate_charts.py` — Generates chart images into `thesis/generated/` (run before building)
+- `thesis/theme.yml` / `thesis/cover-theme.yml` — PDF theme configuration
+- `thesis/references.bib` — Bibliography (BibTeX)
+- `thesis/thesis.md` — Thesis outline / structure notes (Markdown, not the AsciiDoc source)
 
 ## Proof of Concept (`poc/`)
 
@@ -41,12 +46,18 @@ docker compose up --build      # Run in Docker
 ```
 poc/
 ├── apps/
-│   ├── chatbot/               # Chatbot application
-│   └── mcp_server/            # MCP Server application
+│   ├── chatbot/               # Chatbot application (Gradio + OpenAI)
+│   │   └── src/chatbot/main.py
+│   └── mcp_server/            # MCP Server application (FastMCP + DuckDB)
+│       ├── src/mcp_server/    # Server source (tools, services, contracts)
+│       ├── src/tools/         # Data pipeline scripts (download_data.py, load_jahresbericht.py)
+│       └── data/              # Parquet dataset (git-ignored, generated locally)
 ├── docker/                    # Dockerfiles per service
 ├── pyproject.toml             # Workspace root config
 └── docker-compose.yml         # Container orchestration
 ```
+
+> **Note:** `poc/README.md` reflects an older project structure (flat `src/` layout). Rely on `poc/AGENTS.md` for authoritative development guidance.
 
 ## CI/CD Workflows
 
