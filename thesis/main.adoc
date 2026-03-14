@@ -3,13 +3,15 @@ Markus Gruber; Christian Vetter
 :lang: de
 :doctype: book
 include::config/config.adoc[]
-ifdef::backend-pdf[]
-endif::[]
+:notitle:
 :chapter-label: Kapitel
 :!chapter-signifier:
 :bibtex-file: references.bib
 :bibtex-style: apa
 :bibtex-locale: de
+
+[preface]
+image::cover-page.pdf[page=2]
 
 [preface]
 == Zusammenfassung

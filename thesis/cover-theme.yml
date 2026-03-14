@@ -1,0 +1,58 @@
+extends: default
+
+page:
+  layout: portrait
+  margin: [45mm, 25mm, 25mm, 25mm]
+  size: A4
+base:
+  font-color: #333333
+  font-family: Helvetica
+  font-size: 11
+  line-height: 1.15
+  text-align: justify
+role:
+  course-of-study:
+    font-size: 16
+    font-style: bold
+    text-align: center
+  thesis-type:
+    font-size: 20
+    font-style: bold
+    font-color: #999999
+    text-align: center
+  title:
+    font-size: 24
+    font-style: bold
+    font-color: #1a1a1a
+    text-align: center
+  subtitle:
+    font-size: 18
+    font-color: #1a1a1a
+    text-align: center
+  authors:
+    font-size: 16
+    font-style: bold
+    text-align: center
+  date:
+    font-size: 14
+    text-align: center
+  field:
+    font-size: 11
+    font-style: bold
+    text-align: left
+  signature:
+    border-bottom-width: 0.5
+    border-bottom-color: #333333
+title-page: false
+header:
+  height: 25mm
+  recto:
+    left:
+      content: image:images/title-logo-hslu_cropped.png[pdfwidth=5.83cm]
+    right:
+      content: image:images/title-logo-informatik_cropped.png[pdfwidth=6.75cm]
+  verso:
+    left:
+      content: image:images/title-logo-hslu_cropped.png[pdfwidth=5.83cm]
+    right:
+      content: image:images/title-logo-informatik_cropped.png[pdfwidth=6.75cm]
