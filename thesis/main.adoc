@@ -20,6 +20,8 @@ list-of::image[enhanced_rendering=true]
 
 include::text/proof-of-concept.adoc[]
 
+include::text/red-teaming.adoc[]
+
 include::text/introduction.adoc[]
 
 include::text/methods.adoc[]
