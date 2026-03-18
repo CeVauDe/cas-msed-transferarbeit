@@ -13,7 +13,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /build
 
 # Copy workspace config for dependency resolution
-COPY pyproject.toml uv.lock* README.md ./
+COPY pyproject.toml uv.lock README.md ./
 COPY apps/chatbot/pyproject.toml ./apps/chatbot/pyproject.toml
 COPY apps/mcp_server/pyproject.toml ./apps/mcp_server/pyproject.toml
 
@@ -37,7 +37,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
 
 # Copy workspace config
-COPY pyproject.toml uv.lock* README.md ./
+COPY pyproject.toml uv.lock README.md ./
 
 # Copy workspace stubs for other members so uv can resolve the workspace
 COPY apps/chatbot/pyproject.toml ./apps/chatbot/pyproject.toml
