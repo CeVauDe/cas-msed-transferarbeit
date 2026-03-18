@@ -388,4 +388,4 @@ To extend this PoC:
 2. **Build the chatbot agent**: Implement the Claude-based agent in `main.py`
 3. **Add more MCP servers**: Create additional servers for different data sources
 4. **Enhance tests**: Add integration tests for the full chatbot flow
-5. **Add logging**: Implement structured logging with `structlog` or similar
+5. **Add logging**: Logging via Python standard library (`logging` module)
