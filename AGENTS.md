@@ -39,7 +39,16 @@ uv sync --all-extras           # Install dependencies
 uv run pytest                  # Run tests
 uv run ty check                # Type checking
 uv run ruff check .            # Linting
-docker compose up --build      # Run in Docker
+docker compose up --build      # Run in Docker (auto-downloads & generates data)
+```
+
+### Docker (fresh clone)
+
+No local Python or uv needed — just Docker:
+```bash
+cd poc
+cp .env.example .env           # Add your OPENAI_API_KEY
+docker compose up --build      # Downloads data, builds Parquet, starts services
 ```
 
 ### Structure
@@ -51,7 +60,7 @@ poc/
 │   └── mcp_server/            # MCP Server application (FastMCP + DuckDB)
 │       ├── src/mcp_server/    # Server source (tools, services, contracts)
 │       ├── src/tools/         # Data pipeline scripts (download_data.py, load_jahresbericht.py)
-│       └── data/              # Parquet dataset (git-ignored, generated locally)
+│       └── data/              # Parquet dataset (git-ignored, auto-generated during Docker build)
 ├── docker/                    # Dockerfiles per service
 ├── pyproject.toml             # Workspace root config
 └── docker-compose.yml         # Container orchestration

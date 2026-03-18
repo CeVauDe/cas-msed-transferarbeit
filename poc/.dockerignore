@@ -60,3 +60,8 @@ docker-compose*.yml
 
 # Thesis files (not needed in containers)
 ../thesis/
+
+# Data files (generated during multi-stage build)
+apps/mcp_server/data/raw/
+apps/mcp_server/data/*.parquet
+apps/mcp_server/data/*.zip

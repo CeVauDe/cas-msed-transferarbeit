@@ -298,46 +298,26 @@ uv run ruff format --check src tests
 
 ## Docker Setup
 
-### Building and Running with Docker Compose
+### Quick Start (fresh clone)
+
+The only prerequisites are Docker, Docker Compose, and an OpenAI API key:
 
 ```bash
-# Build all services
-docker compose build
-
-# Start all services
-docker compose up
-
-# Start in detached mode
-docker compose up -d
-
-# View logs
-docker compose logs -f
-
-# Stop all services
-docker compose down
+cd poc
+cp .env.example .env           # Add your OPENAI_API_KEY
+docker compose up --build      # Builds images, downloads data, starts services
 ```
 
-### Building Individual Images
+The MCP server Dockerfile uses a **multi-stage build**: the first stage automatically downloads the raw Excel files from GitHub Releases and transforms them into the Parquet file. No local Python, uv, or manual data setup is required.
+
+### Commands
 
 ```bash
-# Build chatbot image
-docker build -t mcp-chatbot -f Dockerfile .
-
-# Build MCP server image
-docker build -t mcp-server -f Dockerfile.mcp-server .
-```
-
-### Running Containers Individually
-
-```bash
-# Run chatbot
-docker run -it --rm \
-  mcp-chatbot
-
-# Run MCP server
-docker run -d --rm \
-  -p 8080:8080 \
-  mcp-server
+docker compose build           # Build images (downloads & generates data automatically)
+docker compose up              # Start all services
+docker compose up -d           # Start in detached mode
+docker compose logs -f         # View logs
+docker compose down            # Stop all services
 ```
 
 ## CI/CD Pipeline
@@ -393,7 +373,7 @@ ty may report type errors for external libraries without type stubs. You can:
 
 ### Docker Build Failures
 
-Ensure `uv.lock` exists before building Docker images:
+The `uv.lock` file is committed to version control for reproducible builds. If it is missing or outdated, regenerate it:
 
 ```bash
 uv lock
