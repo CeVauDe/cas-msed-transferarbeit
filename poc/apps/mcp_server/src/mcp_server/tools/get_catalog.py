@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from difflib import get_close_matches
 
@@ -57,7 +58,12 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
 
     for column_name, column_info in columns.items():
         if normalized_term == column_name.lower():
-            log.info("Exact match found for term=%s, column=%s", term, column_name)
+            log.debug(
+                "Exact match found for term=%s, column=%s:\n%s",
+                term,
+                column_name,
+                json.dumps(column_info.model_dump(mode="python"), indent=2, ensure_ascii=False),
+            )
             return {
                 "ok": True,
                 "catalog_version": catalog.version,
@@ -69,7 +75,12 @@ def get_catalog_handler(context: CatalogContext, term: str | None = None) -> dic
     alias_index = _build_alias_index(columns)
     alias_hit = alias_index.get(normalized_term)
     if alias_hit is not None:
-        log.info("Alias match found for term=%s, column=%s", term, alias_hit)
+        log.debug(
+            "Alias match found for term=%s, column=%s:\n%s",
+            term,
+            alias_hit,
+            json.dumps(columns[alias_hit].model_dump(mode="python"), indent=2, ensure_ascii=False),
+        )
         return {
             "ok": True,
             "catalog_version": catalog.version,

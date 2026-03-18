@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
+import sys
 from collections.abc import Callable, Coroutine
 from typing import Any
 
 import gradio as gr
 from openai.types.chat import ChatCompletionMessageParam
+
+log = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = """\
 Du bist ein Datenassistent für die Analyse von TV-Nutzungsdaten aus den \
@@ -186,9 +190,17 @@ async def _agent_turn(
     messages.extend(_history_to_openai(history))
     messages.append({"role": "user", "content": message})
 
-    for _ in range(_MAX_TOOL_ROUNDS):
+    for round_num in range(_MAX_TOOL_ROUNDS):
+        model = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
+        log.debug(
+            ">>> LLM request (model=%s, messages=%d, round=%d)",
+            model,
+            len(messages),
+            round_num + 1,
+        )
+
         response = openai_client.chat.completions.create(
-            model=os.environ.get("OPENAI_MODEL", "gpt-4o-mini"),
+            model=model,
             messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
             tools=tool_specs,
         )
@@ -197,7 +209,10 @@ async def _agent_turn(
         tool_calls = assistant_message.tool_calls or []
 
         if not tool_calls:
+            log.debug("<<< LLM response: final text answer")
             return _extract_text(assistant_message.content) or "[Keine Antwort]"
+
+        log.debug("<<< LLM response: %d tool call(s)", len(tool_calls))
 
         messages.append(
             {
@@ -215,15 +230,22 @@ async def _agent_turn(
             except json.JSONDecodeError:
                 tool_input = {}
 
+            log.debug(
+                ">>> Tool call: %s(%s)",
+                tool_name,
+                json.dumps(tool_input, indent=2, ensure_ascii=False),
+            )
+
             tool_result = await session.call_tool(name=tool_name, arguments=tool_input)
+            result_content = json.dumps(_to_jsonable(tool_result.content), ensure_ascii=False)
+
+            log.debug("<<< Tool result from %s (%d chars)", tool_name, len(result_content))
+
             messages.append(
                 {
                     "role": "tool",
                     "tool_call_id": str(getattr(call, "id", "")),
-                    "content": json.dumps(
-                        _to_jsonable(tool_result.content),
-                        ensure_ascii=False,
-                    ),
+                    "content": result_content,
                 }
             )
 
@@ -252,6 +274,11 @@ def _make_respond_fn(
 
 
 def main() -> None:
+    logging.basicConfig(
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        stream=sys.stdout,
+        level=logging.INFO,
+    )
     openai_client = _load_openai_client()
     mcp_server_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080/mcp")
     respond = _make_respond_fn(openai_client, mcp_server_url)
