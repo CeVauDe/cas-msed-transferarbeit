@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from uuid import uuid4
 
@@ -22,7 +23,10 @@ class QueryDataContext:
 def query_data_handler(template: dict[str, object], context: QueryDataContext) -> dict[str, object]:
     request_id = str(uuid4())
 
-    log.info("query_data request received")
+    log.debug(
+        "query_data request received:\n%s",
+        json.dumps(template, indent=2, ensure_ascii=False),
+    )
 
     policy_path = context.config.contracts_dir / "policy.yaml"
     policy = load_policy(policy_path)
@@ -62,5 +66,10 @@ def query_data_handler(template: dict[str, object], context: QueryDataContext) -
         debug_enrichment=context.config.debug_enrichment,
         template_version=policy.version,
     )
-    log.info("Response sent, row_count=%d", len(rows))
+    preview_rows = rows[:5]
+    log.debug(
+        "Response sent, row_count=%d, preview:\n%s",
+        len(rows),
+        json.dumps(preview_rows, indent=2, ensure_ascii=False, default=str),
+    )
     return {"ok": True, "request_id": request_id, "result": payload}
