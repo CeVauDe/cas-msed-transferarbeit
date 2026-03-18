@@ -1,22 +1,46 @@
 == Einleitung
-Dies ist der Abschnitt Einleitung. Hier wird der Kontext der Forschungsarbeit dargelegt. In der heutigen digitalen Ära stehen Unternehmen vor der Herausforderung, ihre Software-Architekturen kontinuierlich an sich ändernde Marktbedingungen anzupassen. Die Transition von monolithischen Systemen hin zu modularisierten Microservices-Architekturen ist dabei ein zentrales Thema.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+=== Ausgangslage
+- Bedeutung und Stellenwert des Themas in einem grösseren Kontext aufzeigen
+
+_Die Erhebung und Veröffentlichung der jährlichen Nutzungsdaten für Fernsehen und Radio in der
+Schweiz stellt eine zentrale Informationsquelle für die Medienbranche und die Öffentlichkeit dar. In der
+Vergangenheit wurden diese komplexen Daten über ein interaktives Dashboard zugänglich gemacht.
+Der Unterhalt dieses Systems erwies sich jedoch als äusserst ressourcenintensiv, da die jährliche
+Datenaktualisierung umfangreiche manuelle Anpassungen an der Visualisierungslogik erforderte.
+Aktuell liegen die Daten primär in strukturierten Tabellenformaten vor, für die es jedoch keine
+niederschwellige, intuitive Möglichkeit zur Exploration für Gelegenheitsnutzer oder Fachpersonen ohne
+vertiefte Datenbankkenntnisse gibt. Gleichzeitig besteht innerhalb der Organisation das strategische
+Ziel, Kompetenzen im Bereich von Large Language Models (LLM) und agentischen Systemen
+aufzubauen, um zukünftige Datenprojekte effizienter zu gestalten._
+
 
 === Problemstellung
-Ein zentrales Problem bei der Migration komplexer IT-Landschaften ist die Sicherstellung der Datenkonsistenz über verschiedene Domänen hinweg. Oftmals fehlen standardisierte Protokolle für den Datenaustausch, was zu isolierten "Daten-Silos" führt. Diese Arbeit untersucht, wie das Model Context Protocol (MCP) dazu beitragen kann, diese Barrieren abzubauen cite:[example2026] Hi.
-
-In der Praxis zeigt sich, dass traditionelle Methoden der Softwareentwicklung oft an ihre Grenzen stoßen, wenn es um die Skalierbarkeit und Wartbarkeit von Systemen in Multi-Vendor-Ökosystemen geht. Die Komplexität steigt exponentiell mit der Anzahl der beteiligten Akteure und Schnittstellen.
+_Die Kernherausforderung besteht darin, die Kluft zwischen den strukturierten Nutzungsdaten und den
+natürlichsprachlichen Fragestellungen der Nutzer zu überbrücken. Es soll ein Chatbot-System
+entwickelt werden, das in der Lage ist, komplexe Anfragen wie beispielsweise «Zu welchem Zeitpunkt
+hören die 15-24-Jährigen aus der Deutschschweiz am häufigsten Radio?» präzise zu beantworten. Die
+technische Schwierigkeit liegt hierbei in der korrekten Abbildung von Filtern (Region, Altersgruppe,
+Zeitintervall) auf die zugrunde liegende Datenstruktur, ohne dass das System zu Fehlinterpretationen
+oder Halluzinationen neigt. Eine wesentliche Anforderung ist die strikte Beschränkung auf die
+Faktenwiedergabe: Das System darf keine eigenständigen Interpretationen, Handlungsempfehlungen
+oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthaltenen Fakten textuell
+aufbereiten._
 
 === Zielsetzung der Arbeit
-Das Hauptziel dieser Arbeit ist die Entwicklung eines Proof-of-Concept (PoC) cite:[gao2024empowering], der die Vorteile einer modularen Architektur unter Verwendung von MCP-Servern demonstriert. Dabei soll insbesondere die Interoperabilität zwischen verschiedenen KI-Agenten und Datenquellen im Fokus stehen.
+_Das Hauptziel dieser Arbeit ist die Überprüfung der Praxistauglichkeit eines LLM-basierten Chatbots für
+die Exploration von Mediennutzungsdaten. Zu diesem Zweck wird zunächst ein MCP-Server (Model
+Context Protocol) entwickelt, der als standardisierte Schnittstelle fungiert und die strukturierten
+Jahresdaten für LLM-Agents sicher und effizient zugänglich macht. Darauf aufbauend erfolgt die
+prototypische Implementierung eines Chat-Agents, der über diesen Server auf die Daten zugreift und
+Nutzeranfragen in natürlicher Sprache verarbeitet. Ein weiteres zentrales Ziel ist die systematische
+Evaluation der Antwortqualität, wobei insbesondere die Korrektheit der Datenwiedergabe sowie die
+Einhaltung der gesetzten Leitplanken, wie der Verzicht auf eigenständige Interpretationen, überprüft
+werden. Abschliessend wird ein Massnahmenkatalog erstellt, der die identifizierten
+Optimierungspotenziale zusammenfasst und fundierte Lösungsvorschläge für die im Prototyp erkannten
+Schwachstellen dokumentiert._
 
-Dazu werden folgende Forschungsfragen adressiert:
-
-1. Wie lässt sich eine Transition-Architektur definieren, die sowohl Stabilität als auch Agilität gewährleistet?
-2. Welche technischen Voraussetzungen müssen für den Einsatz von MCP in einer produktiven Umgebung erfüllt sein?
-3. Inwiefern verbessert die Entkopplung von Diensten die allgemeine Steuerungsfähigkeit digitaler Ökosysteme?
-
-Weitere Aspekte, die in dieser Einleitung berücksichtigt werden könnten, umfassen die Relevanz des Themas für die aktuelle Softwareindustrie sowie eine kurze Übersicht über den Stand der Technik. Es wird erwartet, dass die Ergebnisse dieser Untersuchung wertvolle Einblicke für Architekten und Entscheidungsträger liefern, die vor ähnlichen Transformationsprozessen stehen.
-
-Durch die detaillierte Analyse der bestehenden Infrastruktur und die Identifikation von Schwachstellen wird ein Fundament für die anschließende Konzeption des PoC gelegt. Die Einleitung schließt mit einer Übersicht über den weiteren Aufbau der Arbeit, um dem Leser eine klare Orientierung zu bieten.
+=== Aufbau der Arbeit
+- Beschreibung, was in welchen Kapiteln behandelt wird
