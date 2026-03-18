@@ -102,11 +102,16 @@ uv run pre-commit run --all-files  # All pre-commit hooks
 ```
 
 ### Docker
+
+The MCP server Dockerfile uses a **multi-stage build**: stage 1 downloads the raw Excel files from GitHub Releases and transforms them into the Parquet file. The production stage copies only the generated Parquet — no manual data setup is required.
+
 ```bash
-docker compose build           # Build images
+docker compose build           # Build images (downloads & generates data automatically)
 docker compose up              # Run containers
 docker compose down            # Stop containers
 ```
+
+On a fresh clone, `docker compose up --build` is all that's needed (plus an `OPENAI_API_KEY` in `.env`).
 
 ## Key Configuration Files
 
@@ -147,7 +152,8 @@ uv lock
 ## Docker Guidelines
 
 - Each app has its own Dockerfile in `docker/<app>/Dockerfile`
-- Dockerfiles only copy the specific app directory they need
+- The MCP server Dockerfile is a multi-stage build: stage 1 downloads raw data from GitHub Releases and generates the Parquet file; stage 2 is the production image (no pandas/openpyxl/pyarrow)
+- Data pipeline dependencies (`pandas`, `openpyxl`, `pyarrow`) are dev dependencies of the `mcp-server` package — they are only installed in the build stage, not in the production image
 - Use `--package <name>` flag when running apps in containers
 
 ## CI/CD
