@@ -115,6 +115,26 @@ def _build_server() -> FastMCP:
                 le=200,
             ),
         ] = 20,
+        zeilen: Annotated[
+            str | None,
+            Field(
+                description=(
+                    "Pivot-Modus: Spalte für die Zeilen. "
+                    "Beispiel: 'Sender'. "
+                    "Nur zusammen mit spalten_pivot verwenden."
+                ),
+            ),
+        ] = None,
+        spalten_pivot: Annotated[
+            str | None,
+            Field(
+                description=(
+                    "Pivot-Modus: Spalte für die Spaltenköpfe. "
+                    "Beispiel: 'Jahr'. "
+                    "Nur zusammen mit zeilen verwenden."
+                ),
+            ),
+        ] = None,
     ) -> str:
         logger.debug(
             "abfrage_jahresbericht called: jahr=%s, region=%s, "
@@ -142,10 +162,25 @@ def _build_server() -> FastMCP:
             logger.debug("No data matched the filters.")
             return "Keine Daten gefunden."
 
+        row_limit = min(limit, 200)
+
+        if zeilen and spalten_pivot:
+            pivot = result.pivot_table(
+                index=zeilen,
+                columns=spalten_pivot,
+                values="Wert",
+            )
+            table = pivot.head(row_limit).to_markdown()
+            logger.debug(
+                "Returning pivot (%d rows):\n%s",
+                min(row_limit, len(pivot)),
+                table,
+            )
+            return table
+
         if spalten:
             result = result[[c for c in spalten if c in result.columns]]
 
-        row_limit = min(limit, 200)
         table = result.head(row_limit).to_markdown(index=False)
         logger.debug(
             "Returning %d rows (of %d matched):\n%s",

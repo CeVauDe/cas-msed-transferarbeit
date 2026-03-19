@@ -96,7 +96,7 @@ def mcp_url(mcp_container):
 
 
 # ---------------------------------------------------------------------------
-# Iteration 1: Server starts and exposes tools
+# Tests
 # ---------------------------------------------------------------------------
 
 
@@ -119,11 +119,6 @@ async def test_list_tools_returns_expected_tools(mcp_url):
         assert len(tool.description) > 20, (
             f"Tool {tool.name!r} description too short: {tool.description!r}"
         )
-
-
-# ---------------------------------------------------------------------------
-# Iteration 2: Glossary tool returns structured info
-# ---------------------------------------------------------------------------
 
 
 @pytest.mark.integration
@@ -165,11 +160,6 @@ async def test_glossar_resource_returns_domain_terms(mcp_url):
         )
 
 
-# ---------------------------------------------------------------------------
-# Iteration 3: Query tool returns markdown table (long format)
-# ---------------------------------------------------------------------------
-
-
 @pytest.mark.integration
 async def test_query_data_returns_markdown_table(mcp_url):
     """The query tool should return a markdown table with filtered data."""
@@ -202,11 +192,6 @@ async def test_query_data_returns_markdown_table(mcp_url):
         header = lines[0]
         assert "Sender" in header
         assert "Wert" in header
-
-
-# ---------------------------------------------------------------------------
-# Iteration 4: Query tool filters by sender
-# ---------------------------------------------------------------------------
 
 
 @pytest.mark.integration
@@ -242,11 +227,6 @@ async def test_query_data_filter_by_sender(mcp_url):
             assert "SRF 1" in row, f"Row does not contain 'SRF 1': {row}"
 
 
-# ---------------------------------------------------------------------------
-# Iteration 5: Query tool selects columns
-# ---------------------------------------------------------------------------
-
-
 @pytest.mark.integration
 async def test_query_data_select_columns(mcp_url):
     """Requesting specific columns should return only those columns."""
@@ -274,11 +254,6 @@ async def test_query_data_select_columns(mcp_url):
         header = text.strip().splitlines()[0]
         columns = [c.strip() for c in header.split("|") if c.strip()]
         assert columns == ["Sender", "Wert"], f"Expected ['Sender', 'Wert'], got {columns}"
-
-
-# ---------------------------------------------------------------------------
-# Iteration 6: Query tool respects row limit
-# ---------------------------------------------------------------------------
 
 
 def _count_data_rows(markdown_table: str) -> int:
@@ -355,3 +330,51 @@ async def test_query_data_limit_capped_at_200(mcp_url):
         assert isinstance(content, TextContent)
         text = content.text
         assert _count_data_rows(text) <= 200
+
+
+@pytest.mark.integration
+async def test_query_data_pivot_table(mcp_url):
+    """Pivot mode should return Sender as rows and Jahr as columns."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Whole day"],
+                "sender": ["SRF 1", "SRF zwei"],
+                "zeilen": "Sender",
+                "spalten_pivot": "Jahr",
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        lines = text.strip().splitlines()
+        header = lines[0]
+
+        # Header should contain year columns
+        assert "2018" in header
+        assert "2021" in header
+
+        # Header should contain Sender (row index)
+        assert "Sender" in header
+
+        # Header should NOT contain filter columns (they are fixed)
+        assert "Region" not in header
+        assert "Kenngrösse" not in header
+
+        # Should have exactly 2 data rows (SRF 1 and SRF zwei)
+        data_rows = [line for line in lines[2:] if line.strip()]
+        assert len(data_rows) == 2
+
+        row_text = "\n".join(data_rows)
+        assert "SRF 1" in row_text
+        assert "SRF zwei" in row_text
