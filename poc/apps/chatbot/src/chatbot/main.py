@@ -96,6 +96,22 @@ def _history_to_openai(
     return messages
 
 
+async def _read_resources(session: Any) -> str:
+    """Read all text resources from the MCP server and return as a single string."""
+    try:
+        resources_result = await session.list_resources()
+        parts: list[str] = []
+        for resource in resources_result.resources:
+            result = await session.read_resource(resource.uri)
+            for content in result.contents:
+                if hasattr(content, "text"):
+                    parts.append(content.text)
+        return "\n\n".join(parts)
+    except Exception:
+        log.warning("Failed to read MCP resources, continuing without them.", exc_info=True)
+        return ""
+
+
 async def _agent_turn(
     message: str,
     history: list[dict[str, str]],
@@ -104,6 +120,11 @@ async def _agent_turn(
 ) -> str:
     tools_result = await session.list_tools()
     tool_specs = _build_openai_tools(list(tools_result.tools))
+
+    resource_text = await _read_resources(session)
+    system_content = SYSTEM_PROMPT
+    if resource_text:
+        system_content = f"{SYSTEM_PROMPT}\n\n{resource_text}"
 
     messages: list[ChatCompletionMessageParam] = []
     messages.extend(_history_to_openai(history))
@@ -120,7 +141,7 @@ async def _agent_turn(
 
         response = openai_client.chat.completions.create(
             model=model,
-            messages=[{"role": "system", "content": SYSTEM_PROMPT}, *messages],
+            messages=[{"role": "system", "content": system_content}, *messages],
             tools=tool_specs,
         )
 
