@@ -61,4 +61,6 @@ extra-paths = ["apps/chatbot/src", "apps/mcp_server/src"]
 unresolved-import = "ignore"
 
 [dependency-groups]
-dev = []
+dev = [
+    "pyarrow>=23.0.1",
+]
