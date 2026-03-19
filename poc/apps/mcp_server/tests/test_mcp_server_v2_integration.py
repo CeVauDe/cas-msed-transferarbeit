@@ -174,7 +174,7 @@ async def test_query_data_returns_markdown_table(mcp_url):
                 "jahr": [2020],
                 "region": ["Deutschschweiz"],
                 "kenngroesse": ["Rating in 1'000"],
-                "zeitschiene": ["Whole day"],
+                "zeitschiene": ["Ganzer Tag"],
             },
         )
 
@@ -208,7 +208,7 @@ async def test_query_data_filter_by_sender(mcp_url):
                 "jahr": [2020],
                 "region": ["Deutschschweiz"],
                 "kenngroesse": ["Rating in 1'000"],
-                "zeitschiene": ["Whole day"],
+                "zeitschiene": ["Ganzer Tag"],
                 "sender": ["SRF 1"],
             },
         )
@@ -241,7 +241,7 @@ async def test_query_data_select_columns(mcp_url):
                 "jahr": [2020],
                 "region": ["Deutschschweiz"],
                 "kenngroesse": ["Rating in 1'000"],
-                "zeitschiene": ["Whole day"],
+                "zeitschiene": ["Ganzer Tag"],
                 "spalten": ["Sender", "Wert"],
             },
         )
@@ -345,7 +345,7 @@ async def test_query_data_pivot_table(mcp_url):
             {
                 "region": ["Deutschschweiz"],
                 "kenngroesse": ["Marktanteil in %"],
-                "zeitschiene": ["Whole day"],
+                "zeitschiene": ["Ganzer Tag"],
                 "sender": ["SRF 1", "SRF zwei"],
                 "zeilen": "Sender",
                 "spalten_pivot": "Jahr",
