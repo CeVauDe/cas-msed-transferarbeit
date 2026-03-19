@@ -202,3 +202,156 @@ async def test_query_data_returns_markdown_table(mcp_url):
         header = lines[0]
         assert "Sender" in header
         assert "Wert" in header
+
+
+# ---------------------------------------------------------------------------
+# Iteration 4: Query tool filters by sender
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.integration
+async def test_query_data_filter_by_sender(mcp_url):
+    """Filtering by sender should return only rows for that sender."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Rating in 1'000"],
+                "zeitschiene": ["Whole day"],
+                "sender": ["SRF 1"],
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        # Parse data rows (skip header and separator)
+        lines = text.strip().splitlines()
+        data_rows = [line for line in lines[2:] if line.strip()]
+        assert len(data_rows) >= 1, "Expected at least one data row"
+
+        for row in data_rows:
+            assert "SRF 1" in row, f"Row does not contain 'SRF 1': {row}"
+
+
+# ---------------------------------------------------------------------------
+# Iteration 5: Query tool selects columns
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.integration
+async def test_query_data_select_columns(mcp_url):
+    """Requesting specific columns should return only those columns."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Rating in 1'000"],
+                "zeitschiene": ["Whole day"],
+                "spalten": ["Sender", "Wert"],
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        header = text.strip().splitlines()[0]
+        columns = [c.strip() for c in header.split("|") if c.strip()]
+        assert columns == ["Sender", "Wert"], f"Expected ['Sender', 'Wert'], got {columns}"
+
+
+# ---------------------------------------------------------------------------
+# Iteration 6: Query tool respects row limit
+# ---------------------------------------------------------------------------
+
+
+def _count_data_rows(markdown_table: str) -> int:
+    """Count data rows in a markdown table (excludes header and separator)."""
+    lines = markdown_table.strip().splitlines()
+    return len([line for line in lines[2:] if line.strip()])
+
+
+@pytest.mark.integration
+async def test_query_data_respects_default_limit(mcp_url):
+    """Broad query without explicit limit should return at most 20 rows."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Rating in 1'000"],
+            },
+        )
+
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+        assert _count_data_rows(text) <= 20
+
+
+@pytest.mark.integration
+async def test_query_data_respects_custom_limit(mcp_url):
+    """Explicit limit parameter should cap the number of rows."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Rating in 1'000"],
+                "limit": 5,
+            },
+        )
+
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+        assert _count_data_rows(text) == 5
+
+
+@pytest.mark.integration
+async def test_query_data_limit_capped_at_200(mcp_url):
+    """Requesting more than 200 rows should still cap at 200."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "limit": 999,
+            },
+        )
+
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+        assert _count_data_rows(text) <= 200

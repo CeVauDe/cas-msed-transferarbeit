@@ -96,6 +96,25 @@ def _build_server() -> FastMCP:
                 ),
             ),
         ] = None,
+        spalten: Annotated[
+            list[str] | None,
+            Field(
+                description=(
+                    "Spalten im Ergebnis. "
+                    "Erlaubt: Jahr, Region, Zeitschiene, "
+                    "Kenngrösse, Sender, Wert. "
+                    "Standard: alle Spalten."
+                ),
+            ),
+        ] = None,
+        limit: Annotated[
+            int,
+            Field(
+                description="Maximale Anzahl Zeilen. Standard: 20, Maximum: 200.",
+                ge=1,
+                le=200,
+            ),
+        ] = 20,
     ) -> str:
         logger.debug(
             "abfrage_jahresbericht called: jahr=%s, region=%s, "
@@ -123,10 +142,14 @@ def _build_server() -> FastMCP:
             logger.debug("No data matched the filters.")
             return "Keine Daten gefunden."
 
-        table = result.head(20).to_markdown(index=False)
+        if spalten:
+            result = result[[c for c in spalten if c in result.columns]]
+
+        row_limit = min(limit, 200)
+        table = result.head(row_limit).to_markdown(index=False)
         logger.debug(
             "Returning %d rows (of %d matched):\n%s",
-            min(20, len(result)),
+            min(row_limit, len(result)),
             len(result),
             table,
         )
