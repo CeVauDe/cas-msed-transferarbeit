@@ -11,6 +11,7 @@ services:
       - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o-mini}
       - MCP_SERVER_URL=http://mcp-server-v2:8081/mcp
       - GRADIO_PORT=7860
+      - GRADIO_ANALYTICS_ENABLED=False
     volumes:
       - ./apps/chatbot/src:/app/apps/chatbot/src:ro
     restart: on-failure
