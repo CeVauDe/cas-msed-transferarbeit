@@ -70,7 +70,7 @@ def _build_server() -> FastMCP:
             list[str] | None,
             Field(
                 description=(
-                    "Zeitschiene(n). Beispiele: 'Whole day', '18-23h', '20:00:00 - 20:15:00'"
+                    "Zeitschiene(n). Beispiele: 'Ganzer Tag', '18-23h', '20:00:00 - 20:15:00'"
                 ),
             ),
         ] = None,
@@ -136,14 +136,19 @@ def _build_server() -> FastMCP:
             ),
         ] = None,
     ) -> str:
-        logger.debug(
+        logger.info(
             "abfrage_jahresbericht called: jahr=%s, region=%s, "
-            "zeitschiene=%s, kenngroesse=%s, sender=%s",
+            "zeitschiene=%s, kenngroesse=%s, sender=%s, "
+            "spalten=%s, limit=%s, zeilen=%s, spalten_pivot=%s",
             jahr,
             region,
             zeitschiene,
             kenngroesse,
             sender,
+            spalten,
+            limit,
+            zeilen,
+            spalten_pivot,
         )
 
         result = df
@@ -159,7 +164,7 @@ def _build_server() -> FastMCP:
             result = result[result["Sender"].isin(sender)]
 
         if result.empty:
-            logger.debug("No data matched the filters.")
+            logger.info("No data matched the filters.")
             return "Keine Daten gefunden."
 
         row_limit = min(limit, 200)
@@ -171,7 +176,7 @@ def _build_server() -> FastMCP:
                 values="Wert",
             )
             table = pivot.head(row_limit).to_markdown()
-            logger.debug(
+            logger.info(
                 "Returning pivot (%d rows):\n%s",
                 min(row_limit, len(pivot)),
                 table,
@@ -182,7 +187,7 @@ def _build_server() -> FastMCP:
             result = result[[c for c in spalten if c in result.columns]]
 
         table = result.head(row_limit).to_markdown(index=False)
-        logger.debug(
+        logger.info(
             "Returning %d rows (of %d matched):\n%s",
             min(row_limit, len(result)),
             len(result),

@@ -50,7 +50,7 @@ def parse_filename_metadata(file_path: Path) -> FileMeta:
 
 # The broadcast day runs 02:00–26:00 (midnight = 24:00, not 00:00).
 _SPECIAL_TIMESLOTS: dict[str, Timeslot] = {
-    "Whole day": Timeslot("Whole day", "02:00:00", "26:00:00", 24 * 60),
+    "Whole day": Timeslot("Ganzer Tag", "02:00:00", "26:00:00", 24 * 60),
     "18-23h": Timeslot("18-23h", "18:00:00", "23:00:00", 5 * 60),
 }
 
@@ -164,8 +164,8 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
     df_long.insert(0, "Jahr", meta.jahr)
     df_long.insert(1, "Region", meta.region)
 
-    # Normalise string columns: strip whitespace.
-    df_long["Sender"] = df_long["Sender"].str.strip()
+    # Normalise string columns: strip whitespace and remove _T sender suffix.
+    df_long["Sender"] = df_long["Sender"].str.strip().str.replace(r"_T$", "", regex=True)
     df_long["Kenngrösse"] = df_long["Kenngrösse"].str.strip()
 
     # Resolve Kenngrössen codes to descriptive names.
