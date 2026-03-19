@@ -13,7 +13,7 @@ import httpx
 import pytest
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
-from mcp.types import TextResourceContents
+from mcp.types import TextContent, TextResourceContents
 from pydantic import AnyUrl
 from testcontainers.core.container import DockerContainer
 
@@ -163,3 +163,42 @@ async def test_glossar_resource_returns_domain_terms(mcp_url):
         assert "abfrage_jahresbericht" not in text.lower(), (
             "Glossary should not contain usage instructions for the query tool"
         )
+
+
+# ---------------------------------------------------------------------------
+# Iteration 3: Query tool returns markdown table (long format)
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.integration
+async def test_query_data_returns_markdown_table(mcp_url):
+    """The query tool should return a markdown table with filtered data."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Rating in 1'000"],
+                "zeitschiene": ["Whole day"],
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        # Must be a markdown table
+        lines = text.strip().splitlines()
+        assert any("|" in line for line in lines), "No markdown table found"
+        assert any("---" in line for line in lines), "No header separator found"
+
+        # Must contain expected columns
+        header = lines[0]
+        assert "Sender" in header
+        assert "Wert" in header

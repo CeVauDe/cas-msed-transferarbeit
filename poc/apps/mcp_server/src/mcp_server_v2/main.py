@@ -3,12 +3,20 @@
 import os
 from typing import Literal
 
+import pandas as pd
 from mcp.server.fastmcp import FastMCP
 
 from mcp_server_v2.glossary import GLOSSARY_MD
 
 type LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 type Transport = Literal["stdio", "sse", "streamable-http"]
+
+_DEFAULT_PARQUET = "apps/mcp_server/data/Jahresbericht_v2.parquet"
+
+
+def _load_dataframe() -> pd.DataFrame:
+    path = os.environ.get("MCP_DATA_V2_PARQUET_PATH", _DEFAULT_PARQUET)
+    return pd.read_parquet(path)
 
 
 def _build_server() -> FastMCP:
@@ -23,20 +31,47 @@ def _build_server() -> FastMCP:
         log_level=log_level,
     )
 
+    df = _load_dataframe()
+
     @server.tool(
         name="abfrage_jahresbericht",
         description=(
             "Abfrage des Mediapulse TV-Jahresberichts. "
             "Gibt eine Markdown-Tabelle mit TV-Zuschauerdaten zurück "
-            "(Ratings, Marktanteile, Reichweiten, Sehdauer) für Schweizer TV-Sender. "
-            "Verwende dieses Tool, wenn nach TV-Zuschauerdaten, Einschaltquoten, "
-            "Marktanteilen oder Sehverhalten gefragt wird. "
-            "Unterstützt Filterung nach Jahr, Region, Zeitschiene, Kenngrösse und Sender. "
-            "Gibt Rohdaten zurück — es wird keine Aggregation durchgeführt."
+            "(Ratings, Marktanteile, Reichweiten, Sehdauer) "
+            "für Schweizer TV-Sender. "
+            "Verwende dieses Tool, wenn nach TV-Zuschauerdaten, "
+            "Einschaltquoten, Marktanteilen oder Sehverhalten "
+            "gefragt wird. "
+            "Unterstützt Filterung nach Jahr, Region, Zeitschiene, "
+            "Kenngrösse und Sender. "
+            "Gibt Rohdaten zurück — "
+            "es wird keine Aggregation durchgeführt."
         ),
     )
-    def abfrage_jahresbericht() -> str:
-        return "Not yet implemented"
+    def abfrage_jahresbericht(
+        jahr: list[int] | None = None,
+        region: list[str] | None = None,
+        zeitschiene: list[str] | None = None,
+        kenngroesse: list[str] | None = None,
+        sender: list[str] | None = None,
+    ) -> str:
+        result = df
+        if jahr:
+            result = result[result["Jahr"].isin(jahr)]
+        if region:
+            result = result[result["Region"].isin(region)]
+        if zeitschiene:
+            result = result[result["Zeitschiene"].isin(zeitschiene)]
+        if kenngroesse:
+            result = result[result["Kenngrösse"].isin(kenngroesse)]
+        if sender:
+            result = result[result["Sender"].isin(sender)]
+
+        if result.empty:
+            return "Keine Daten gefunden."
+
+        return result.head(20).to_markdown(index=False)
 
     @server.resource(
         uri="glossar://mediapulse",
