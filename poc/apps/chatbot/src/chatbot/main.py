@@ -238,6 +238,7 @@ def main() -> None:
             "Zeige mir Reichweite und Marktanteil aller Sender in der Suisse romande 2019.",
         ],
         cache_examples=False,
+        concurrency_limit=4,
     )
 
     port = int(os.environ.get("GRADIO_PORT", "7860"))
