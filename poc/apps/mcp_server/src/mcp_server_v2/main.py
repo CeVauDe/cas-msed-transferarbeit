@@ -1,15 +1,19 @@
 """MCP server v2 entrypoint — simplified Jahresbericht data access via pandas."""
 
+import logging
 import os
-from typing import Literal
+from typing import Annotated, Literal
 
 import pandas as pd
 from mcp.server.fastmcp import FastMCP
+from pydantic import Field
 
 from mcp_server_v2.glossary import GLOSSARY_MD
 
 type LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 type Transport = Literal["stdio", "sse", "streamable-http"]
+
+logger = logging.getLogger(__name__)
 
 _DEFAULT_PARQUET = "apps/mcp_server/data/Jahresbericht_v2.parquet"
 
@@ -50,12 +54,59 @@ def _build_server() -> FastMCP:
         ),
     )
     def abfrage_jahresbericht(
-        jahr: list[int] | None = None,
-        region: list[str] | None = None,
-        zeitschiene: list[str] | None = None,
-        kenngroesse: list[str] | None = None,
-        sender: list[str] | None = None,
+        jahr: Annotated[
+            list[int] | None,
+            Field(description="Jahr(e). Erlaubt: 2018, 2019, 2020, 2021"),
+        ] = None,
+        region: Annotated[
+            list[str] | None,
+            Field(
+                description=(
+                    "Sprachregion(en). Erlaubt: Deutschschweiz, Suisse romande, Svizzera italiana"
+                ),
+            ),
+        ] = None,
+        zeitschiene: Annotated[
+            list[str] | None,
+            Field(
+                description=(
+                    "Zeitschiene(n). Beispiele: 'Whole day', '18-23h', '20:00:00 - 20:15:00'"
+                ),
+            ),
+        ] = None,
+        kenngroesse: Annotated[
+            list[str] | None,
+            Field(
+                description=(
+                    "Kenngrösse(n). Erlaubt: "
+                    "Rating in 1'000, Rating in %, "
+                    "Nettoreichweite in 1'000, "
+                    "Nettoreichweite in %, "
+                    "Marktanteil in %, "
+                    "durchschnittliche Sehdauer in Sekunden, "
+                    "durchschnittliche Verweildauer in Sekunden"
+                ),
+            ),
+        ] = None,
+        sender: Annotated[
+            list[str] | None,
+            Field(
+                description=(
+                    "TV-Sender. Beispiele: SRF 1, SRF zwei, RTS 1, RSI LA 1, ARD, ZDF, ORF 1"
+                ),
+            ),
+        ] = None,
     ) -> str:
+        logger.debug(
+            "abfrage_jahresbericht called: jahr=%s, region=%s, "
+            "zeitschiene=%s, kenngroesse=%s, sender=%s",
+            jahr,
+            region,
+            zeitschiene,
+            kenngroesse,
+            sender,
+        )
+
         result = df
         if jahr:
             result = result[result["Jahr"].isin(jahr)]
@@ -69,9 +120,17 @@ def _build_server() -> FastMCP:
             result = result[result["Sender"].isin(sender)]
 
         if result.empty:
+            logger.debug("No data matched the filters.")
             return "Keine Daten gefunden."
 
-        return result.head(20).to_markdown(index=False)
+        table = result.head(20).to_markdown(index=False)
+        logger.debug(
+            "Returning %d rows (of %d matched):\n%s",
+            min(20, len(result)),
+            len(result),
+            table,
+        )
+        return table
 
     @server.resource(
         uri="glossar://mediapulse",
