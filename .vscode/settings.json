@@ -1,5 +1,10 @@
 {
     "asciidoc.preview.attributes": {
         "pdf-theme": "theme.yml"
-    }
+    },
+    "python.testing.pytestArgs": [
+        "poc"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
