@@ -7,10 +7,12 @@ dependencies = [
     "duckdb>=1.4.1",
     "duckdb-engine>=0.17.0",
     "mcp>=1.0.0",
+    "pandas>=3.0.1",
+    "pyarrow>=23.0.1",
     "pydantic>=2.11.7",
     "pyyaml>=6.0.2",
     "sqlalchemy>=2.0.43",
-
+    "tabulate>=0.9.0",
 ]
 
 [build-system]
@@ -18,7 +20,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/mcp_server"]
+packages = ["src/mcp_server", "src/mcp_server_v2"]
 
 [dependency-groups]
 dev = [

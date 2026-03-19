@@ -46,12 +46,15 @@ select = [
 ignore = []
 
 [tool.ruff.lint.isort]
-known-first-party = ["chatbot", "mcp_server"]
+known-first-party = ["chatbot", "mcp_server", "mcp_server_v2"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["apps"]
 pythonpath = ["apps/chatbot/src", "apps/mcp_server/src"]
+markers = [
+    "integration: marks tests that require Docker (deselect with '-m \"not integration\"')",
+]
 
 [tool.ty.environment]
 python-version = "3.14"
@@ -63,4 +66,5 @@ unresolved-import = "ignore"
 [dependency-groups]
 dev = [
     "pyarrow>=23.0.1",
+    "testcontainers>=4.0.0",
 ]
