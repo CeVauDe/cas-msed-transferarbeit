@@ -15,7 +15,7 @@ class FileMeta(NamedTuple):
 
 
 class Timeslot(NamedTuple):
-    zeitschiene: str
+    Zeitschiene: str
     timeslot_start: str
     timeslot_end: str
     timeslot_duration_minutes: int
@@ -144,7 +144,7 @@ def load_and_transform(file_path: Path) -> pd.DataFrame:
     station_map = {k: header_rows.iloc[2, k + 1] for k in value_col_indices}
 
     timeslot_id_vars = [
-        "zeitschiene",
+        "Zeitschiene",
         "timeslot_start",
         "timeslot_end",
         "timeslot_duration_minutes",
