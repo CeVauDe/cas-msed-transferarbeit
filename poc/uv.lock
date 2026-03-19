@@ -782,6 +782,7 @@ test = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "openpyxl" },
     { name = "pyarrow" },
     { name = "testcontainers" },
 ]
@@ -800,6 +801,7 @@ provides-extras = ["dev", "test"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "openpyxl", specifier = ">=3.1.5" },
     { name = "pyarrow", specifier = ">=23.0.1" },
     { name = "testcontainers", specifier = ">=4.0.0" },
 ]
