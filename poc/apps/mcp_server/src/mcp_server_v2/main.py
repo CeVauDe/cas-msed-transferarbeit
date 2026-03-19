@@ -5,6 +5,8 @@ from typing import Literal
 
 from mcp.server.fastmcp import FastMCP
 
+from mcp_server_v2.glossary import GLOSSARY_MD
+
 type LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 type Transport = Literal["stdio", "sse", "streamable-http"]
 
@@ -36,18 +38,17 @@ def _build_server() -> FastMCP:
     def abfrage_jahresbericht() -> str:
         return "Not yet implemented"
 
-    @server.tool(
-        name="glossar",
+    @server.resource(
+        uri="glossar://mediapulse",
+        name="Glossar",
         description=(
-            "Gibt das Glossar des Jahresberichts-Datensatzes zurück. "
-            "Beschreibt alle verfügbaren Spalten, deren Bedeutung, Datentypen und erlaubte Werte. "
-            "Enthält Erklärungen zu jeder Kenngrösse (Metrik) mit Masseinheit. "
-            "Aufrufen, um zu verstehen, welche Daten verfügbar sind "
-            "und welche Filterwerte gültig sind."
+            "Fachbegriffe der TV-Forschung "
+            "(Zeitschiene, Rating, Marktanteil, Sehdauer, "
+            "Verweildauer, Nettoreichweite)."
         ),
     )
     def glossar() -> str:
-        return "Not yet implemented"
+        return GLOSSARY_MD
 
     return server
 

@@ -13,6 +13,8 @@ import httpx
 import pytest
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
+from mcp.types import TextResourceContents
+from pydantic import AnyUrl
 from testcontainers.core.container import DockerContainer
 
 _DESKTOP_SOCK = Path.home() / ".docker" / "desktop" / "docker.sock"
@@ -100,7 +102,7 @@ def mcp_url(mcp_container):
 
 @pytest.mark.integration
 async def test_list_tools_returns_expected_tools(mcp_url):
-    """The server should expose exactly 2 tools with descriptive names."""
+    """The server should expose exactly 1 tool with a descriptive name."""
     async with (
         streamable_http_client(mcp_url) as (read, write, _),
         ClientSession(read, write) as session,
@@ -109,11 +111,55 @@ async def test_list_tools_returns_expected_tools(mcp_url):
         result = await session.list_tools()
 
         tool_names = {t.name for t in result.tools}
-        assert len(result.tools) == 2, f"Expected 2 tools, got {len(result.tools)}: {tool_names}"
+        assert len(result.tools) == 1, f"Expected 1 tool, got {len(result.tools)}: {tool_names}"
+        assert "abfrage_jahresbericht" in tool_names
 
-        # Both tools should have non-empty descriptions
-        for tool in result.tools:
-            assert tool.description, f"Tool {tool.name!r} has no description"
-            assert len(tool.description) > 20, (
-                f"Tool {tool.name!r} description too short: {tool.description!r}"
-            )
+        tool = result.tools[0]
+        assert tool.description, f"Tool {tool.name!r} has no description"
+        assert len(tool.description) > 20, (
+            f"Tool {tool.name!r} description too short: {tool.description!r}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Iteration 2: Glossary tool returns structured info
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.integration
+async def test_glossar_resource_returns_domain_terms(mcp_url):
+    """The glossar resource should return markdown explaining domain terms."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+
+        # Verify resource is listed
+        resources = await session.list_resources()
+        uris = {str(r.uri) for r in resources.resources}
+        assert "glossar://mediapulse" in uris
+
+        # Read the resource
+        result = await session.read_resource(AnyUrl("glossar://mediapulse"))
+        assert len(result.contents) == 1
+        content = result.contents[0]
+        assert isinstance(content, TextResourceContents)
+        text = content.text
+
+        # Must contain glossary term explanations
+        for term in [
+            "Zeitschiene",
+            "Verweildauer",
+            "Sehdauer",
+            "Rating",
+            "Nettoreichweite",
+            "Marktanteil",
+            "Fact",
+        ]:
+            assert term in text, f"Missing glossary term {term!r}"
+
+        # Must NOT contain usage instructions for the query tool
+        assert "abfrage_jahresbericht" not in text.lower(), (
+            "Glossary should not contain usage instructions for the query tool"
+        )
