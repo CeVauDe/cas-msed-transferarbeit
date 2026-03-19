@@ -725,6 +725,11 @@ test = [
     { name = "mcp-server" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pyarrow" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "chatbot", marker = "extra == 'test'", editable = "apps/chatbot" },
@@ -738,7 +743,7 @@ requires-dist = [
 provides-extras = ["dev", "test"]
 
 [package.metadata.requires-dev]
-dev = []
+dev = [{ name = "pyarrow", specifier = ">=23.0.1" }]
 
 [[package]]
 name = "mcp-server"
