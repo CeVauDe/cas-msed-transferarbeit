@@ -225,17 +225,17 @@ def main() -> None:
 
     demo = gr.ChatInterface(
         fn=respond,
-        title="SRF Jahresbericht Chat",
+        title="Jahreszahlen TV Nutzung Schweiz",
         description=(
             "Stellen Sie Fragen zu den TV-Nutzungsdaten der Schweizer "
-            "Mediapulse-Jahresberichte (2018-2021). "
-            "Datenquelle: SRF/SRG Jahresbericht, Panel-basierte TV-Messung."
+            "Mediapulse-Jahresberichte (2018-2021)."
         ),
         examples=[
-            "Was war der durchschnittliche Marktanteil von SRF 1 in der Deutschen Schweiz 2021?",
-            "Zeige mir die Reichweite aller Sender in der Deutschen Schweiz für 2020.",
-            "Welcher Sender hatte den höchsten Marktanteil in der Suisse Romande 2019?",
-            "Wie war die Sehdauer für SRF zwei in der Deutschen Schweiz in der Primetime 2021?",
+            "Was war der Marktanteil von SRF 1 in der Deutschschweiz 2021?",
+            "Vergleiche die Sehdauer von SRF 1, SRF zwei und ARD in der Deutschschweiz 2020.",
+            "Wie hat sich der Marktanteil von SRF 1 und ZDF in der Deutschschweiz von 2018 bis "
+            "2021 entwickelt?",
+            "Zeige mir Reichweite und Marktanteil aller Sender in der Suisse romande 2019.",
         ],
         cache_examples=False,
     )
