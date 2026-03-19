@@ -6,7 +6,7 @@ from typing import Annotated, Literal
 
 import pandas as pd
 from mcp.server.fastmcp import FastMCP
-from pydantic import Field
+from pydantic import BaseModel, Field
 
 from mcp_server_v2.glossary import GLOSSARY_MD
 
@@ -16,6 +16,16 @@ type Transport = Literal["stdio", "sse", "streamable-http"]
 logger = logging.getLogger(__name__)
 
 _DEFAULT_PARQUET = "apps/mcp_server/data/Jahresbericht_v2.parquet"
+
+
+class Sortierung(BaseModel):
+    """Sort specification for a single column."""
+
+    spalte: str = Field(description="Spalte, nach der sortiert wird.")
+    richtung: Literal["aufsteigend", "absteigend"] = Field(
+        default="aufsteigend",
+        description="Sortierrichtung.",
+    )
 
 
 def _load_dataframe() -> pd.DataFrame:
@@ -135,11 +145,22 @@ def _build_server() -> FastMCP:
                 ),
             ),
         ] = None,
+        sortierung: Annotated[
+            list[Sortierung] | None,
+            Field(
+                description=(
+                    "Sortierung: Liste von Objekten mit 'spalte' und "
+                    "'richtung' (aufsteigend/absteigend). "
+                    'Beispiel: [{"spalte": "Wert", "richtung": "absteigend"}]'
+                ),
+            ),
+        ] = None,
     ) -> str:
         logger.info(
             "abfrage_jahresbericht called: jahr=%s, region=%s, "
             "zeitschiene=%s, kenngroesse=%s, sender=%s, "
-            "spalten=%s, limit=%s, zeilen=%s, spalten_pivot=%s",
+            "spalten=%s, limit=%s, zeilen=%s, spalten_pivot=%s, "
+            "sortierung=%s",
             jahr,
             region,
             zeitschiene,
@@ -149,6 +170,7 @@ def _build_server() -> FastMCP:
             limit,
             zeilen,
             spalten_pivot,
+            sortierung,
         )
 
         result = df
@@ -169,12 +191,26 @@ def _build_server() -> FastMCP:
 
         row_limit = min(limit, 200)
 
+        if sortierung:
+            by = [s.spalte for s in sortierung if s.spalte in result.columns]
+            asc = [s.richtung == "aufsteigend" for s in sortierung if s.spalte in result.columns]
+            if by:
+                result = result.sort_values(by=by, ascending=asc)
+
         if zeilen and spalten_pivot:
             pivot = result.pivot_table(
                 index=zeilen,
                 columns=spalten_pivot,
                 values="Wert",
             )
+            if sortierung:
+                for s in reversed(sortierung):
+                    if s.spalte == pivot.index.name:
+                        pivot = pivot.sort_index(ascending=(s.richtung == "aufsteigend"))
+                    elif s.spalte in pivot.columns:
+                        pivot = pivot.sort_values(
+                            by=s.spalte, ascending=(s.richtung == "aufsteigend")
+                        )
             table = pivot.head(row_limit).to_markdown()
             logger.info(
                 "Returning pivot (%d rows):\n%s",

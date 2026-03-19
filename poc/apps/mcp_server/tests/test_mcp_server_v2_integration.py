@@ -378,3 +378,199 @@ async def test_query_data_pivot_table(mcp_url):
         row_text = "\n".join(data_rows)
         assert "SRF 1" in row_text
         assert "SRF zwei" in row_text
+
+
+@pytest.mark.integration
+async def test_query_without_region_returns_all_regions(mcp_url):
+    """Omitting region should return data from all three language regions."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Ganzer Tag"],
+                "sender": ["SRF 1"],
+                "spalten": ["Region", "Sender", "Wert"],
+                "limit": 50,
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        # Must be a markdown table
+        lines = text.strip().splitlines()
+        assert any("|" in line for line in lines), "No markdown table found"
+        assert any("---" in line for line in lines), "No header separator found"
+
+        # All three regions must be present
+        data_rows = [line for line in lines[2:] if line.strip()]
+        assert len(data_rows) >= 3, f"Expected at least 3 rows, got {len(data_rows)}"
+        for region in ["Deutschschweiz", "Suisse romande", "Svizzera italiana"]:
+            assert region in text, f"Region {region!r} missing from results"
+
+
+def _parse_column_values(markdown_table: str, column_name: str) -> list[str]:
+    """Extract values of a named column from a markdown table."""
+    lines = markdown_table.strip().splitlines()
+    header_cells = [c.strip() for c in lines[0].split("|") if c.strip()]
+    col_idx = header_cells.index(column_name)
+    values = []
+    for line in lines[2:]:
+        if not line.strip():
+            continue
+        cells = [c.strip() for c in line.split("|") if c.strip()]
+        values.append(cells[col_idx])
+    return values
+
+
+@pytest.mark.integration
+async def test_query_with_sortierung_descending(mcp_url):
+    """Sortierung with richtung=absteigend should return values in descending order."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Ganzer Tag"],
+                "spalten": ["Sender", "Wert"],
+                "sortierung": [{"spalte": "Wert", "richtung": "absteigend"}],
+                "limit": 10,
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        values = [float(v) for v in _parse_column_values(text, "Wert")]
+        assert len(values) >= 2, "Need at least 2 rows to verify ordering"
+        for i in range(len(values) - 1):
+            assert values[i] >= values[i + 1], (
+                f"Row {i} ({values[i]}) should be >= row {i + 1} ({values[i + 1]})"
+            )
+
+
+@pytest.mark.integration
+async def test_query_with_sortierung_ascending(mcp_url):
+    """Sortierung with richtung=aufsteigend should return values in ascending order."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Ganzer Tag"],
+                "spalten": ["Sender", "Wert"],
+                "sortierung": [{"spalte": "Wert", "richtung": "aufsteigend"}],
+                "limit": 10,
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        values = [float(v) for v in _parse_column_values(text, "Wert")]
+        assert len(values) >= 2, "Need at least 2 rows to verify ordering"
+        for i in range(len(values) - 1):
+            assert values[i] <= values[i + 1], (
+                f"Row {i} ({values[i]}) should be <= row {i + 1} ({values[i + 1]})"
+            )
+
+
+@pytest.mark.integration
+async def test_query_with_sortierung_multiple_columns(mcp_url):
+    """Multi-column sortierung: primary by Sender asc, secondary by Jahr desc."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "jahr": [2020, 2021],
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Ganzer Tag"],
+                "sender": ["SRF 1", "SRF zwei"],
+                "spalten": ["Sender", "Jahr", "Wert"],
+                "sortierung": [
+                    {"spalte": "Sender", "richtung": "aufsteigend"},
+                    {"spalte": "Jahr", "richtung": "absteigend"},
+                ],
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        senders = _parse_column_values(text, "Sender")
+        jahre = [int(v) for v in _parse_column_values(text, "Jahr")]
+        assert len(senders) == 4, f"Expected 4 rows (2 senders x 2 years), got {len(senders)}"
+
+        # SRF 1 rows should come before SRF zwei rows
+        assert senders[:2] == ["SRF 1", "SRF 1"]
+        assert senders[2:] == ["SRF zwei", "SRF zwei"]
+
+        # Within each sender, Jahre should be descending
+        assert jahre[0] > jahre[1], f"SRF 1: {jahre[0]} should be > {jahre[1]}"
+        assert jahre[2] > jahre[3], f"SRF zwei: {jahre[2]} should be > {jahre[3]}"
+
+
+@pytest.mark.integration
+async def test_query_with_sortierung_on_pivot(mcp_url):
+    """Sortierung on pivot table should sort the index."""
+    async with (
+        streamable_http_client(mcp_url) as (read, write, _),
+        ClientSession(read, write) as session,
+    ):
+        await session.initialize()
+        result = await session.call_tool(
+            "abfrage_jahresbericht",
+            {
+                "region": ["Deutschschweiz"],
+                "kenngroesse": ["Marktanteil in %"],
+                "zeitschiene": ["Ganzer Tag"],
+                "sender": ["SRF 1", "SRF zwei", "ARD"],
+                "zeilen": "Sender",
+                "spalten_pivot": "Jahr",
+                "sortierung": [{"spalte": "Sender", "richtung": "absteigend"}],
+            },
+        )
+
+        assert len(result.content) == 1
+        content = result.content[0]
+        assert isinstance(content, TextContent)
+        text = content.text
+
+        lines = text.strip().splitlines()
+        data_rows = [line for line in lines[2:] if line.strip()]
+        sender_names = [row.split("|")[1].strip() for row in data_rows]
+
+        assert sender_names == sorted(sender_names, reverse=True), (
+            f"Sender index should be descending: {sender_names}"
+        )
