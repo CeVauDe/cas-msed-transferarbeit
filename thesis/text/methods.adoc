@@ -15,3 +15,20 @@
 ==== MCP Server
 
 ===== Was ist MCP?
+
+===  Welche Methoden haben Sie verwendet?
+
+==== Red Teaming
+TODO: erklärung red teaming frameworks
+
+Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptaugenmerk auf Kriterien gelegt, die zur Erforschung der Praxistauglichkeit des Chatbots essentiell sind. Die Kriterien sind wie folgt:
+
+1. <<methods-korrektheit,Korrektheit>>
+2. <<methods-prognosen,Keine Prognosen>>
+3. <<methods-keine-interpretationen,Keine Interpretationen>>
+4. <<methods-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
+
+include::methods/korrektheit.adoc[]
+include::methods/keine-prognosen.adoc[]
+include::methods/keine-interpretationen.adoc[]
+include::methods/keine-handlungsanweisungen.adoc[]

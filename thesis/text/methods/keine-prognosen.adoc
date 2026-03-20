@@ -1,4 +1,4 @@
-[#prognosen]
+[#methods-prognosen]
 === Prognosen
 Der Agent muss ausschliesslich faktisch handeln und darf auf keinen Fall Prognostizieren. Um dies zu testen wird mittels des Red-Teaming Frameworks eine Strategie genutzt, die (TODO: add final value) X Fragen mittels LLM generiert und die Antwort auswertet. Zum Generieren der Fragen wird folgende Prompt genutzt:
 

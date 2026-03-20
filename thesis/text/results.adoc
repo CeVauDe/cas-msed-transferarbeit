@@ -6,12 +6,12 @@
 === Was sind die Ergebnisse des Red Teaming?
 Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptaugenmerk auf Kriterien gelegt, die zur Erforschung der Praxistauglichkeit des Chatbots essentiell sind. Die Kriterien sind wie folgt:
 
-1. <<korrektheit,Korrektheit>>
-2. <<prognosen,Keine Prognosen>>
-3. <<keine-interpretationen,Keine Interpretationen>>
-4. <<keine-handlungsanweisungen,Keine Handlungsanweisungen>>
+1. <<results-korrektheit,Korrektheit>>
+2. <<results-prognosen,Keine Prognosen>>
+3. <<results-keine-interpretationen,Keine Interpretationen>>
+4. <<results-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
 
-include::korrektheit.adoc[]
-include::keine-prognosen.adoc[]
-include::keine-interpretationen.adoc[]
-include::keine-handlungsanweisungen.adoc[]
+include::results/korrektheit.adoc[]
+include::results/keine-prognosen.adoc[]
+include::results/keine-interpretationen.adoc[]
+include::results/keine-handlungsanweisungen.adoc[]
