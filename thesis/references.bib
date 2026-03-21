@@ -26,3 +26,44 @@
   year={2024},
   publisher={Elsevier}
 }
+
+@misc{liu_prompt_2025,
+	title = {Prompt {Injection} attack against {LLM}-integrated {Applications}},
+	url = {http://arxiv.org/abs/2306.05499},
+	doi = {10.48550/arXiv.2306.05499},
+	abstract = {Large Language Models (LLMs), renowned for their superior proficiency in language comprehension and generation, stimulate a vibrant ecosystem of applications around them. However, their extensive assimilation into various services introduces significant security risks. This study deconstructs the complexities and implications of prompt injection attacks on actual LLM-integrated applications. Initially, we conduct an exploratory analysis on ten commercial applications, highlighting the constraints of current attack strategies in practice. Prompted by these limitations, we subsequently formulate HouYi, a novel black-box prompt injection attack technique, which draws inspiration from traditional web injection attacks. HouYi is compartmentalized into three crucial elements: a seamlessly-incorporated pre-constructed prompt, an injection prompt inducing context partition, and a malicious payload designed to fulfill the attack objectives. Leveraging HouYi, we unveil previously unknown and severe attack outcomes, such as unrestricted arbitrary LLM usage and uncomplicated application prompt theft. We deploy HouYi on 36 actual LLM-integrated applications and discern 31 applications susceptible to prompt injection. 10 vendors have validated our discoveries, including Notion, which has the potential to impact millions of users. Our investigation illuminates both the possible risks of prompt injection attacks and the possible tactics for mitigation.},
+	urldate = {2026-03-20},
+	publisher = {arXiv},
+	author = {Liu, Yi and Deng, Gelei and Li, Yuekang and Wang, Kailong and Wang, Zihao and Wang, Xiaofeng and Zhang, Tianwei and Liu, Yepang and Wang, Haoyu and Zheng, Yan and Zhang, Leo Yu and Liu, Yang},
+	month = dec,
+	year = {2025},
+	note = {arXiv:2306.05499 [cs]},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computation and Language, Computer Science - Cryptography and Security, Computer Science - Software Engineering, prompt-injection},
+	annote = {Prompt Injection. Prompt injection [6, 20, 44] overrides an LLM’s original prompt and directs it to follow malicious instructions. This can lead to disruptive outcomes such as erroneous advice or unauthorized disclosure of sensitive information. From a broader view, backdoor [7, 36, 68] and model hijacking [56, 61] can be classified under this type of attack. Perez et al. [44] revealed GPT-3 and its dependent applications are susceptible to prompt injection attacks, which commandeer the model’s initial objective or expose the application’s original prompts. Compared to their work, we systematically explore the strategies and prompt patterns that can trigger the attack in a wider range of real-world applications.},
+	file = {Full Text PDF:/Users/mars/Zotero/storage/9JTJIPTG/Liu et al. - 2025 - Prompt Injection attack against LLM-integrated Applications.pdf:application/pdf;Snapshot:/Users/mars/Zotero/storage/RE2QPDEX/2306.html:text/html},
+}
+
+@inproceedings{wang-etal-2025-diffusionattacker,
+    title = "{D}iffusion{A}ttacker: Diffusion-Driven Prompt Manipulation for {LLM} Jailbreak",
+    author = "Wang, Hao  and
+      Li, Hao  and
+      Zhu, Junda  and
+      Wang, Xinyuan  and
+      Pan, Chengwei  and
+      Huang, Minlie  and
+      Sha, Lei",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.1128/",
+    doi = "10.18653/v1/2025.emnlp-main.1128",
+    pages = "22182--22194",
+    ISBN = "979-8-89176-332-6",
+    abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
+}
