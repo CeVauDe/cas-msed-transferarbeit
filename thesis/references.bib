@@ -67,3 +67,26 @@
     ISBN = "979-8-89176-332-6",
     abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
 }
+
+@misc{promptfooTeamStrategies,
+	author = {{Promptfoo Inc.}},
+	title = {{R}ed {T}eam {S}trategies},
+	howpublished = {\url{https://www.promptfoo.dev/docs/red-team/strategies/}},
+	year = {2026},
+	note = {[Accessed 21-03-2026]},
+}
+
+@inproceedings{russinovich2025great,
+  title={Great, now write an article about that: The crescendo $\{$Multi-Turn$\}$$\{$LLM$\}$ jailbreak attack},
+  author={Russinovich, Mark and Salem, Ahmed and Eldan, Ronen},
+  booktitle={34th USENIX Security Symposium (USENIX Security 25)},
+  pages={2421--2440},
+  year={2025}
+}
+
+@article{pavlova2024automated,
+  title={Automated red teaming with goat: the generative offensive agent tester},
+  author={Pavlova, Maya and Brinkman, Erik and Iyer, Krithika and Albiero, Vitor and Bitton, Joanna and Nguyen, Hailey and Li, Joe and Ferrer, Cristian Canton and Evtimov, Ivan and Grattafiori, Aaron},
+  journal={arXiv preprint arXiv:2410.01606},
+  year={2024}
+}

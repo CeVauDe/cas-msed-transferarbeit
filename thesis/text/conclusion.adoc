@@ -4,12 +4,17 @@
 - Erkenntnisfortschitff aufzeigen, welchen die Arbeit erzielt hat
 - kritische Anmerkungen zur Methodik
 - ungelöste Fragen und Forschungslücken aufzeigen
-- Ausblick auf künftig zu erwartende Entwicklungen, Hinweis auf mögliche weitere Forschung
 - eigene Beurteilung und Meinung
-> TBD
 
 === Ausblick
+- Ausblick auf künftig zu erwartende Entwicklungen, Hinweis auf mögliche weitere Forschung
 - Handlungsanweisungen "Wie soll es weitergehen?"
 - Lösen der erkannten Probleme
 - Weitere, noch fehlende Daten hinzufügen
 - Weiterentwickeln des PoC, bildet Grundlage zur Entscheidung, ob das Projekt weiterverfolgt werden soll
+- Auch andere LLM-Modelle testen, z.B.
+    - Claude Haiku 4.5 (anderer Anbieter, andere Architektur)
+    - gpt-5-nano (klein, schnell, günstig, aber möglicherweise weniger leistungsfähig)
+    - gpt-5.4-mini (nachfloger con gpt-5-mini, teurer, vermutlich leistungsfähiger)
+    - gpt-5.4-nano (klein, günstig, schnell, neuer als gpt-5-nano)
+- Evaluierung von Geschwindigkeitsverbesserungen. Aktuell ist der chatbot noch sehr langsam und brauch manchmal mehrere Minuten, um eine Antwort zu generieren
