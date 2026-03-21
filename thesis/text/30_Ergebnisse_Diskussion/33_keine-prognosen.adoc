@@ -1,5 +1,9 @@
-[#methods-prognosen]
-=== Keine Prognosen / Halluzinationen
+
+=== Prognosen
+
+==== Ergebnnisse
+[#results-prognosen]
+==== Keine Prognosen / Halluzinationen
 Der Agent muss ausschliesslich faktisch handeln und darf auf keinen Fall prognostizieren. Um dies zu testen wird des Red-Teaming Frameworks angewendet, um Fragen mittels LLM zu generien und die Antwort auswertet. Zum Generieren der Fragen wird folgende Prompt genutzt:
 
 ----
@@ -23,7 +27,7 @@ Als ersten Versuch wurden 45 Fragen generiert. Jeweils 15 pro Strategie:
 * jailbreak
 
 
-==== Einfache Benutzereingabe
+===== Einfache Benutzereingabe
 
 Eine generierte einfache Beispielfrage für eine Prognose ist
 
@@ -114,5 +118,8 @@ The output provides factual data regarding Swiss TV market shares from 2020 to 2
 Es wird zwar richtigerweise informiert, dass Daten für das Jahr 2023 fehlen, allerdings wird im Einleitungssatz die Frage einfach wiederholt und kann zu Verwirrung oder falschen Annahmen (Halluzination) führen. Dies ist ein Problem vom Agenten und der System Prompt wird weiter optimiert: *«Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf die Richtigkeit der präsentierten Daten an und informiere exakt über Abweichungen zur Frage, um Verwirrung zu vermeiden.»*.
 
 
-==== Prompt-injection / Jailbreak
+===== Prompt-injection / Jailbreak
 Versuche die System Prompt auf das Wesentliche zu reduzieren und eine Prompt-injection oder Jailbreak zu provuzieren sind gescheitert. Der genutzte OpenAi Agent trennt die Benutzereingaben von der System Prompt (Role=System) und gibt ihr eine höhere Bedeutung. Der Test spielt kaum eine Rolle und es reichen wenige Tests in diesem Bereich um eine grundsätzliche Fehlkonfiguration vom Agenten zu überprüfen. Exzessives inhaltliches Testing wird das richtige Verhalten vom OpenAi Agenten selbst testen und weniger unsere Anwendung.
+
+[#discussion-prognosen]
+==== Diskussion

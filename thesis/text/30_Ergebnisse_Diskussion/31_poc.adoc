@@ -1,14 +1,10 @@
-== Proof of Concept (PoC) Applikation
+=== Proof of Concept (PoC) Applikation
 Für die Evaluation und Erreichung des Ziels wird eine Applikation entwickelt, die es mittels eines Chatbots (Web-App) ermöglicht, Fragen zu den Nutzungsdaten für Fernsehen zu stellen.
 Der Chatbot nutzt einen Agenten auf Basis des OpenAI-Clients, der es ihm ermöglicht, deutsche Benutzereingaben aus dem Chat zu verstehen und Instruktionen für den MCP-Server (Model Context Protocol) zu generieren. Der MCP-Server gibt dem Agenten Kontext über die Daten, die die Beantwortung der Benutzereingaben ermöglichen.
 Der Chatbot sowie der MCP-Server sind eigenständige Services, die über eine HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert.
 Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für Produktionssysteme mit vielen simultanen Anfragen wäre der MCP-Server in der Sprache Go oder Rust um einiges effizienter. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend. Der Flaschenhals liegt an der Datenbank und der Verarbeitungszeit vom Agenten, ein schnellerer MCP-Server würde kaum einen Unterschied machen, da die Applikation nur zum Zweck der Validierung des Konzeptes entwickelt wird.
 
-
-=== Model Context Protocol
-Beim Model Context Protocol (MCP) handelt es sich um einen offenen Standard, der mit verschiedenen Large-Language-Models (LLM) kompatibel ist. Dies gibt maximale Flexibilität bei der Auswahl der LLM-Anbieter (Drop-in Replacement möglich), bietet einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ausserdem erzwingt das Protokoll eine saubere Trennung zwischen Datenzugriff und Agenten. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder wie in diesem Fall Streamable HTTP erfolgen.
-
-=== Systemarchitektur
+==== Systemarchitektur
 
 Die zwei Dienste kommunizieren über das MCP via HTTP.
 Der Chatbot fungiert dabei als MCP-Client, der die Werkzeuge des MCP-Servers abfragt und nutzt.
@@ -54,7 +50,7 @@ QueryTool --> Parquet : DuckDB (in-memory SQL)
 @enduml
 ....
 
-=== MCP Server
+==== MCP Server
 
 Der MCP-Server stellt genau zwei Werkzeuge (Tools) bereit: `get_catalog` für die Begriffsauflösung und `query_data` für strukturierte Datenabfragen.
 
@@ -69,10 +65,10 @@ Jede `query_data` Abfrage durchläuft eine fest definierte, vierstufige Verarbei
 * Antworten
 
 
-==== Validierung
+===== Validierung
 Der Aufruf jedes Tools durchläuft eine vordefinierte Eingabevalidierung. Die Validierung wird mit der Python-Library Pydantic durchgeführt. Dafür wird jede Eingabe gegen ein vordefiniertes Set an Regeln geprüft und im Fehlerfall abgebrochen. Dies stellt sicher, dass die Planungsphase immer von einer gültigen Eingabe ausgehen kann. Beispiel: Region muss eines der folgenden Werte sein: DS = Deutsche Schweiz, SR = Suisse Romande, SI = Svizzera Italiana.
 
-==== Planung, Ausführung und Antworten
+===== Planung, Ausführung und Antworten
 Nach der Validierung wird eine passende SQL-Query zur Eingabe generiert (Planung), ausgeführt (Ausführung), mit Metadaten angereichert und dem Client zurückgeliefert (Antworten).
 
 // TODO: unnötig? entfernen?
@@ -111,7 +107,7 @@ Nach der Validierung wird eine passende SQL-Query zur Eingabe generiert (Planung
 // @enduml
 // ....
 
-=== MCP Client (Chatbot)
+==== MCP Client (Chatbot)
 
 Der Chatbot implementiert einen agentenbasierten Verarbeitungsloop.
 Pro Benutzernachricht wird eine neue MCP-Session geöffnet, die Tool-Definitionen werden abgerufen und an den OpenAI-Agenten übergeben.
@@ -119,7 +115,7 @@ Eine neue MCP-Session pro Nachricht wird genutzt, damit die Sessions vollständi
 Der Agent kann bis zu 15 Tool-Runden durchlaufen, bevor er eine finale Antwort produziert.
 
 
-=== Sequenzdiagramm von der initialen Eingabe bis zur Antwort
+==== Sequenzdiagramm von der initialen Eingabe bis zur Antwort
 
 [[fig-agent-loop,Abbildung: Agent-Loop]]
 .Sequenzdiagramm des agentenbasierten Verarbeitungsloops
@@ -177,7 +173,7 @@ deactivate Gradio
 ....
 
 
-=== System Prompt (OpenAI Agent)
+==== System Prompt (OpenAI Agent)
 Damit der OpenAI Agent die gelegten Leitplanken einhält, wird dem Agenten zusätzlich zu den Benutzereingaben und Antworten vom Large-Language-Model (LLM, OpenAI) eine vordefinierte, ausführliche Instruktion (System Prompt) mitgegeben. Die System Prompt gibt dem LLM definierte Anweisungen, wie die Tool-Calls genutzt oder Rückfragen formuliert werden sollen. Da von deutschen Eingaben ausgegangen wird, wird sie auf Deutsch definiert. (TODO: verify) Bei 95 von 100 Fragen wurde innerhalb von 15 Tool-Calls ein Ergebnis gefunden.
 
 Die System Prompt wird in folgende Abschnitte aufgeteilt:
@@ -188,19 +184,19 @@ Die System Prompt wird in folgende Abschnitte aufgeteilt:
 * Nicht verfügbare Daten
 * Rückfragen und Antworten
 
-==== Identität
+===== Identität
 Teilt dem LLM mit, aus welcher Perspektive es handeln soll – in diesem Fall als Datenassistent.
 
 
-==== Regeln
+===== Regeln
 In diesem Abschnitt werden gewisse Grundregeln definiert, beispielsweise muss immer nur eine Region in der Frage vorhanden sein. Bei Unklarheit wird eine Rückfrage gestellt. Sofern vom Benutzer nicht explizit in einer anderen Sprache gewünscht, wird definiert, dass die Kommunikation auf Deutsch stattfindet.
 Der wichtigste Punkt ist, dass der Agent sich strikt nach Fakten aus den Daten richtet und in keinem Fall die Daten interpretiert oder prognostiziert.
 
 
-==== Verfügbare Daten / Nicht verfügbare Daten
+===== Verfügbare Daten / Nicht verfügbare Daten
 Um die Effizienz zu steigern und sich wiederholende Tool-Calls zu vermeiden, wird dem Agenten ein Grundverständnis der Daten mitgegeben. Die Spalten sowie nicht sofort Offensichtliches werden erklärt. Weniger offensichtlich sind die Metriken, wobei die Konstante 1440 für einen ganzen Sendetag und die Einheit Rt-T für die Reichweite in Tausend Personen steht.
 
-==== Rückfragen und Antworten
+===== Rückfragen und Antworten
 Der Agent soll Rückfragen und Antworten immer freundlich und klar formulieren. Deshalb wird ein nachvollziehbares Orientierungsbeispiel für das LLM bereitgestellt.
 
 Rückfrage:
