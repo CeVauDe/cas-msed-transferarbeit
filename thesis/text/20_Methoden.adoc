@@ -115,7 +115,7 @@ Ursprüchgliches Paper: cite:[pavlova2024automated]
 Simuliert einen hartnäckigen und einfallsreichen Nutzer. Dieser versucht in mehreren Iterationen und mit verschiedenen Formulierungen das System zu überwinden und Antworten zu erhalten, die den Richtlinien und Massgaben des Systems widersprechen.
 
 ====== jailbreak:meta
-Ähnlich zur `jaulbreak:hydra` Strategie verwendet der angreifende meta-Agent ein fallspezifisches Klassifizierungsschema und passt seine Strategie basierend auf den Antworten des Systems an.
+Ähnlich zur `jailbreak:hydra` Strategie verwendet der angreifende meta-Agent ein fallspezifisches Klassifizierungsschema und passt seine Strategie basierend auf den Antworten des Systems an.
 
 ====== jailbreak:composite für gpt (OpenAI)
 `jailbreak:composite` ist eine Single-Turn Strategie. Dabei wird der ursprüngliche Prompt mithilfe von verschiedenen bekannten Jailbreak Strategien optimiert. Es enstehen mehrere Varianten des Promts, die dann im Test gegen das System verwendet werden. In der verwendeten Strategie werden die Prompts mür Modelle der `gpt` Modellfamilie verwendet.
