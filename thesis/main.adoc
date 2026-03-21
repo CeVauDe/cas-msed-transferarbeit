@@ -22,8 +22,6 @@ Some sample text for the abstract. This section provides a brief overview of the
 == Abbildungsverzeichnis
 list-of::image[enhanced_rendering=true]
 
-include::text/proof-of-concept.adoc[]
-
 include::text/10_Einleitung.adoc[]
 
 include::text/20_Methoden.adoc[]
@@ -36,3 +34,5 @@ include::text/50_Fazit.adoc[]
 == Literaturverzeichnis
 
 bibliography::[]
+
+include::text/80_Anhang.adoc[]

@@ -2,88 +2,15 @@
 - Was sind die Ergebnisse des Red Teaming?
 - Hier noch keine Interpretation oder Einordnung der Ergebnisse, die erfolgt im Diskussionsteil
 
-
-=== Was sind die Ergebnisse des Red Teaming?
 Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptaugenmerk auf Kriterien gelegt, die zur Erforschung der Praxistauglichkeit des Chatbots essentiell sind. Die Kriterien sind wie folgt:
 
-1. <<results-korrektheit,Korrektheit>>
-2. <<results-prognosen,Keine Prognosen>>
-3. <<results-keine-interpretationen,Keine Interpretationen>>
-4. <<results-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
+. <<results-korrektheit,Korrektheit>>
+. <<results-prognosen,Keine Prognosen>>
+. <<results-keine-interpretationen,Keine Interpretationen>>
+. <<results-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
 
-include::30_Ergebnisse_Diskussion/korrektheit.adoc[]
-include::30_Ergebnisse_Diskussion/keine-prognosen.adoc[]
-include::30_Ergebnisse_Diskussion/keine-interpretationen.adoc[]
-include::30_Ergebnisse_Diskussion/keine-handlungsanweisungen.adoc[]
-
-
-// =============================================================
-// VERGLEICH: Chat-Darstellungsoptionen (temporär, zum Vergleich)
-// =============================================================
-
-<<<
-
-=== Chat-Bubbles (Chatbot links, Benutzer rechts, 90% Breite)
-
-// Benutzer-Nachricht: rechts, 90% Breite
-[cols="1,9a",frame=none,grid=none]
-|===
-|
-|
-.*Benutzer*
-****
-Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 zusammenfassen?
-****
-|===
-
-// Chatbot-Antwort: links, 90% Breite
-[cols="9a,1",frame=none,grid=none]
-|===
-|
-.*Chatbot*
-****
-Ich kann keine Trends interpretieren oder bewerten. Unten gebe ich die Fakten (Marktanteile in %) aus den Mediapulse-Jahresberichten für die Jahre 2018–2021 aus.
-
-Deutschschweiz — Auszug:
-
-[cols="1,1,1,1,1",options=header]
-!===
-! Sender ! 2018 ! 2019 ! 2020 ! 2021
-
-! SRF 1 ! 18.747 ! 18.771 ! 21.121 ! 19.896
-! ARD   ! 4.740  ! 5.236  ! 5.448  ! 5.711
-!===
-****
-|
-|===
-
-// Benutzer-Nachricht: rechts
-[cols="1,9a",frame=none,grid=none]
-|===
-|
-|
-.*Benutzer*
-****
-Gibt es Sender mit einem kontinuierlichen Anstieg oder Rückgang über alle vier Jahre?
-****
-|===
-
-// Chatbot-Antwort: links
-[cols="9a,1",frame=none,grid=none]
-|===
-|
-.*Chatbot*
-****
-Sender mit durchgängig monotonem Trend (Deutschschweiz):
-
-[cols="1,1,1,1,1,1",options=header]
-!===
-! Sender ! 2018 ! 2019 ! 2020 ! 2021 ! Trend
-
-! ARD      ! 4.740 ! 5.236 ! 5.448 ! 5.711 ! Kont. Anstieg
-! ZDF      ! 5.388 ! 5.654 ! 6.025 ! 6.347 ! Kont. Anstieg
-! ProSieben ! 2.938 ! 2.777 ! 2.365 ! 1.924 ! Kont. Rückgang
-!===
-****
-|
-|===
+include::30_Ergebnisse_Diskussion/31_poc.adoc[]
+include::30_Ergebnisse_Diskussion/32_Korrektheit.adoc[]
+include::30_Ergebnisse_Diskussion/33_keine-prognosen.adoc[]
+include::30_Ergebnisse_Diskussion/34_keine-interpretationen.adoc[]
+include::30_Ergebnisse_Diskussion/35_keine-handlungsanweisungen.adoc[]

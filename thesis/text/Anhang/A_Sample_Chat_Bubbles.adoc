@@ -1,0 +1,70 @@
+
+// =============================================================
+// VERGLEICH: Chat-Darstellungsoptionen (temporär, zum Vergleich)
+// =============================================================
+
+[appendix]
+== Chat-Bubbles (Chatbot links, Benutzer rechts, 90% Breite)
+
+// Benutzer-Nachricht: rechts, 90% Breite
+[cols="1,9a",frame=none,grid=none]
+|===
+|
+|
+.*Benutzer*
+****
+Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 zusammenfassen?
+****
+|===
+
+// Chatbot-Antwort: links, 90% Breite
+[cols="9a,1",frame=none,grid=none]
+|===
+|
+.*Chatbot*
+****
+Ich kann keine Trends interpretieren oder bewerten. Unten gebe ich die Fakten (Marktanteile in %) aus den Mediapulse-Jahresberichten für die Jahre 2018–2021 aus.
+
+Deutschschweiz — Auszug:
+
+[cols="1,1,1,1,1",options=header]
+!===
+! Sender ! 2018 ! 2019 ! 2020 ! 2021
+
+! SRF 1 ! 18.747 ! 18.771 ! 21.121 ! 19.896
+! ARD   ! 4.740  ! 5.236  ! 5.448  ! 5.711
+!===
+****
+|
+|===
+
+// Benutzer-Nachricht: rechts
+[cols="1,9a",frame=none,grid=none]
+|===
+|
+|
+.*Benutzer*
+****
+Gibt es Sender mit einem kontinuierlichen Anstieg oder Rückgang über alle vier Jahre?
+****
+|===
+
+// Chatbot-Antwort: links
+[cols="9a,1",frame=none,grid=none]
+|===
+|
+.*Chatbot*
+****
+Sender mit durchgängig monotonem Trend (Deutschschweiz):
+
+[cols="1,1,1,1,1,1",options=header]
+!===
+! Sender ! 2018 ! 2019 ! 2020 ! 2021 ! Trend
+
+! ARD      ! 4.740 ! 5.236 ! 5.448 ! 5.711 ! Kont. Anstieg
+! ZDF      ! 5.388 ! 5.654 ! 6.025 ! 6.347 ! Kont. Anstieg
+! ProSieben ! 2.938 ! 2.777 ! 2.365 ! 1.924 ! Kont. Rückgang
+!===
+****
+|
+|===

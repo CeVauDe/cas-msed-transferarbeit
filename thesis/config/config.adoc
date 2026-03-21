@@ -1,5 +1,6 @@
 :reproducible:
 :toc:
+:toclevels: 3
 :sectnums:
 :stem: latexmath
 :xrefstyle: short
