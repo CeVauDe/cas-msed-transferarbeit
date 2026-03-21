@@ -15,7 +15,7 @@ from openai.types.chat import ChatCompletionMessageParam
 log = logging.getLogger(__name__)
 
 # To switch back to v1: change this import to system_prompt_v1
-from chatbot.system_prompt_v2 import SYSTEM_PROMPT  # noqa: E402
+from chatbot.system_prompt_v2_minimum import SYSTEM_PROMPT  # noqa: E402
 
 _MAX_TOOL_ROUNDS = 15
 
