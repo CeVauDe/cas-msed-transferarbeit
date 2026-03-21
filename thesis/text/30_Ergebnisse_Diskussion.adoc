@@ -11,10 +11,10 @@ Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptau
 3. <<results-keine-interpretationen,Keine Interpretationen>>
 4. <<results-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
 
-include::results/korrektheit.adoc[]
-include::results/keine-prognosen.adoc[]
-include::results/keine-interpretationen.adoc[]
-include::results/keine-handlungsanweisungen.adoc[]
+include::30_Ergebnisse_Diskussion/korrektheit.adoc[]
+include::30_Ergebnisse_Diskussion/keine-prognosen.adoc[]
+include::30_Ergebnisse_Diskussion/keine-interpretationen.adoc[]
+include::30_Ergebnisse_Diskussion/keine-handlungsanweisungen.adoc[]
 
 
 // =============================================================

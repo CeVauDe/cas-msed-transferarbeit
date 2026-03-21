@@ -24,13 +24,13 @@ list-of::image[enhanced_rendering=true]
 
 include::text/proof-of-concept.adoc[]
 
-include::text/introduction.adoc[]
+include::text/10_Einleitung.adoc[]
 
-include::text/methods.adoc[]
+include::text/20_Methoden.adoc[]
 
-include::text/results.adoc[]
+include::text/30_Ergebnisse_Diskussion.adoc[]
 
-include::text/conclusion.adoc[]
+include::text/50_Fazit.adoc[]
 
 [bibliography]
 == Literaturverzeichnis
