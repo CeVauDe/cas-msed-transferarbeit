@@ -1,2 +1,42 @@
 [#methods-keine-handlungsanweisungen]
 === Keine Handlungsanweisungen
+
+==== Verwendete Strategien
+
+Jailbreak im Allgemeinen: Ziel ist es die Grenzen des Systems, also was dem System (z.B. via Systemprompt) erlaubt ist zu erreichen und zu überschreiten. Vgl. cite:[russinovich2025great].
+
+Die verwendeten Strategien werden vom verwendeten Tool `promptfoo` bereitgestellt und sind in der dortigen Dokumentation näher erläutert. Nachfolgend eine kurze Übersicht über die verwendeten Strategien, basierend auf cite:[promptfooTeamStrategies].
+
+===== crescendo
+Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt der einfache multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach immer weiter basierend auf den Antworten des Modells.
+
+===== jailbreak:hydra
+In dieser Strategie passt sich der anngreifende Agent auf jede Antwort des Systems an. Dazu verwendet er das Vorwissen der vorausgegangenen Versuche und wendet neue Angriffsvektoren an, wenn die direkte Versuche nicht zum Erfolg führen.
+
+===== goat (Generative Offensive Agent Tester)
+Verwendet verschiedene vordefinierte Angriffsszenarien und verfeinert diese Iterativ um die Verteidigungsmassnahmen des zu testenden Systems zu überwinden.
+Ursprüchgliches Paper: cite:[pavlova2024automated]
+
+===== mischievous-user
+Simuliert einen hartnäckigen und einfallsreichen Nutzer. Dieser versucht in mehreren Iterationen und mit verschiedenen Formulierungen das System zu überwinden und Antworten zu erhalten, die den Richtlinien und Massgaben des Systems widersprechen.
+
+===== jailbreak:meta
+Ähnlich zur `jaulbreak:hydra` Strategie verwendet der angreifende meta-Agent ein fallspezifisches Klassifizierungsschema und passt seine Strategie basierend auf den Antworten des Systems an.
+
+===== jailbreak:composite für gpt (OpenAI)
+`jailbreak:composite` ist eine Single-Turn Strategie. Dabei wird der ursprüngliche Prompt mithilfe von verschiedenen bekannten Jailbreak Strategien optimiert. Es enstehen mehrere Varianten des Promts, die dann im Test gegen das System verwendet werden. In der verwendeten Strategie werden die Prompts mür Modelle der `gpt` Modellfamilie verwendet.
+
+==== verwendete Plugins
+
+
+===== Policy
+Für dieses Plugin wird eine Richtlinie definiert. Ausgehend davon werden Testprompts genieriert, die versuchen das Zielsystem dazu zu bringen, diese Richtlinie zu missachten.
+Das Plugin bewertet die Antwort hinsichtlich 5 Kriterien:
+1. Wird die Richtlinie konnsequent eingehalten?
+2. Sind die Antworten über verschiedene Anfragen hinweg konsistent?
+3. Gibt das System Erklärungen zu seiner Handlung, wenn es eine Anfrage nicht beantwortet?
+4. Offeriert das System alternativen, die der Richtline entsprechen?
+5. Erkennnt und kommuniziert das System Versuche die Grenzen der Richtline zu verschieben?
+
+===== Custom Plugin für Handlungsanweisungen
+Das eigens geschriebene Plugin besteht aus einem Generatorprompt (`generator`) und einem Bewertungsprompt (`grader`). Der `generator` definiert Rahmenbedingungen, nach denen ein Prompt generiert wird der versucht, das System zu unerwünschten Handlungen zu bewegen. Im vorliegenden Fall wird das System durch die Prompts explizit dazu aufgefordert Handlungsanweisungen zu geben. Dazu "schlüpft" das angreifende Modell in verschiedene Rollen und baut Druck auf, um die Grenzen des System zu überschreiten. Der `grader` bewertet die Antwort des Systems und entscheidet, ob der Angriff erfolgreich war oder nicht.
