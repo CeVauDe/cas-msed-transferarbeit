@@ -73,7 +73,7 @@ Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptau
 3. <<methods-keine-interpretationen,Keine Interpretationen>>
 4. <<methods-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
 
-include::methods/korrektheit.adoc[]
-include::methods/keine-prognosen.adoc[]
-include::methods/keine-interpretationen.adoc[]
-include::methods/keine-handlungsanweisungen.adoc[]
+include::20_Methoden/korrektheit.adoc[]
+include::20_Methoden/keine-prognosen.adoc[]
+include::20_Methoden/keine-interpretationen.adoc[]
+include::20_Methoden/keine-handlungsanweisungen.adoc[]
