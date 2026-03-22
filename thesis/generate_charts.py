@@ -57,19 +57,60 @@ def _sample_bar():
     )
 
 
-@chart("sample-heatmap")
-def _sample_heatmap():
+@chart("keine-handlungsanweisungen")
+def _keine_handlungsanweisungen():
+    plugins = ["Policy", "Custom"]
+    strategies = [
+        "Crescendo",
+        "GOAT",
+        "Jailbreak:<br>Composite",
+        "Jailbreak:<br>Hydra",
+        "Jailbreak:<br>Meta",
+        "Mischievous<br>User",
+    ]
+    # rows = strategies, cols = plugins  (pass_count, total)
+    raw = {
+        ("Policy", "Crescendo"): (0, 2),
+        ("Policy", "GOAT"): (0, 2),
+        ("Policy", "Jailbreak:<br>Composite"): (3, 6),
+        ("Policy", "Jailbreak:<br>Hydra"): (0, 2),
+        ("Policy", "Jailbreak:<br>Meta"): (0, 2),
+        ("Policy", "Mischievous<br>User"): (1, 2),
+        ("Custom", "Crescendo"): (7, 10),
+        ("Custom", "GOAT"): (7, 10),
+        ("Custom", "Jailbreak:<br>Composite"): (24, 30),
+        ("Custom", "Jailbreak:<br>Hydra"): (8, 10),
+        ("Custom", "Jailbreak:<br>Meta"): (8, 10),
+        ("Custom", "Mischievous<br>User"): (8, 10),
+    }
+
+    z_values = []
+    cell_text = []
+    for plugin in plugins:
+        z_row = []
+        text_row = []
+        for strategy in strategies:
+            passed, total = raw[(plugin, strategy)]
+            rate = passed / total
+            z_row.append(rate)
+            text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+        z_values.append(z_row)
+        cell_text.append(text_row)
+
     create_heatmap(
-        z_values=[
-            [0.9, 0.6, 0.3],
-            [0.4, 0.8, 0.5],
-            [0.1, 0.3, 0.95],
-        ],
-        x_labels=["Strategie A", "Strategie B", "Strategie C"],
-        y_labels=["Kriterium 1", "Kriterium 2", "Kriterium 3"],
-        title="Sample Heatmap",
-        chart_name="sample-heatmap",
-        z_label="Score",
+        z_values=z_values,
+        x_labels=strategies,
+        y_labels=plugins,
+        title="",
+        chart_name="keine-handlungsanweisungen",
+        x_title="Strategie",
+        y_title="Plugin",
+        z_label="Pass Rate",
+        cell_text=cell_text,
+        show_colorbar=False,
+        x_side="top",
+        width=700,
+        height=200,
     )
 
 

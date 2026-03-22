@@ -12,11 +12,21 @@ def create_heatmap(
     *,
     z_label: str = "",
     show_values: bool = True,
+    show_colorbar: bool = True,
+    x_side: str = "bottom",
+    x_title: str = "",
+    y_title: str = "",
     value_format: str = ".1f",
+    cell_text: list[list[str]] | None = None,
     width: int | None = None,
     height: int | None = None,
 ) -> None:
-    """Create a heatmap with a red-yellow-green color scale and save as SVG."""
+    """Create a heatmap with a red-yellow-green color scale and save as SVG.
+
+    Args:
+        cell_text: Optional 2D list of display strings per cell. If provided,
+                   these are shown instead of the formatted z_values.
+    """
     fig = go.Figure(
         data=go.Heatmap(
             z=z_values,
@@ -24,6 +34,9 @@ def create_heatmap(
             y=y_labels,
             colorscale=RYG_COLORSCALE,
             colorbar=dict(title=z_label) if z_label else None,
+            showscale=show_colorbar,
+            xgap=2,
+            ygap=2,
             zmin=0,
             zmax=1,
         )
@@ -33,11 +46,12 @@ def create_heatmap(
         annotations = []
         for i, row in enumerate(z_values):
             for j, val in enumerate(row):
+                display = cell_text[i][j] if cell_text else format(val, value_format)
                 annotations.append(
                     dict(
                         x=x_labels[j],
                         y=y_labels[i],
-                        text=format(val, value_format),
+                        text=display,
                         showarrow=False,
                         font=dict(
                             color="black" if 0.3 < val < 0.7 else "white",
@@ -47,11 +61,16 @@ def create_heatmap(
                 )
         fig.update_layout(annotations=annotations)
 
+    fig.update_layout(**THESIS_LAYOUT)
     fig.update_layout(
-        title=dict(text=title, x=0.5, xanchor="center"),
-        xaxis=dict(side="bottom"),
-        yaxis=dict(autorange="reversed"),
-        **THESIS_LAYOUT,
+        title=dict(text=title, x=0.5, xanchor="center") if title else None,
+        xaxis=dict(side=x_side, title=x_title if x_title else None),
+        yaxis=dict(
+            autorange="reversed",
+            title=dict(text=y_title, standoff=15) if y_title else None,
+            ticksuffix="  ",
+        ),
+        margin=dict(l=0, r=0, t=0, b=0, autoexpand=True),
     )
 
     kwargs: dict = {}

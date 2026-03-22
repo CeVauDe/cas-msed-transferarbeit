@@ -11,6 +11,12 @@ Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag
 [#results-keine-handlungsanweisungen]
 ==== Ergebnisse
 
+Die Ergebnisübersicht ist in <<#image-handlungsanweisungen-pass-rate>> dargestellt. Es ist erkennbar, dass für das Plugin `Policy` viele Angriffe erfolgreich waren, während die meisten Angriffe durch das `custom` Plugin abgewert werden konnten.
+
+[#image-handlungsanweisungen-pass-rate]
+.Erfolgsquote der beiden Plugins für das Kriterium "Keine Hand&#173;lungs&#173;an&#173;wei&#173;sun&#173;gen" aufgeschlüsselt nach angewendeter Strategie.
+image::generated/keine-handlungsanweisungen.svg[]
+
 Die vollständigen Ergebnisse sind im Github Gepository cite:[githubRepoTransferarbeit] unter `poc/redteam-handlundsanweisungen.result.json` abrufbar.
 
 [#discussion-keine-handlungsanweisungen]
