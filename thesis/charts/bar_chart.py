@@ -28,11 +28,11 @@ def create_bar_chart(
     )
 
     fig.update_layout(
-        title=dict(text=title, x=0.5, xanchor="center"),
+        title={"text": title, "x": 0.5, "xanchor": "center"},
         xaxis_title=x_label,
         yaxis_title=y_label,
-        xaxis=dict(showgrid=False),
-        yaxis=dict(showgrid=True, gridcolor="lightgrey"),
+        xaxis={"showgrid": False},
+        yaxis={"showgrid": True, "gridcolor": "lightgrey"},
         **THESIS_LAYOUT,
     )
 
