@@ -1,5 +1,16 @@
 extends: default
 
+font:
+  catalog:
+    merge: true
+    DejaVuSans:
+      normal: /usr/share/fonts/dejavu/DejaVuSans.ttf
+      bold: /usr/share/fonts/dejavu/DejaVuSans-Bold.ttf
+      italic: /usr/share/fonts/dejavu/DejaVuSans-Oblique.ttf
+      bold_italic: /usr/share/fonts/dejavu/DejaVuSans-BoldOblique.ttf
+  fallbacks:
+    - DejaVuSans
+
 page:
   layout: portrait
   margin: [25.4mm, 25.4mm, 25.4mm, 25.4mm]
@@ -82,9 +93,9 @@ example:
   padding: [6, 8, 6, 8]
 role:
   chat:
-    font-size: 9
+    font-size: 8
   chat-right:
-    font-size: 9
+    font-size: 8
     text-align: right
   chat-label:
     font-size: 9
