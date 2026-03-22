@@ -11,28 +11,35 @@
 |===
 |
 |
-.*Benutzer*
-****
+====
+[.chat-label-right]
+Benutzer
+
+[.chat-right]
 Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 zusammenfassen?
-****
+====
 |===
 
 // Chatbot-Antwort: links, 90% Breite
 [cols="9a,1",frame=none,grid=none]
 |===
 |
-.*Chatbot*
 ****
+[.chat-label]
+Chatbot
+
+[.chat]
 Ich kann keine Trends interpretieren oder bewerten. Unten gebe ich die Fakten (Marktanteile in %) aus den Mediapulse-Jahresberichten für die Jahre 2018–2021 aus.
 
+[.chat]
 Deutschschweiz — Auszug:
 
-[cols="1,1,1,1,1",options=header]
+[cols="1,1,1,1,1",%header]
 !===
-! Sender ! 2018 ! 2019 ! 2020 ! 2021
+! [.chat]#Sender# ! [.chat]#2018# ! [.chat]#2019# ! [.chat]#2020# ! [.chat]#2021#
 
-! SRF 1 ! 18.747 ! 18.771 ! 21.121 ! 19.896
-! ARD   ! 4.740  ! 5.236  ! 5.448  ! 5.711
+! [.chat]#SRF 1# ! [.chat]#18.747# ! [.chat]#18.771# ! [.chat]#21.121# ! [.chat]#19.896#
+! [.chat]#ARD#   ! [.chat]#4.740#  ! [.chat]#5.236#  ! [.chat]#5.448#  ! [.chat]#5.711#
 !===
 ****
 |
@@ -43,27 +50,33 @@ Deutschschweiz — Auszug:
 |===
 |
 |
-.*Benutzer*
-****
+====
+[.chat-label-right]
+Benutzer
+
+[.chat-right]
 Gibt es Sender mit einem kontinuierlichen Anstieg oder Rückgang über alle vier Jahre?
-****
+====
 |===
 
 // Chatbot-Antwort: links
 [cols="9a,1",frame=none,grid=none]
 |===
 |
-.*Chatbot*
 ****
+[.chat-label]
+Chatbot
+
+[.chat]
 Sender mit durchgängig monotonem Trend (Deutschschweiz):
 
-[cols="1,1,1,1,1,1",options=header]
+[cols="1,1,1,1,1,1",%header]
 !===
-! Sender ! 2018 ! 2019 ! 2020 ! 2021 ! Trend
+! [.chat]#Sender# ! [.chat]#2018# ! [.chat]#2019# ! [.chat]#2020# ! [.chat]#2021# ! [.chat]#Trend#
 
-! ARD      ! 4.740 ! 5.236 ! 5.448 ! 5.711 ! Kont. Anstieg
-! ZDF      ! 5.388 ! 5.654 ! 6.025 ! 6.347 ! Kont. Anstieg
-! ProSieben ! 2.938 ! 2.777 ! 2.365 ! 1.924 ! Kont. Rückgang
+! [.chat]#ARD#       ! [.chat]#4.740# ! [.chat]#5.236# ! [.chat]#5.448# ! [.chat]#5.711# ! [.chat]#Kont. Anstieg#
+! [.chat]#ZDF#       ! [.chat]#5.388# ! [.chat]#5.654# ! [.chat]#6.025# ! [.chat]#6.347# ! [.chat]#Kont. Anstieg#
+! [.chat]#ProSieben# ! [.chat]#2.938# ! [.chat]#2.777# ! [.chat]#2.365# ! [.chat]#1.924# ! [.chat]#Kont. Rückgang#
 !===
 ****
 |
