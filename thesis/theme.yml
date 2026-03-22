@@ -68,3 +68,28 @@ title-page: false
 cover:
   front:
     image: cover-page.pdf
+sidebar:
+  background-color: #e3f2fd
+  border-color: #90caf9
+  border-width: 0.5
+  border-radius: 3
+  padding: [6, 8, 6, 8]
+example:
+  background-color: #fdecea
+  border-color: #ef9a9a
+  border-width: 0.5
+  border-radius: 3
+  padding: [6, 8, 6, 8]
+role:
+  chat:
+    font-size: 9
+  chat-right:
+    font-size: 9
+    text-align: right
+  chat-label:
+    font-size: 9
+    font-style: bold
+  chat-label-right:
+    font-size: 9
+    font-style: bold
+    text-align: right
