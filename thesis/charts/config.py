@@ -18,11 +18,11 @@ RYG_COLORSCALE = [
     [1.0, "rgb(26, 150, 65)"],
 ]
 
-THESIS_LAYOUT = dict(
-    font=dict(family=DEFAULT_FONT, size=14),
-    plot_bgcolor="white",
-    paper_bgcolor="white",
-)
+THESIS_LAYOUT = {
+    "font": {"family": DEFAULT_FONT, "size": 14},
+    "plot_bgcolor": "white",
+    "paper_bgcolor": "white",
+}
 
 
 def ensure_output_dir() -> Path:
