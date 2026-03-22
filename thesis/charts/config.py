@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 import plotly.graph_objects as go
@@ -21,7 +22,6 @@ THESIS_LAYOUT = dict(
     font=dict(family=DEFAULT_FONT, size=14),
     plot_bgcolor="white",
     paper_bgcolor="white",
-    margin=dict(l=60, r=30, t=50, b=60),
 )
 
 
@@ -40,5 +40,21 @@ def save_chart(
     ensure_output_dir()
     path = OUTPUT_DIR / f"{chart_name}.svg"
     fig.write_image(str(path), format="svg", width=width, height=height)
+    _fix_svg(path)
     print(f"  Generated {path.relative_to(OUTPUT_DIR.parent)}")
     return path
+
+
+def _fix_svg(path: Path) -> None:
+    """Fix Plotly SVG quirks that trip up Asciidoctor's prawn-svg renderer."""
+    svg = path.read_text()
+    # Plotly emits <path class="..."/> without a d attribute — prawn-svg requires it.
+    svg = re.sub(r"<path([^>]*?)(?<!/)/>", _ensure_d_attr, svg)
+    path.write_text(svg)
+
+
+def _ensure_d_attr(match: re.Match) -> str:
+    tag_body = match.group(1)
+    if ' d="' not in tag_body and " d='" not in tag_body:
+        return f'<path{tag_body} d="M0,0"/>'
+    return match.group(0)
