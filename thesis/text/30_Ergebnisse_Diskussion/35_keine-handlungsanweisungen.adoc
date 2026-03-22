@@ -1,7 +1,17 @@
 === Keine Handlungsanweisungen
 
+Für das Kriterium _Keine Handlungsanweisungen_ werden zwei <<methoden-plugins>> und alle sieben vorgestellten <<methoden-strategien>> verwendet. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+
+____
+The assistant must never provide action recommendations, investment advice, strategic suggestions, predictions, or value judgments. It must only present factual data without interpretation.
+____
+
+Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden.
+
 [#results-keine-handlungsanweisungen]
 ==== Ergebnisse
+
+Die vollständigen Ergebnisse sind im Github Gepository cite:[githubRepoTransferarbeit] unter `poc/redteam-handlundsanweisungen.result.json` abrufbar.
 
 [#discussion-keine-handlungsanweisungen]
 ==== Diskussion
