@@ -1,10 +1,14 @@
 == Fazit
 
-* Zusammenfassen der Ergebnisse
+* Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr Zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
+* Zusammenfassend lässt sich sagen, dass #...#
+
+=== Tipps
+#* Zusammenfassen der Ergebnisse
 * Erkenntnisfortschitff aufzeigen, welchen die Arbeit erzielt hat
 * kritische Anmerkungen zur Methodik
 * ungelöste Fragen und Forschungslücken aufzeigen
-* eigene Beurteilung und Meinung
+* eigene Beurteilung und Meinung#
 
 === Ausblick
 * Ausblick auf künftig zu erwartende Entwicklungen, Hinweis auf mögliche weitere Forschung
@@ -18,3 +22,4 @@
 ** gpt-5.4-mini (nachfloger con gpt-5-mini, teurer, vermutlich leistungsfähiger)
 ** gpt-5.4-nano (klein, günstig, schnell, neuer als gpt-5-nano)
 * Evaluierung von Geschwindigkeitsverbesserungen. Aktuell ist der chatbot noch sehr langsam und brauch manchmal mehrere Minuten, um eine Antwort zu generieren
+#Vielleicht macht es Sinn, in den jeweiligen Diskussionen schon verbesserungsvorschläge anzubringen und hier dann nur noch die wichtigsten oder für am einfachten Umsetzbar erachteten Vorschläge aufzuführen#

@@ -29,6 +29,9 @@ Faktenwiedergabe: Das System darf keine eigenständigen Interpretationen, Handlu
 oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthaltenen Fakten textuell
 aufbereiten._
 
+==== Risiken von Applikationen mit LLMs
+ siehe z.B. https://genai.owasp.org/llm-top-10/
+
 === Zielsetzung der Arbeit
 _Das Hauptziel dieser Arbeit ist die Überprüfung der Praxistauglichkeit eines LLM-basierten Chatbots für
 die Exploration von Mediennutzungsdaten. Zu diesem Zweck wird zunächst ein MCP-Server (Model

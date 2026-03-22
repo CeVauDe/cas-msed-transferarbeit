@@ -15,7 +15,6 @@ base:
 list:
   indent: 30
   item-spacing: 4
-outline-list:
   margin-top: 0
   margin-bottom: 6
 heading:
@@ -39,6 +38,8 @@ heading:
   margin-bottom: 6
 codespan:
   font-color: #333333
+quote:
+  font-size: 11
 header:
   height: 15mm
   padding: [10mm, 0mm, 1mm, 0mm]
