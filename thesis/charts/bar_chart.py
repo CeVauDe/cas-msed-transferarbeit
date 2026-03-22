@@ -23,6 +23,9 @@ def create_bar_chart(
                 x=categories,
                 y=values,
                 marker_color="#4a90e2",
+                text=values,
+                textposition="outside",
+                texttemplate="%{text:.1f}",
             )
         ]
     )
