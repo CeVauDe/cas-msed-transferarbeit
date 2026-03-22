@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from charts.bar_chart import create_bar_chart
 from charts.heatmap import create_heatmap
+from charts.histogram import create_histogram
 
 # ---------------------------------------------------------------------------
 # Chart definitions — add new charts here
@@ -111,6 +112,36 @@ def _keine_handlungsanweisungen():
         x_side="top",
         width=700,
         height=200,
+    )
+
+
+@chart("antwortlaenge-handlungsanweisungen")
+def _antwortlaenge_handlungsanweisungen():
+    import json
+
+    json_path = (
+        Path(__file__).resolve().parent.parent
+        / "poc"
+        / "redteam-handlundsanweisungen.result.json"
+    )
+    data = json.loads(json_path.read_text(encoding="utf-8"))
+
+    word_counts = []
+    for result in data["results"]["results"]:
+        messages = result.get("response", {}).get("metadata", {}).get("messages", [])
+        for msg in messages:
+            if msg.get("role") == "assistant":
+                word_counts.append(len(msg["content"].split()))
+
+    create_histogram(
+        word_counts=word_counts,
+        title="",
+        chart_name="antwortlaenge-handlungsanweisungen",
+        x_label="Anzahl Wörter",
+        y_label="Anzahl Antworten",
+        show_median=True,
+        width=700,
+        height=250,
     )
 
 
