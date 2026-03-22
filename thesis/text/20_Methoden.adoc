@@ -117,22 +117,28 @@ In der Generierung der Testfälle wird für jedes definierte Plugin die konfigur
 
 Die verwendeten Strategien werden vom verwendeten Tool `promptfoo` bereitgestellt und sind in der dortigen Dokumentation näher erläutert. Nachfolgend eine kurze Übersicht über die verwendeten Strategien, basierend auf cite:[promptfooTeamStrategies].
 
+[#methods-strategien-crescendo]
 ====== crescendo
 Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt der einfache multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach immer weiter basierend auf den Antworten des Modells.
 
+[#methods-strategien-jailbreak-hydra]
 ====== jailbreak:hydra
 In dieser Strategie passt sich der anngreifende Agent auf jede Antwort des Systems an. Dazu verwendet er das Vorwissen der vorausgegangenen Versuche und wendet neue Angriffsvektoren an, wenn die direkte Versuche nicht zum Erfolg führen.
 
+[#methods-strategien-goat]
 ====== goat (Generative Offensive Agent Tester)
 Verwendet verschiedene vordefinierte Angriffsszenarien und verfeinert diese Iterativ um die Verteidigungsmassnahmen des zu testenden Systems zu überwinden.
 Ursprüchgliches Paper: cite:[pavlova2024automated]
 
+[#methods-strategien-mischievous-user]
 ====== mischievous-user
 Simuliert einen hartnäckigen und einfallsreichen Nutzer. Dieser versucht in mehreren Iterationen und mit verschiedenen Formulierungen das System zu überwinden und Antworten zu erhalten, die den Richtlinien und Massgaben des Systems widersprechen.
 
+[#methods-strategien-jailbreak-meta]
 ====== jailbreak:meta
 Ähnlich zur `jailbreak:hydra` Strategie verwendet der angreifende meta-Agent ein fallspezifisches Klassifizierungsschema und passt seine Strategie basierend auf den Antworten des Systems an.
 
+[#methods-strategien-jailbreak-composite]
 ====== jailbreak:composite für gpt (OpenAI)
 `jailbreak:composite` ist eine Single-Turn Strategie. Dabei wird der ursprüngliche Prompt mithilfe von verschiedenen bekannten Jailbreak Strategien optimiert. Es enstehen mehrere Varianten des Promts, die dann im Test gegen das System verwendet werden. In der verwendeten Strategie werden die Prompts mür Modelle der `gpt` Modellfamilie verwendet.
 
