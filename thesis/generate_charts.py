@@ -1,38 +1,99 @@
-import os
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "plotly>=6.0",
+#     "kaleido>=0.4",
+# ]
+# ///
+"""Generate all thesis charts.
+
+Usage:
+    uv run generate_charts.py              # generate all charts
+    uv run generate_charts.py CHART_NAME   # generate only the named chart
+"""
+
+import sys
+from pathlib import Path
+
+# Ensure the thesis directory is on sys.path so `charts` package is importable
+# regardless of the working directory.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from charts.bar_chart import create_bar_chart
+from charts.heatmap import create_heatmap
+
+# ---------------------------------------------------------------------------
+# Chart definitions — add new charts here
+# ---------------------------------------------------------------------------
+
+CHARTS: dict[str, callable] = {}
 
 
-def generate_sample_chart():
-    svg_content = """<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#f9f9f9"/>
-  <line x1="50" y1="250" x2="350" y2="250" stroke="#333" stroke-width="2"/>
-  <line x1="50" y1="50" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+def chart(name: str):
+    """Decorator to register a chart generator function."""
 
-  <!-- Bar 1 -->
-  <rect x="70" y="100" width="40" height="150" fill="#4a90e2"/>
-  <text x="70" y="270" font-family="Arial" font-size="12">Q1</text>
+    def decorator(func):
+        CHARTS[name] = func
+        return func
 
-  <!-- Bar 2 -->
-  <rect x="140" y="150" width="40" height="100" fill="#50e3c2"/>
-  <text x="140" y="270" font-family="Arial" font-size="12">Q2</text>
+    return decorator
 
-  <!-- Bar 3 -->
-  <rect x="210" y="80" width="40" height="170" fill="#f5a623"/>
-  <text x="210" y="270" font-family="Arial" font-size="12">Q3</text>
 
-  <!-- Bar 4 -->
-  <rect x="280" y="120" width="40" height="130" fill="#d0021b"/>
-  <text x="280" y="270" font-family="Arial" font-size="12">Q4</text>
+# -- Example charts (replace with real thesis data) -------------------------
 
-  <text x="200" y="30" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold">Sample Growth Chart</text>
-</svg>"""
 
-    output_dir = os.path.join(os.path.dirname(__file__), "generated")
-    os.makedirs(output_dir, exist_ok=True)
+@chart("sample-bar")
+def _sample_bar():
+    create_bar_chart(
+        data={
+            "Q1": 150,
+            "Q2": 100,
+            "Q3": 170,
+            "Q4": 130,
+        },
+        title="Sample Bar Chart",
+        chart_name="sample-bar",
+        y_label="Wert",
+    )
 
-    with open(os.path.join(output_dir, "sample-chart.svg"), "w") as f:
-        f.write(svg_content)
-    print(f"Generated sample chart in {output_dir}")
+
+@chart("sample-heatmap")
+def _sample_heatmap():
+    create_heatmap(
+        z_values=[
+            [0.9, 0.6, 0.3],
+            [0.4, 0.8, 0.5],
+            [0.1, 0.3, 0.95],
+        ],
+        x_labels=["Strategie A", "Strategie B", "Strategie C"],
+        y_labels=["Kriterium 1", "Kriterium 2", "Kriterium 3"],
+        title="Sample Heatmap",
+        chart_name="sample-heatmap",
+        z_label="Score",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Main entry point
+# ---------------------------------------------------------------------------
+
+
+def main() -> None:
+    target = sys.argv[1] if len(sys.argv) > 1 else None
+
+    if target:
+        if target not in CHARTS:
+            print(f"Unknown chart: {target}")
+            print(f"Available charts: {', '.join(sorted(CHARTS))}")
+            sys.exit(1)
+        print(f"Generating chart: {target}")
+        CHARTS[target]()
+    else:
+        print(f"Generating {len(CHARTS)} chart(s)...")
+        for name, func in CHARTS.items():
+            func()
+        print("Done.")
 
 
 if __name__ == "__main__":
-    generate_sample_chart()
+    main()

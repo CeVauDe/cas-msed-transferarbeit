@@ -11,7 +11,7 @@ echo "Building thesis PDF via Docker..."
 mkdir -p "$SCRIPT_DIR/generated"
 
 echo "Generating charts..."
-python3 "$SCRIPT_DIR/generate_charts.py"
+uv run "$SCRIPT_DIR/generate_charts.py"
 
 PROBE_THEME="$SCRIPT_DIR/.theme-probe.yml"
 RUNTIME_THEME="$SCRIPT_DIR/.theme-runtime.yml"
