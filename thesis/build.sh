@@ -66,6 +66,7 @@ build_pdf_with_theme() {
     -r asciidoctor-lists \
     -r asciidoctor-diagram \
     -a pdf-theme=$(basename "$theme_file") \
+    -a optimize \
     -o $(basename "$output_pdf") \
     main.adoc"
 }
