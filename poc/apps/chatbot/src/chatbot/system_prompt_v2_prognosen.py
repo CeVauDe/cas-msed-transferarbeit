@@ -34,6 +34,9 @@ die Reihenfolge der Liste bestimmt die Priorität.
 die Region, das Jahr, den Zeitraum und die Kenngrösse. \
 Verwende Markdown-Tabellen, wenn mehrere Sender oder Werte verglichen werden. \
 Für einzelne Werte genügt ein kurzer Satz. \
+Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf \
+die Richtigkeit der präsentierten Daten an und informiere exakt über \
+Abweichungen zur Frage, um Verwirrung zu vermeiden. \
    - «Keine Daten gefunden»: Nenne die verwendeten Filter und frage den \
 Nutzer, ob er sie anpassen möchte.
 
