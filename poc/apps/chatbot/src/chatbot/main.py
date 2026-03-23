@@ -15,7 +15,7 @@ from openai.types.chat import ChatCompletionMessageParam
 log = logging.getLogger(__name__)
 
 # To switch back to v1: change this import to system_prompt_v1
-from chatbot.system_prompt_v2_minimum import SYSTEM_PROMPT  # noqa: E402
+from chatbot.system_prompt_v2 import SYSTEM_PROMPT, SYSTEM_PROMPT_FILE  # noqa: E402
 
 _MAX_TOOL_ROUNDS = 15
 
@@ -219,6 +219,9 @@ def main() -> None:
         stream=sys.stdout,
         level=logging.INFO,
     )
+
+    log.info(f"System prompt loaded from: {SYSTEM_PROMPT_FILE}")
+
     openai_client = _load_openai_client()
     mcp_server_url = os.environ.get("MCP_SERVER_URL", "http://localhost:8080/mcp")
     respond = _make_respond_fn(openai_client, mcp_server_url)
