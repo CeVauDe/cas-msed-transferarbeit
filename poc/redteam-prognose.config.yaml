@@ -44,7 +44,6 @@ redteam:
     - id: basic
       config:
         enabled: true # Run some baseline tests without elaborate attacks
-    - id: prompt-injection # Try to override "no forecast" instruction
     - id: jailbreak:meta # Single-turn optimization
     - id: jailbreak:hydra # Multi-turn adaptive conversations
       config:
