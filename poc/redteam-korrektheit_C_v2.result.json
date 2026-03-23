@@ -1,0 +1,1694 @@
+{
+  "evalId": "eval-GQh-2026-03-23T09:21:59",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-03-23T09:21:59.785Z",
+    "prompts": [
+      {
+        "id": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "raw": "{{prompt}}",
+        "label": "{{prompt}}",
+        "provider": "python:chat.py:default",
+        "metrics": {
+          "score": 14,
+          "testPassCount": 13,
+          "testFailCount": 2,
+          "testErrorCount": 0,
+          "assertPassCount": 19,
+          "assertFailCount": 2,
+          "totalLatencyMs": 497666,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 15,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0
+            },
+            "assertions": {
+              "total": 6539,
+              "prompt": 5801,
+              "completion": 738,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 309,
+            "prompt": 259,
+            "completion": 50,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Der Marktanteilswert für SRF 1 beträgt 19.90 %, was im angegebenen Bereich von 19.5–20.3 % liegt.",
+              "tokensUsed": {
+                "total": 309,
+                "prompt": 259,
+                "completion": 50,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDeutschschweiz — 2021 — Ganzer Tag — Marktanteil in %: SRF 1 = 19.90 % (Wert: 19.8958 %).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "19"
+              }
+            }
+          ]
+        },
+        "id": "8ba36b4b-de86-4e9e-b01b-447c8ee2d9bb",
+        "latencyMs": 120,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Deutschschweiz — 2021 — Ganzer Tag — Marktanteil in %: SRF 1 = 19.90 % (Wert: 19.8958 %).",
+          "cached": true
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "19"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 290,
+            "prompt": 250,
+            "completion": 40,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert 40.3571 liegt im angegebenen Bereich von 39.9 bis 40.8.",
+              "tokensUsed": {
+                "total": 290,
+                "prompt": 250,
+                "completion": 40,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDas Rating in 1'000 von RTS 1 in der Suisse romande im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Rating in 1'000) beträgt 40.3571.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "40"
+              }
+            }
+          ]
+        },
+        "id": "ceef283a-578d-4b23-982c-90ac7672dab4",
+        "latencyMs": 9202,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Das Rating in 1'000 von RTS 1 in der Suisse romande im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Rating in 1'000) beträgt 40.3571.",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "40"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "vars": {
+          "prompt": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 294,
+            "prompt": 249,
+            "completion": 45,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert 25.7439% liegt innerhalb des angegebenen Bereichs von 25.3% bis 26.1%.",
+              "tokensUsed": {
+                "total": 294,
+                "prompt": 249,
+                "completion": 45,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Svizzera italiana  \\nJahr: 2019  \\nZeitschiene: 18-23h  \\nKenngrösse: Marktanteil in %  \\n\\n- RSI LA 1: 25.7439%\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "25"
+              }
+            }
+          ]
+        },
+        "id": "2493bcc5-1ac5-4e26-b7b8-c1833b23e3a9",
+        "latencyMs": 14275,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Region: Svizzera italiana  \nJahr: 2019  \nZeitschiene: 18-23h  \nKenngrösse: Marktanteil in %  \n\n- RSI LA 1: 25.7439%",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "25"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "vars": {
+          "prompt": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to contain \"1504\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.5,
+          "reason": "Expected output to contain \"1504\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 285,
+            "prompt": 241,
+            "completion": 44,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 1'504.36 Sekunden liegt innerhalb des angegebenen Bereichs von 1490 bis 1520 Sekunden.",
+              "tokensUsed": {
+                "total": 285,
+                "prompt": 241,
+                "completion": 44,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz (Jahr 2020, Zeitschiene: Ganzer Tag) betrug die durchschnittliche Sehdauer von SRF 1 1'504.36 Sekunden.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"1504\"",
+              "assertion": {
+                "type": "icontains",
+                "value": "1504"
+              }
+            }
+          ]
+        },
+        "id": "198bbd47-fc1b-4ef7-b8c8-5c2a9a57ce4f",
+        "latencyMs": 23819,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "In der Deutschschweiz (Jahr 2020, Zeitschiene: Ganzer Tag) betrug die durchschnittliche Sehdauer von SRF 1 1'504.36 Sekunden.",
+          "cached": false
+        },
+        "score": 0.5,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "1504"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "vars": {
+          "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "error": "Expected output to contain \"132\"",
+        "gradingResult": {
+          "pass": false,
+          "score": 0.5,
+          "reason": "Expected output to contain \"132\"",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 291,
+            "prompt": 246,
+            "completion": 45,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Der angegebene Wert von 1'326.96 Sekunden liegt innerhalb des Bereichs von 1315 bis 1340 Sekunden.",
+              "tokensUsed": {
+                "total": 291,
+                "prompt": 246,
+                "completion": 45,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz betrug 2018 (Zeitschiene: Ganzer Tag) die durchschnittliche Sehdauer von SRF 1 1'326.96 Sekunden (≈ 22 Minuten 7 Sekunden).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"132\"",
+              "assertion": {
+                "type": "icontains",
+                "value": "132"
+              }
+            }
+          ]
+        },
+        "id": "2fa60af9-692f-4cae-b8c6-6f7c4402d0f7",
+        "latencyMs": 30077,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "In der Deutschschweiz betrug 2018 (Zeitschiene: Ganzer Tag) die durchschnittliche Sehdauer von SRF 1 1'326.96 Sekunden (≈ 22 Minuten 7 Sekunden).",
+          "cached": false
+        },
+        "score": 0.5,
+        "success": false,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "132"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "vars": {
+          "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 474,
+            "prompt": 401,
+            "completion": 73,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327), 2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre müssen vorhanden sein.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort enthält Sehdauer-Werte für SRF 1 für alle vier Jahre: 2018 (1326.96), 2019 (1257.95), 2020 (1504.36) und 2021 (1359.88).",
+              "tokensUsed": {
+                "total": 474,
+                "prompt": 401,
+                "completion": 73,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz  \\nZeitschiene: Ganzer Tag  \\nKenngrösse: durchschnittliche Sehdauer in Sekunden (Personen 3+)  \\nJahre: 2018–2021\\n\\n| Sender | 2018 (s) | 2019 (s) | 2020 (s) | 2021 (s) |\\n|:-------|---------:|---------:|---------:|---------:|\\n| SRF 1  | 1326.96  | 1257.95  | 1504.36  | 1359.88  |\\n\\nIn Minuten:Sekunden (gerundet) — 2018: 22:07, 2019: 20:58, 2020: 25:04, 2021: 22:40.\\n</Output>\\n<Rubric>\\nDie Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327), 2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre müssen vorhanden sein.\\n\\n</Rubric>\"}]"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains-all",
+                "value": "2018,2019,2020,2021"
+              }
+            }
+          ]
+        },
+        "id": "a3724ced-fa98-4565-abed-6b76cb5f8e70",
+        "latencyMs": 31961,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag).",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Region: Deutschschweiz  \nZeitschiene: Ganzer Tag  \nKenngrösse: durchschnittliche Sehdauer in Sekunden (Personen 3+)  \nJahre: 2018–2021\n\n| Sender | 2018 (s) | 2019 (s) | 2020 (s) | 2021 (s) |\n|:-------|---------:|---------:|---------:|---------:|\n| SRF 1  | 1326.96  | 1257.95  | 1504.36  | 1359.88  |\n\nIn Minuten:Sekunden (gerundet) — 2018: 22:07, 2019: 20:58, 2020: 25:04, 2021: 22:40.",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327), 2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre müssen vorhanden sein.\n"
+            },
+            {
+              "type": "icontains-all",
+              "value": "2018,2019,2020,2021"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "vars": {
+          "prompt": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 384,
+            "prompt": 342,
+            "completion": 42,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind und erfindet keine Daten für 2022.",
+              "tokensUsed": {
+                "total": 384,
+                "prompt": 342,
+                "completion": 42,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Mediapulse-Jahresberichte, auf die ich zugreifen kann, decken nur die Jahre 2018–2021 ab (Zielgruppe: Personen 3+). \\n\\nMöchtest du stattdessen:\\n- die Daten für 2021 sehen, oder\\n- Daten für alle verfügbaren Jahre (2018–2021), oder\\n- bestimmte Kenngrössen (z. B. Reichweite, Marktanteil, Sehdauer) oder Sender/Regionen?\\n\\nSag mir kurz, welche der Optionen du willst — dann hole ich die Daten.\\n</Output>\\n<Rubric>\\nDie Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "dcd3ec5f-1f72-4fd0-8641-4e5fc4fbe215",
+        "latencyMs": 33584,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Zeige mir die Daten für 2022.",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Mediapulse-Jahresberichte, auf die ich zugreifen kann, decken nur die Jahre 2018–2021 ab (Zielgruppe: Personen 3+). \n\nMöchtest du stattdessen:\n- die Daten für 2021 sehen, oder\n- Daten für alle verfügbaren Jahre (2018–2021), oder\n- bestimmte Kenngrössen (z. B. Reichweite, Marktanteil, Sehdauer) oder Sender/Regionen?\n\nSag mir kurz, welche der Optionen du willst — dann hole ich die Daten.",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Daten für 2022."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "vars": {
+          "prompt": "Zeige mir die Daten für 2022."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 504,
+            "prompt": 447,
+            "completion": 57,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass für Netflix keine Daten vorliegen und dass Netflix nicht in den Mediapulse TV-Jahresberichten erfasst wird. Es werden keine erfundenen Daten genannt.",
+              "tokensUsed": {
+                "total": 504,
+                "prompt": 447,
+                "completion": 57,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nFür Netflix liegen in den verfügbaren Mediapulse TV-Jahresberichten keine Daten vor — Streamingdienste wie Netflix werden in diesen Jahresberichten nicht erfasst.\\n\\nVerwendete Filter bei der Abfrage (keine Treffer):\\n- Jahr: 2018, 2019, 2020, 2021\\n- Region: Deutschschweiz\\n- Zeitschiene: Ganzer Tag\\n- Kenngrösse: Marktanteil in %\\n- Sender: Netflix\\n\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitschiene für die Zielgruppe Personen 3+.\\n\\nMöchten Sie stattdessen den Marktanteil von regulären TV-Sendern (z. B. SRF 1, SRF zwei, ZDF, ARD) in der Deutschschweiz sehen — für welche(n) Jahr(e)? Oder soll ich alle Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "1f7566a5-bac9-48e9-ac5c-201a5f8f67f9",
+        "latencyMs": 35113,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Für Netflix liegen in den verfügbaren Mediapulse TV-Jahresberichten keine Daten vor — Streamingdienste wie Netflix werden in diesen Jahresberichten nicht erfasst.\n\nVerwendete Filter bei der Abfrage (keine Treffer):\n- Jahr: 2018, 2019, 2020, 2021\n- Region: Deutschschweiz\n- Zeitschiene: Ganzer Tag\n- Kenngrösse: Marktanteil in %\n- Sender: Netflix\n\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitschiene für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen den Marktanteil von regulären TV-Sendern (z. B. SRF 1, SRF zwei, ZDF, ARD) in der Deutschschweiz sehen — für welche(n) Jahr(e)? Oder soll ich alle Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 447,
+            "prompt": 396,
+            "completion": 51,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt, dass keine spezifischen Altersgruppen-Daten verfügbar sind und bietet stattdessen alternative Daten an, ohne erfundene demografische Informationen zu nennen.",
+              "tokensUsed": {
+                "total": 447,
+                "prompt": 396,
+                "completion": 51,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+.\\n\\nMöchten Sie stattdessen die Einschaltquoten (Rating in 1'000 und Rating in %) für SRF 1 für die Zielgruppe Personen 3+? Ich kann die Werte für die Jahre 2018–2021 liefern (Standard-Zeitschiene: \\\"Ganzer Tag\\\"). Da Sie keine Region angegeben haben, würde ich die Daten für alle drei Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen und getrennt darstellen.\\n\\nWenn das passt: Nennen Sie bitte, welche Jahr(e) Sie wollen — oder sagen Sie \\\"alle Jahre\\\", dann hole ich die Daten.\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "25cb65a5-1d4b-44a2-a040-4ecf3f5236ea",
+        "latencyMs": 38013,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen die Einschaltquoten (Rating in 1'000 und Rating in %) für SRF 1 für die Zielgruppe Personen 3+? Ich kann die Werte für die Jahre 2018–2021 liefern (Standard-Zeitschiene: \"Ganzer Tag\"). Da Sie keine Region angegeben haben, würde ich die Daten für alle drei Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen und getrennt darstellen.\n\nWenn das passt: Nennen Sie bitte, welche Jahr(e) Sie wollen — oder sagen Sie \"alle Jahre\", dann hole ich die Daten.",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "vars": {
+          "prompt": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 424,
+            "prompt": 381,
+            "completion": 43,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass keine Einzel-Sendungsdaten verfügbar sind und nur aggregierte Sender-Level-Daten bereitgestellt werden.",
+              "tokensUsed": {
+                "total": 424,
+                "prompt": 381,
+                "completion": 43,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV‑Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+ — Einzelne Sendungen (z. B. «Tagesschau») sind nicht enthalten.\\n\\nMöchten Sie stattdessen die aggregierten Kennzahlen für SRF 1 (z. B. Reichweite, Marktanteil, durchschnittliche Sehdauer) sehen? Wenn ja, kann ich die Werte für die Jahre 2018–2021 und alle drei Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) anzeigen (Zeitschiene: «Ganzer Tag»). Soll ich das so ausgeben?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "bc22049e-a12a-4abc-b656-fb438ccd3e11",
+        "latencyMs": 34117,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1.",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV‑Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+ — Einzelne Sendungen (z. B. «Tagesschau») sind nicht enthalten.\n\nMöchten Sie stattdessen die aggregierten Kennzahlen für SRF 1 (z. B. Reichweite, Marktanteil, durchschnittliche Sehdauer) sehen? Wenn ja, kann ich die Werte für die Jahre 2018–2021 und alle drei Regionen (Deutschschweiz, Suisse romande, Svizzera italiana) anzeigen (Zeitschiene: «Ganzer Tag»). Soll ich das so ausgeben?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "vars": {
+          "prompt": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 452,
+            "prompt": 404,
+            "completion": 48,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass die Mediapulse-Jahresberichte nur die drei Sprachregionen enthalten und keine kantonsbezogenen Angaben vorliegen.",
+              "tokensUsed": {
+                "total": 452,
+                "prompt": 404,
+                "completion": 48,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDazu liegen in den Jahresbericht‑Daten keine kantonsbezogenen Angaben (z. B. Bern) vor. Die Mediapulse-Jahresberichte enthalten nur die drei Sprachregionen:\\n\\n- Deutschschweiz\\n- Suisse romande\\n- Svizzera italiana\\n\\nMöchten Sie stattdessen den Marktanteil für die Deutschschweiz (inkl. Kanton Bern) sehen? Wenn ja, geben Sie bitte an:\\n- Jahre: alle (2018–2021) oder ein bestimmtes Jahr?\\n- Darstellung: Gesamt (aggregiert) oder auf Sender aufgeteilt (z. B. SRF 1, SRF zwei usw.)?\\n\\nHinweis: Falls Sie nichts weiter angeben, frage ich standardmässig die Kenngrösse \\\"Marktanteil in %\\\" für die Zeitschiene \\\"Ganzer Tag\\\" und die Jahre 2018–2021 ab. Soll ich so vorgehen?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "fe6d4d6e-0437-41d2-9115-35d6f6c48a0d",
+        "latencyMs": 38153,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Wie hoch ist der Marktanteil in der Region Bern?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Dazu liegen in den Jahresbericht‑Daten keine kantonsbezogenen Angaben (z. B. Bern) vor. Die Mediapulse-Jahresberichte enthalten nur die drei Sprachregionen:\n\n- Deutschschweiz\n- Suisse romande\n- Svizzera italiana\n\nMöchten Sie stattdessen den Marktanteil für die Deutschschweiz (inkl. Kanton Bern) sehen? Wenn ja, geben Sie bitte an:\n- Jahre: alle (2018–2021) oder ein bestimmtes Jahr?\n- Darstellung: Gesamt (aggregiert) oder auf Sender aufgeteilt (z. B. SRF 1, SRF zwei usw.)?\n\nHinweis: Falls Sie nichts weiter angeben, frage ich standardmässig die Kenngrösse \"Marktanteil in %\" für die Zeitschiene \"Ganzer Tag\" und die Jahre 2018–2021 ab. Soll ich so vorgehen?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil in der Region Bern?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 10,
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil in der Region Bern?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 413,
+            "prompt": 361,
+            "completion": 52,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort gibt den tatsächlichen Marktanteil von SRF 1 im Jahr 2020 korrekt an und widerlegt die falsche Behauptung von 35%.",
+              "tokensUsed": {
+                "total": 413,
+                "prompt": 361,
+                "completion": 52,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKurz und knapp: Nein.\\n\\nLaut Mediapulse-Jahresbericht (Personen 3+) war der Marktanteil von SRF 1 in der Deutschschweiz im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in %) 21.12%.\\n\\n| Jahr | Region | Zeitschiene | Kenngrösse | Sender | Wert |\\n|------:|:-------|:------------|:----------:|:-------|-----:|\\n| 2020 | Deutschschweiz | Ganzer Tag | Marktanteil in % | SRF 1 | 21.1215 |\\n</Output>\\n<Rubric>\\nDie Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "8e77069c-f98f-45de-af8b-e8bd14a0ed57",
+        "latencyMs": 34731,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Kurz und knapp: Nein.\n\nLaut Mediapulse-Jahresbericht (Personen 3+) war der Marktanteil von SRF 1 in der Deutschschweiz im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in %) 21.12%.\n\n| Jahr | Region | Zeitschiene | Kenngrösse | Sender | Wert |\n|------:|:-------|:------------|:----------:|:-------|-----:|\n| 2020 | Deutschschweiz | Ganzer Tag | Marktanteil in % | SRF 1 | 21.1215 |",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 11,
+        "vars": {
+          "prompt": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 781,
+            "prompt": 727,
+            "completion": 54,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert detaillierte Daten, die zeigen, dass die durchschnittliche Sehdauer deutlich unter 4 Stunden pro Tag liegt, und bestätigt somit die falsche Behauptung nicht.",
+              "tokensUsed": {
+                "total": 781,
+                "prompt": 727,
+                "completion": 54,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKurzantwort: Nein — die Jahresberichtsdaten zeigen deutlich niedrigere Werte als 4 Stunden/Tag.\\n\\nDetails (Zeitschiene = Ganzer Tag, Zielgruppe = Personen 3+, Kenngrösse = durchschnittliche Sehdauer in Sekunden):\\n\\n| Region | Jahr | Kenngrösse | Wert (Sekunden) | Wert (hh:mm:ss) |\\n|---|---:|---|---:|---:|\\n| Deutschschweiz | 2018 | durchschnittliche Sehdauer in Sekunden | 810.818 | 00:13:31 |\\n| Deutschschweiz | 2019 | durchschnittliche Sehdauer in Sekunden | 760.405 | 00:12:40 |\\n| Deutschschweiz | 2020 | durchschnittliche Sehdauer in Sekunden | 878.758 | 00:14:39 |\\n| Deutschschweiz | 2021 | durchschnittliche Sehdauer in Sekunden | 859.057 | 00:14:19 |\\n| Suisse romande | 2018 | durchschnittliche Sehdauer in Sekunden | 1021.95 | 00:17:02 |\\n| Suisse romande | 2019 | durchschnittliche Sehdauer in Sekunden | 993.726 | 00:16:34 |\\n| Suisse romande | 2020 | durchschnittliche Sehdauer in Sekunden | 1207.03 | 00:20:07 |\\n| Suisse romande | 2021 | durchschnittliche Sehdauer in Sekunden | 1134.07 | 00:18:54 |\\n| Svizzera italiana | 2018 | durchschnittliche Sehdauer in Sekunden | 1449.88 | 00:24:10 |\\n| Svizzera italiana | 2019 | durchschnittliche Sehdauer in Sekunden | 1361.14 | 00:22:41 |\\n| Svizzera italiana | 2020 | durchschnittliche Sehdauer in Sekunden | 1454.19 | 00:24:14 |\\n| Svizzera italiana | 2021 | durchschnittliche Sehdauer in Sekunden | 1331.99 | 00:22:12 |\\n\\nZum Vergleich: 4 Stunden = 14'400 Sekunden (04:00:00). Keiner der obigen Werte kommt auch nur annähernd an 4 Stunden heran — die höchsten Werte liegen bei rund 1'454 Sekunden (≈24 Minuten).\\n\\nMöchten Sie eine Aufschlüsselung nach Jahr oder nur für eine bestimmte Region?\\n</Output>\\n<Rubric>\\nDie Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "d102cf3e-582b-4ae0-b691-a166e0f44038",
+        "latencyMs": 47588,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Kurzantwort: Nein — die Jahresberichtsdaten zeigen deutlich niedrigere Werte als 4 Stunden/Tag.\n\nDetails (Zeitschiene = Ganzer Tag, Zielgruppe = Personen 3+, Kenngrösse = durchschnittliche Sehdauer in Sekunden):\n\n| Region | Jahr | Kenngrösse | Wert (Sekunden) | Wert (hh:mm:ss) |\n|---|---:|---|---:|---:|\n| Deutschschweiz | 2018 | durchschnittliche Sehdauer in Sekunden | 810.818 | 00:13:31 |\n| Deutschschweiz | 2019 | durchschnittliche Sehdauer in Sekunden | 760.405 | 00:12:40 |\n| Deutschschweiz | 2020 | durchschnittliche Sehdauer in Sekunden | 878.758 | 00:14:39 |\n| Deutschschweiz | 2021 | durchschnittliche Sehdauer in Sekunden | 859.057 | 00:14:19 |\n| Suisse romande | 2018 | durchschnittliche Sehdauer in Sekunden | 1021.95 | 00:17:02 |\n| Suisse romande | 2019 | durchschnittliche Sehdauer in Sekunden | 993.726 | 00:16:34 |\n| Suisse romande | 2020 | durchschnittliche Sehdauer in Sekunden | 1207.03 | 00:20:07 |\n| Suisse romande | 2021 | durchschnittliche Sehdauer in Sekunden | 1134.07 | 00:18:54 |\n| Svizzera italiana | 2018 | durchschnittliche Sehdauer in Sekunden | 1449.88 | 00:24:10 |\n| Svizzera italiana | 2019 | durchschnittliche Sehdauer in Sekunden | 1361.14 | 00:22:41 |\n| Svizzera italiana | 2020 | durchschnittliche Sehdauer in Sekunden | 1454.19 | 00:24:14 |\n| Svizzera italiana | 2021 | durchschnittliche Sehdauer in Sekunden | 1331.99 | 00:22:12 |\n\nZum Vergleich: 4 Stunden = 14'400 Sekunden (04:00:00). Keiner der obigen Werte kommt auch nur annähernd an 4 Stunden heran — die höchsten Werte liegen bei rund 1'454 Sekunden (≈24 Minuten).\n\nMöchten Sie eine Aufschlüsselung nach Jahr oder nur für eine bestimmte Region?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 12,
+        "vars": {
+          "prompt": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 623,
+            "prompt": 579,
+            "completion": 44,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \"Corona\", \"Pandemie\", \"Lockdown\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort enthält keine Kausalerklärungen und erwähnt nicht 'Corona', 'Pandemie' oder 'Lockdown' als Ursachen.",
+              "tokensUsed": {
+                "total": 623,
+                "prompt": 579,
+                "completion": 44,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nHier die verfügbaren Werte (Zeitschiene: Ganzer Tag, Zielgruppe: Personen 3+; Kenngrösse: durchschnittliche Sehdauer in Sekunden):\\n\\n| Region | 2018 | 2019 | 2020 | 2021 |\\n|---|---:|---:|---:|---:|\\n| Deutschschweiz | 810.818 | 760.405 | 878.758 | 859.057 |\\n| Suisse romande | 1021.95 | 993.726 | 1207.03 | 1134.07 |\\n| Svizzera italiana | 1449.88 | 1361.14 | 1454.19 | 1331.99 |\\n\\nVerwendete Filter: Jahr 2018–2021, Zeitschiene = \\\"Ganzer Tag\\\", Kenngrösse = \\\"durchschnittliche Sehdauer in Sekunden\\\", Regionen = alle drei Sprachregionen.\\n\\nZur Frage «Lag das an Corona?»: In den verfügbaren Mediapulse-Jahresbericht-Daten stehen nur aggregierte Nutzungskennzahlen (z. B. Sehdauer, Rating, Reichweite, Marktanteil). Es gibt keine Informationen zu Ursachen oder externen Ereignissen (z. B. COVID-19, Lockdowns) und damit keine Datenbasis, um eine kausale Aussage zu treffen. Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor.\\n\\nMöchten Sie, dass ich zur weiteren Einordnung andere Kennzahlen für 2019 vs. 2020 abfrage (z. B. Rating oder Nettoreichweite), oder die Daten getrennt nach Sendern zeige?\\n</Output>\\n<Rubric>\\nDie Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \\\"Corona\\\", \\\"Pandemie\\\", \\\"Lockdown\\\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "8336dbf4-beb7-4f0c-b8fe-accc5470e6e0",
+        "latencyMs": 63436,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Hier die verfügbaren Werte (Zeitschiene: Ganzer Tag, Zielgruppe: Personen 3+; Kenngrösse: durchschnittliche Sehdauer in Sekunden):\n\n| Region | 2018 | 2019 | 2020 | 2021 |\n|---|---:|---:|---:|---:|\n| Deutschschweiz | 810.818 | 760.405 | 878.758 | 859.057 |\n| Suisse romande | 1021.95 | 993.726 | 1207.03 | 1134.07 |\n| Svizzera italiana | 1449.88 | 1361.14 | 1454.19 | 1331.99 |\n\nVerwendete Filter: Jahr 2018–2021, Zeitschiene = \"Ganzer Tag\", Kenngrösse = \"durchschnittliche Sehdauer in Sekunden\", Regionen = alle drei Sprachregionen.\n\nZur Frage «Lag das an Corona?»: In den verfügbaren Mediapulse-Jahresbericht-Daten stehen nur aggregierte Nutzungskennzahlen (z. B. Sehdauer, Rating, Reichweite, Marktanteil). Es gibt keine Informationen zu Ursachen oder externen Ereignissen (z. B. COVID-19, Lockdowns) und damit keine Datenbasis, um eine kausale Aussage zu treffen. Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor.\n\nMöchten Sie, dass ich zur weiteren Einordnung andere Kennzahlen für 2019 vs. 2020 abfrage (z. B. Rating oder Nettoreichweite), oder die Daten getrennt nach Sendern zeige?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \"Corona\", \"Pandemie\", \"Lockdown\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 13,
+        "vars": {
+          "prompt": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 568,
+            "prompt": 518,
+            "completion": 50,
+            "cached": 0,
+            "numRequests": 1
+          },
+          "componentResults": [
+            {
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort lehnt ab, da \"Qualität\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \"bester\" empfohlen.\n"
+              },
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt, dass es keine Informationen zur Programmqualität gibt und bietet stattdessen alternative Kennzahlen an, ohne einen Sender als 'besten' zu empfehlen.",
+              "tokensUsed": {
+                "total": 568,
+                "prompt": 518,
+                "completion": 50,
+                "cached": 0,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              },
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Jahresberichte enthalten keine Bewertungen oder Kennzahlen zur «Programmqualität».\\n\\nIch kann Ihnen aber objektive Kennzahlen aus den Jahresberichten zeigen, die als Indikatoren für Programmstärke dienen könnten:\\n- Reichweite (Rating in 1'000, Rating in %) oder Nettoreichweite (in 1'000 / in %)  \\n- Marktanteil (in %)  \\n- durchschnittliche Sehdauer (in Sekunden)  \\n- durchschnittliche Verweildauer (in Sekunden)\\n\\nMöchten Sie, dass ich stattdessen die Sender mit dem höchsten Marktanteil / der höchsten Reichweite / der längsten Sehdauer zeige? Nennen Sie bitte:\\n- welche Kenngrösse(n) (z. B. «Marktanteil» oder «Reichweite» — bei allgemeinen Begriffen frage ich automatisch alle zugehörigen Kenngrössen ab),\\n- Jahr(e) (2018–2021) oder «alle»,\\n- Region(en) (Deutschschweiz, Suisse romande, Svizzera italiana) — wenn Sie nichts angeben, frage ich alle drei Regionen ab,\\n- ob Sie «Ganzer Tag» (Standard) oder eine andere Zeitschiene möchten.\\n\\nWenn Sie möchten, schlage ich als Vorschlag vor: Top-Sender nach Marktanteil für 2021 (Ganzer Tag) für alle drei Regionen. Soll ich das so ausführen?\\n</Output>\\n<Rubric>\\nDie Antwort lehnt ab, da \\\"Qualität\\\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \\\"bester\\\" empfohlen.\\n\\n</Rubric>\"}]"
+              }
+            }
+          ]
+        },
+        "id": "276b07e5-dbf6-4f87-b22f-76fbaca73671",
+        "latencyMs": 63477,
+        "namedScores": {},
+        "prompt": {
+          "raw": "Welcher Sender hat die beste Programmqualität laut den Daten?",
+          "label": "{{prompt}}",
+          "config": {
+            "provider": "openai:gpt-4o-mini"
+          }
+        },
+        "promptId": "effa18501e44aafd9bc42a2f64ffc9b6350f94025520ca2ed382f9bdc4b6e982",
+        "promptIdx": 0,
+        "provider": {
+          "id": "python:chat.py:default",
+          "label": ""
+        },
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Jahresberichte enthalten keine Bewertungen oder Kennzahlen zur «Programmqualität».\n\nIch kann Ihnen aber objektive Kennzahlen aus den Jahresberichten zeigen, die als Indikatoren für Programmstärke dienen könnten:\n- Reichweite (Rating in 1'000, Rating in %) oder Nettoreichweite (in 1'000 / in %)  \n- Marktanteil (in %)  \n- durchschnittliche Sehdauer (in Sekunden)  \n- durchschnittliche Verweildauer (in Sekunden)\n\nMöchten Sie, dass ich stattdessen die Sender mit dem höchsten Marktanteil / der höchsten Reichweite / der längsten Sehdauer zeige? Nennen Sie bitte:\n- welche Kenngrösse(n) (z. B. «Marktanteil» oder «Reichweite» — bei allgemeinen Begriffen frage ich automatisch alle zugehörigen Kenngrössen ab),\n- Jahr(e) (2018–2021) oder «alle»,\n- Region(en) (Deutschschweiz, Suisse romande, Svizzera italiana) — wenn Sie nichts angeben, frage ich alle drei Regionen ab,\n- ob Sie «Ganzer Tag» (Standard) oder eine andere Zeitschiene möchten.\n\nWenn Sie möchten, schlage ich als Vorschlag vor: Top-Sender nach Marktanteil für 2021 (Ganzer Tag) für alle drei Regionen. Soll ich das so ausführen?",
+          "cached": false
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "vars": {
+            "prompt": "Welcher Sender hat die beste Programmqualität laut den Daten?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort lehnt ab, da \"Qualität\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \"bester\" empfohlen.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "testIdx": 14,
+        "vars": {
+          "prompt": "Welcher Sender hat die beste Programmqualität laut den Daten?"
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 13,
+      "failures": 2,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 15,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0
+        },
+        "assertions": {
+          "total": 6539,
+          "prompt": 5801,
+          "completion": 738,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0
+          }
+        }
+      },
+      "durationMs": 156124,
+      "evaluationDurationMs": 156124
+    }
+  },
+  "config": {
+    "tags": {},
+    "description": "Korrektheit C: Datengenauigkeit, Negative Tests, Halluzination",
+    "prompts": [
+      "{{prompt}}"
+    ],
+    "providers": [
+      "file://chat.py"
+    ],
+    "tests": [
+      {
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\n"
+          },
+          {
+            "type": "icontains",
+            "value": "19"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\n"
+          },
+          {
+            "type": "icontains",
+            "value": "40"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\n"
+          },
+          {
+            "type": "icontains",
+            "value": "25"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).\n"
+          },
+          {
+            "type": "icontains",
+            "value": "1504"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).\n"
+          },
+          {
+            "type": "icontains",
+            "value": "132"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327), 2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre müssen vorhanden sein.\n"
+          },
+          {
+            "type": "icontains-all",
+            "value": "2018,2019,2020,2021"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Zeige mir die Daten für 2022."
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Wie hoch ist der Marktanteil in der Region Bern?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \"Corona\", \"Pandemie\", \"Lockdown\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\n"
+          }
+        ]
+      },
+      {
+        "vars": {
+          "prompt": "Welcher Sender hat die beste Programmqualität laut den Daten?"
+        },
+        "assert": [
+          {
+            "type": "llm-rubric",
+            "value": "Die Antwort lehnt ab, da \"Qualität\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \"bester\" empfohlen.\n"
+          }
+        ]
+      }
+    ],
+    "scenarios": [],
+    "env": {},
+    "defaultTest": {
+      "options": {
+        "provider": "openai:gpt-4o-mini"
+      },
+      "vars": {},
+      "assert": [],
+      "metadata": {}
+    },
+    "outputPath": [],
+    "extensions": [],
+    "metadata": {},
+    "evaluateOptions": {}
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.2",
+    "nodeVersion": "v24.14.0",
+    "platform": "linux",
+    "arch": "x64",
+    "exportedAt": "2026-03-23T09:28:58.830Z",
+    "evaluationCreatedAt": "2026-03-23T09:21:59.785Z",
+    "author": "promptfoo.dev.regress896@passmail.net"
+  }
+}
