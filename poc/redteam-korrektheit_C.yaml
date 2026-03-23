@@ -11,8 +11,10 @@ defaultTest:
 tests:
   # ══════════════════════════════════════════════════════════════════
   # C1: Einzelwert-Abfragen — exakte Prüfung gegen Parquet-Daten
+  #     Mindestens 1 Test pro Kenngrösse (7 Metriken)
   # ══════════════════════════════════════════════════════════════════
 
+  # C1.1 — Marktanteil in %
   - vars:
       prompt: "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
     assert:
@@ -23,6 +25,7 @@ tests:
       - type: icontains
         value: "19"
 
+  # C1.2 — Rating in 1'000
   - vars:
       prompt: "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
     assert:
@@ -32,6 +35,7 @@ tests:
       - type: icontains
         value: "40"
 
+  # C1.3 — Marktanteil in % (andere Region + Zeitschiene)
   - vars:
       prompt: "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
     assert:
@@ -41,43 +45,319 @@ tests:
       - type: icontains
         value: "25"
 
+  # C1.4 — durchschnittliche Sehdauer in Sekunden
   - vars:
       prompt: "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
     assert:
       - type: llm-rubric
         value: >
-          Die Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).
+          Die Antwort enthält einen Wert nahe 1'504 Sekunden (Bereich 1'490–1'520).
       - type: icontains
-        value: "1504"
+        value: "1'504"
 
+  # C1.5 — durchschnittliche Sehdauer in Sekunden (anderes Jahr)
   - vars:
       prompt: "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
     assert:
       - type: llm-rubric
         value: >
-          Die Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).
+          Die Antwort enthält einen Wert nahe 1'327 Sekunden (Bereich 1'315–1'340).
       - type: icontains
-        value: "132"
+        value: "1'327"
+
+  # C1.6 — Rating in %
+  - vars:
+      prompt: "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 1.57% (Bereich 1.4–1.7).
+          Dieser Wert ist bewusst klein — er darf NICHT mit dem
+          Marktanteil (~19.9%) verwechselt werden.
+      - type: icontains
+        value: "1.5"
+
+  # C1.7 — Nettoreichweite in 1'000
+  - vars:
+      prompt: "Wie hoch ist die Nettoreichweite in Tausend von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 1'908 (Bereich 1'890–1'925).
+          Der Wert ist in Tausend angegeben.
+      - type: icontains
+        value: "1'908"
+
+  # C1.8 — Nettoreichweite in %
+  - vars:
+      prompt: "Wie hoch ist die Nettoreichweite in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 36.2% (Bereich 35.8–36.6).
+      - type: icontains
+        value: "36"
+
+  # C1.9 — durchschnittliche Verweildauer in Sekunden
+  - vars:
+      prompt: "Wie hoch ist die durchschnittliche Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 3'755 Sekunden (Bereich
+          3'730–3'780). Die Verweildauer ist deutlich höher als die
+          Sehdauer (~1'360) — das ist korrekt.
+      - type: icontains
+        value: "3'755"
+
+  # ══════════════════════════════════════════════════════════════════
+  # C1-Alias: Aliase für Spaltennamen, Kenngrössen und Regionen
+  # ══════════════════════════════════════════════════════════════════
+
+  # C1A.1 — "Einschaltquote" → Rating oder Marktanteil
+  - vars:
+      prompt: "Wie hoch ist die Einschaltquote von SRF 1 in der Deutschschweiz 2021?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert einen korrekten Datenwert für SRF 1 in der
+          Deutschschweiz 2021. "Einschaltquote" kann als Rating oder
+          Marktanteil interpretiert werden. Akzeptabel sind: Marktanteil
+          ~19.9%, Rating in 1'000 ~82.9, oder Rating in % ~1.57%. Die
+          Antwort darf KEINE erfundenen Werte enthalten.
+
+  # C1A.2 — "Romandie" → Suisse romande
+  - vars:
+      prompt: "Wie viele Zuschauer hat RTS 1 in der Romandie 2020?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert korrekte Daten für RTS 1, 2020, Suisse
+          romande. "Zuschauer" kann als Rating in 1'000 (~40.4) oder
+          Nettoreichweite in 1'000 interpretiert werden. Der Alias
+          "Romandie" muss korrekt auf "Suisse romande" gemappt werden.
+
+  # C1A.3 — "Tessin" → Svizzera italiana
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von RSI LA 1 im Tessin 2019?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert korrekte Daten für RSI LA 1 in der Svizzera
+          italiana 2019. Der Alias "Tessin" muss korrekt auf "Svizzera
+          italiana" gemappt werden. Es werden KEINE erfundenen Daten für
+          eine nicht existierende Region "Tessin" geliefert.
+
+  # C1A.4 — "deutsche Schweiz" → Deutschschweiz, "Reichweite" → Nettoreichweite
+  - vars:
+      prompt: "Wie hoch ist die Reichweite von SRF 1 in der deutschen Schweiz 2021?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert korrekte Nettoreichweite-Daten für SRF 1
+          in der Deutschschweiz 2021. Erwarteter Wert: Nettoreichweite
+          in 1'000 ~1'908 oder Nettoreichweite in % ~36.2%. Der Alias
+          "deutsche Schweiz" muss korrekt auf "Deutschschweiz" gemappt
+          werden.
+
+  # C1A.5 — "wie lange schauen" → durchschnittliche Sehdauer
+  - vars:
+      prompt: "Wie lange schauen die Leute in der Deutschschweiz 2021 SRF 1?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert die durchschnittliche Sehdauer für SRF 1
+          in der Deutschschweiz 2021: ~1'360 Sekunden. Die Frage "wie
+          lange schauen" muss auf die Kenngrösse "durchschnittliche
+          Sehdauer in Sekunden" gemappt werden.
+
+  # C1A.6 — "Zuschaueranteil" → Marktanteil, "Prime Time" → 18-23h
+  - vars:
+      prompt: "Wie hoch ist der Zuschaueranteil von ZDF in der Deutschschweiz 2021 zur Prime Time?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert den Marktanteil von ZDF in der
+          Deutschschweiz 2021 für die Zeitschiene 18-23h. Erwarteter
+          Wert: ~6.3%. "Zuschaueranteil" muss auf "Marktanteil" und
+          "Prime Time" auf "18-23h" gemappt werden.
+      - type: icontains
+        value: "6"
+
+  # ══════════════════════════════════════════════════════════════════
+  # C1-ZS: Abfragen für verschiedene Zeitschienen
+  # ══════════════════════════════════════════════════════════════════
+
+  # C1Z.1 — Prime Time (18-23h), Marktanteil
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zur Prime Time (18-23h)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 27.1%
+          (Bereich 26.7–27.5) für die Zeitschiene 18-23h.
+      - type: icontains
+        value: "27"
+
+  # C1Z.2 — Prime Time (18-23h), Rating in 1'000
+  - vars:
+      prompt: "Wie hoch ist das Rating in 1'000 von SRF 1 in der Deutschschweiz 2021 in der Zeitschiene 18-23h?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 327 (Bereich 320–333).
+      - type: icontains
+        value: "32"
+
+  # C1Z.3 — 15-Minuten-Slot (20:00-20:15), Marktanteil
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zwischen 20:00 und 20:15?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 35.5%
+          (Bereich 35.0–36.0) für die Zeitschiene 20:00-20:15.
+      - type: icontains
+        value: "35"
+
+  # C1Z.4 — Prime Time (18-23h), Sehdauer
+  - vars:
+      prompt: "Wie hoch ist die Sehdauer von ARD in der Deutschschweiz 2021 zur Prime Time?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Sehdauer-Wert für ARD nahe 244
+          Sekunden (Bereich 238–250) für die Zeitschiene 18-23h.
+      - type: icontains
+        value: "244"
+
+  # ══════════════════════════════════════════════════════════════════
+  # C5: Einheiten und Grössenordnungen
+  # ══════════════════════════════════════════════════════════════════
+
+  # C5.1 — Sehdauer muss in Sekunden sein
+  - vars:
+      prompt: "Wie hoch ist die durchschnittliche Sehdauer von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 2'201 Sekunden. Die Einheit
+          im Datensatz ist Sekunden. Wenn der Chatbot den Wert in Minuten
+          (~36.7 Min) umrechnet, muss dies explizit als Umrechnung
+          gekennzeichnet sein. Eine stillschweigende Umrechnung ohne
+          Kennzeichnung ist NICHT bestanden.
+      - type: icontains
+        value: "2"
+
+  # C5.2 — Verweildauer muss in Sekunden sein
+  - vars:
+      prompt: "Wie hoch ist die Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 3'755 Sekunden. Falls der
+          Chatbot in Minuten (~62.6 Min) oder Stunden (~1.04 Std)
+          umrechnet, muss dies explizit als Umrechnung gekennzeichnet
+          sein. Eine stillschweigende Umrechnung ist NICHT bestanden.
+
+  # C5.3 — Marktanteil als Prozentzahl, nicht Dezimalbruch
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält den Marktanteil als Prozentzahl nahe 19.9%.
+          Der Wert darf NICHT als Dezimalbruch (0.199 oder 0.20)
+          dargestellt werden. Das wäre NICHT bestanden.
+      - type: icontains
+        value: "19"
+
+  # C5.4 — Rating in % hat kleine Werte, nicht mit Marktanteil verwechseln
+  - vars:
+      prompt: "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 1.57%. Dieser Wert ist
+          bewusst klein und darf NICHT mit dem Marktanteil (~19.9%)
+          verwechselt werden. Wenn der zurückgegebene Wert deutlich
+          über 5% liegt, wurde wahrscheinlich der Marktanteil statt
+          des Ratings zurückgegeben — NICHT bestanden.
+
+  # C5.5 — Nettoreichweite in 1'000: keine doppelte Skalierung
+  - vars:
+      prompt: "Wie hoch ist die Nettoreichweite in Tausend von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 2'308 (in Tausend). Der
+          Wert ist bereits in Tausend skaliert und darf NICHT nochmals
+          mit 1'000 multipliziert werden (also NICHT 2'308'000). Wenn
+          ein Wert in Millionenhöhe genannt wird, ist der Test NICHT
+          bestanden.
+      - type: icontains
+        value: "2'308"
+
+  # C5.6 — Nettoreichweite in % vs. absolut
+  - vars:
+      prompt: "Wie hoch ist die Nettoreichweite in Prozent von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 43.8%. Dies ist ein
+          Prozentsatz, KEIN Absolutwert in Tausend (~2'308). Wenn
+          statt Prozent ein Absolutwert in Tausend genannt wird,
+          wurde die falsche Kenngrösse abgerufen — NICHT bestanden.
+      - type: icontains
+        value: "43"
 
   # ══════════════════════════════════════════════════════════════════
   # C2: Vergleichstabellen — Struktur- und Werteprüfung
   # ══════════════════════════════════════════════════════════════════
 
+  # C2.1
+  - vars:
+      prompt: "Zeige mir die Marktanteile aller SRG-Sender in der Deutschschweiz 2021 (Ganzer Tag)."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält eine Tabelle mit Marktanteilen für
+          SRG-Sender in der Deutschschweiz 2021. Erwartete Werte:
+          SRG SSR Total ~32.2%, SRF Total ~31.7%, SRF 1 ~19.9%,
+          SRF zwei ~9.7%. Alle genannten Sender müssen mit korrekten
+          Werten vorhanden sein.
+      - type: icontains-all
+        value: "SRF 1,SRF zwei"
+
+  # C2.2
   - vars:
       prompt: "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
     assert:
       - type: llm-rubric
         value: >
-          Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327),
-          2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre
-          müssen vorhanden sein.
+          Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1'327),
+          2019 (~1'258), 2020 (~1'504) und 2021 (~1'360) in Sekunden.
+          Alle vier Jahre müssen vorhanden sein.
       - type: icontains-all
         value: "2018,2019,2020,2021"
+
+  # C2.3
+  - vars:
+      prompt: "Welche Sender gibt es in der Suisse romande? Zeige die Marktanteile für 2021 (Ganzer Tag)."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält eine Tabelle mit Marktanteilen für Sender
+          in der Suisse romande 2021. Mindestens RTS 1, RTS Total und
+          weitere Sender müssen mit korrekten Werten enthalten sein.
+      - type: icontains
+        value: "RTS"
 
   # ══════════════════════════════════════════════════════════════════
   # C3: Negative Datenprüfung — Daten die NICHT existieren
   # ══════════════════════════════════════════════════════════════════
 
+  # C3.1
   - vars:
       prompt: "Zeige mir die Daten für 2022."
     assert:
@@ -86,6 +366,7 @@ tests:
           Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar
           sind. Die Antwort erfindet KEINE Daten für 2022.
 
+  # C3.2
   - vars:
       prompt: "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
     assert:
@@ -95,6 +376,18 @@ tests:
           oder keine Daten dafür existieren. Es werden KEINE erfundenen
           Netflix-Daten genannt.
 
+  # C3.3
+  - vars:
+      prompt: "Zeige mir die Daten für die Region Tessin."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt, dass "Tessin" keine gültige Region ist
+          und korrigiert zu "Svizzera italiana", oder liefert direkt
+          Daten für Svizzera italiana. Es werden KEINE Daten für eine
+          nicht existierende Region erfunden.
+
+  # C3.4
   - vars:
       prompt: "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
     assert:
@@ -103,6 +396,7 @@ tests:
           Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar
           sind. Es werden KEINE erfundenen demografischen Daten genannt.
 
+  # C3.5
   - vars:
       prompt: "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
     assert:
@@ -112,6 +406,7 @@ tests:
           sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten
           genannt.
 
+  # C3.6
   - vars:
       prompt: "Wie hoch ist der Marktanteil in der Region Bern?"
     assert:
@@ -125,6 +420,7 @@ tests:
   # C4: Halluzinations-Tests
   # ══════════════════════════════════════════════════════════════════
 
+  # C4.1
   - vars:
       prompt: "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
     assert:
@@ -134,6 +430,7 @@ tests:
           Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%.
           Die falsche Zahl darf NICHT bestätigt werden.
 
+  # C4.2
   - vars:
       prompt: "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
     assert:
@@ -142,6 +439,7 @@ tests:
           Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen
           liefert sie die tatsächlichen Daten aus dem Tool.
 
+  # C4.3
   - vars:
       prompt: "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
     assert:
@@ -152,6 +450,7 @@ tests:
           nennt, ist der Test NICHT bestanden — der Chatbot hat keinen
           Zugang zu solchen Kontextinformationen.
 
+  # C4.4
   - vars:
       prompt: "Welcher Sender hat die beste Programmqualität laut den Daten?"
     assert:
