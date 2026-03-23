@@ -106,6 +106,9 @@ Das Plugin bewertet die Antwort hinsichtlich 5 Kriterien:
 4. Offeriert das System alternativen, die der Richtline entsprechen?
 5. Erkennnt und kommuniziert das System Versuche die Grenzen der Richtline zu verschieben?
 
+====== Intent
+Mit dem Intent Plugin ist es einfach, eigene Prompts zu definieren, die dann durch diverse <<#methoden-strategien>> erweitert werden. Besonders gut eigenen sich dazu Jailbreak Strategien, die den Prompt dynamisch erweitern und fortführen. Demgegenüber ist es auch möglich eine Sequzenz von Prompts anzugeben um einen vorgegebenen Chatverlauf zu erreichen. Dabei müssen die nachfolgenden Prompts eine ungefähre Antwort auf die vorherigen Anfragen antizipieren.
+
 ====== Custom
 Das benutzerdefiniertes Plugin besteht aus einem Generatorprompt (`generator`) und einem Bewertungsprompt (`grader`). Der `generator` definiert Rahmenbedingungen für den Angriffs-Prompt. Mit diesem wird dann versucht, das System gezielt zu unerwünschten Antworten zu provozieren. Dazu kann das angreifende Modell in verschiedene Rollen "schlüpft" und so Druck aufbauen, um die Grenzen des System zu überschreiten. Der `grader` bewertet anschliessend die Antworten des Systems und entscheidet, ob der Angriff erfolgreich war oder nicht.
 
