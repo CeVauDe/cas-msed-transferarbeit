@@ -25,9 +25,8 @@ THESIS_LAYOUT = {
 }
 
 
-def ensure_output_dir() -> Path:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    return OUTPUT_DIR
+def ensure_parent_dir(path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
 
 
 def save_chart(
@@ -37,8 +36,8 @@ def save_chart(
     width: int = DEFAULT_WIDTH,
     height: int = DEFAULT_HEIGHT,
 ) -> Path:
-    ensure_output_dir()
     path = OUTPUT_DIR / f"{chart_name}.svg"
+    ensure_parent_dir(path)
     fig.write_image(str(path), format="svg", width=width, height=height)
     _fix_svg(path)
     print(f"  Generated {path.relative_to(OUTPUT_DIR.parent)}")
