@@ -46,6 +46,8 @@ def create_heatmap(
         annotations = []
         for i, row in enumerate(z_values):
             for j, val in enumerate(row):
+                if val is None:
+                    continue
                 display = cell_text[i][j] if cell_text else format(val, value_format)
                 annotations.append(
                     {

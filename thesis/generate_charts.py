@@ -12,6 +12,7 @@ Usage:
     uv run generate_charts.py CHART_NAME   # generate only the named chart
 """
 
+import functools
 import sys
 from pathlib import Path
 
@@ -22,10 +23,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from charts.bar_chart import create_bar_chart
 from charts.heatmap import create_heatmap
 from charts.histogram import create_histogram
+from charts.result_data import extract_redteam_data
 
-# ---------------------------------------------------------------------------
-# Chart definitions — add new charts here
-# ---------------------------------------------------------------------------
+POC_DIR = Path(__file__).resolve().parent.parent / "poc"
+
 
 CHARTS: dict[str, callable] = {}
 
@@ -34,32 +35,71 @@ def chart(name: str):
     """Decorator to register a chart generator function."""
 
     def decorator(func):
-        CHARTS[name] = func
-        return func
+        @functools.wraps(func)
+        def wrapper():
+            return func(chart_name=name)
+
+        CHARTS[name] = wrapper
+        return wrapper
 
     return decorator
 
 
-# -- Example charts (replace with real thesis data) -------------------------
+# ---------------------------------------------------------------------------
+# Chart definitions — add new charts here
+# ---------------------------------------------------------------------------
 
 
-@chart("sample-bar")
-def _sample_bar():
-    create_bar_chart(
-        data={
-            "Q1": 150,
-            "Q2": 100,
-            "Q3": 170,
-            "Q4": 130,
-        },
-        title="Sample Bar Chart",
-        chart_name="sample-bar",
-        y_label="Wert",
+@chart("korrektheit/pass-rate")
+def _korrektheit_ergebnisse_heatmap(chart_name: str):
+    result = extract_redteam_data(
+        paths=[
+            POC_DIR / "redteam-korrektheit_C_erweitert_v2.result.json",
+            POC_DIR / "redteam-korrektheit_AB_v2.result.json",
+        ],
+        default_plugin="Custom",
+    )
+    plugins = result.plugins
+    strategies = result.strategies
+    raw = result.raw
+
+    z_values = []
+    cell_text = []
+    for plugin in plugins:
+        z_row = []
+        text_row = []
+        for strategy in strategies:
+            entry = raw.get((plugin, strategy))
+            if entry is not None:
+                passed, total = entry
+                rate = passed / total
+                z_row.append(rate)
+                text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            else:
+                z_row.append(None)
+                text_row.append("")
+        z_values.append(z_row)
+        cell_text.append(text_row)
+
+    create_heatmap(
+        z_values=z_values,
+        x_labels=strategies,
+        y_labels=plugins,
+        title="",
+        chart_name=chart_name,
+        x_title="Strategie",
+        y_title="Plugin",
+        z_label="Pass Rate",
+        cell_text=cell_text,
+        show_colorbar=False,
+        x_side="top",
+        width=700,
+        height=200,
     )
 
 
-@chart("prognosen-plugins")
-def _prognosen_plugins():
+@chart("prognose/redteam-prognosen-plugins")
+def _prognosen_plugins(chart_name: str):
     """Red Teaming Erfolgsrate nach Plugin (Prognosen-Evaluation)."""
     create_bar_chart(
         data={
@@ -68,13 +108,13 @@ def _prognosen_plugins():
             "Hallucination": 4.8,
         },
         title="Red Teaming Erfolgsrate nach Plugin",
-        chart_name="prognose/redteam-prognosen-plugins",
+        chart_name=chart_name,
         y_label="Erfolgsrate (%)",
     )
 
 
-@chart("prognosen-strategien")
-def _prognosen_strategien():
+@chart("prognose/redteam-prognosen-strategies")
+def _prognosen_strategien(chart_name: str):
     """Red Teaming Erfolgsrate nach Strategie (Prognosen-Evaluation)."""
     plugins = ["Custom", "Policy", "Hallucination"]
     strategies = [
@@ -119,10 +159,15 @@ def _prognosen_strategien():
         z_row = []
         text_row = []
         for strategy in strategies:
-            passed, total = raw[(plugin, strategy)]
-            rate = passed / total
-            z_row.append(rate)
-            text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            entry = raw.get((plugin, strategy))
+            if entry is not None:
+                passed, total = entry
+                rate = passed / total
+                z_row.append(rate)
+                text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            else:
+                z_row.append(None)
+                text_row.append("")
         z_values.append(z_row)
         cell_text.append(text_row)
 
@@ -131,7 +176,7 @@ def _prognosen_strategien():
         x_labels=strategies,
         y_labels=plugins,
         title="",
-        chart_name="prognose/redteam-prognosen-strategies",
+        chart_name=chart_name,
         x_title="Strategie",
         y_title="Plugin",
         z_label="Pass Rate",
@@ -143,32 +188,14 @@ def _prognosen_strategien():
     )
 
 
-@chart("keine-handlungsanweisungen")
-def _keine_handlungsanweisungen():
-    plugins = ["Policy", "Custom"]
-    strategies = [
-        "Crescendo",
-        "GOAT",
-        "Jailbreak:<br>Composite",
-        "Jailbreak:<br>Hydra",
-        "Jailbreak:<br>Meta",
-        "Mischievous<br>User",
-    ]
-    # rows = strategies, cols = plugins  (pass_count, total)
-    raw = {
-        ("Policy", "Crescendo"): (0, 2),
-        ("Policy", "GOAT"): (0, 2),
-        ("Policy", "Jailbreak:<br>Composite"): (3, 6),
-        ("Policy", "Jailbreak:<br>Hydra"): (0, 2),
-        ("Policy", "Jailbreak:<br>Meta"): (0, 2),
-        ("Policy", "Mischievous<br>User"): (1, 2),
-        ("Custom", "Crescendo"): (7, 10),
-        ("Custom", "GOAT"): (7, 10),
-        ("Custom", "Jailbreak:<br>Composite"): (24, 30),
-        ("Custom", "Jailbreak:<br>Hydra"): (8, 10),
-        ("Custom", "Jailbreak:<br>Meta"): (8, 10),
-        ("Custom", "Mischievous<br>User"): (8, 10),
-    }
+@chart("handlungsanweisungen/pass-rate")
+def _handlungsanweisungen_pass_rate(chart_name: str):
+    result = extract_redteam_data(
+        POC_DIR / "redteam-handlundsanweisungen.result.json",
+    )
+    plugins = result.plugins
+    strategies = result.strategies
+    raw = result.raw
 
     z_values = []
     cell_text = []
@@ -176,10 +203,15 @@ def _keine_handlungsanweisungen():
         z_row = []
         text_row = []
         for strategy in strategies:
-            passed, total = raw[(plugin, strategy)]
-            rate = passed / total
-            z_row.append(rate)
-            text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            entry = raw.get((plugin, strategy))
+            if entry is not None:
+                passed, total = entry
+                rate = passed / total
+                z_row.append(rate)
+                text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            else:
+                z_row.append(None)
+                text_row.append("")
         z_values.append(z_row)
         cell_text.append(text_row)
 
@@ -188,7 +220,7 @@ def _keine_handlungsanweisungen():
         x_labels=strategies,
         y_labels=plugins,
         title="",
-        chart_name="keine-handlungsanweisungen",
+        chart_name=chart_name,
         x_title="Strategie",
         y_title="Plugin",
         z_label="Pass Rate",
@@ -200,8 +232,8 @@ def _keine_handlungsanweisungen():
     )
 
 
-@chart("antwortlaenge-handlungsanweisungen")
-def _antwortlaenge_handlungsanweisungen():
+@chart("handlungsanweisungen/antwortlaenge")
+def _handlungsanweisungen_antwortlaenge(chart_name: str):
     import json
 
     json_path = (
@@ -221,7 +253,7 @@ def _antwortlaenge_handlungsanweisungen():
     create_histogram(
         word_counts=word_counts,
         title="",
-        chart_name="antwortlaenge-handlungsanweisungen",
+        chart_name=chart_name,
         x_label="Anzahl Wörter",
         y_label="Anzahl Antworten",
         show_median=True,
