@@ -120,9 +120,17 @@ In der Generierung der Testfälle wird für jedes definierte Plugin die konfigur
 
 Die verwendeten Strategien werden vom verwendeten Tool `promptfoo` bereitgestellt und sind in der dortigen Dokumentation näher erläutert. Nachfolgend eine kurze Übersicht über die verwendeten Strategien, basierend auf cite:[promptfooTeamStrategies].
 
+[#methods-strategien-basic]
+====== basic
+Die basic Strategie nutzt die generierten Fragen der Plugins ohne weitere zusätzliche Strategie auf die Fragen anzuwenden.
+
 [#methods-strategien-crescendo]
 ====== crescendo
 Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt der einfache multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach immer weiter basierend auf den Antworten des Modells.
+
+[#methods-strategien-jailbreak-templates]
+====== jailbreak-templates
+Damit werden 67 statische Jailbreak-Vorlagen zu den generierten Tests hinzugefügt. Unter anderem das DAN (Do Anything Now) Rollenspiel, wo versucht wird dem LLM eine andere Persönlichkeit zu geben.
 
 [#methods-strategien-jailbreak-hydra]
 ====== jailbreak:hydra
