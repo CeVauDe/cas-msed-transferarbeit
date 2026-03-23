@@ -125,7 +125,7 @@ echo "Reordering pages (move Eidesstattliche Erklärung before ToC)..."
 docker run --rm \
   -v "$SCRIPT_DIR":/documents \
   asciidoctor/docker-asciidoctor \
-  sh -c "apk add --no-cache qpdf >/dev/null 2>&1 && qpdf main.pdf --pages main.pdf 1 main.pdf 4 main.pdf 2-3 main.pdf 4-z -- main.reordered.pdf"
+  sh -c "apk add --no-cache qpdf >/dev/null 2>&1 && qpdf main.pdf --pages main.pdf 1 main.pdf 4 main.pdf 2-3 main.pdf 5-z -- main.reordered.pdf"
 mv "$SCRIPT_DIR/main.reordered.pdf" "$SCRIPT_DIR/main.pdf"
 
 rm -f "$PROBE_THEME" "$RUNTIME_THEME" "$PROBE_PDF" "$PROBE_TEXT" "$SCRIPT_DIR/main.reordered.pdf" #"$COVER_PDF"
