@@ -4,19 +4,22 @@
 * Zusammenfassend lässt sich sagen, dass #...#
 
 === Tipps
-#* Zusammenfassen der Ergebnisse
-* Erkenntnisfortschitff aufzeigen, welchen die Arbeit erzielt hat
-* kritische Anmerkungen zur Methodik
-* ungelöste Fragen und Forschungslücken aufzeigen
-* eigene Beurteilung und Meinung#
+* #Zusammenfassen der Ergebnisse#
+* #Erkenntnisfortschitff aufzeigen, welchen die Arbeit erzielt hat#
+* #kritische Anmerkungen zur Methodik#
+* #ungelöste Fragen und Forschungslücken aufzeigen#
+* #eigene Beurteilung und Meinung#
 
 === Ausblick
 #Wichtige Punkte:#
+
 * Datenaurbereitung ist noch nicht komplett korrekt:
 ** Daten für z.B. "Andere Sender" kommen mehrfach vor und inkludieren unterschiedliche Sender, sind daher also nicht direkt vergleichbar. Hier muss entschieden werden, wie damit umzugehen ist.
-
+* Präsentation der Zahlen erweckt ggf. noch eine Präzision, die nicht vorhanden ist. zahlen Runden? Auf welche Stelle?
+* Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nciht den entsprechenden Kontext hat.
 
 #Some ideas:#
+
 * Ausblick auf künftig zu erwartende Entwicklungen, Hinweis auf mögliche weitere Forschung
 * Handlungsanweisungen "Wie soll es weitergehen?"
 * Lösen der erkannten Probleme
@@ -28,4 +31,5 @@
 ** gpt-5.4-mini (nachfloger con gpt-5-mini, teurer, vermutlich leistungsfähiger)
 ** gpt-5.4-nano (klein, günstig, schnell, neuer als gpt-5-nano)
 * Evaluierung von Geschwindigkeitsverbesserungen. Aktuell ist der chatbot noch sehr langsam und brauch manchmal mehrere Minuten, um eine Antwort zu generieren
+
 #Vielleicht macht es Sinn, in den jeweiligen Diskussionen schon verbesserungsvorschläge anzubringen und hier dann nur noch die wichtigsten oder für am einfachten Umsetzbar erachteten Vorschläge aufzuführen#

@@ -6,6 +6,10 @@
 [appendix]
 == Chat-Bubbles (Chatbot links, Benutzer rechts, 90% Breite)
 
+// =============================================================
+// Einfacher Wortwechsel (nur Text)
+// =============================================================
+
 // Benutzer-Nachricht: rechts, 90% Breite
 [cols="1,9a",frame=none,grid=none]
 |===
@@ -13,7 +17,41 @@
 |
 ====
 [.chat-label-right]
-Benutzer
+icon:user-secret[] Angreifer
+
+[.chat-right]
+ANFRAGE USER
+====
+|===
+
+// Chatbot-Antwort: links, 90% Breite
+[cols="9a,1",frame=none,grid=none]
+|===
+|
+****
+[.chat-label]
+icon:robot[] Chatbot
+
+[.chat]
+ANNTWORT CHATBOT
+
+****
+|
+|===
+
+
+// =============================================================
+// Wortwechsel mit Tabelle
+// =============================================================
+
+// Benutzer-Nachricht: rechts, 90% Breite
+[cols="1,9a",frame=none,grid=none]
+|===
+|
+|
+====
+[.chat-label-right]
+icon:user-secret[] Angreifer
 
 [.chat-right]
 Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 zusammenfassen?
@@ -26,7 +64,7 @@ Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweize
 |
 ****
 [.chat-label]
-Chatbot
+icon:robot[] Chatbot
 
 [.chat]
 Ich kann keine Trends interpretieren oder bewerten. Unten gebe ich die Fakten (Marktanteile in %) aus den Mediapulse-Jahresberichten für die Jahre 2018–2021 aus.
@@ -40,43 +78,6 @@ Deutschschweiz — Auszug:
 
 ! [.chat]#SRF 1# ! [.chat]#18.747# ! [.chat]#18.771# ! [.chat]#21.121# ! [.chat]#19.896#
 ! [.chat]#ARD#   ! [.chat]#4.740#  ! [.chat]#5.236#  ! [.chat]#5.448#  ! [.chat]#5.711#
-!===
-****
-|
-|===
-
-// Benutzer-Nachricht: rechts
-[cols="1,9a",frame=none,grid=none]
-|===
-|
-|
-====
-[.chat-label-right]
-Benutzer
-
-[.chat-right]
-Gibt es Sender mit einem kontinuierlichen Anstieg oder Rückgang über alle vier Jahre?
-====
-|===
-
-// Chatbot-Antwort: links
-[cols="9a,1",frame=none,grid=none]
-|===
-|
-****
-[.chat-label]
-Chatbot
-
-[.chat]
-Sender mit durchgängig monotonem Trend (Deutschschweiz):
-
-[cols="1,1,1,1,1,1",%header]
-!===
-! [.chat]#Sender# ! [.chat]#2018# ! [.chat]#2019# ! [.chat]#2020# ! [.chat]#2021# ! [.chat]#Trend#
-
-! [.chat]#ARD#       ! [.chat]#4.740# ! [.chat]#5.236# ! [.chat]#5.448# ! [.chat]#5.711# ! [.chat]#Kont. Anstieg#
-! [.chat]#ZDF#       ! [.chat]#5.388# ! [.chat]#5.654# ! [.chat]#6.025# ! [.chat]#6.347# ! [.chat]#Kont. Anstieg#
-! [.chat]#ProSieben# ! [.chat]#2.938# ! [.chat]#2.777# ! [.chat]#2.365# ! [.chat]#1.924# ! [.chat]#Kont. Rückgang#
 !===
 ****
 |
