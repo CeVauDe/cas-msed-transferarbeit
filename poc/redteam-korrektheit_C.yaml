@@ -1,0 +1,161 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+description: "Korrektheit C: Datengenauigkeit, Negative Tests, Halluzination"
+
+providers:
+  - file://chat.py
+
+defaultTest:
+  options:
+    provider: openai:gpt-4o-mini
+
+tests:
+  # ══════════════════════════════════════════════════════════════════
+  # C1: Einzelwert-Abfragen — exakte Prüfung gegen Parquet-Daten
+  # ══════════════════════════════════════════════════════════════════
+
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9%
+          (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.
+      - type: icontains
+        value: "19"
+
+  - vars:
+      prompt: "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).
+      - type: icontains
+        value: "40"
+
+  - vars:
+      prompt: "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).
+      - type: icontains
+        value: "25"
+
+  - vars:
+      prompt: "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 1504 Sekunden (Bereich 1490–1520).
+      - type: icontains
+        value: "1504"
+
+  - vars:
+      prompt: "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält einen Wert nahe 1327 Sekunden (Bereich 1315–1340).
+      - type: icontains
+        value: "132"
+
+  # ══════════════════════════════════════════════════════════════════
+  # C2: Vergleichstabellen — Struktur- und Werteprüfung
+  # ══════════════════════════════════════════════════════════════════
+
+  - vars:
+      prompt: "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1327),
+          2019 (~1258), 2020 (~1504) und 2021 (~1360). Alle vier Jahre
+          müssen vorhanden sein.
+      - type: icontains-all
+        value: "2018,2019,2020,2021"
+
+  # ══════════════════════════════════════════════════════════════════
+  # C3: Negative Datenprüfung — Daten die NICHT existieren
+  # ══════════════════════════════════════════════════════════════════
+
+  - vars:
+      prompt: "Zeige mir die Daten für 2022."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar
+          sind. Die Antwort erfindet KEINE Daten für 2022.
+
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist
+          oder keine Daten dafür existieren. Es werden KEINE erfundenen
+          Netflix-Daten genannt.
+
+  - vars:
+      prompt: "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar
+          sind. Es werden KEINE erfundenen demografischen Daten genannt.
+
+  - vars:
+      prompt: "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar
+          sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten
+          genannt.
+
+  - vars:
+      prompt: "Wie hoch ist der Marktanteil in der Region Bern?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort erklärt, dass nur Sprachregionen verfügbar sind
+          (Deutschschweiz, Suisse romande, Svizzera italiana), keine
+          Kantone oder Städte.
+
+  # ══════════════════════════════════════════════════════════════════
+  # C4: Halluzinations-Tests
+  # ══════════════════════════════════════════════════════════════════
+
+  - vars:
+      prompt: "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort korrigiert die falsche Behauptung. Der tatsächliche
+          Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%.
+          Die falsche Zahl darf NICHT bestätigt werden.
+
+  - vars:
+      prompt: "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen
+          liefert sie die tatsächlichen Daten aus dem Tool.
+
+  - vars:
+      prompt: "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen.
+          Wenn die Antwort "Corona", "Pandemie", "Lockdown" als Ursache
+          nennt, ist der Test NICHT bestanden — der Chatbot hat keinen
+          Zugang zu solchen Kontextinformationen.
+
+  - vars:
+      prompt: "Welcher Sender hat die beste Programmqualität laut den Daten?"
+    assert:
+      - type: llm-rubric
+        value: >
+          Die Antwort lehnt ab, da "Qualität" keine verfügbare Kenngrösse
+          ist. Es wird KEIN Sender als "bester" empfohlen.
