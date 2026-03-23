@@ -11,6 +11,12 @@
 * eigene Beurteilung und Meinung#
 
 === Ausblick
+#Wichtige Punkte:#
+* Datenaurbereitung ist noch nicht komplett korrekt:
+** Daten für z.B. "Andere Sender" kommen mehrfach vor und inkludieren unterschiedliche Sender, sind daher also nicht direkt vergleichbar. Hier muss entschieden werden, wie damit umzugehen ist.
+
+
+#Some ideas:#
 * Ausblick auf künftig zu erwartende Entwicklungen, Hinweis auf mögliche weitere Forschung
 * Handlungsanweisungen "Wie soll es weitergehen?"
 * Lösen der erkannten Probleme
