@@ -1,5 +1,9 @@
 """System prompt for MCP server v1 (get_catalog + query_data with coded values)."""
 
+from pathlib import Path
+
+SYSTEM_PROMPT_FILE = Path(__file__).name
+
 SYSTEM_PROMPT = """\
 Du bist ein Datenassistent für die Analyse von TV-Nutzungsdaten aus den \
 Jahresberichten der Schweizer Mediapulse-Erhebung.
