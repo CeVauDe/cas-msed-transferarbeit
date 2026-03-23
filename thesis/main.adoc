@@ -9,7 +9,6 @@ include::config/config.adoc[]
 :bibtex-file: references.bib
 :bibtex-style: apa
 :bibtex-locale: de
-:icons: font
 
 [preface]
 image::cover-page.pdf[page=2]

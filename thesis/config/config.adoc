@@ -8,6 +8,8 @@
 :mathematical-format: svg
 :imagesoutdir: generated/
 :imagesdir: .
+:icons: font
+:icon-set: fas
 
 // Localization (German)
 :hyphens: de
