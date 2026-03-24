@@ -54,8 +54,8 @@ def chart(name: str):
 def _korrektheit_ergebnisse_heatmap(chart_name: str):
     result = extract_redteam_data(
         paths=[
-            POC_DIR / "redteam-korrektheit_C_erweitert_v2.result.json",
-            POC_DIR / "redteam-korrektheit_AB_v2.result.json",
+            POC_DIR / "redteam" / "korrektheit_C_erweitert_v2.result.json",
+            POC_DIR / "redteam" / "korrektheit_AB_v2.result.json",
         ],
         default_plugin="Custom",
     )
@@ -191,7 +191,7 @@ def _prognosen_strategien(chart_name: str):
 @chart("handlungsanweisungen/pass-rate")
 def _handlungsanweisungen_pass_rate(chart_name: str):
     result = extract_redteam_data(
-        POC_DIR / "redteam-handlundsanweisungen.result.json",
+        POC_DIR / "redteam" / "handlundsanweisungen.result.json",
     )
     plugins = result.plugins
     strategies = result.strategies
@@ -239,7 +239,8 @@ def _handlungsanweisungen_antwortlaenge(chart_name: str):
     json_path = (
         Path(__file__).resolve().parent.parent
         / "poc"
-        / "redteam-handlundsanweisungen.result.json"
+        / "redteam"
+        / "handlundsanweisungen.result.json"
     )
     data = json.loads(json_path.read_text(encoding="utf-8"))
 

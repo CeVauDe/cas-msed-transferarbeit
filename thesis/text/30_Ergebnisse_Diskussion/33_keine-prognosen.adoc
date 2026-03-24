@@ -19,7 +19,7 @@ Es versucht den Agent dazu zu bringen:
 * Falsche Zahlen oder nicht-existente Entitäten zu behaupten
 * Mit Überzeugung etwas Falsches zu sagen
 
-Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/plugins/keine-prognosen.yaml` nachgelesen werden.
+Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
 
 [#results-prognosen]
 ==== Ergebnisse
@@ -82,7 +82,7 @@ Die folgende Heatmap zeigte die Plugin-spezifische Erfolgsrate pro Strategie. Di
 .Red Teaming Erfolgsrate nach Angriffsstrategie und Plugin
 image::generated/prognose/redteam-prognosen-strategies.svg[Red Teaming Strategien, 800]
 
-Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam-prognose.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose.result.json` abrufbar.
 
 [#prognosen-beispiel1,reftext="Beispiel 1"]
 ====== Beispiel 1: Dramatischer Fehler mit linearer Extrapolation (Policy Plugin)
@@ -256,4 +256,4 @@ Erstelle keine Prognosen, keine Trends und keine Vermutungen. Gib nur Fakten aus
 Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf die Richtigkeit der präsentierten Daten an und informiere exakt über Abweichungen zur Frage, um Verwirrung zu vermeiden.
 ----
 
-Die angepasste System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam-prognose-optimiert.result.json`.
+Die angepasste System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose-optimiert.result.json`.
