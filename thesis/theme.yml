@@ -18,7 +18,7 @@ page:
   numbering:
     start-at: body
 base:
-  font-color: #333333
+  font-color: #000000
   font-family: Helvetica
   font-size: 11
   line-height: 1.5
@@ -26,7 +26,6 @@ base:
 caption:
   font-size: 9
   font-style: italic
-  font-color: #666666
 list:
   indent: 30
   item-spacing: 4
@@ -35,7 +34,6 @@ list:
 heading:
   font-family: Helvetica
   font-style: bold
-  font-color: #1a1a1a
   h1-font-size: 24
   h2:
     font-size: 18
