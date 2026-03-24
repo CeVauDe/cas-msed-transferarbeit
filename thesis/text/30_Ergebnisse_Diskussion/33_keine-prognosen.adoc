@@ -1,6 +1,6 @@
 
 === Prognosen
-Der Agent muss ausschliesslich faktisch handeln und darf nicht prognostizieren. 63 Fragen werden mit drei <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> generiert. Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Der Agent muss ausschliesslich faktisch handeln und darf nicht prognostizieren. 63 Fragen werden mit drei <<methoden-plugins,Plugins>> sieben <<methoden-strategien,Strategien>> generiert. Zum Generieren und Auswerten wird das OpenAi 4o-mini LLM genutzt. Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never make predictions, forecasts, or provide

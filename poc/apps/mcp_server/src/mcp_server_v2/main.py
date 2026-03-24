@@ -241,6 +241,8 @@ def _build_server() -> FastMCP:
         ),
     )
     def glossar() -> str:
+        logger.info("glossar called")
+
         return GLOSSARY_MD
 
     return server

@@ -7,22 +7,71 @@
 - Welche Daten haben Sie erhoben bzw. ausgewertet?
 - Welche Hypothesen stellen Sie auf?
 
-=== PoC
-Um zu an einem echten System zu testen wird ein Proof-of Concept entwickelt
+=== Proof-of-Concept
+Im nachfolgenden Kompositionsstrukturdiagramm wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und basis für die Evaluation genutzt wird. Die Applikation wurde mit hilfe von künstlicher Intelligenz erstellt.
 
-#Add a diagram with very basic structure here#
+.Kompositionsstrukturdiagramm der Proo-of-Concept-Applikation
+[plantuml, svg]
+....
+@startuml
+!theme plain
+skinparam componentStyle rectangle
 
-==== Large Language Model
+frame "OpenAI" {
+  rectangle "OpenAI API" <<external service>> {
+    component "Chat Completion API" as openai_api
+  }
+}
+
+frame "PoC System" {
+
+  rectangle "Chatbot Service" <<component>> {
+    port "HTTP" as http_in
+    component "Web UI" as webui
+    component "Agent" as agent
+    component "MCP Client" as client
+
+    http_in -right-> webui
+    webui -right-> agent : "User Input"
+    agent -right-> client : "Tool Calls"
+  }
+
+  rectangle "MCP Server" <<component>> {
+    port "MCP\nstreamable HTTP" as mcp_port
+    component "Tool Handler" as tool
+    component "Glossar" as glossar
+    component "Pandas Engine" as pandas
+
+    mcp_port -right-> tool
+    mcp_port -down-> glossar
+    tool -right-> pandas : "Filter & Query"
+  }
+
+  database "Parquet Files" as data
+
+  client -right-> mcp_port : "JSON-RPC"
+  pandas -right-> data : "Read"
+}
+
+actor User
+User -down-> http_in : "Web\nBrowser"
+agent <-up-> openai_api : "HTTPS"
+
+@enduml
+....
+
+
+==== Large Language Model (LLM)
 
 ==== Model Context Protocol
-Beim Model Context Protocol (MCP) handelt es sich um einen offenen Standard, der mit verschiedenen Large-Language-Models (LLM) kompatibel ist. Dies gibt maximale Flexibilität bei der Auswahl der LLM-Anbieter (Drop-in Replacement möglich), bietet einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ausserdem erzwingt das Protokoll eine saubere Trennung zwischen Datenzugriff und Agenten. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder wie in diesem Fall Streamable HTTP erfolgen.
+Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen cite:[mcpAnthropic]. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder Streamable HTTP erfolgen. Das Protokoll zwingt eine saubere Trennung zwischen Datenzugriff und Agenten.
 
 ==== Chatbot
-#kurze info zum Chatbot allgemein und dass es der MCP Client ist#
+Der Chatbot fungiert als visuelle, webbasierte Applikation (MCP Client) der die Kommunikation zwischen Benutzer und MCP Server übernimmt. Die Benutzerinteraktion wird von der Chat Completions API cite:[openaiChat] und eines LLMs (TODO: crosslink)
 
 ==== MCP Server
-
-#Kurze info zum MCP Server und warum er gewählt wird um die Daten berietzustellen. Und warum nicht z.B. ein RAG#
+Um dem MCP Client Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
+Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt])
 
 === Red Teaming
 #TODO: ausführlichere erklärung red teaming allgemein:
