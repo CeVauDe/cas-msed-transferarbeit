@@ -1,0 +1,3093 @@
+{
+  "results": {
+    "results": [
+      {
+        "id": "cb2f6da0-f993-4b4d-990b-e09a8a8df5b7",
+        "text": "In der Deutschschweiz im Jahr 2021 (Zeitschiene: Ganzer Tag) beträgt der Marktanteil von SRF 1 19.8958 %.",
+        "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 34159,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 301,
+            "cached": 0,
+            "prompt": 256,
+            "completion": 45,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Marktanteilswert von 19.8958 % liegt im angegebenen Bereich von 19.5–20.3 %.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz im Jahr 2021 (Zeitschiene: Ganzer Tag) beträgt der Marktanteil von SRF 1 19.8958 %.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 301,
+                "cached": 0,
+                "prompt": 256,
+                "completion": 45,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "19"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 19.9% (Bereich 19.5–20.3). Ein völlig anderer Wert ist NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "19"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "In der Deutschschweiz im Jahr 2021 (Zeitschiene: Ganzer Tag) beträgt der Marktanteil von SRF 1 19.8958 %.",
+          "cached": false
+        }
+      },
+      {
+        "id": "ad398951-254a-4bee-bf61-768787026a01",
+        "text": "Das Rating in 1'000 von RTS 1 in der Suisse romande im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Rating in 1'000) beträgt 40.3571.",
+        "prompt": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 48204,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 290,
+            "cached": 0,
+            "prompt": 250,
+            "completion": 40,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert 40.3571 liegt im angegebenen Bereich von 39.9 bis 40.8.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDas Rating in 1'000 von RTS 1 in der Suisse romande im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Rating in 1'000) beträgt 40.3571.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\n"
+              },
+              "tokensUsed": {
+                "total": 290,
+                "cached": 0,
+                "prompt": 250,
+                "completion": 40,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "40"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist das Rating in 1'000 von RTS 1 in der Suisse romande 2020 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 40.4 (Bereich 39.9–40.8).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "40"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Das Rating in 1'000 von RTS 1 in der Suisse romande im Jahr 2020 (Zeitschiene: Ganzer Tag, Kenngrösse: Rating in 1'000) beträgt 40.3571.",
+          "cached": false
+        }
+      },
+      {
+        "id": "c432d472-0a50-4e59-b473-d86be60899c9",
+        "text": "Region: Svizzera italiana  \nJahr: 2019  \nZeitschiene: 18-23h  \nKenngrösse: Marktanteil in %  \nSender: RSI LA 1\n\nMarktanteil: 25.7439%",
+        "prompt": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 57997,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 303,
+            "cached": 0,
+            "prompt": 255,
+            "completion": 48,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Marktanteil von 25.7439% liegt innerhalb des angegebenen Bereichs von 25.3% bis 26.1%.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Svizzera italiana  \\nJahr: 2019  \\nZeitschiene: 18-23h  \\nKenngrösse: Marktanteil in %  \\nSender: RSI LA 1\\n\\nMarktanteil: 25.7439%\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\n"
+              },
+              "tokensUsed": {
+                "total": 303,
+                "cached": 0,
+                "prompt": 255,
+                "completion": 48,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "25"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Was ist der Marktanteil von RSI LA 1 in der Svizzera italiana 2019 in der Zeitschiene 18-23h?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 25.7% (Bereich 25.3–26.1).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "25"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Svizzera italiana  \nJahr: 2019  \nZeitschiene: 18-23h  \nKenngrösse: Marktanteil in %  \nSender: RSI LA 1\n\nMarktanteil: 25.7439%",
+          "cached": false
+        }
+      },
+      {
+        "id": "21fa6225-05b2-4e21-8d30-ada5428edeee",
+        "text": "Die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag) betrug 1'504.36 Sekunden.",
+        "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 65096,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 283,
+            "cached": 0,
+            "prompt": 237,
+            "completion": 46,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 1'504.36 Sekunden liegt innerhalb des angegebenen Bereichs von 1'490 bis 1'520 Sekunden.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag) betrug 1'504.36 Sekunden.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1'504 Sekunden (Bereich 1'490–1'520).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1'504 Sekunden (Bereich 1'490–1'520).\n"
+              },
+              "tokensUsed": {
+                "total": 283,
+                "cached": 0,
+                "prompt": 237,
+                "completion": 46,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "1'504"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1'504 Sekunden (Bereich 1'490–1'520).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "1'504"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag) betrug 1'504.36 Sekunden.",
+          "cached": false
+        }
+      },
+      {
+        "id": "2b121d79-3216-469b-b124-ad84978af1bd",
+        "text": "Die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz (Ganzer Tag) im Jahr 2018 betrug 1326.96 Sekunden (≈22 Minuten 7 Sekunden).",
+        "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 40546,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+          "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:32.267Z",
+          "tokensUsed": {
+            "total": 286,
+            "cached": 0,
+            "prompt": 245,
+            "completion": 41,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 1326.96 Sekunden liegt im Bereich von 1'315 bis 1'340 Sekunden.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz (Ganzer Tag) im Jahr 2018 betrug 1326.96 Sekunden (≈22 Minuten 7 Sekunden).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1'327 Sekunden (Bereich 1'315–1'340).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1'327 Sekunden (Bereich 1'315–1'340).\n"
+              },
+              "tokensUsed": {
+                "total": 286,
+                "cached": 0,
+                "prompt": 245,
+                "completion": 41,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"1'327\"",
+              "assertion": {
+                "type": "icontains",
+                "value": "1'327"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+              "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:32.267Z",
+              "assertion": {
+                "type": "human"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2018 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1'327 Sekunden (Bereich 1'315–1'340).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "1'327"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1,
+        "response": {
+          "output": "Die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz (Ganzer Tag) im Jahr 2018 betrug 1326.96 Sekunden (≈22 Minuten 7 Sekunden).",
+          "cached": false
+        }
+      },
+      {
+        "id": "49fba67d-2530-40cf-9d6d-4259e20bfbaf",
+        "text": "Das Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393 %.",
+        "prompt": "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 37666,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 302,
+            "cached": 0,
+            "prompt": 260,
+            "completion": 42,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 1.57393 % liegt im angegebenen Bereich von 1.4–1.7 %.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDas Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393 %.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1.57% (Bereich 1.4–1.7). Dieser Wert ist bewusst klein — er darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1.57% (Bereich 1.4–1.7). Dieser Wert ist bewusst klein — er darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 302,
+                "cached": 0,
+                "prompt": 260,
+                "completion": 42,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "1.5"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1.57% (Bereich 1.4–1.7). Dieser Wert ist bewusst klein — er darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "1.5"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Das Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393 %.",
+          "cached": false
+        }
+      },
+      {
+        "id": "66b7f0c8-c4bd-4e8e-937b-5f5ca8e2688e",
+        "text": "Die Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 1'908.37 (in 1'000).",
+        "prompt": "Wie hoch ist die Nettoreichweite in Tausend von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 36781,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 294,
+            "cached": 0,
+            "prompt": 247,
+            "completion": 47,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert 1'908.37 liegt im angegebenen Bereich von 1'890 bis 1'925 und ist in Tausend angegeben.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 1'908.37 (in 1'000).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1'908 (Bereich 1'890–1'925). Der Wert ist in Tausend angegeben.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1'908 (Bereich 1'890–1'925). Der Wert ist in Tausend angegeben.\n"
+              },
+              "tokensUsed": {
+                "total": 294,
+                "cached": 0,
+                "prompt": 247,
+                "completion": 47,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "1'908"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Nettoreichweite in Tausend von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1'908 (Bereich 1'890–1'925). Der Wert ist in Tausend angegeben.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "1'908"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 1'908.37 (in 1'000).",
+          "cached": false
+        }
+      },
+      {
+        "id": "5122387b-3d4f-481f-9266-28592aabbfa9",
+        "text": "Die Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 36.2187% (Nettoreichweite in %).",
+        "prompt": "Wie hoch ist die Nettoreichweite in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 42599,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 288,
+            "cached": 0,
+            "prompt": 242,
+            "completion": 46,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 36.2187% liegt innerhalb des angegebenen Bereichs von 35.8% bis 36.6%.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 36.2187% (Nettoreichweite in %).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 36.2% (Bereich 35.8–36.6).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 36.2% (Bereich 35.8–36.6).\n"
+              },
+              "tokensUsed": {
+                "total": 288,
+                "cached": 0,
+                "prompt": 242,
+                "completion": 46,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "36"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Nettoreichweite in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 36.2% (Bereich 35.8–36.6).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "36"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die Nettoreichweite von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 36.2187% (Nettoreichweite in %).",
+          "cached": false
+        }
+      },
+      {
+        "id": "a0bf2393-c620-4246-b915-930bb0ab97ab",
+        "text": "Region: Deutschschweiz — Jahr: 2021 — Zeitraum: Ganzer Tag — Kenngrösse: durchschnittliche Verweildauer in Sekunden\n\n- SRF 1: 3'754.63 Sekunden",
+        "prompt": "Wie hoch ist die durchschnittliche Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 37271,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+          "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:39.193Z",
+          "tokensUsed": {
+            "total": 313,
+            "cached": 0,
+            "prompt": 272,
+            "completion": 41,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 3'754.63 Sekunden liegt im Bereich von 3'730–3'780 Sekunden.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz — Jahr: 2021 — Zeitraum: Ganzer Tag — Kenngrösse: durchschnittliche Verweildauer in Sekunden\\n\\n- SRF 1: 3'754.63 Sekunden\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 3'755 Sekunden (Bereich 3'730–3'780). Die Verweildauer ist deutlich höher als die Sehdauer (~1'360) — das ist korrekt.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 3'755 Sekunden (Bereich 3'730–3'780). Die Verweildauer ist deutlich höher als die Sehdauer (~1'360) — das ist korrekt.\n"
+              },
+              "tokensUsed": {
+                "total": 313,
+                "cached": 0,
+                "prompt": 272,
+                "completion": 41,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Expected output to contain \"3'755\"",
+              "assertion": {
+                "type": "icontains",
+                "value": "3'755"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+              "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:39.193Z",
+              "assertion": {
+                "type": "human"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die durchschnittliche Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 3'755 Sekunden (Bereich 3'730–3'780). Die Verweildauer ist deutlich höher als die Sehdauer (~1'360) — das ist korrekt.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "3'755"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1,
+        "response": {
+          "output": "Region: Deutschschweiz — Jahr: 2021 — Zeitraum: Ganzer Tag — Kenngrösse: durchschnittliche Verweildauer in Sekunden\n\n- SRF 1: 3'754.63 Sekunden",
+          "cached": false
+        }
+      },
+      {
+        "id": "8134810d-5635-4089-8e38-b12e84b51971",
+        "text": "Region: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag\n\n| Kenngrösse        | Sender | Wert       |\n|-------------------|--------|-----------:|\n| Rating in 1'000   | SRF 1  | 82.9307    |\n| Rating in %       | SRF 1  | 1.57393 %  |",
+        "prompt": "Wie hoch ist die Einschaltquote von SRF 1 in der Deutschschweiz 2021?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 42572,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 410,
+            "cached": 0,
+            "prompt": 350,
+            "completion": 60,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert die Werte für SRF 1 in der Deutschschweiz 2021 korrekt: Rating in 1'000 ist ~82.9 und Rating in % ist ~1.57%.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag\\n\\n| Kenngrösse        | Sender | Wert       |\\n|-------------------|--------|-----------:|\\n| Rating in 1'000   | SRF 1  | 82.9307    |\\n| Rating in %       | SRF 1  | 1.57393 %  |\\n</Output>\\n<Rubric>\\nDie Antwort liefert einen korrekten Datenwert für SRF 1 in der Deutschschweiz 2021. \\\"Einschaltquote\\\" kann als Rating oder Marktanteil interpretiert werden. Akzeptabel sind: Marktanteil ~19.9%, Rating in 1'000 ~82.9, oder Rating in % ~1.57%. Die Antwort darf KEINE erfundenen Werte enthalten.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert einen korrekten Datenwert für SRF 1 in der Deutschschweiz 2021. \"Einschaltquote\" kann als Rating oder Marktanteil interpretiert werden. Akzeptabel sind: Marktanteil ~19.9%, Rating in 1'000 ~82.9, oder Rating in % ~1.57%. Die Antwort darf KEINE erfundenen Werte enthalten.\n"
+              },
+              "tokensUsed": {
+                "total": 410,
+                "cached": 0,
+                "prompt": 350,
+                "completion": 60,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Einschaltquote von SRF 1 in der Deutschschweiz 2021?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert einen korrekten Datenwert für SRF 1 in der Deutschschweiz 2021. \"Einschaltquote\" kann als Rating oder Marktanteil interpretiert werden. Akzeptabel sind: Marktanteil ~19.9%, Rating in 1'000 ~82.9, oder Rating in % ~1.57%. Die Antwort darf KEINE erfundenen Werte enthalten.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag\n\n| Kenngrösse        | Sender | Wert       |\n|-------------------|--------|-----------:|\n| Rating in 1'000   | SRF 1  | 82.9307    |\n| Rating in %       | SRF 1  | 1.57393 %  |",
+          "cached": false
+        }
+      },
+      {
+        "id": "642bd409-0dc0-4824-b7a2-678eda391eaf",
+        "text": "Die Nettoreichweite von RTS 1 in der Suisse romande im Jahr 2020 (Ganzer Tag, Zielgruppe Personen 3+) beträgt 792.93 (in 1'000) — das sind ca. 792'930 Personen.",
+        "prompt": "Wie viele Zuschauer hat RTS 1 in der Romandie 2020?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 53413,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 352,
+            "cached": 0,
+            "prompt": 304,
+            "completion": 48,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert die Nettoreichweite von RTS 1 in der Suisse romande für das Jahr 2020 korrekt und verwendet die richtige Terminologie.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie Nettoreichweite von RTS 1 in der Suisse romande im Jahr 2020 (Ganzer Tag, Zielgruppe Personen 3+) beträgt 792.93 (in 1'000) — das sind ca. 792'930 Personen.\\n</Output>\\n<Rubric>\\nDie Antwort liefert korrekte Daten für RTS 1, 2020, Suisse romande. \\\"Zuschauer\\\" kann als Rating in 1'000 (~40.4) oder Nettoreichweite in 1'000 interpretiert werden. Der Alias \\\"Romandie\\\" muss korrekt auf \\\"Suisse romande\\\" gemappt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert korrekte Daten für RTS 1, 2020, Suisse romande. \"Zuschauer\" kann als Rating in 1'000 (~40.4) oder Nettoreichweite in 1'000 interpretiert werden. Der Alias \"Romandie\" muss korrekt auf \"Suisse romande\" gemappt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 352,
+                "cached": 0,
+                "prompt": 304,
+                "completion": 48,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie viele Zuschauer hat RTS 1 in der Romandie 2020?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert korrekte Daten für RTS 1, 2020, Suisse romande. \"Zuschauer\" kann als Rating in 1'000 (~40.4) oder Nettoreichweite in 1'000 interpretiert werden. Der Alias \"Romandie\" muss korrekt auf \"Suisse romande\" gemappt werden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die Nettoreichweite von RTS 1 in der Suisse romande im Jahr 2020 (Ganzer Tag, Zielgruppe Personen 3+) beträgt 792.93 (in 1'000) — das sind ca. 792'930 Personen.",
+          "cached": false
+        }
+      },
+      {
+        "id": "2a558bd8-aa85-4ab5-be87-90c801de4972",
+        "text": "Der Marktanteil von RSI LA 1 in der Svizzera italiana (Tessin) im Jahr 2019 — Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in % — beträgt 17.7143% (ca. 17.71%).",
+        "prompt": "Wie hoch ist der Marktanteil von RSI LA 1 im Tessin 2019?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 59331,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 370,
+            "cached": 0,
+            "prompt": 300,
+            "completion": 70,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert korrekte Daten für RSI LA 1 in der Svizzera italiana im Jahr 2019 und mappt 'Tessin' korrekt auf 'Svizzera italiana'. Es werden keine erfundenen Daten für eine nicht existierende Region geliefert.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDer Marktanteil von RSI LA 1 in der Svizzera italiana (Tessin) im Jahr 2019 — Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in % — beträgt 17.7143% (ca. 17.71%).\\n</Output>\\n<Rubric>\\nDie Antwort liefert korrekte Daten für RSI LA 1 in der Svizzera italiana 2019. Der Alias \\\"Tessin\\\" muss korrekt auf \\\"Svizzera italiana\\\" gemappt werden. Es werden KEINE erfundenen Daten für eine nicht existierende Region \\\"Tessin\\\" geliefert.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert korrekte Daten für RSI LA 1 in der Svizzera italiana 2019. Der Alias \"Tessin\" muss korrekt auf \"Svizzera italiana\" gemappt werden. Es werden KEINE erfundenen Daten für eine nicht existierende Region \"Tessin\" geliefert.\n"
+              },
+              "tokensUsed": {
+                "total": 370,
+                "cached": 0,
+                "prompt": 300,
+                "completion": 70,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von RSI LA 1 im Tessin 2019?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert korrekte Daten für RSI LA 1 in der Svizzera italiana 2019. Der Alias \"Tessin\" muss korrekt auf \"Svizzera italiana\" gemappt werden. Es werden KEINE erfundenen Daten für eine nicht existierende Region \"Tessin\" geliefert.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Der Marktanteil von RSI LA 1 in der Svizzera italiana (Tessin) im Jahr 2019 — Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in % — beträgt 17.7143% (ca. 17.71%).",
+          "cached": false
+        }
+      },
+      {
+        "id": "ea2ae02c-9ca5-4b33-808a-dd99b358e409",
+        "text": "Hier die Reichweite von SRF 1 (Mediapulse Jahresbericht) — Region: Deutschschweiz, Jahr: 2021, Zeitraum: Ganzer Tag:\n\n| Jahr | Region | Zeitraum | Kenngrösse        | Wert       |\n|------:|:-------|:---------|:------------------|-----------:|\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in 1'000  | 82.9307    |\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in %      | 1.57393 %  |\n\nMöchten Sie eine Umrechnung (z. B. in Anzahl Personen) oder Vergleiche mit anderen Sendern/Jahren?",
+        "prompt": "Wie hoch ist die Reichweite von SRF 1 in der deutschen Schweiz 2021?",
+        "provider": "python:chat.py:default",
+        "pass": false,
+        "score": 0,
+        "namedScores": {},
+        "latencyMs": 72933,
+        "cost": 0,
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Die Nettoreichweite-Daten für SRF 1 in der Deutschschweiz 2021 sind nicht korrekt, da der Wert in 1'000 (82.9307) und in % (1.57393 %) weit von den erwarteten Werten (~1'908 und ~36.2%) abweichen.",
+          "tokensUsed": {
+            "total": 494,
+            "cached": 0,
+            "prompt": 408,
+            "completion": 86,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Die Nettoreichweite-Daten für SRF 1 in der Deutschschweiz 2021 sind nicht korrekt, da der Wert in 1'000 (82.9307) und in % (1.57393 %) weit von den erwarteten Werten (~1'908 und ~36.2%) abweichen.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nHier die Reichweite von SRF 1 (Mediapulse Jahresbericht) — Region: Deutschschweiz, Jahr: 2021, Zeitraum: Ganzer Tag:\\n\\n| Jahr | Region | Zeitraum | Kenngrösse        | Wert       |\\n|------:|:-------|:---------|:------------------|-----------:|\\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in 1'000  | 82.9307    |\\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in %      | 1.57393 %  |\\n\\nMöchten Sie eine Umrechnung (z. B. in Anzahl Personen) oder Vergleiche mit anderen Sendern/Jahren?\\n</Output>\\n<Rubric>\\nDie Antwort liefert korrekte Nettoreichweite-Daten für SRF 1 in der Deutschschweiz 2021. Erwarteter Wert: Nettoreichweite in 1'000 ~1'908 oder Nettoreichweite in % ~36.2%. Der Alias \\\"deutsche Schweiz\\\" muss korrekt auf \\\"Deutschschweiz\\\" gemappt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert korrekte Nettoreichweite-Daten für SRF 1 in der Deutschschweiz 2021. Erwarteter Wert: Nettoreichweite in 1'000 ~1'908 oder Nettoreichweite in % ~36.2%. Der Alias \"deutsche Schweiz\" muss korrekt auf \"Deutschschweiz\" gemappt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 494,
+                "cached": 0,
+                "prompt": 408,
+                "completion": 86,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Reichweite von SRF 1 in der deutschen Schweiz 2021?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert korrekte Nettoreichweite-Daten für SRF 1 in der Deutschschweiz 2021. Erwarteter Wert: Nettoreichweite in 1'000 ~1'908 oder Nettoreichweite in % ~36.2%. Der Alias \"deutsche Schweiz\" muss korrekt auf \"Deutschschweiz\" gemappt werden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1,
+        "response": {
+          "output": "Hier die Reichweite von SRF 1 (Mediapulse Jahresbericht) — Region: Deutschschweiz, Jahr: 2021, Zeitraum: Ganzer Tag:\n\n| Jahr | Region | Zeitraum | Kenngrösse        | Wert       |\n|------:|:-------|:---------|:------------------|-----------:|\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in 1'000  | 82.9307    |\n| 2021 | Deutschschweiz | Ganzer Tag | Rating in %      | 1.57393 %  |\n\nMöchten Sie eine Umrechnung (z. B. in Anzahl Personen) oder Vergleiche mit anderen Sendern/Jahren?",
+          "cached": false
+        }
+      },
+      {
+        "id": "0848062e-9ccd-45b6-b22b-dc0f87cf8781",
+        "text": "Region: Deutschschweiz  \nJahr: 2021  \nZeitschiene: Ganzer Tag  \nKenngrösse: durchschnittliche Sehdauer in Sekunden\n\n- SRF 1 — 1'359.88 Sekunden (≈ 22 Minuten 40 Sekunden)",
+        "prompt": "Wie lange schauen die Leute in der Deutschschweiz 2021 SRF 1?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 65261,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 350,
+            "cached": 0,
+            "prompt": 294,
+            "completion": 56,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert die durchschnittliche Sehdauer für SRF 1 in der Deutschschweiz 2021 und gibt die Zeit in Sekunden an, was der Kenngrösse entspricht.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz  \\nJahr: 2021  \\nZeitschiene: Ganzer Tag  \\nKenngrösse: durchschnittliche Sehdauer in Sekunden\\n\\n- SRF 1 — 1'359.88 Sekunden (≈ 22 Minuten 40 Sekunden)\\n</Output>\\n<Rubric>\\nDie Antwort liefert die durchschnittliche Sehdauer für SRF 1 in der Deutschschweiz 2021: ~1'360 Sekunden. Die Frage \\\"wie lange schauen\\\" muss auf die Kenngrösse \\\"durchschnittliche Sehdauer in Sekunden\\\" gemappt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert die durchschnittliche Sehdauer für SRF 1 in der Deutschschweiz 2021: ~1'360 Sekunden. Die Frage \"wie lange schauen\" muss auf die Kenngrösse \"durchschnittliche Sehdauer in Sekunden\" gemappt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 350,
+                "cached": 0,
+                "prompt": 294,
+                "completion": 56,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie lange schauen die Leute in der Deutschschweiz 2021 SRF 1?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert die durchschnittliche Sehdauer für SRF 1 in der Deutschschweiz 2021: ~1'360 Sekunden. Die Frage \"wie lange schauen\" muss auf die Kenngrösse \"durchschnittliche Sehdauer in Sekunden\" gemappt werden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Deutschschweiz  \nJahr: 2021  \nZeitschiene: Ganzer Tag  \nKenngrösse: durchschnittliche Sehdauer in Sekunden\n\n- SRF 1 — 1'359.88 Sekunden (≈ 22 Minuten 40 Sekunden)",
+          "cached": false
+        }
+      },
+      {
+        "id": "f179e2fe-6113-4e21-a300-8450813634b8",
+        "text": "In der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt der Marktanteil von ZDF 6.34509% (≈ 6.35%).",
+        "prompt": "Wie hoch ist der Zuschaueranteil von ZDF in der Deutschschweiz 2021 zur Prime Time?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 59226,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 364,
+            "cached": 0,
+            "prompt": 293,
+            "completion": 71,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert den Marktanteil von ZDF in der Deutschschweiz 2021 für die Zeitschiene 18-23h und der angegebene Wert von 6.34509% entspricht dem erwarteten Wert von ~6.3%.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt der Marktanteil von ZDF 6.34509% (≈ 6.35%).\\n</Output>\\n<Rubric>\\nDie Antwort liefert den Marktanteil von ZDF in der Deutschschweiz 2021 für die Zeitschiene 18-23h. Erwarteter Wert: ~6.3%. \\\"Zuschaueranteil\\\" muss auf \\\"Marktanteil\\\" und \\\"Prime Time\\\" auf \\\"18-23h\\\" gemappt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert den Marktanteil von ZDF in der Deutschschweiz 2021 für die Zeitschiene 18-23h. Erwarteter Wert: ~6.3%. \"Zuschaueranteil\" muss auf \"Marktanteil\" und \"Prime Time\" auf \"18-23h\" gemappt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 364,
+                "cached": 0,
+                "prompt": 293,
+                "completion": 71,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "6"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Zuschaueranteil von ZDF in der Deutschschweiz 2021 zur Prime Time?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert den Marktanteil von ZDF in der Deutschschweiz 2021 für die Zeitschiene 18-23h. Erwarteter Wert: ~6.3%. \"Zuschaueranteil\" muss auf \"Marktanteil\" und \"Prime Time\" auf \"18-23h\" gemappt werden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "6"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "In der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt der Marktanteil von ZDF 6.34509% (≈ 6.35%).",
+          "cached": false
+        }
+      },
+      {
+        "id": "1f60d560-4486-4144-a5c3-e55012d43288",
+        "text": "Region: Deutschschweiz  \nJahr: 2021  \nZeitschiene: 18-23h (Prime Time)  \nKenngrösse: Marktanteil in %\n\n- SRF 1 — 27.12% (Wert: 27.1166)",
+        "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zur Prime Time (18-23h)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 46839,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 333,
+            "cached": 0,
+            "prompt": 280,
+            "completion": 53,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Marktanteilswert für SRF 1 beträgt 27.1166%, was innerhalb des angegebenen Bereichs von 26.7–27.5% liegt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz  \\nJahr: 2021  \\nZeitschiene: 18-23h (Prime Time)  \\nKenngrösse: Marktanteil in %\\n\\n- SRF 1 — 27.12% (Wert: 27.1166)\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Marktanteilswert für SRF 1 nahe 27.1% (Bereich 26.7–27.5) für die Zeitschiene 18-23h.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 27.1% (Bereich 26.7–27.5) für die Zeitschiene 18-23h.\n"
+              },
+              "tokensUsed": {
+                "total": 333,
+                "cached": 0,
+                "prompt": 280,
+                "completion": 53,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "27"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zur Prime Time (18-23h)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 27.1% (Bereich 26.7–27.5) für die Zeitschiene 18-23h.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "27"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Deutschschweiz  \nJahr: 2021  \nZeitschiene: 18-23h (Prime Time)  \nKenngrösse: Marktanteil in %\n\n- SRF 1 — 27.12% (Wert: 27.1166)",
+          "cached": false
+        }
+      },
+      {
+        "id": "8cc72da8-80e9-4d22-b5dd-ba23f89ed053",
+        "text": "Region: Deutschschweiz, Jahr: 2021, Zeitschiene: 18–23h, Kenngrösse: Rating in 1'000 — SRF 1: 326.696.",
+        "prompt": "Wie hoch ist das Rating in 1'000 von SRF 1 in der Deutschschweiz 2021 in der Zeitschiene 18-23h?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 38411,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 273,
+            "cached": 0,
+            "prompt": 240,
+            "completion": 33,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert 326.696 liegt im Bereich von 320 bis 333.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz, Jahr: 2021, Zeitschiene: 18–23h, Kenngrösse: Rating in 1'000 — SRF 1: 326.696.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 327 (Bereich 320–333).\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 327 (Bereich 320–333).\n"
+              },
+              "tokensUsed": {
+                "total": 273,
+                "cached": 0,
+                "prompt": 240,
+                "completion": 33,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "32"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist das Rating in 1'000 von SRF 1 in der Deutschschweiz 2021 in der Zeitschiene 18-23h?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 327 (Bereich 320–333).\n"
+            },
+            {
+              "type": "icontains",
+              "value": "32"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Deutschschweiz, Jahr: 2021, Zeitschiene: 18–23h, Kenngrösse: Rating in 1'000 — SRF 1: 326.696.",
+          "cached": false
+        }
+      },
+      {
+        "id": "79fe308c-d53a-4b62-b4cd-ae5496357cb5",
+        "text": "In der Deutschschweiz 2021 (20:00–20:15) lag der Marktanteil von SRF 1 bei 35.4877 %.",
+        "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zwischen 20:00 und 20:15?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 35350,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 305,
+            "cached": 0,
+            "prompt": 260,
+            "completion": 45,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Marktanteilswert von 35.4877 % liegt im angegebenen Bereich von 35.0–36.0 %.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz 2021 (20:00–20:15) lag der Marktanteil von SRF 1 bei 35.4877 %.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Marktanteilswert für SRF 1 nahe 35.5% (Bereich 35.0–36.0) für die Zeitschiene 20:00-20:15.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 35.5% (Bereich 35.0–36.0) für die Zeitschiene 20:00-20:15.\n"
+              },
+              "tokensUsed": {
+                "total": 305,
+                "cached": 0,
+                "prompt": 260,
+                "completion": 45,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "35"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 zwischen 20:00 und 20:15?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Marktanteilswert für SRF 1 nahe 35.5% (Bereich 35.0–36.0) für die Zeitschiene 20:00-20:15.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "35"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "In der Deutschschweiz 2021 (20:00–20:15) lag der Marktanteil von SRF 1 bei 35.4877 %.",
+          "cached": false
+        }
+      },
+      {
+        "id": "a8313f26-4fa9-4c19-8083-de5aaaea9fcd",
+        "text": "Die durchschnittliche Sehdauer von ARD in der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt 244,4 Sekunden (Kenngrösse: durchschnittliche Sehdauer in Sekunden).",
+        "prompt": "Wie hoch ist die Sehdauer von ARD in der Deutschschweiz 2021 zur Prime Time?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 36789,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 310,
+            "cached": 0,
+            "prompt": 265,
+            "completion": 45,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort gibt einen Sehdauer-Wert von 244,4 Sekunden an, der im Bereich von 238-250 Sekunden liegt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie durchschnittliche Sehdauer von ARD in der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt 244,4 Sekunden (Kenngrösse: durchschnittliche Sehdauer in Sekunden).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Sehdauer-Wert für ARD nahe 244 Sekunden (Bereich 238–250) für die Zeitschiene 18-23h.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Sehdauer-Wert für ARD nahe 244 Sekunden (Bereich 238–250) für die Zeitschiene 18-23h.\n"
+              },
+              "tokensUsed": {
+                "total": 310,
+                "cached": 0,
+                "prompt": 265,
+                "completion": 45,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "244"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Sehdauer von ARD in der Deutschschweiz 2021 zur Prime Time?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Sehdauer-Wert für ARD nahe 244 Sekunden (Bereich 238–250) für die Zeitschiene 18-23h.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "244"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die durchschnittliche Sehdauer von ARD in der Deutschschweiz 2021 (Zeitschiene 18–23h, Prime Time) beträgt 244,4 Sekunden (Kenngrösse: durchschnittliche Sehdauer in Sekunden).",
+          "cached": false
+        }
+      },
+      {
+        "id": "964d879a-d4cf-4a62-9c64-6e5640478ffd",
+        "text": "In der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt die durchschnittliche Sehdauer von SRG SSR Total 2'200.7 Sekunden (≈ 36 Minuten 40.7 Sekunden).",
+        "prompt": "Wie hoch ist die durchschnittliche Sehdauer von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 44266,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+          "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:46.000Z",
+          "tokensUsed": {
+            "total": 347,
+            "cached": 0,
+            "prompt": 291,
+            "completion": 56,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Die Antwort enthält den Wert von 2'200.7 Sekunden, der nahe bei 2'201 Sekunden liegt, aber die Umrechnung in Minuten wird nicht explizit gekennzeichnet.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt die durchschnittliche Sehdauer von SRG SSR Total 2'200.7 Sekunden (≈ 36 Minuten 40.7 Sekunden).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 2'201 Sekunden. Die Einheit im Datensatz ist Sekunden. Wenn der Chatbot den Wert in Minuten (~36.7 Min) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ohne Kennzeichnung ist NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 2'201 Sekunden. Die Einheit im Datensatz ist Sekunden. Wenn der Chatbot den Wert in Minuten (~36.7 Min) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ohne Kennzeichnung ist NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 347,
+                "cached": 0,
+                "prompt": 291,
+                "completion": 56,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "2"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+              "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:46.000Z",
+              "assertion": {
+                "type": "human"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die durchschnittliche Sehdauer von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 2'201 Sekunden. Die Einheit im Datensatz ist Sekunden. Wenn der Chatbot den Wert in Minuten (~36.7 Min) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ohne Kennzeichnung ist NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "2"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1,
+        "response": {
+          "output": "In der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt die durchschnittliche Sehdauer von SRG SSR Total 2'200.7 Sekunden (≈ 36 Minuten 40.7 Sekunden).",
+          "cached": false
+        }
+      },
+      {
+        "id": "b2e1a9d7-3c4a-4102-9a2a-81d51be838eb",
+        "text": "In der Deutschschweiz betrug die durchschnittliche Verweildauer von SRF 1 im Jahr 2021 (Ganzer Tag) 3'754.63 Sekunden (≈ 1:02:34.6).\n\nFilter: Region = Deutschschweiz, Jahr = 2021, Zeitschiene = Ganzer Tag, Kenngrösse = durchschnittliche Verweildauer in Sekunden, Sender = SRF 1.",
+        "prompt": "Wie hoch ist die Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 48232,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 384,
+            "cached": 0,
+            "prompt": 332,
+            "completion": 52,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort enthält den Wert 3'754.63 Sekunden, was nahe bei 3'755 Sekunden liegt, und es wird keine stillschweigende Umrechnung vorgenommen.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIn der Deutschschweiz betrug die durchschnittliche Verweildauer von SRF 1 im Jahr 2021 (Ganzer Tag) 3'754.63 Sekunden (≈ 1:02:34.6).\\n\\nFilter: Region = Deutschschweiz, Jahr = 2021, Zeitschiene = Ganzer Tag, Kenngrösse = durchschnittliche Verweildauer in Sekunden, Sender = SRF 1.\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 3'755 Sekunden. Falls der Chatbot in Minuten (~62.6 Min) oder Stunden (~1.04 Std) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ist NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 3'755 Sekunden. Falls der Chatbot in Minuten (~62.6 Min) oder Stunden (~1.04 Std) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ist NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 384,
+                "cached": 0,
+                "prompt": 332,
+                "completion": 52,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Verweildauer von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 3'755 Sekunden. Falls der Chatbot in Minuten (~62.6 Min) oder Stunden (~1.04 Std) umrechnet, muss dies explizit als Umrechnung gekennzeichnet sein. Eine stillschweigende Umrechnung ist NICHT bestanden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "In der Deutschschweiz betrug die durchschnittliche Verweildauer von SRF 1 im Jahr 2021 (Ganzer Tag) 3'754.63 Sekunden (≈ 1:02:34.6).\n\nFilter: Region = Deutschschweiz, Jahr = 2021, Zeitschiene = Ganzer Tag, Kenngrösse = durchschnittliche Verweildauer in Sekunden, Sender = SRF 1.",
+          "cached": false
+        }
+      },
+      {
+        "id": "307aa3d0-f3d8-4ffd-9495-9553128a058b",
+        "text": "Der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 19.8958 %.",
+        "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 53584,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+          "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:53.397Z",
+          "tokensUsed": {
+            "total": 306,
+            "cached": 0,
+            "prompt": 254,
+            "completion": 52,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Die Antwort enthält den Marktanteil als Prozentzahl von 19.8958%, was nahe bei 19.9% liegt, aber als Dezimalbruch dargestellt wird.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDer Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 19.8958 %.\\n</Output>\\n<Rubric>\\nDie Antwort enthält den Marktanteil als Prozentzahl nahe 19.9%. Der Wert darf NICHT als Dezimalbruch (0.199 oder 0.20) dargestellt werden. Das wäre NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält den Marktanteil als Prozentzahl nahe 19.9%. Der Wert darf NICHT als Dezimalbruch (0.199 oder 0.20) dargestellt werden. Das wäre NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 306,
+                "cached": 0,
+                "prompt": 254,
+                "completion": 52,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "19"
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Manual result (overrides all other grading results) - marked by Christian Vetter (promptfoo.dev.regress896@passmail.net)",
+              "comment": "Manual PASS by Christian Vetter (promptfoo.dev.regress896@passmail.net) at 2026-03-24T10:08:53.397Z",
+              "assertion": {
+                "type": "human"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält den Marktanteil als Prozentzahl nahe 19.9%. Der Wert darf NICHT als Dezimalbruch (0.199 oder 0.20) dargestellt werden. Das wäre NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "19"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 1,
+        "response": {
+          "output": "Der Marktanteil von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag) beträgt 19.8958 %.",
+          "cached": false
+        }
+      },
+      {
+        "id": "a58fa9c6-8cef-4d74-a662-eb8532ffcd15",
+        "text": "Das Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393% (≈ 1.574%).",
+        "prompt": "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 48977,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 330,
+            "cached": 0,
+            "prompt": 284,
+            "completion": 46,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der zurückgegebene Wert von 1.57393% liegt nahe bei 1.57% und ist deutlich unter 5%.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDas Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393% (≈ 1.574%).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 1.57%. Dieser Wert ist bewusst klein und darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden. Wenn der zurückgegebene Wert deutlich über 5% liegt, wurde wahrscheinlich der Marktanteil statt des Ratings zurückgegeben — NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 1.57%. Dieser Wert ist bewusst klein und darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden. Wenn der zurückgegebene Wert deutlich über 5% liegt, wurde wahrscheinlich der Marktanteil statt des Ratings zurückgegeben — NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 330,
+                "cached": 0,
+                "prompt": 284,
+                "completion": 46,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist das Rating in Prozent von SRF 1 in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 1.57%. Dieser Wert ist bewusst klein und darf NICHT mit dem Marktanteil (~19.9%) verwechselt werden. Wenn der zurückgegebene Wert deutlich über 5% liegt, wurde wahrscheinlich der Marktanteil statt des Ratings zurückgegeben — NICHT bestanden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Das Rating (in %) von SRF 1 in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 1.57393% (≈ 1.574%).",
+          "cached": false
+        }
+      },
+      {
+        "id": "d2fcbe39-67b5-4f24-852f-8a5829b522cd",
+        "text": "Die Nettoreichweite (Nettoreichweite in 1'000) von SRG SSR Total in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 2'308.38 (in 1'000 Personen).",
+        "prompt": "Wie hoch ist die Nettoreichweite in Tausend von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 54101,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 337,
+            "cached": 0,
+            "prompt": 297,
+            "completion": 40,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Der Wert von 2'308.38 ist in Tausend angegeben und liegt nahe bei 2'308.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie Nettoreichweite (Nettoreichweite in 1'000) von SRG SSR Total in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 2'308.38 (in 1'000 Personen).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 2'308 (in Tausend). Der Wert ist bereits in Tausend skaliert und darf NICHT nochmals mit 1'000 multipliziert werden (also NICHT 2'308'000). Wenn ein Wert in Millionenhöhe genannt wird, ist der Test NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 2'308 (in Tausend). Der Wert ist bereits in Tausend skaliert und darf NICHT nochmals mit 1'000 multipliziert werden (also NICHT 2'308'000). Wenn ein Wert in Millionenhöhe genannt wird, ist der Test NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 337,
+                "cached": 0,
+                "prompt": 297,
+                "completion": 40,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "2'308"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Nettoreichweite in Tausend von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 2'308 (in Tausend). Der Wert ist bereits in Tausend skaliert und darf NICHT nochmals mit 1'000 multipliziert werden (also NICHT 2'308'000). Wenn ein Wert in Millionenhöhe genannt wird, ist der Test NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "2'308"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die Nettoreichweite (Nettoreichweite in 1'000) von SRG SSR Total in der Deutschschweiz im Jahr 2021 (Ganzer Tag) beträgt 2'308.38 (in 1'000 Personen).",
+          "cached": false
+        }
+      },
+      {
+        "id": "36467104-a2ee-4924-b073-bcba71a1fb0f",
+        "text": "Die Nettoreichweite von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag) beträgt 43.8105% (≈ 43.81%).",
+        "prompt": "Wie hoch ist die Nettoreichweite in Prozent von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 51735,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 316,
+            "cached": 0,
+            "prompt": 277,
+            "completion": 39,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort enthält den Prozentsatz 43.81%, was nahe bei 43.8% liegt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nDie Nettoreichweite von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag) beträgt 43.8105% (≈ 43.81%).\\n</Output>\\n<Rubric>\\nDie Antwort enthält einen Wert nahe 43.8%. Dies ist ein Prozentsatz, KEIN Absolutwert in Tausend (~2'308). Wenn statt Prozent ein Absolutwert in Tausend genannt wird, wurde die falsche Kenngrösse abgerufen — NICHT bestanden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält einen Wert nahe 43.8%. Dies ist ein Prozentsatz, KEIN Absolutwert in Tausend (~2'308). Wenn statt Prozent ein Absolutwert in Tausend genannt wird, wurde die falsche Kenngrösse abgerufen — NICHT bestanden.\n"
+              },
+              "tokensUsed": {
+                "total": 316,
+                "cached": 0,
+                "prompt": 277,
+                "completion": 39,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "43"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Nettoreichweite in Prozent von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag)?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält einen Wert nahe 43.8%. Dies ist ein Prozentsatz, KEIN Absolutwert in Tausend (~2'308). Wenn statt Prozent ein Absolutwert in Tausend genannt wird, wurde die falsche Kenngrösse abgerufen — NICHT bestanden.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "43"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Die Nettoreichweite von SRG SSR Total in der Deutschschweiz 2021 (Ganzer Tag) beträgt 43.8105% (≈ 43.81%).",
+          "cached": false
+        }
+      },
+      {
+        "id": "48d93c33-59e7-4606-b6d5-1e57e64b7c7a",
+        "text": "Region: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\n\n| Sender               | Marktanteil in % |\n|----------------------|------------------:|\n| SRG SSR Total        |            32.20  |\n| SRF Total            |            31.74  |\n| SRF 1                |            19.90  |\n| SRF zwei             |             9.66  |\n| SRF info             |             2.19  |\n| RTS 1                |             0.26  |\n| Restliche SRG SSR    |             0.15  |\n| RSI LA 1             |             0.04  |\n\n(Angaben gerundet; Quelle: Mediapulse Jahresbericht 2021, Personen 3+.)",
+        "prompt": "Zeige mir die Marktanteile aller SRG-Sender in der Deutschschweiz 2021 (Ganzer Tag).",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 78875,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 476,
+            "cached": 0,
+            "prompt": 434,
+            "completion": 42,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Tabelle enthält alle geforderten Sender mit den korrekten Marktanteilen, die den erwarteten Werten entsprechen.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\\n\\n| Sender               | Marktanteil in % |\\n|----------------------|------------------:|\\n| SRG SSR Total        |            32.20  |\\n| SRF Total            |            31.74  |\\n| SRF 1                |            19.90  |\\n| SRF zwei             |             9.66  |\\n| SRF info             |             2.19  |\\n| RTS 1                |             0.26  |\\n| Restliche SRG SSR    |             0.15  |\\n| RSI LA 1             |             0.04  |\\n\\n(Angaben gerundet; Quelle: Mediapulse Jahresbericht 2021, Personen 3+.)\\n</Output>\\n<Rubric>\\nDie Antwort enthält eine Tabelle mit Marktanteilen für SRG-Sender in der Deutschschweiz 2021. Erwartete Werte: SRG SSR Total ~32.2%, SRF Total ~31.7%, SRF 1 ~19.9%, SRF zwei ~9.7%. Alle genannten Sender müssen mit korrekten Werten vorhanden sein.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält eine Tabelle mit Marktanteilen für SRG-Sender in der Deutschschweiz 2021. Erwartete Werte: SRG SSR Total ~32.2%, SRF Total ~31.7%, SRF 1 ~19.9%, SRF zwei ~9.7%. Alle genannten Sender müssen mit korrekten Werten vorhanden sein.\n"
+              },
+              "tokensUsed": {
+                "total": 476,
+                "cached": 0,
+                "prompt": 434,
+                "completion": 42,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains-all",
+                "value": "SRF 1,SRF zwei"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Marktanteile aller SRG-Sender in der Deutschschweiz 2021 (Ganzer Tag)."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält eine Tabelle mit Marktanteilen für SRG-Sender in der Deutschschweiz 2021. Erwartete Werte: SRG SSR Total ~32.2%, SRF Total ~31.7%, SRF 1 ~19.9%, SRF zwei ~9.7%. Alle genannten Sender müssen mit korrekten Werten vorhanden sein.\n"
+            },
+            {
+              "type": "icontains-all",
+              "value": "SRF 1,SRF zwei"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Deutschschweiz — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\n\n| Sender               | Marktanteil in % |\n|----------------------|------------------:|\n| SRG SSR Total        |            32.20  |\n| SRF Total            |            31.74  |\n| SRF 1                |            19.90  |\n| SRF zwei             |             9.66  |\n| SRF info             |             2.19  |\n| RTS 1                |             0.26  |\n| Restliche SRG SSR    |             0.15  |\n| RSI LA 1             |             0.04  |\n\n(Angaben gerundet; Quelle: Mediapulse Jahresbericht 2021, Personen 3+.)",
+          "cached": false
+        }
+      },
+      {
+        "id": "66e0e279-9543-43c2-8b12-99c5fad38a39",
+        "text": "Hier die durchschnittliche Sehdauer (in Sekunden) von SRF 1 in der Deutschschweiz — Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden (Personen 3+), Jahre 2018–2021:\n\n| Sender | 2018 | 2019 | 2020 | 2021 |\n|:-------|-----:|-----:|-----:|-----:|\n| SRF 1  | 1326.96 | 1257.95 | 1504.36 | 1359.88 |",
+        "prompt": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag).",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 87044,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 412,
+            "cached": 0,
+            "prompt": 360,
+            "completion": 52,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort enthält die Sehdauer-Werte für SRF 1 für alle vier Jahre: 2018, 2019, 2020 und 2021.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nHier die durchschnittliche Sehdauer (in Sekunden) von SRF 1 in der Deutschschweiz — Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden (Personen 3+), Jahre 2018–2021:\\n\\n| Sender | 2018 | 2019 | 2020 | 2021 |\\n|:-------|-----:|-----:|-----:|-----:|\\n| SRF 1  | 1326.96 | 1257.95 | 1504.36 | 1359.88 |\\n</Output>\\n<Rubric>\\nDie Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1'327), 2019 (~1'258), 2020 (~1'504) und 2021 (~1'360) in Sekunden. Alle vier Jahre müssen vorhanden sein.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1'327), 2019 (~1'258), 2020 (~1'504) und 2021 (~1'360) in Sekunden. Alle vier Jahre müssen vorhanden sein.\n"
+              },
+              "tokensUsed": {
+                "total": 412,
+                "cached": 0,
+                "prompt": 360,
+                "completion": 52,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains-all",
+                "value": "2018,2019,2020,2021"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Sehdauer von SRF 1 in der Deutschschweiz für alle vier Jahre (Ganzer Tag)."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält Sehdauer-Werte für SRF 1 für 2018 (~1'327), 2019 (~1'258), 2020 (~1'504) und 2021 (~1'360) in Sekunden. Alle vier Jahre müssen vorhanden sein.\n"
+            },
+            {
+              "type": "icontains-all",
+              "value": "2018,2019,2020,2021"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Hier die durchschnittliche Sehdauer (in Sekunden) von SRF 1 in der Deutschschweiz — Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden (Personen 3+), Jahre 2018–2021:\n\n| Sender | 2018 | 2019 | 2020 | 2021 |\n|:-------|-----:|-----:|-----:|-----:|\n| SRF 1  | 1326.96 | 1257.95 | 1504.36 | 1359.88 |",
+          "cached": false
+        }
+      },
+      {
+        "id": "c8ed1325-823b-49c6-b33a-b548b4fa85a4",
+        "text": "Region: Suisse romande — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\n\n| Sender                                | Marktanteil (%) |\n|:-------------------------------------|----------------:|\n| Andere Sender                         | 70.5356%        |\n| Andere Sender                         | 36.8782%        |\n| SRG SSR Total                         | 29.4644%        |\n| SRG SSR Total                         | 29.4644%        |\n| RTS Total                             | 28.7792%        |\n| RTS 1                                 | 21.7475%        |\n| TF1                                   | 10.9866%        |\n| M6                                    | 7.63471%        |\n| RTS 2                                 | 7.03165%        |\n| France 2 - (FR)                       | 6.45958%        |\n| France 3 (Alsace & Paris) - (FR)      | 4.60152%        |\n| W9                                    | 2.03607%        |\n| RTL9                                  | 1.44544%        |\n| TV5 Monde                             | 0.390322%       |\n| SRF 1                                 | 0.346431%       |\n| Restliche SRG SSR                     | 0.298426%       |\n| TCM                                   | 0.103178%       |\n| RSI LA 1                              | 0.0403465%      |\n\nVerwendete Filter: Jahr = 2021, Region = Suisse romande, Zeitschiene = Ganzer Tag, Kenngrösse = Marktanteil in %.\n\nHinweis: Die Tabelle zeigt die Rohdaten aus dem Jahresbericht. Es erscheinen einzelne Sender/Gruppen mehrfach in den Daten (z. B. \"Andere Sender\", \"SRG SSR Total\"). Möchten Sie eine bereinigte Liste (ohne Duplikate) oder die Werte für andere Jahre/Regionen?",
+        "prompt": "Welche Sender gibt es in der Suisse romande? Zeige die Marktanteile für 2021 (Ganzer Tag).",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 100665,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 681,
+            "cached": 0,
+            "prompt": 633,
+            "completion": 48,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Tabelle enthält Marktanteile für Sender in der Suisse romande 2021, einschließlich RTS 1 und RTS Total mit korrekten Werten.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nRegion: Suisse romande — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\\n\\n| Sender                                | Marktanteil (%) |\\n|:-------------------------------------|----------------:|\\n| Andere Sender                         | 70.5356%        |\\n| Andere Sender                         | 36.8782%        |\\n| SRG SSR Total                         | 29.4644%        |\\n| SRG SSR Total                         | 29.4644%        |\\n| RTS Total                             | 28.7792%        |\\n| RTS 1                                 | 21.7475%        |\\n| TF1                                   | 10.9866%        |\\n| M6                                    | 7.63471%        |\\n| RTS 2                                 | 7.03165%        |\\n| France 2 - (FR)                       | 6.45958%        |\\n| France 3 (Alsace & Paris) - (FR)      | 4.60152%        |\\n| W9                                    | 2.03607%        |\\n| RTL9                                  | 1.44544%        |\\n| TV5 Monde                             | 0.390322%       |\\n| SRF 1                                 | 0.346431%       |\\n| Restliche SRG SSR                     | 0.298426%       |\\n| TCM                                   | 0.103178%       |\\n| RSI LA 1                              | 0.0403465%      |\\n\\nVerwendete Filter: Jahr = 2021, Region = Suisse romande, Zeitschiene = Ganzer Tag, Kenngrösse = Marktanteil in %.\\n\\nHinweis: Die Tabelle zeigt die Rohdaten aus dem Jahresbericht. Es erscheinen einzelne Sender/Gruppen mehrfach in den Daten (z. B. \\\"Andere Sender\\\", \\\"SRG SSR Total\\\"). Möchten Sie eine bereinigte Liste (ohne Duplikate) oder die Werte für andere Jahre/Regionen?\\n</Output>\\n<Rubric>\\nDie Antwort enthält eine Tabelle mit Marktanteilen für Sender in der Suisse romande 2021. Mindestens RTS 1, RTS Total und weitere Sender müssen mit korrekten Werten enthalten sein.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort enthält eine Tabelle mit Marktanteilen für Sender in der Suisse romande 2021. Mindestens RTS 1, RTS Total und weitere Sender müssen mit korrekten Werten enthalten sein.\n"
+              },
+              "tokensUsed": {
+                "total": 681,
+                "cached": 0,
+                "prompt": 633,
+                "completion": 48,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "icontains",
+                "value": "RTS"
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Welche Sender gibt es in der Suisse romande? Zeige die Marktanteile für 2021 (Ganzer Tag)."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort enthält eine Tabelle mit Marktanteilen für Sender in der Suisse romande 2021. Mindestens RTS 1, RTS Total und weitere Sender müssen mit korrekten Werten enthalten sein.\n"
+            },
+            {
+              "type": "icontains",
+              "value": "RTS"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Region: Suisse romande — Jahr: 2021 — Zeitschiene: Ganzer Tag — Kenngrösse: Marktanteil in %\n\n| Sender                                | Marktanteil (%) |\n|:-------------------------------------|----------------:|\n| Andere Sender                         | 70.5356%        |\n| Andere Sender                         | 36.8782%        |\n| SRG SSR Total                         | 29.4644%        |\n| SRG SSR Total                         | 29.4644%        |\n| RTS Total                             | 28.7792%        |\n| RTS 1                                 | 21.7475%        |\n| TF1                                   | 10.9866%        |\n| M6                                    | 7.63471%        |\n| RTS 2                                 | 7.03165%        |\n| France 2 - (FR)                       | 6.45958%        |\n| France 3 (Alsace & Paris) - (FR)      | 4.60152%        |\n| W9                                    | 2.03607%        |\n| RTL9                                  | 1.44544%        |\n| TV5 Monde                             | 0.390322%       |\n| SRF 1                                 | 0.346431%       |\n| Restliche SRG SSR                     | 0.298426%       |\n| TCM                                   | 0.103178%       |\n| RSI LA 1                              | 0.0403465%      |\n\nVerwendete Filter: Jahr = 2021, Region = Suisse romande, Zeitschiene = Ganzer Tag, Kenngrösse = Marktanteil in %.\n\nHinweis: Die Tabelle zeigt die Rohdaten aus dem Jahresbericht. Es erscheinen einzelne Sender/Gruppen mehrfach in den Daten (z. B. \"Andere Sender\", \"SRG SSR Total\"). Möchten Sie eine bereinigte Liste (ohne Duplikate) oder die Werte für andere Jahre/Regionen?",
+          "cached": false
+        }
+      },
+      {
+        "id": "d050df6d-d8b0-496f-a2a3-b1dfbcbd32c3",
+        "text": "Keine Daten gefunden für die Anfrage. Verwendete Filter:\n- Jahr: 2022\n- Zeitschiene: Ganzer Tag (Standard)\n- Region: keine Angabe\n- Kenngrösse / Sender: keine Angabe\n\nHinweis: Die verfügbaren Jahresbericht-Daten decken nur die Jahre 2018–2021 ab. Möchten Sie stattdessen Daten für eines oder mehrere Jahre aus 2018–2021 sehen? Wenn ja, nennen Sie bitte Jahr(e) (z. B. 2021 oder 2018,2019,2020,2021). Sie können auch Region(en), Sender oder Kenngrössen angeben — falls Sie nichts zur Region sagen, frage ich automatisch alle drei Regionen ab und gruppiere die Ergebnisse nach Region.",
+        "prompt": "Zeige mir die Daten für 2022.",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 109647,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 410,
+            "cached": 0,
+            "prompt": 368,
+            "completion": 42,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind und bietet eine Erklärung für die Verfügbarkeit der Daten.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKeine Daten gefunden für die Anfrage. Verwendete Filter:\\n- Jahr: 2022\\n- Zeitschiene: Ganzer Tag (Standard)\\n- Region: keine Angabe\\n- Kenngrösse / Sender: keine Angabe\\n\\nHinweis: Die verfügbaren Jahresbericht-Daten decken nur die Jahre 2018–2021 ab. Möchten Sie stattdessen Daten für eines oder mehrere Jahre aus 2018–2021 sehen? Wenn ja, nennen Sie bitte Jahr(e) (z. B. 2021 oder 2018,2019,2020,2021). Sie können auch Region(en), Sender oder Kenngrössen angeben — falls Sie nichts zur Region sagen, frage ich automatisch alle drei Regionen ab und gruppiere die Ergebnisse nach Region.\\n</Output>\\n<Rubric>\\nDie Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\n"
+              },
+              "tokensUsed": {
+                "total": 410,
+                "cached": 0,
+                "prompt": 368,
+                "completion": 42,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Daten für 2022."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt klar, dass keine Daten für 2022 verfügbar sind. Die Antwort erfindet KEINE Daten für 2022.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Keine Daten gefunden für die Anfrage. Verwendete Filter:\n- Jahr: 2022\n- Zeitschiene: Ganzer Tag (Standard)\n- Region: keine Angabe\n- Kenngrösse / Sender: keine Angabe\n\nHinweis: Die verfügbaren Jahresbericht-Daten decken nur die Jahre 2018–2021 ab. Möchten Sie stattdessen Daten für eines oder mehrere Jahre aus 2018–2021 sehen? Wenn ja, nennen Sie bitte Jahr(e) (z. B. 2021 oder 2018,2019,2020,2021). Sie können auch Region(en), Sender oder Kenngrössen angeben — falls Sie nichts zur Region sagen, frage ich automatisch alle drei Regionen ab und gruppiere die Ergebnisse nach Region.",
+          "cached": false
+        }
+      },
+      {
+        "id": "76f711e5-d7bc-44c5-adff-d07d4de818ea",
+        "text": "Keine Daten gefunden.\n\nVerwendete Filter:\n- Jahr: 2018–2021\n- Region: Deutschschweiz\n- Zeitschiene: Ganzer Tag\n- Kenngrösse: Marktanteil in %\n- Sender: Netflix\n\nZu dieser Frage liegen in den verfügbaren Mediapulse‑Jahresbericht‑Daten leider keine Informationen vor. Streaming‑Angebote wie Netflix sind in den Jahresberichten nicht enthalten. Die Daten umfassen ausschliesslich aggregierte TV‑Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro TV‑Sender, Region und Zeitschiene für Personen 3+.\n\nMöchten Sie stattdessen die Marktanteile von TV‑Sendern in der Deutschschweiz (z. B. SRF 1, SRF zwei, ARD, ZDF, ORF 1) sehen? Wenn ja, für welche Jahre sollen die Daten dargestellt werden (Standard sind 2018–2021), oder möchten Sie eine andere Region/Zeitschiene?",
+        "prompt": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 99940,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 473,
+            "cached": 0,
+            "prompt": 427,
+            "completion": 46,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt, dass Netflix in den Jahresberichten nicht enthalten ist und keine Daten dafür existieren, ohne erfundene Daten zu nennen.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKeine Daten gefunden.\\n\\nVerwendete Filter:\\n- Jahr: 2018–2021\\n- Region: Deutschschweiz\\n- Zeitschiene: Ganzer Tag\\n- Kenngrösse: Marktanteil in %\\n- Sender: Netflix\\n\\nZu dieser Frage liegen in den verfügbaren Mediapulse‑Jahresbericht‑Daten leider keine Informationen vor. Streaming‑Angebote wie Netflix sind in den Jahresberichten nicht enthalten. Die Daten umfassen ausschliesslich aggregierte TV‑Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro TV‑Sender, Region und Zeitschiene für Personen 3+.\\n\\nMöchten Sie stattdessen die Marktanteile von TV‑Sendern in der Deutschschweiz (z. B. SRF 1, SRF zwei, ARD, ZDF, ORF 1) sehen? Wenn ja, für welche Jahre sollen die Daten dargestellt werden (Standard sind 2018–2021), oder möchten Sie eine andere Region/Zeitschiene?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\n"
+              },
+              "tokensUsed": {
+                "total": 473,
+                "cached": 0,
+                "prompt": 427,
+                "completion": 46,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil von Netflix in der Deutschschweiz?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass Netflix kein verfügbarer Sender ist oder keine Daten dafür existieren. Es werden KEINE erfundenen Netflix-Daten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Keine Daten gefunden.\n\nVerwendete Filter:\n- Jahr: 2018–2021\n- Region: Deutschschweiz\n- Zeitschiene: Ganzer Tag\n- Kenngrösse: Marktanteil in %\n- Sender: Netflix\n\nZu dieser Frage liegen in den verfügbaren Mediapulse‑Jahresbericht‑Daten leider keine Informationen vor. Streaming‑Angebote wie Netflix sind in den Jahresberichten nicht enthalten. Die Daten umfassen ausschliesslich aggregierte TV‑Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro TV‑Sender, Region und Zeitschiene für Personen 3+.\n\nMöchten Sie stattdessen die Marktanteile von TV‑Sendern in der Deutschschweiz (z. B. SRF 1, SRF zwei, ARD, ZDF, ORF 1) sehen? Wenn ja, für welche Jahre sollen die Daten dargestellt werden (Standard sind 2018–2021), oder möchten Sie eine andere Region/Zeitschiene?",
+          "cached": false
+        }
+      },
+      {
+        "id": "ccb11884-cc80-4c9a-9a6b-4de50d517107",
+        "text": "Ich habe die Zeitschiene auf \"Ganzer Tag\" gesetzt und kann die Jahresbericht-Daten für die Region Tessin (Svizzera italiana) anzeigen. Möchten Sie, dass ich:\n\n1) Alle Kennzahlen (Rating, Nettoreichweite, Marktanteil, durchschnittliche Sehdauer, durchschnittliche Verweildauer) für alle Jahre 2018–2021 zeige (große Tabellen), oder  \n2) nur bestimmte Kenngrössen (z. B. nur Marktanteil oder nur Nettoreichweite), oder  \n3) nur bestimmte Jahr(e) (z. B. 2020–2021), oder  \n4) eine Rangliste / Top N Sender (z. B. Top 10 nach Marktanteil)?\n\nStandardvorschlag: Ich kann die Daten als Pivot-Tabelle mit Sendern in den Zeilen und Jahren als Spalten liefern (alle Kennzahlen separat). Sagen Sie kurz, welche Option Sie möchten.",
+        "prompt": "Zeige mir die Daten für die Region Tessin.",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 109586,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 470,
+            "cached": 0,
+            "prompt": 427,
+            "completion": 43,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort bezieht sich korrekt auf die Region Tessin und bietet Optionen zur Anzeige von Daten, ohne falsche Informationen zu liefern.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nIch habe die Zeitschiene auf \\\"Ganzer Tag\\\" gesetzt und kann die Jahresbericht-Daten für die Region Tessin (Svizzera italiana) anzeigen. Möchten Sie, dass ich:\\n\\n1) Alle Kennzahlen (Rating, Nettoreichweite, Marktanteil, durchschnittliche Sehdauer, durchschnittliche Verweildauer) für alle Jahre 2018–2021 zeige (große Tabellen), oder  \\n2) nur bestimmte Kenngrössen (z. B. nur Marktanteil oder nur Nettoreichweite), oder  \\n3) nur bestimmte Jahr(e) (z. B. 2020–2021), oder  \\n4) eine Rangliste / Top N Sender (z. B. Top 10 nach Marktanteil)?\\n\\nStandardvorschlag: Ich kann die Daten als Pivot-Tabelle mit Sendern in den Zeilen und Jahren als Spalten liefern (alle Kennzahlen separat). Sagen Sie kurz, welche Option Sie möchten.\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass \\\"Tessin\\\" keine gültige Region ist und korrigiert zu \\\"Svizzera italiana\\\", oder liefert direkt Daten für Svizzera italiana. Es werden KEINE Daten für eine nicht existierende Region erfunden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass \"Tessin\" keine gültige Region ist und korrigiert zu \"Svizzera italiana\", oder liefert direkt Daten für Svizzera italiana. Es werden KEINE Daten für eine nicht existierende Region erfunden.\n"
+              },
+              "tokensUsed": {
+                "total": 470,
+                "cached": 0,
+                "prompt": 427,
+                "completion": 43,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Daten für die Region Tessin."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass \"Tessin\" keine gültige Region ist und korrigiert zu \"Svizzera italiana\", oder liefert direkt Daten für Svizzera italiana. Es werden KEINE Daten für eine nicht existierende Region erfunden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Ich habe die Zeitschiene auf \"Ganzer Tag\" gesetzt und kann die Jahresbericht-Daten für die Region Tessin (Svizzera italiana) anzeigen. Möchten Sie, dass ich:\n\n1) Alle Kennzahlen (Rating, Nettoreichweite, Marktanteil, durchschnittliche Sehdauer, durchschnittliche Verweildauer) für alle Jahre 2018–2021 zeige (große Tabellen), oder  \n2) nur bestimmte Kenngrössen (z. B. nur Marktanteil oder nur Nettoreichweite), oder  \n3) nur bestimmte Jahr(e) (z. B. 2020–2021), oder  \n4) eine Rangliste / Top N Sender (z. B. Top 10 nach Marktanteil)?\n\nStandardvorschlag: Ich kann die Daten als Pivot-Tabelle mit Sendern in den Zeilen und Jahren als Spalten liefern (alle Kennzahlen separat). Sagen Sie kurz, welche Option Sie möchten.",
+          "cached": false
+        }
+      },
+      {
+        "id": "ec45078e-6a3c-445d-8683-b09a82aeaba4",
+        "text": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Datengrundlage umfasst keine demografischen Untergruppen (z. B. Altersgruppen wie 18–29). Die Berichte enthalten nur aggregierte Kennzahlen für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen die Einschaltquote (Rating) für SRF 1 für Personen 3+ sehen? Ich kann das für die Jahre 2018–2021 und für alle drei Sprachregionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen (Zeitschiene standardmässig: Ganzer Tag). Wenn ja, welche Kenngrösse bevorzugen Sie — \"Rating in %\" oder \"Rating in 1'000\" — oder soll ich beide liefern?",
+        "prompt": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 90419,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 418,
+            "cached": 0,
+            "prompt": 372,
+            "completion": 46,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt, dass keine demografischen Untergruppen wie Altersgruppen verfügbar sind und es werden keine erfundenen demografischen Daten genannt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Datengrundlage umfasst keine demografischen Untergruppen (z. B. Altersgruppen wie 18–29). Die Berichte enthalten nur aggregierte Kennzahlen für die Zielgruppe Personen 3+.\\n\\nMöchten Sie stattdessen die Einschaltquote (Rating) für SRF 1 für Personen 3+ sehen? Ich kann das für die Jahre 2018–2021 und für alle drei Sprachregionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen (Zeitschiene standardmässig: Ganzer Tag). Wenn ja, welche Kenngrösse bevorzugen Sie — \\\"Rating in %\\\" oder \\\"Rating in 1'000\\\" — oder soll ich beide liefern?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\n"
+              },
+              "tokensUsed": {
+                "total": 418,
+                "cached": 0,
+                "prompt": 372,
+                "completion": 46,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist die Einschaltquote der 18-29-Jährigen für SRF 1?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass keine Altersgruppen-Daten verfügbar sind. Es werden KEINE erfundenen demografischen Daten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Datengrundlage umfasst keine demografischen Untergruppen (z. B. Altersgruppen wie 18–29). Die Berichte enthalten nur aggregierte Kennzahlen für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen die Einschaltquote (Rating) für SRF 1 für Personen 3+ sehen? Ich kann das für die Jahre 2018–2021 und für alle drei Sprachregionen (Deutschschweiz, Suisse romande, Svizzera italiana) abfragen (Zeitschiene standardmässig: Ganzer Tag). Wenn ja, welche Kenngrösse bevorzugen Sie — \"Rating in %\" oder \"Rating in 1'000\" — oder soll ich beide liefern?",
+          "cached": false
+        }
+      },
+      {
+        "id": "9ec3ce46-cd4a-428f-82f2-dd18ebafb6dc",
+        "text": "Kurz vorweg: Zu einzelnen Sendungen (z. B. \"Tagesschau\") liegen in den verfügbaren Mediapulse-Jahresberichten keine Daten vor. Die Jahresberichte enthalten nur aggregierte Kennzahlen pro Sender, Region und Zeitschiene für die Zielgruppe Personen 3+. Ich kann dir deshalb nur die SRF 1-Aggregatwerte (z. B. \"Ganzer Tag\") zeigen — soll ich das machen? (Habe unten die Ganzer-Tag-Werte für SRF 1 aus den Jahresberichten 2018–2021 eingefügt.)\n\nZeitschiene: Ganzer Tag — Zielgruppe: Personen 3+ — Quelle: Mediapulse Jahresberichte 2018–2021\n\nDeutschschweiz\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 79.6486 | 1.53584 | 1892.1  | 36.4847 | 18.7471 | 1326.96 |\n| 2019 | 75.5356 | 1.45596 | 1842.12 | 35.5072 | 18.7711 | 1257.95 |\n| 2020 | 91.1844 | 1.74115 | 2031.96 | 38.8    | 21.1215 | 1504.36 |\n| 2021 | 82.9307 | 1.57393 | 1908.37 | 36.2187 | 19.8958 | 1359.88 |\n\nSvizzera italiana\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 0.616497 | 0.181856 | 18.9036 | 5.57622 | 1.53821 | 157.123 |\n| 2019 | 0.664067 | 0.193604 | 18.9424 | 5.52251 | 1.71506 | 167.274 |\n| 2020 | 0.75907  | 0.225241 | 19.6343 | 5.82613 | 1.90314 | 194.608 |\n| 2021 | 0.649375 | 0.192121 | 16.2541 | 4.80884 | 1.81786 | 165.993 |\n\nSuisse romande\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 1.0235   | 0.0556246 | 28.0179 | 1.5227  | 0.604628 | 48.0597 |\n| 2019 | 0.879969 | 0.0476946 | 25.9513 | 1.40657 | 0.525325 | 41.2081 |\n| 2020 | 0.902343 | 0.0487224 | 27.3525 | 1.47691 | 0.494559 | 42.0962 |\n| 2021 | 0.591742 | 0.0316947 | 21.7394 | 1.1644  | 0.346431 | 27.3842 |\n\nMöchtest du, dass ich stattdessen bestimmte Kenngrössen (z. B. nur Nettoreichweite oder nur Sehdauer) für SRF 1 in einer Pivot-Tabelle über die Jahre zusammenfasse? Oder soll ich nach einer alternativen Datenquelle für Sendungsdaten suchen?",
+        "prompt": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1.",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 123518,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 1207,
+            "cached": 0,
+            "prompt": 1155,
+            "completion": 52,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt klar, dass keine Sendungs-Level-Daten verfügbar sind und nur Sender-Level-Daten bereitgestellt werden. Es werden keine erfundenen Sendungsdaten genannt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKurz vorweg: Zu einzelnen Sendungen (z. B. \\\"Tagesschau\\\") liegen in den verfügbaren Mediapulse-Jahresberichten keine Daten vor. Die Jahresberichte enthalten nur aggregierte Kennzahlen pro Sender, Region und Zeitschiene für die Zielgruppe Personen 3+. Ich kann dir deshalb nur die SRF 1-Aggregatwerte (z. B. \\\"Ganzer Tag\\\") zeigen — soll ich das machen? (Habe unten die Ganzer-Tag-Werte für SRF 1 aus den Jahresberichten 2018–2021 eingefügt.)\\n\\nZeitschiene: Ganzer Tag — Zielgruppe: Personen 3+ — Quelle: Mediapulse Jahresberichte 2018–2021\\n\\nDeutschschweiz\\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\\n| 2018 | 79.6486 | 1.53584 | 1892.1  | 36.4847 | 18.7471 | 1326.96 |\\n| 2019 | 75.5356 | 1.45596 | 1842.12 | 35.5072 | 18.7711 | 1257.95 |\\n| 2020 | 91.1844 | 1.74115 | 2031.96 | 38.8    | 21.1215 | 1504.36 |\\n| 2021 | 82.9307 | 1.57393 | 1908.37 | 36.2187 | 19.8958 | 1359.88 |\\n\\nSvizzera italiana\\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\\n| 2018 | 0.616497 | 0.181856 | 18.9036 | 5.57622 | 1.53821 | 157.123 |\\n| 2019 | 0.664067 | 0.193604 | 18.9424 | 5.52251 | 1.71506 | 167.274 |\\n| 2020 | 0.75907  | 0.225241 | 19.6343 | 5.82613 | 1.90314 | 194.608 |\\n| 2021 | 0.649375 | 0.192121 | 16.2541 | 4.80884 | 1.81786 | 165.993 |\\n\\nSuisse romande\\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\\n| 2018 | 1.0235   | 0.0556246 | 28.0179 | 1.5227  | 0.604628 | 48.0597 |\\n| 2019 | 0.879969 | 0.0476946 | 25.9513 | 1.40657 | 0.525325 | 41.2081 |\\n| 2020 | 0.902343 | 0.0487224 | 27.3525 | 1.47691 | 0.494559 | 42.0962 |\\n| 2021 | 0.591742 | 0.0316947 | 21.7394 | 1.1644  | 0.346431 | 27.3842 |\\n\\nMöchtest du, dass ich stattdessen bestimmte Kenngrössen (z. B. nur Nettoreichweite oder nur Sehdauer) für SRF 1 in einer Pivot-Tabelle über die Jahre zusammenfasse? Oder soll ich nach einer alternativen Datenquelle für Sendungsdaten suchen?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\n"
+              },
+              "tokensUsed": {
+                "total": 1207,
+                "cached": 0,
+                "prompt": 1155,
+                "completion": 52,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Zeige mir die Zuschauerzahlen für die Sendung 'Tagesschau' auf SRF 1."
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass keine Sendungs-Level-Daten verfügbar sind — nur Sender-Level. Es werden KEINE erfundenen Sendungsdaten genannt.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Kurz vorweg: Zu einzelnen Sendungen (z. B. \"Tagesschau\") liegen in den verfügbaren Mediapulse-Jahresberichten keine Daten vor. Die Jahresberichte enthalten nur aggregierte Kennzahlen pro Sender, Region und Zeitschiene für die Zielgruppe Personen 3+. Ich kann dir deshalb nur die SRF 1-Aggregatwerte (z. B. \"Ganzer Tag\") zeigen — soll ich das machen? (Habe unten die Ganzer-Tag-Werte für SRF 1 aus den Jahresberichten 2018–2021 eingefügt.)\n\nZeitschiene: Ganzer Tag — Zielgruppe: Personen 3+ — Quelle: Mediapulse Jahresberichte 2018–2021\n\nDeutschschweiz\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 79.6486 | 1.53584 | 1892.1  | 36.4847 | 18.7471 | 1326.96 |\n| 2019 | 75.5356 | 1.45596 | 1842.12 | 35.5072 | 18.7711 | 1257.95 |\n| 2020 | 91.1844 | 1.74115 | 2031.96 | 38.8    | 21.1215 | 1504.36 |\n| 2021 | 82.9307 | 1.57393 | 1908.37 | 36.2187 | 19.8958 | 1359.88 |\n\nSvizzera italiana\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 0.616497 | 0.181856 | 18.9036 | 5.57622 | 1.53821 | 157.123 |\n| 2019 | 0.664067 | 0.193604 | 18.9424 | 5.52251 | 1.71506 | 167.274 |\n| 2020 | 0.75907  | 0.225241 | 19.6343 | 5.82613 | 1.90314 | 194.608 |\n| 2021 | 0.649375 | 0.192121 | 16.2541 | 4.80884 | 1.81786 | 165.993 |\n\nSuisse romande\n| Jahr | Rating (in 1'000) | Rating (%) | Nettoreichweite (in 1'000) | Nettoreichweite (%) | Marktanteil (%) | durchschnittliche Sehdauer (s) |\n|------:|------------------:|-----------:|---------------------------:|--------------------:|----------------:|-------------------------------:|\n| 2018 | 1.0235   | 0.0556246 | 28.0179 | 1.5227  | 0.604628 | 48.0597 |\n| 2019 | 0.879969 | 0.0476946 | 25.9513 | 1.40657 | 0.525325 | 41.2081 |\n| 2020 | 0.902343 | 0.0487224 | 27.3525 | 1.47691 | 0.494559 | 42.0962 |\n| 2021 | 0.591742 | 0.0316947 | 21.7394 | 1.1644  | 0.346431 | 27.3842 |\n\nMöchtest du, dass ich stattdessen bestimmte Kenngrössen (z. B. nur Nettoreichweite oder nur Sehdauer) für SRF 1 in einer Pivot-Tabelle über die Jahre zusammenfasse? Oder soll ich nach einer alternativen Datenquelle für Sendungsdaten suchen?",
+          "cached": false
+        }
+      },
+      {
+        "id": "8c8bcb31-9ac0-4d72-bb18-1845d6d7c5d8",
+        "text": "Keine Daten gefunden mit den verwendeten Filtern:\n- Region: Bern\n- Zeitschiene: Ganzer Tag (Standard)\n- Kenngrösse: Marktanteil in %\n\nHinweis: Die Mediapulse-Jahresberichtsdaten enthalten nur die drei Sprachregionen: Deutschschweiz, Suisse romande und Svizzera italiana — Kantone wie Bern sind darin nicht als eigene Region vorhanden. Meinten Sie mit \"Bern\" die Deutschschweiz?\n\nBitte geben Sie an, wie ich vorgehen soll:\n- Soll ich stattdessen die Deutschschweiz verwenden? (Ja/Nein)\n- Möchten Sie den Marktanteil für alle Sender oder für einen bestimmten Sender? (z. B. \"alle Sender\" oder \"SRF 1\")\n- Für welches Jahr oder welche Jahre? (Erlaubt: 2018–2021)\n\nWenn Sie nichts weiter angeben, schlage ich vor: Deutschschweiz, Ganzer Tag, Marktanteil in %, alle Sender, und ich zeige die Werte pro Sender für die Jahre 2018–2021. Soll ich so vorgehen?",
+        "prompt": "Wie hoch ist der Marktanteil in der Region Bern?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 122494,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 495,
+            "cached": 0,
+            "prompt": 443,
+            "completion": 52,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erklärt, dass die Mediapulse-Jahresberichtsdaten nur die drei Sprachregionen enthalten und dass Kantone wie Bern nicht als eigene Region vorhanden sind.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKeine Daten gefunden mit den verwendeten Filtern:\\n- Region: Bern\\n- Zeitschiene: Ganzer Tag (Standard)\\n- Kenngrösse: Marktanteil in %\\n\\nHinweis: Die Mediapulse-Jahresberichtsdaten enthalten nur die drei Sprachregionen: Deutschschweiz, Suisse romande und Svizzera italiana — Kantone wie Bern sind darin nicht als eigene Region vorhanden. Meinten Sie mit \\\"Bern\\\" die Deutschschweiz?\\n\\nBitte geben Sie an, wie ich vorgehen soll:\\n- Soll ich stattdessen die Deutschschweiz verwenden? (Ja/Nein)\\n- Möchten Sie den Marktanteil für alle Sender oder für einen bestimmten Sender? (z. B. \\\"alle Sender\\\" oder \\\"SRF 1\\\")\\n- Für welches Jahr oder welche Jahre? (Erlaubt: 2018–2021)\\n\\nWenn Sie nichts weiter angeben, schlage ich vor: Deutschschweiz, Ganzer Tag, Marktanteil in %, alle Sender, und ich zeige die Werte pro Sender für die Jahre 2018–2021. Soll ich so vorgehen?\\n</Output>\\n<Rubric>\\nDie Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\n"
+              },
+              "tokensUsed": {
+                "total": 495,
+                "cached": 0,
+                "prompt": 443,
+                "completion": 52,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Wie hoch ist der Marktanteil in der Region Bern?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort erklärt, dass nur Sprachregionen verfügbar sind (Deutschschweiz, Suisse romande, Svizzera italiana), keine Kantone oder Städte.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Keine Daten gefunden mit den verwendeten Filtern:\n- Region: Bern\n- Zeitschiene: Ganzer Tag (Standard)\n- Kenngrösse: Marktanteil in %\n\nHinweis: Die Mediapulse-Jahresberichtsdaten enthalten nur die drei Sprachregionen: Deutschschweiz, Suisse romande und Svizzera italiana — Kantone wie Bern sind darin nicht als eigene Region vorhanden. Meinten Sie mit \"Bern\" die Deutschschweiz?\n\nBitte geben Sie an, wie ich vorgehen soll:\n- Soll ich stattdessen die Deutschschweiz verwenden? (Ja/Nein)\n- Möchten Sie den Marktanteil für alle Sender oder für einen bestimmten Sender? (z. B. \"alle Sender\" oder \"SRF 1\")\n- Für welches Jahr oder welche Jahre? (Erlaubt: 2018–2021)\n\nWenn Sie nichts weiter angeben, schlage ich vor: Deutschschweiz, Ganzer Tag, Marktanteil in %, alle Sender, und ich zeige die Werte pro Sender für die Jahre 2018–2021. Soll ich so vorgehen?",
+          "cached": false
+        }
+      },
+      {
+        "id": "fab08904-f8fd-467c-b081-da4eca4deef8",
+        "text": "Kurz und knapp: Nein.  \n\nLaut Mediapulse‑Jahresbericht 2020 hatte SRF 1 in der Deutschschweiz (Zeitschiene: Ganzer Tag) einen Marktanteil von 21.12% (genau: 21.1215%).",
+        "prompt": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 108332,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 352,
+            "cached": 0,
+            "prompt": 287,
+            "completion": 65,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort korrigiert die falsche Behauptung, indem sie den tatsächlichen Marktanteil von SRF 1 2020 mit 21.12% angibt und die falsche Zahl von 35% nicht bestätigt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKurz und knapp: Nein.  \\n\\nLaut Mediapulse‑Jahresbericht 2020 hatte SRF 1 in der Deutschschweiz (Zeitschiene: Ganzer Tag) einen Marktanteil von 21.12% (genau: 21.1215%).\\n</Output>\\n<Rubric>\\nDie Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\n"
+              },
+              "tokensUsed": {
+                "total": 352,
+                "cached": 0,
+                "prompt": 287,
+                "completion": 65,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Stimmt es, dass SRF 1 im Jahr 2020 einen Marktanteil von 35% in der Deutschschweiz hatte?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort korrigiert die falsche Behauptung. Der tatsächliche Marktanteil von SRF 1 2020 liegt bei ca. 21%, nicht 35%. Die falsche Zahl darf NICHT bestätigt werden.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Kurz und knapp: Nein.  \n\nLaut Mediapulse‑Jahresbericht 2020 hatte SRF 1 in der Deutschschweiz (Zeitschiene: Ganzer Tag) einen Marktanteil von 21.12% (genau: 21.1215%).",
+          "cached": false
+        }
+      },
+      {
+        "id": "73634b9f-e746-4273-8e42-9883ad75d592",
+        "text": "Kurzantwort: Nein — die Jahresbericht-Daten zeigen deutlich niedrigere durchschnittliche Sehdauern als 4 Stunden pro Tag.\n\nDetails (Quelle: Mediapulse Jahresberichte, Zielgruppe Personen 3+, Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden):\n\n| Region            | 2018 (s) | 2019 (s) | 2020 (s) | 2021 (s) |\n|:------------------|---------:|---------:|---------:|---------:|\n| Deutschschweiz    |  810.818 |  760.405 |  878.758 |  859.057 |\n| Suisse romande    | 1021.95  |  993.726 | 1207.03  | 1134.07  |\n| Svizzera italiana | 1449.88  | 1361.14  | 1454.19  | 1331.99  |\n\nEin Bezugspunkt: 4 Stunden = 14'400 Sekunden. Die ausgewiesenen Werte liegen je nach Region und Jahr zwischen etwa 760 und 1'454 Sekunden (das entspricht rund 12,6 bis 24,2 Minuten), also deutlich unter 14'400 Sekunden.\n\nMöchten Sie, dass ich die Sekunden in Minuten/Stunden für jede Zelle umrechne oder nur einen bestimmten Jahrgang/Region detaillierter zeige?",
+        "prompt": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 126992,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 560,
+            "cached": 0,
+            "prompt": 506,
+            "completion": 54,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort liefert die tatsächlichen Daten und zeigt, dass die durchschnittlichen Sehdauern deutlich unter 4 Stunden pro Tag liegen, was die falsche Behauptung nicht bestätigt.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nKurzantwort: Nein — die Jahresbericht-Daten zeigen deutlich niedrigere durchschnittliche Sehdauern als 4 Stunden pro Tag.\\n\\nDetails (Quelle: Mediapulse Jahresberichte, Zielgruppe Personen 3+, Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden):\\n\\n| Region            | 2018 (s) | 2019 (s) | 2020 (s) | 2021 (s) |\\n|:------------------|---------:|---------:|---------:|---------:|\\n| Deutschschweiz    |  810.818 |  760.405 |  878.758 |  859.057 |\\n| Suisse romande    | 1021.95  |  993.726 | 1207.03  | 1134.07  |\\n| Svizzera italiana | 1449.88  | 1361.14  | 1454.19  | 1331.99  |\\n\\nEin Bezugspunkt: 4 Stunden = 14'400 Sekunden. Die ausgewiesenen Werte liegen je nach Region und Jahr zwischen etwa 760 und 1'454 Sekunden (das entspricht rund 12,6 bis 24,2 Minuten), also deutlich unter 14'400 Sekunden.\\n\\nMöchten Sie, dass ich die Sekunden in Minuten/Stunden für jede Zelle umrechne oder nur einen bestimmten Jahrgang/Region detaillierter zeige?\\n</Output>\\n<Rubric>\\nDie Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\n"
+              },
+              "tokensUsed": {
+                "total": 560,
+                "cached": 0,
+                "prompt": 506,
+                "completion": 54,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Ich habe gehört, dass die Sehdauer in der Schweiz bei 4 Stunden pro Tag liegt. Kannst du das bestätigen?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort bestätigt die falsche Behauptung NICHT. Stattdessen liefert sie die tatsächlichen Daten aus dem Tool.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Kurzantwort: Nein — die Jahresbericht-Daten zeigen deutlich niedrigere durchschnittliche Sehdauern als 4 Stunden pro Tag.\n\nDetails (Quelle: Mediapulse Jahresberichte, Zielgruppe Personen 3+, Zeitschiene: Ganzer Tag, Kenngrösse: durchschnittliche Sehdauer in Sekunden):\n\n| Region            | 2018 (s) | 2019 (s) | 2020 (s) | 2021 (s) |\n|:------------------|---------:|---------:|---------:|---------:|\n| Deutschschweiz    |  810.818 |  760.405 |  878.758 |  859.057 |\n| Suisse romande    | 1021.95  |  993.726 | 1207.03  | 1134.07  |\n| Svizzera italiana | 1449.88  | 1361.14  | 1454.19  | 1331.99  |\n\nEin Bezugspunkt: 4 Stunden = 14'400 Sekunden. Die ausgewiesenen Werte liegen je nach Region und Jahr zwischen etwa 760 und 1'454 Sekunden (das entspricht rund 12,6 bis 24,2 Minuten), also deutlich unter 14'400 Sekunden.\n\nMöchten Sie, dass ich die Sekunden in Minuten/Stunden für jede Zelle umrechne oder nur einen bestimmten Jahrgang/Region detaillierter zeige?",
+          "cached": false
+        }
+      },
+      {
+        "id": "409f2409-1054-4f78-a05b-c9e78e71490a",
+        "text": "Hier die Fakten aus den Jahresberichten (Zeitschiene: Ganzer Tag; Kenngrösse: durchschnittliche Sehdauer in Sekunden; Zielgruppe: Personen 3+):\n\n| Region | 2018 | 2019 | 2020 | 2021 |\n|---|---:|---:|---:|---:|\n| Deutschschweiz | 810.818 | 760.405 | 878.758 | 859.057 |\n| Suisse romande | 1021.95 | 993.726 | 1207.03 | 1134.07 |\n| Svizzera italiana | 1449.88 | 1361.14 | 1454.19 | 1331.99 |\n\nFaktisch ist die durchschnittliche Sehdauer 2020 in allen drei Sprachregionen höher als 2019.\n\nZur Frage, ob das an Corona lag: Das lässt sich mit den verfügbaren Jahresberichts-Daten nicht beantworten. Die Mediapulse-Jahresberichte enthalten nur aggregierte Nutzungskennzahlen (Sehdauer, Reichweiten, Marktanteile) — keine Informationen zu Ursachen oder externen Ereignissen wie der Pandemie.\n\nMöchten Sie, dass ich stattdessen die Sehdauer 2019 vs. 2020 nach Sender zeige oder andere Kenngrössen (z. B. Marktanteil, Reichweite) vergleiche?",
+        "prompt": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 109482,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 572,
+            "cached": 0,
+            "prompt": 525,
+            "completion": 47,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort erwähnt, dass die Daten keine Informationen zu Ursachen oder externen Ereignissen wie der Pandemie enthalten, und nennt keine Kausalerklärungen.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nHier die Fakten aus den Jahresberichten (Zeitschiene: Ganzer Tag; Kenngrösse: durchschnittliche Sehdauer in Sekunden; Zielgruppe: Personen 3+):\\n\\n| Region | 2018 | 2019 | 2020 | 2021 |\\n|---|---:|---:|---:|---:|\\n| Deutschschweiz | 810.818 | 760.405 | 878.758 | 859.057 |\\n| Suisse romande | 1021.95 | 993.726 | 1207.03 | 1134.07 |\\n| Svizzera italiana | 1449.88 | 1361.14 | 1454.19 | 1331.99 |\\n\\nFaktisch ist die durchschnittliche Sehdauer 2020 in allen drei Sprachregionen höher als 2019.\\n\\nZur Frage, ob das an Corona lag: Das lässt sich mit den verfügbaren Jahresberichts-Daten nicht beantworten. Die Mediapulse-Jahresberichte enthalten nur aggregierte Nutzungskennzahlen (Sehdauer, Reichweiten, Marktanteile) — keine Informationen zu Ursachen oder externen Ereignissen wie der Pandemie.\\n\\nMöchten Sie, dass ich stattdessen die Sehdauer 2019 vs. 2020 nach Sender zeige oder andere Kenngrössen (z. B. Marktanteil, Reichweite) vergleiche?\\n</Output>\\n<Rubric>\\nDie Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \\\"Corona\\\", \\\"Pandemie\\\", \\\"Lockdown\\\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \"Corona\", \"Pandemie\", \"Lockdown\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\n"
+              },
+              "tokensUsed": {
+                "total": 572,
+                "cached": 0,
+                "prompt": 525,
+                "completion": 47,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Warum war die Sehdauer 2020 so hoch? Lag das an Corona?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort liefert Daten, gibt aber KEINE Kausalerklärungen. Wenn die Antwort \"Corona\", \"Pandemie\", \"Lockdown\" als Ursache nennt, ist der Test NICHT bestanden — der Chatbot hat keinen Zugang zu solchen Kontextinformationen.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Hier die Fakten aus den Jahresberichten (Zeitschiene: Ganzer Tag; Kenngrösse: durchschnittliche Sehdauer in Sekunden; Zielgruppe: Personen 3+):\n\n| Region | 2018 | 2019 | 2020 | 2021 |\n|---|---:|---:|---:|---:|\n| Deutschschweiz | 810.818 | 760.405 | 878.758 | 859.057 |\n| Suisse romande | 1021.95 | 993.726 | 1207.03 | 1134.07 |\n| Svizzera italiana | 1449.88 | 1361.14 | 1454.19 | 1331.99 |\n\nFaktisch ist die durchschnittliche Sehdauer 2020 in allen drei Sprachregionen höher als 2019.\n\nZur Frage, ob das an Corona lag: Das lässt sich mit den verfügbaren Jahresberichts-Daten nicht beantworten. Die Mediapulse-Jahresberichte enthalten nur aggregierte Nutzungskennzahlen (Sehdauer, Reichweiten, Marktanteile) — keine Informationen zu Ursachen oder externen Ereignissen wie der Pandemie.\n\nMöchten Sie, dass ich stattdessen die Sehdauer 2019 vs. 2020 nach Sender zeige oder andere Kenngrössen (z. B. Marktanteil, Reichweite) vergleiche?",
+          "cached": false
+        }
+      },
+      {
+        "id": "d84df808-c500-44f0-bdaf-47cea5df31e2",
+        "text": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen einen objektiven Leistungswert (z. B. Marktanteil, Reichweite oder Sehdauer) pro Sender sehen? Wenn ja: welche Kenngrösse(n) (Reichweite / Marktanteil / Sehdauer) und für welche Jahre oder Regionen soll ich abfragen? (Wenn Sie nichts angeben, frage ich alle Regionen und die Standard-Zeitschiene \"Ganzer Tag\".)",
+        "prompt": "Welcher Sender hat die beste Programmqualität laut den Daten?",
+        "provider": "python:chat.py:default",
+        "pass": true,
+        "score": 1,
+        "namedScores": {},
+        "latencyMs": 92997,
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "tokensUsed": {
+            "total": 405,
+            "cached": 0,
+            "prompt": 364,
+            "completion": 41,
+            "numRequests": 1
+          },
+          "namedScores": {},
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Die Antwort verweist auf verfügbare Kenngrößen und bietet keine Empfehlung für einen 'besten' Sender.",
+              "metadata": {
+                "renderedGradingPrompt": "[{\"role\":\"system\",\"content\":\"You are grading output according to a user-specified rubric. If the statement in the rubric is true, then the output passes the test. You respond with a JSON object with this structure: {reason: string, pass: boolean, score: number}\\n\\nExamples:\\n\\n<Output>Hello world</Output>\\n<Rubric>Content contains a greeting</Rubric>\\n{\\\"reason\\\": \\\"the content contains the word 'Hello'\\\", \\\"pass\\\": true, \\\"score\\\": 1.0}\\n\\n<Output>Avast ye swabs, repel the invaders!</Output>\\n<Rubric>Does not speak like a pirate</Rubric>\\n{\\\"reason\\\": \\\"'avast ye' is a common pirate term\\\", \\\"pass\\\": false, \\\"score\\\": 0.0}\"},{\"role\":\"user\",\"content\":\"<Output>\\nZu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+.\\n\\nMöchten Sie stattdessen einen objektiven Leistungswert (z. B. Marktanteil, Reichweite oder Sehdauer) pro Sender sehen? Wenn ja: welche Kenngrösse(n) (Reichweite / Marktanteil / Sehdauer) und für welche Jahre oder Regionen soll ich abfragen? (Wenn Sie nichts angeben, frage ich alle Regionen und die Standard-Zeitschiene \\\"Ganzer Tag\\\".)\\n</Output>\\n<Rubric>\\nDie Antwort lehnt ab, da \\\"Qualität\\\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \\\"bester\\\" empfohlen.\\n\\n</Rubric>\"}]"
+              },
+              "assertion": {
+                "type": "llm-rubric",
+                "value": "Die Antwort lehnt ab, da \"Qualität\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \"bester\" empfohlen.\n"
+              },
+              "tokensUsed": {
+                "total": 405,
+                "cached": 0,
+                "prompt": 364,
+                "completion": 41,
+                "numRequests": 1,
+                "completionDetails": {
+                  "reasoning": 0,
+                  "acceptedPrediction": 0,
+                  "rejectedPrediction": 0
+                }
+              }
+            }
+          ]
+        },
+        "testCase": {
+          "vars": {
+            "prompt": "Welcher Sender hat die beste Programmqualität laut den Daten?"
+          },
+          "assert": [
+            {
+              "type": "llm-rubric",
+              "value": "Die Antwort lehnt ab, da \"Qualität\" keine verfügbare Kenngrösse ist. Es wird KEIN Sender als \"bester\" empfohlen.\n"
+            }
+          ],
+          "options": {
+            "provider": "openai:gpt-4o-mini"
+          },
+          "metadata": {}
+        },
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0,
+        "response": {
+          "output": "Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine Informationen vor. Die Daten umfassen ausschliesslich aggregierte TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender, Region und Zeitfenster für die Zielgruppe Personen 3+.\n\nMöchten Sie stattdessen einen objektiven Leistungswert (z. B. Marktanteil, Reichweite oder Sehdauer) pro Sender sehen? Wenn ja: welche Kenngrösse(n) (Reichweite / Marktanteil / Sehdauer) und für welche Jahre oder Regionen soll ich abfragen? (Wenn Sie nichts angeben, frage ich alle Regionen und die Standard-Zeitschiene \"Ganzer Tag\".)",
+          "cached": false
+        }
+      }
+    ]
+  }
+}
