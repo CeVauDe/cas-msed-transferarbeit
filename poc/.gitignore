@@ -55,3 +55,8 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+
+# promptfoo
+evalLastWritten
+promptfoo.yaml
