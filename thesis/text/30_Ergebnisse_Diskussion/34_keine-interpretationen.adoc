@@ -1,7 +1,7 @@
 
 === Keine Interpretationen
 
-Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red-Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red-Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Zum Generieren und Auswerten wird das OpenAi 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never provide interpretations, causal

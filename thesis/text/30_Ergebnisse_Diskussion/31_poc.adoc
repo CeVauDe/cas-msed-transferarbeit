@@ -1,124 +1,41 @@
 === Proof of Concept (PoC) Applikation
-Für die Evaluation und Erreichung des Ziels wird eine Applikation entwickelt, die es mittels eines Chatbots (Web-App) ermöglicht, Fragen zu den Nutzungsdaten für Fernsehen zu stellen.
-Der Chatbot nutzt einen Agenten auf Basis des OpenAI-Clients, der es ihm ermöglicht, deutsche Benutzereingaben aus dem Chat zu verstehen und Instruktionen für den MCP-Server (Model Context Protocol) zu generieren. Der MCP-Server gibt dem Agenten Kontext über die Daten, die die Beantwortung der Benutzereingaben ermöglichen.
-Der Chatbot sowie der MCP-Server sind eigenständige Services, die über eine HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert.
-Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für Produktionssysteme mit vielen simultanen Anfragen wäre der MCP-Server in der Sprache Go oder Rust um einiges effizienter. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend. Der Flaschenhals liegt an der Datenbank und der Verarbeitungszeit vom Agenten, ein schnellerer MCP-Server würde kaum einen Unterschied machen, da die Applikation nur zum Zweck der Validierung des Konzeptes entwickelt wird.
-
-==== Systemarchitektur
-
-Die zwei Dienste kommunizieren über das MCP via HTTP.
-Der Chatbot fungiert dabei als MCP-Client, der die Werkzeuge des MCP-Servers abfragt und nutzt.
-Der Agent trifft autonom die Entscheidung, welches Werkzeug er mit welchen Argumenten aufruft.
-
-[[fig-systemarchitektur,Abbildung: Systemarchitektur]]
-.Komponentendiagramm der PoC-Applikation
-[plantuml, systemarchitektur, svg]
-....
-@startuml
-!theme plain
-skinparam componentStyle rectangle
-skinparam defaultTextAlignment center
-skinparam linetype ortho
-
-actor "Benutzer\n(Web Browser)" as User
-
-package "Chatbot Service" {
-  component "Chat Web-App" as Gradio
-  component "Agent" as LLM
-  component "MCP Client" as MCPClient
-}
-
-cloud "OpenAI API" as OpenAI
-
-package "MCP Server" {
-  component "Tool: get_catalog\n(Glossar-Suche)" as CatalogTool
-  component "Tool: query_data\n(Datenabfrage)" as QueryTool
-  component "Contracts\n(policy.yaml, catalog.yaml)" as Contracts
-}
-
-database "Parquet-Datei\nJahresbericht_all.parquet" as Parquet
-
-User --> Gradio : natürliche Sprache
-Gradio <--> LLM : Anfrage
-LLM <--> OpenAI : Chat Completion API
-LLM <--> MCPClient : Tool-Aufruf
-MCPClient <--> CatalogTool : HTTP / streamable-http
-MCPClient <--> QueryTool : HTTP / streamable-http
-CatalogTool --> Contracts
-QueryTool --> Contracts
-QueryTool --> Parquet : DuckDB (in-memory SQL)
-@enduml
-....
+Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend.
 
 ==== MCP Server
 
-Der MCP-Server stellt genau zwei Werkzeuge (Tools) bereit: `get_catalog` für die Begriffsauflösung und `query_data` für strukturierte Datenabfragen.
+Der MCP-Server v2 stellt ein Werkzeug (`Tool`) und eine Ressource (`Resource`) bereit:
 
-Das `get_catalog` Werkzeug liefert Spaltendefinitionen und deren Kandidaten zurück. Dies kann zum Einsatz kommen, wenn unter anderem die Region nicht eindeutig ist und eine Liste an möglichen Regionen dem Benutzer zur Auswahl präsentiert wird.
+* **Tool: `abfrage_jahresbericht`**: Strukturierte Datenabfrage mit Filterung nach Jahr, Region, Zeitschiene, Kenngrösse und Sender. Unterstützt Pivot-Tabellen und Sortierung. Gibt Markdown-Tabellen zurück.
 
-Das `query_data` Werkzeug hat die Aufgabe, die Daten für die Antwort zu liefern.
-Jede `query_data` Abfrage durchläuft eine fest definierte, vierstufige Verarbeitungspipeline:
+* **Ressource: `glossar`**: Glossar mit Fachbegriffen der TV-Forschung (Marktanteil, Rating, Nettoreichweite, Sehdauer, etc.).
 
-* Validierung
-* Planung
-* Ausführung
-* Antworten
+===== Datenverarbeitung
 
+Das `abfrage_jahresbericht` Werkzeug nutzt pandas für die Datenverarbeitung:
 
-===== Validierung
-Der Aufruf jedes Tools durchläuft eine vordefinierte Eingabevalidierung. Die Validierung wird mit der Python-Library Pydantic durchgeführt. Dafür wird jede Eingabe gegen ein vordefiniertes Set an Regeln geprüft und im Fehlerfall abgebrochen. Dies stellt sicher, dass die Planungsphase immer von einer gültigen Eingabe ausgehen kann. Beispiel: Region muss eines der folgenden Werte sein: DS = Deutsche Schweiz, SR = Suisse Romande, SI = Svizzera Italiana.
+1. **Filterung**: Die Parquet-Datei wird als pandas DataFrame geladen. Filter werden direkt auf den DataFrame angewendet (z.B. `df[df["Jahr"].isin([2019,2020,2021])]`).
 
-===== Planung, Ausführung und Antworten
-Nach der Validierung wird eine passende SQL-Query zur Eingabe generiert (Planung), ausgeführt (Ausführung), mit Metadaten angereichert und dem Client zurückgeliefert (Antworten).
+2. **Pivot-Tabellen**: Bei Vergleichen über mehrere Dimensionen (z.B. mehrere Jahre oder Sender) werden Pivot-Tabellen erstellt (`pivot_table` mit `index` und `columns`).
 
-// TODO: unnötig? entfernen?
-// [[fig-query-pipeline,Abbildung: Query-Pipeline]]
-// .Vierstufige Verarbeitungspipeline des query_data-Werkzeugs
-// [plantuml, query-pipeline, svg]
-// ....
-// @startuml
-// !theme plain
-// skinparam defaultTextAlignment center
+3. **Sortierung**: Ergebnisse können nach beliebigen Spalten aufsteigend oder absteigend sortiert werden (`sort_values`).
 
-// |Validierung|
-// start
-// :QueryTemplate (dict)\n//Eingabe vom LLM//;
-// :Pydantic Schema-Prüfung;
-// :Policy-Prüfung\n(Metriken, Filter, Group-By,\nSortierung, Limit, Region-Guard);
-// if (Validierung OK?) then (nein)
-//   :POLICY_VIOLATION\nFehler → zurück an Agent;
-//   stop
-// else (ja)
-// endif
+4. **Ausgabe**: Das Ergebnis wird als Markdown-Tabelle formatiert und zurückgegeben (`to_markdown`).
 
-// |Planung|
-// :SQLAlchemy Select-Statement\nerstellen;
-// :Virtuelle Tabelle aus\nPolicy-Spaltensatz aufbauen;
-
-// |Ausführung|
-// :DuckDB In-Memory-Verbindung\nöffnen;
-// :View erstellen:\njahresbericht_normalized → Parquet;
-// :Statement ausführen;
-
-// |Antworten|
-// :Metadaten und row_count\nhinzufügen;
-// :Response (dict)\n//zurück über MCP//;
-// stop
-// @enduml
-// ....
+Die Glossar-Ressource wird als statischer Markdown-Text bereitgestellt und enthält Definitionen für alle wichtigen Kennzahlen der TV-Forschung.
 
 ==== MCP Client (Chatbot)
+Der Chatbot implementiert einen agentenbasierten Verarbeitungsloop mit dem `gpt-4o-mini` cite:[llmGpt4oMini] sowie `gpt-5-mini` cite:[llmGpt5Mini] Model von OpenAI. Um aufwendiges Sessionhandling zu verhindern und die Komplexität zu reduzieren, wird pro Nachricht eine neue MCP-Session genutzt. Dies hat den Vorteil, dass der Kontext zeit- und serverunabhängig ist. Der Kontext ist immer gültig, auch bei Abbrüchen der Verbindung. Bei zwischenzeitlichen Serveraktualisierungen können zukünftige Nachrichten von potenziell neuen Tools oder Funktionen profitieren. Der Agent kann bis zu 15 Tool-Runden durchlaufen, bevor er eine finale Antwort produziert. Beim Erreichen der maximalen Runden wird abgebrochen um Endlosschleifen zu verhindern.
 
-Der Chatbot implementiert einen agentenbasierten Verarbeitungsloop.
-Pro Benutzernachricht wird eine neue MCP-Session geöffnet, die Tool-Definitionen werden abgerufen und an den OpenAI-Agenten übergeben.
-Eine neue MCP-Session pro Nachricht wird genutzt, damit die Sessions vollständig zustandslos sind. Zustandslos in diesem Sinne bedeutet, dass jegliche vorangegangene Kommunikation mitgesendet wird und nicht auf dem Server gespeichert werden muss. Dafür wird kein aufwendiges Öffnen, Wiederherstellen und Schliessen der Sessions benötigt, womit die Komplexität reduziert wird. Dies hat den Vorteil, dass der Kontext zeit- und serverunabhängig ist. Der Kontext ist immer gültig, auch bei Abbrüchen der Verbindung. Bei zwischenzeitlichen Serveraktualisierungen können zukünftige Nachrichten von potenziell neuen Tools oder Funktionen profitieren.
-Der Agent kann bis zu 15 Tool-Runden durchlaufen, bevor er eine finale Antwort produziert.
+==== System Prompt (OpenAI Agent)
+Damit der OpenAI Agent funktionieren kann, wird dem Agenten zusätzlich zu den Benutzereingaben und Antworten vom Large-Language-Model (LLM) eine vordefinierte Instruktion (System Prompt) mitgegeben. Die System Prompt gibt dem LLM definierte Anweisungen, wie die Tools genutzt oder die Antworten formuliert werden sollen. Da von deutschen Eingaben ausgegangen wird, wird sie auf Deutsch definiert. Der System Prompt wird eine Identität verliehen und ein Ablauf definiert. Als Identität wird die Rolle «Datenassistent für die Analyse» definiert. Der Ablauf hat einen «Abfragen» und einen «Antworten» Bereich. *Abfragen:* Als erstes wird beschrieben, dass das `abfrage_jahresbericht`-Tool aufgerufen wird, sowie wie mit dem Tool umgegangen wird. Über Standardwerte wird informiert, Spalten beschrieben sowie die Sortierung bestimmt. *Antworten:* Der Antworten Abschnitt erhält Instruktionen über Formulierungen bei Antworten mit und ohne Daten.
 
+Die vollständige System Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/apps/chatbot/src/chatbot/system_prompt_v2_minimum.py` nachgelesen werden.
 
-==== Sequenzdiagramm von der initialen Eingabe bis zur Antwort
+// TODO: wo wollen dir das diagram platzieren?
+==== Sequenzdiagramm des Verarbeitungsloops einer Beispielfrage
 
 [[fig-agent-loop,Abbildung: Agent-Loop]]
-.Sequenzdiagramm des agentenbasierten Verarbeitungsloops
+.Sequenzdiagramm des agentenbasierten Verarbeitungsloops (Beispielfrage)
 [plantuml, agent-loop, svg]
 ....
 @startuml
@@ -128,82 +45,60 @@ skinparam responseMessageBelowArrow true
 
 actor Benutzer
 participant "Gradio\nChatInterface" as Gradio
-participant "OpenAI Agent\n(gpt-4o-mini)" as LLM
+participant "OpenAI Agent" as LLM
 participant "MCP Client" as MCPClient
-participant "MCP Server\nget_catalog" as Catalog
-participant "MCP Server\nquery_data" as Query
+participant "MCP Server v2" as MCPServer
 
-Benutzer -> Gradio: Nachricht senden
+Benutzer -> Gradio: "Wie hat sich der Marktanteil von\nSRF 1 in der DS von 2019 bis 2021 entwickelt?"
 activate Gradio
+
 Gradio -> MCPClient: Neue MCP-Session öffnen
-MCPClient -> Catalog: Tool-Definitionen abrufen
-MCPClient <-- Catalog: OpenAI Tool-Spezifikationen
-Gradio -> LLM: System-Prompt + Verlauf +\nNachricht + Tools
+activate MCPClient
+
+MCPClient -> MCPServer: list_resources()
+MCPServer --> MCPClient: [glossar]
+
+MCPClient -> MCPServer: read_resource("glossar")
+MCPServer --> MCPClient: Glossar-Text\n(Fachbegriffe:\nMarktanteil, Rating, ...)
+
+MCPClient -> MCPServer: list_tools()
+MCPServer --> MCPClient: [abfrage_jahresbericht]
+
+MCPClient --> Gradio: Tools + Glossar
+
+Gradio -> LLM: System-Prompt + Glossar +\nNachricht + Tool-Definitionen
 activate LLM
 
-loop bis zu 15 Tool-Runden
-  LLM -> MCPClient: tool_call: get_catalog(term="...")
-  MCPClient -> Catalog: get_catalog RPC
-  Catalog --> MCPClient: Spaltendefinition / Kandidaten
-  MCPClient --> LLM: Tool-Ergebnis
+== Tool-Runde 1 ==
 
-  alt Unklarer Begriff (selection_required=true)
-    LLM -> Gradio: Rückfrage an Benutzer
-    deactivate LLM
-    Benutzer -> Gradio: Präzisierung
-    Gradio -> LLM: Aktualisierte Nachricht
-    activate LLM
-  end
+LLM -> LLM: Analysiere Anfrage:\nFilter: sender=[SRF 1], region=[Deutschschweiz],\njahr=[2019,2020,2021], kenngrösse=[Marktanteil in %]\nPivot: zeilen=Jahr
 
-  LLM -> MCPClient: tool_call: query_data(template={...})
-  MCPClient -> Query: query_data RPC
-  Query --> Query: Validate → Plan → Execute → Build
-  Query --> MCPClient: Zeilen + Metadaten
-  MCPClient --> LLM: Tool-Ergebnis
+LLM -> MCPClient: tool_call: abfrage_jahresbericht(\n  sender=["SRF 1"],\n  region=["Deutschschweiz"],\n  jahr=[2019,2020,2021],\n  kenngrösse=["Marktanteil in %"],\n  zeitschiene=["Ganzer Tag"],\n  zeilen="Jahr",\n  spalten=["Jahr","Wert"])
 
-  alt Keine weiteren tool_calls
-    LLM -> Gradio: Finale Antwort (Text)
-    deactivate LLM
-  end
-end
+MCPClient -> MCPServer: abfrage_jahresbericht
+activate MCPServer
+
+MCPServer -> MCPServer: Pandas DataFrame filtern:\n- Jahr in [2019,2020,2021]\n- Region = Deutschschweiz\n- Sender = SRF 1\n- Kenngrösse = Marktanteil in %
+
+MCPServer --> MCPClient: Tool-Ergebnis (Markdown-Tabelle)
+deactivate MCPServer
+
+MCPClient --> LLM: Tool-Ergebnis (Markdown-Tabelle)
+
+== Analyse & Antwort ==
+
+LLM -> LLM: Daten vorhanden? \nKeine weiteren tool_calls nötig? \nAntwort formulieren
+
+LLM -> Gradio: LLM formulierte Antwort
+
+deactivate LLM
+deactivate MCPClient
 
 Gradio -> Benutzer: Antwort anzeigen
 deactivate Gradio
+
 @enduml
 ....
 
-
-==== System Prompt (OpenAI Agent)
-Damit der OpenAI Agent die gelegten Leitplanken einhält, wird dem Agenten zusätzlich zu den Benutzereingaben und Antworten vom Large-Language-Model (LLM, OpenAI) eine vordefinierte, ausführliche Instruktion (System Prompt) mitgegeben. Die System Prompt gibt dem LLM definierte Anweisungen, wie die Tool-Calls genutzt oder Rückfragen formuliert werden sollen. Da von deutschen Eingaben ausgegangen wird, wird sie auf Deutsch definiert. (TODO: verify) Bei 95 von 100 Fragen wurde innerhalb von 15 Tool-Calls ein Ergebnis gefunden.
-
-Die System Prompt wird in folgende Abschnitte aufgeteilt:
-
-* Identität
-* Regeln
-* Verfügbare Daten
-* Nicht verfügbare Daten
-* Rückfragen und Antworten
-
-===== Identität
-Teilt dem LLM mit, aus welcher Perspektive es handeln soll – in diesem Fall als Datenassistent.
-
-
-===== Regeln
-In diesem Abschnitt werden gewisse Grundregeln definiert, beispielsweise muss immer nur eine Region in der Frage vorhanden sein. Bei Unklarheit wird eine Rückfrage gestellt. Sofern vom Benutzer nicht explizit in einer anderen Sprache gewünscht, wird definiert, dass die Kommunikation auf Deutsch stattfindet.
-Der wichtigste Punkt ist, dass der Agent sich strikt nach Fakten aus den Daten richtet und in keinem Fall die Daten interpretiert oder prognostiziert.
-
-
-===== Verfügbare Daten / Nicht verfügbare Daten
-Um die Effizienz zu steigern und sich wiederholende Tool-Calls zu vermeiden, wird dem Agenten ein Grundverständnis der Daten mitgegeben. Die Spalten sowie nicht sofort Offensichtliches werden erklärt. Weniger offensichtlich sind die Metriken, wobei die Konstante 1440 für einen ganzen Sendetag und die Einheit Rt-T für die Reichweite in Tausend Personen steht.
-
-===== Rückfragen und Antworten
-Der Agent soll Rückfragen und Antworten immer freundlich und klar formulieren. Deshalb wird ein nachvollziehbares Orientierungsbeispiel für das LLM bereitgestellt.
-
-Rückfrage:
-«Meinen Sie die Deutschschweiz (DS), die Suisse Romande (SR) oder die Svizzera Italiana (SI)?»
-
-Antwort:
-«Zu dieser Frage liegen in den verfügbaren Jahresbericht-Daten leider keine
-Informationen vor. Die Daten umfassen ausschliesslich aggregierte
-TV-Nutzungskennzahlen (Reichweite, Marktanteil, Sehdauer) pro Sender,
-Region und Zeitfenster für die Zielgruppe Personen 3+.»
+==== Diskussion
+Für Produktionssysteme mit vielen simultanen Anfragen wäre der MCP-Server in einer Sprache wie Go oder Rust performanter. Da jedoch der Flaschenhals bei der LLM-Verarbeitungszeit liegt und nicht bei der Datenabfrage, ist die Wahl von Python für den Proof-of-Concept gerechtfertigt. Die Applikation dient primär der Validierung des Konzepts, nicht der Produktionsreife. Die Anzahl der maximal 15 Tool-Runden wurde bei keiner einzigen Frage erreicht. Für ein produktives System muss dies genauer analysiert werden.
