@@ -1,4 +1,4 @@
-== Ergebnisse
+== Ergebnisse und Diskussionen
 - Was sind die Ergebnisse des Red Teaming?
 - Hier noch keine Interpretation oder Einordnung der Ergebnisse, die erfolgt im Diskussionsteil
 
