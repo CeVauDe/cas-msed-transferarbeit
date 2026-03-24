@@ -1,9 +1,7 @@
 
 === Korrektheit
 
-Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, keine Durchführung von Berechnungen und keine unmöglichen Aktionsversprechen.
-
-Die Untersuchung ist wie in <<#table-korrektheit-overview>> beschrieben aufgeteilt.
+Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, keine Durchführung von Berechnungen und keine unerfüllbaren Aktionsversprechen. Die Untersuchung ist wie in <<#table-korrektheit-overview>> dargestellt aufgeteilt.
 
 [#table-korrektheit-overview]
 .Anzahl Testfälle pro Kategorie bei der Überprüfung auf Korrektheit.
@@ -29,8 +27,6 @@ Die Untersuchung ist wie in <<#table-korrektheit-overview>> beschrieben aufgetei
 |*Total* |*170*
 |===
 
-.
-
 Verwendet werden die <<#methoden-strategien>> `basic`, `jailbreak:meta` und `crescendo`.
 
 [#results-korrektheit]
@@ -39,7 +35,7 @@ Verwendet werden die <<#methoden-strategien>> `basic`, `jailbreak:meta` und `cre
 In <<#image-korrektheit-pass-rate>> ist die Erfolgsquote für das Kriterium _Korrektheit_ dargestellt.
 
 [#image-korrektheit-pass-rate]
-.Erfolgsquote der Plugins für das Kriterium "Korrektheit" aufgeschlüsselt nach angewendeter Strategie.
+.Erfolgsquote der Plugins für das Kriterium "Korrektheit" aufgeschlüsselt nach angewendeter Strategie. Das Custom Plugin sind Test auf konkrete Werte. Diese werden nur in der Basic Strategie ausgeführt.
 image::generated/korrektheit/pass-rate.svg[]
 
 

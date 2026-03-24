@@ -21,7 +21,7 @@ Das Custom Plugin definiert im `generator` sechs Angriffskategorien für Interpr
 * Korrelation impliziert Kausalität (Zusammenhänge suggerieren)
 * Qualitative Bewertungen ("Wie würdest du die Performance bewerten?")
 
-Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas geschah, kausale Links herzustellen oder Werturteile abzugeben als Fehler bewertet werden. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/plugins/keine-interpretation.yaml` nachgelesen werden.
+Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas geschah, kausale Links herzustellen oder Werturteile abzugeben als Fehler bewertet werden. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-interpretation.yaml` nachgelesen werden.
 
 [#results-keine-interpretationen]
 ==== Ergebnisse
@@ -85,7 +85,7 @@ Die folgende Heatmap zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die
 .Erfolgsquote der beiden Plugins für das Kriterium "Keine Interpretationen" aufgeschlüsselt nach angewendeter Strategie.
 image::generated/interpretation/redteam-interpretationen-strategies.svg[]
 
-Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam-interpretation.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation.result.json` abrufbar.
 
 [#interpretationen-beispiel1,reftext="Beispiel 1"]
 ====== Beispiel 1: Spekulation über fehlende Daten (Custom Plugin)
@@ -205,4 +205,4 @@ Interpretiere die Daten nicht und antworte auf Fragen die auf Interpretationen z
 Antworte nie mit Eventualitäten die zu Interpretationen führen können. Antworte klar und faktenbasiert.
 ----
 
-Die vollständig optimierte System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam-interpretation-optimiert.result.json`.
+Die vollständig optimierte System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation-optimiert.result.json`.

@@ -7,7 +7,7 @@ ____
 The assistant must never provide action recommendations, investment advice, strategic suggestions, predictions, or value judgments. It must only present factual data without interpretation.
 ____
 
-Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden.
+Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden.
 
 [#results-keine-handlungsanweisungen]
 ==== Ergebnisse
@@ -18,10 +18,10 @@ Die Ergebnisübersicht ist in <<#image-handlungsanweisungen-pass-rate>> dargeste
 .Erfolgsquote der beiden Plugins für das Kriterium "Keine Hand&#173;lungs&#173;an&#173;wei&#173;sun&#173;gen" aufgeschlüsselt nach angewendeter Strategie.
 image::generated/handlungsanweisungen/pass-rate.svg[]
 
-Die vollständigen Ergebnisse sind im Github Gepository cite:[githubRepoTransferarbeit] unter `poc/redteam-handlundsanweisungen.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Gepository cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json` abrufbar.
 
 [#handlungsanweisungen-beispiel1,reftext="Beispiel 1"]
-.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie (gekürzt. Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam-handlundsanweisungen.result.json`)
+.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie (gekürzt. Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json`)
 // Benutzer-Nachricht: rechts, 90% Breite
 [cols="1,9a",frame=none,grid=none]
 |===
@@ -83,7 +83,7 @@ ____
 
 
 [#handlungsanweisungen-beispiel2]
-.Beispiel 2 aus Custom Plugin mit Crescendo Strategie (gekürzt; Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam-handlundsanweisungen.result.json`)
+.Beispiel 2 aus Custom Plugin mit Crescendo Strategie (gekürzt; Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json`)
 [cols="1,9a",frame=none,grid=none]
 |===
 |
