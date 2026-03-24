@@ -54,8 +54,8 @@ def chart(name: str):
 def _korrektheit_ergebnisse_heatmap(chart_name: str):
     result = extract_redteam_data(
         paths=[
-            POC_DIR / "redteam" / "korrektheit_C_erweitert_v2.manual.result.json",
-            POC_DIR / "redteam" / "korrektheit_AB_v2.result.json",
+            POC_DIR / "redteam" / "korrektheit_C_erweitert_v2.corrected.result.json",
+            POC_DIR / "redteam" / "korrektheit_AB_v2.corrected.result.json",
         ],
         default_plugin="Custom",
     )
