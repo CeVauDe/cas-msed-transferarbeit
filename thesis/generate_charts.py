@@ -107,7 +107,7 @@ def _prognosen_plugins(chart_name: str):
             "Policy<br>(generisch)": 9.5,
             "Hallucination": 4.8,
         },
-        title="Red Teaming Erfolgsrate nach Plugin",
+        title="Erfolgsrate nach Plugin",
         chart_name=chart_name,
         y_label="Erfolgsrate (%)",
     )
@@ -259,6 +259,89 @@ def _handlungsanweisungen_antwortlaenge(chart_name: str):
         show_median=True,
         width=700,
         height=250,
+    )
+
+
+@chart("interpretation/redteam-interpretationen-plugins")
+def _interpretationen_plugins(chart_name: str):
+    """Red Teaming Erfolgsrate nach Plugin (Interpretationen-Evaluation)."""
+    # Data from redteam-interpretation.result.json:
+    # Custom: 5/35 = 14.29%, Policy: 0/35 = 0%
+    create_bar_chart(
+        data={
+            "Custom<br>(keine-inter-<br>pretationen)": 14.3,
+            "Policy<br>(generisch)": 0.0,
+        },
+        title="Erfolgsrate nach Plugin",
+        chart_name=chart_name,
+        y_label="Erfolgsrate (%)",
+    )
+
+
+@chart("interpretation/redteam-interpretationen-strategies")
+def _interpretationen_strategien(chart_name: str):
+    """Red Teaming Erfolgsrate nach Strategie (Interpretationen-Evaluation)."""
+    plugins = ["Custom", "Policy"]
+    strategies = [
+        "basic",
+        "jailbreak-<br>templates",
+        "jailbreak:<br>meta",
+        "mischievous-<br>user",
+        "jailbreak:<br>hydra",
+        "crescendo",
+        "goat",
+    ]
+
+    # Data extracted from redteam-interpretation.result.json
+    raw = {
+        ("Custom", "basic"): (1, 5),
+        ("Custom", "jailbreak-<br>templates"): (1, 5),
+        ("Custom", "jailbreak:<br>meta"): (1, 5),
+        ("Custom", "mischievous-<br>user"): (2, 5),
+        ("Custom", "jailbreak:<br>hydra"): (0, 5),
+        ("Custom", "crescendo"): (0, 5),
+        ("Custom", "goat"): (0, 5),
+        ("Policy", "basic"): (0, 5),
+        ("Policy", "jailbreak-<br>templates"): (0, 5),
+        ("Policy", "jailbreak:<br>meta"): (0, 5),
+        ("Policy", "mischievous-<br>user"): (0, 5),
+        ("Policy", "jailbreak:<br>hydra"): (0, 5),
+        ("Policy", "crescendo"): (0, 5),
+        ("Policy", "goat"): (0, 5),
+    }
+
+    z_values = []
+    cell_text = []
+    for plugin in plugins:
+        z_row = []
+        text_row = []
+        for strategy in strategies:
+            entry = raw.get((plugin, strategy))
+            if entry is not None:
+                passed, total = entry
+                rate = passed / total
+                z_row.append(rate)
+                text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+            else:
+                z_row.append(None)
+                text_row.append("")
+        z_values.append(z_row)
+        cell_text.append(text_row)
+
+    create_heatmap(
+        z_values=z_values,
+        x_labels=strategies,
+        y_labels=plugins,
+        title="",
+        chart_name=chart_name,
+        x_title="Strategie",
+        y_title="Plugin",
+        z_label="Pass Rate",
+        cell_text=cell_text,
+        show_colorbar=False,
+        x_side="top",
+        width=800,
+        height=200,
     )
 
 
