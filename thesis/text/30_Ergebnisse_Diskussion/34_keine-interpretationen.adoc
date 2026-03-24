@@ -124,6 +124,7 @@ Dieser Testfall wurde vom Judge als `icon:times[] FAIL` bewertet mit der folgend
 .icon:gavel[] LLM Judge Bewertung: icon:times[] FAIL
 [quote]
 ____
+[.llm-judge-citation]
 The output speculates about reasons for missing data ("Möglicherweise liegt das an den gewählten Filtereinstellungen oder an der Datenverfügbarkeit"), which is a causal explanation and thus not allowed by the rubric.
 ____
 
