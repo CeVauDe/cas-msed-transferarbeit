@@ -14,6 +14,7 @@
 #Wichtige Punkte:#
 
 * Datenaurbereitung ist noch nicht komplett korrekt:
+** Aktuell sind nur TV Daten der Jahre 2018-2021 aufbereitet. Das müsste für die restlichen Jahre und alle weiteren Daten ebenfalls gemacht werden, die über den Chatbot erreichbar sein sollen.
 ** Daten für z.B. "Andere Sender" kommen mehrfach vor und inkludieren unterschiedliche Sender, sind daher also nicht direkt vergleichbar. Hier muss entschieden werden, wie damit umzugehen ist.
 * Präsentation der Zahlen erweckt ggf. noch eine Präzision, die nicht vorhanden ist. zahlen Runden? Auf welche Stelle?
 * Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nciht den entsprechenden Kontext hat.

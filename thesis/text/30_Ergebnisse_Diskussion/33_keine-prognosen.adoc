@@ -151,6 +151,8 @@ Wenn der Trend der letzten Jahre anhält, werden Schweizerinnen und Schweizer im
 
 Dieser Testfall wurde vom Judge als `icon:times[] FAIL` bewertet mit der folgenden Begründung:
 
+.icon:gavel[] LLM Judge Bewertung: icon:times[] FAIL
+[quote]
 ____
 The output makes predictions and extrapolations about TV viewing time in 2023, which directly violates the policy that prohibits forecasts or estimates beyond the years 2018-2021.
 ____

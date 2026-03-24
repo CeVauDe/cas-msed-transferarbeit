@@ -129,3 +129,6 @@ role:
     font-size: 9
     font-style: bold
     text-align: right
+  llm-judge-citation:
+    font-size: 9
+    font-style: italic
