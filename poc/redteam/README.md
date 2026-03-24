@@ -9,7 +9,17 @@ This folder contains promptfoo red teaming configurations and result files.
 | `*.yaml` | Promptfoo eval configuration |
 | `*.config.yaml` | Provider/model configuration for an eval |
 | `*.result.json` | Eval results in promptfoo file format (CLI output) |
-| `*.manual.result.json` | Manually reviewed/adjusted version of a result file |
+| `*.corrected.result.json` | Manually reviewed/adjusted version of a result file |
+
+## Available Eval Configs
+
+| File | Tests |
+|------|-------|
+| `korrektheit_AB.yaml` | Correctness of data answers (test cases A & B) |
+| `korrektheit_C.yaml` | Correctness of data answers (test case C, extended) |
+| `prognose.yaml` | System correctly rejects prognosis requests |
+| `interpretation.yaml` | System correctly rejects interpretation requests |
+| `handlungsanweisungen.yaml` | System correctly rejects action-item requests |
 
 ## Running an Eval
 
@@ -31,7 +41,7 @@ To use the corrected scores in a chart, follow the next steps.
 If an eval was run previously and is stored in the promptfoo database, export it via the UI:
 
 1. Open `promptfoo view` and navigate to the eval
-2. Go to **TEval Resuls** view → **Download eval data and configs** → **JSON Export** (in the Table Data Exports section)
+2. Go to **Eval Results** view → **Download eval data and configs** → **JSON Export** (in the Table Data Exports section)
 3. Save the downloaded file as `<name>.export.json` (this is a different format than the CLI result files)
 
 ## Converting export.json to result.json

@@ -1,20 +1,20 @@
 # Proof of Concept
 
-This section includes the implementation details of the proof of concept: a chatbot backed by an agent that can use one or more MCP (Model Context Protocol) servers to retrieve information.
+A chatbot backed by an OpenAI agent that queries Swiss TV audience statistics (Mediapulse Jahresbericht 2018–2021) through constrained MCP (Model Context Protocol) servers. The chatbot exposes a Gradio web UI and enforces domain constraints via system prompts and server-side policy validation.
 
 ## Project Overview
 
 The PoC demonstrates:
-- A Python-based chatbot using the OpenAI API
-- Integration with MCP servers for tool execution
-- Docker Compose setup for easy deployment
+- A Python-based chatbot using the OpenAI API (tool-calling agent loop)
+- Two MCP server implementations for constrained, read-only data access
+- Docker Compose setup for easy deployment (3 services)
 - Code quality enforcement with pre-commit hooks and CI/CD
 
 ## Prerequisites
 
 - **uv** (installed via pipx): `pipx install uv`
 - **Python 3.14+** (installed via uv, if not already available): `uv python install 3.14`
-> Do not use Python 3.14 as system default, if it is not already your defauls system python version. This will mess up you system and can even break it!
+  > Do not use Python 3.14 as your system default if it is not already — it can break system tooling.
 - **Docker** and **Docker Compose**
 - **Git**
 
@@ -22,29 +22,36 @@ The PoC demonstrates:
 
 ```
 poc/
+├── apps/                            # uv workspace members
+│   ├── chatbot/
+│   │   ├── pyproject.toml
+│   │   ├── src/chatbot/
+│   │   │   ├── main.py              # Gradio UI + OpenAI agent loop
+│   │   │   └── system_prompt_v2.py  # Current system prompt (German)
+│   │   └── tests/
+│   └── mcp_server/
+│       ├── pyproject.toml
+│       ├── src/
+│       │   ├── mcp_server/          # v1: schema-validated, DuckDB-backed
+│       │   │   ├── main.py
+│       │   │   ├── contracts/       # policy.yaml, catalog.yaml, JSON schema
+│       │   │   └── services/        # validator, planner, executor, response builder
+│       │   ├── mcp_server_v2/       # v2: pandas-based, pivot support
+│       │   │   └── main.py
+│       │   └── tools/               # data pipeline scripts
+│       │       ├── download_data.py
+│       │       ├── load_jahresbericht.py    # → Jahresbericht_all.parquet (v1)
+│       │       └── load_jahresbericht_v2.py # → Jahresbericht_v2.parquet (v2)
+│       └── tests/
 ├── docker/
-│   ├── chatbot/
-│   │   └── Dockerfile          # Chatbot Docker image
-│   └── mcp_server/
-│       └── Dockerfile          # MCP server Docker image
-├── src/
-│   ├── chatbot/
-│   │   ├── __init__.py         # Chatbot package init
-│   │   └── main.py             # Chatbot main entry point
-│   └── mcp_server/
-│       ├── __init__.py         # MCP server package init
-│       └── main.py             # MCP server entry point
-├── tests/
-│   ├── __init__.py             # Tests package init
-│   ├── test_main.py            # Tests for main module
-│   └── test_mcp_server.py      # Tests for MCP server
-├── .dockerignore               # Docker build ignore rules
-├── .env.example                # Environment variables template
-├── .gitignore                  # Git ignore rules
-├── .pre-commit-config.yaml     # Pre-commit hooks configuration
-├── docker-compose.yml          # Docker Compose setup
-├── README.md                   # This documentation
-└── pyproject.toml              # Project configuration
+│   ├── chatbot/Dockerfile           # Gradio chatbot image
+│   ├── mcp_server/Dockerfile        # v1 MCP server (multi-stage: data → prod)
+│   └── mcp_server_v2/Dockerfile     # v2 MCP server (multi-stage: data → prod)
+├── redteam/                         # promptfoo red-team evaluation configs & results
+├── pyproject.toml                   # Workspace root config (shared dev tools)
+├── uv.lock                          # Dependency lock file
+├── docker-compose.yml               # 3-service orchestration
+└── .env.example                     # Environment variables template
 
 # Note: GitHub Actions workflow is at repo root: /.github/workflows/poc-ci.yml
 ```
@@ -57,14 +64,13 @@ poc/
 # Navigate to the poc directory
 cd poc
 
-# Initialize the project with uv (creates virtual environment and installs dependencies)
+# Install all dependencies (creates .venv)
 uv sync --all-extras
 ```
 
 ### 2. Set Up Pre-commit Hooks
 
 ```bash
-# Install pre-commit hooks
 uv run pre-commit install
 
 # (Optional) Run hooks on all files to verify setup
@@ -74,23 +80,14 @@ uv run pre-commit run --all-files
 ### 3. Configure Environment Variables
 
 ```bash
-# Copy the example environment file
 cp .env.example .env
-
-# Edit .env and add your OpenAI API key
-# OPENAI_API_KEY=your-api-key-here
+# Edit .env and add your OPENAI_API_KEY
 ```
 
 ### 4. Verify the Setup
 
 ```bash
-# Run the tests
 uv run pytest -v
-
-# Run the chatbot locally
-uv run python -m chatbot.main
-
-# Run type checking manually
 uv run ty check
 ```
 
@@ -108,100 +105,48 @@ uv run --package mcp-server python apps/mcp_server/src/tools/download_data.py
 This places 24 `Jahresbericht*.xlsx` files into `apps/mcp_server/data/raw/`.
 The directory is git-ignored; re-run the script on any fresh checkout.
 
-## Data Transformation (Jahresbericht SRF-DS)
+## Data Transformation
 
-Normalize the source CSV into a long-format dataset for DB ingestion and analytics.
-
-Run from `poc/`:
+### MCP Server v1 (DuckDB)
 
 ```bash
-# Parquet output (recommended, preserves list-type Sendergruppen)
 uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py
-
-# Parquet + optional CSV output
-uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py \
-  --output apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet \
-  --output-csv apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.csv
-
-# Optional: drop rows where sender value is missing
-uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht.py \
-  --drop-na-values
+# Output: apps/mcp_server/data/Jahresbericht_all.parquet
 ```
 
-Output files:
-- `apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.parquet`
-- Optional CSV: `apps/mcp_server/data/Jahresbericht21_SRF-DS.normalized.csv`
-
-### Parquet Structure (for further usage)
-
-The normalized Parquet file stores one row per original timeslot/metric row and sender.
+Normalizes the source Excel files into a long-format Parquet dataset (one row per timeslot/metric/sender combination).
 
 Main columns:
-- `Zeitschienen` (string): source timeslot label (kept unchanged)
-- `Facts` (string): tracked metric (e.g., `MA-%`, `VD Ø [Sekunden]`)
-- `Aktivitäten` (string)
-- `Zielgruppe` (string)
-- `Region` (string)
-- `Jahr` (int)
+- `Zeitschienen` (string): source timeslot label
+- `Facts` (string): tracked metric (e.g. `MA-%`, `VD Ø [Sekunden]`)
+- `Aktivitäten`, `Zielgruppe` (string)
+- `Region` (string): `Deutsche Schweiz`, `Suisse romande`, `Svizzera italiana`
+- `Jahr` (int): 2018–2021
 - `Zeitintervall` (string)
-- `Sender` (string): one of `SRF 1`, `SRF zwei`, `SRF info`, `RTS 1`, `RSI LA 1`, `Andere Sender`
-- `Wert` (float): numeric sender value
-- `Sendergruppen` (list[string]): group memberships used for rollups
+- `Sender` (string): individual broadcaster
+- `Wert` (float): numeric value
+- `Sendergruppen` (list[string]): group memberships for rollups
 
-Usage notes:
-- Aggregate by `Sender`, `Facts`, `Jahr`, `Zeitintervall`, and/or `Zeitschienen` for standard reporting.
-- Use `Sendergruppen` to roll up to higher levels (e.g., `SRF Total`, `SRG SSR Total`) by exploding the list column in your query engine.
-- Keep rows with `Wert = null` unless you explicitly run with `--drop-na-values`.
-
-## MCP Server (Constrained Data Access)
-
-The MCP server exposes **read-only tools** for the normalized dataset and blocks arbitrary SQL.
-
-### Run locally
-
-From `poc/`:
+### MCP Server v2 (pandas)
 
 ```bash
-uv run --package mcp-server python -m mcp_server.main
+uv run --package mcp-server python apps/mcp_server/src/tools/load_jahresbericht_v2.py
+# Output: apps/mcp_server/data/Jahresbericht_v2.parquet
 ```
 
-### Docker Compose runtime
+Alternative schema optimized for the pandas-based v2 server (pivot table support).
 
-The Compose setup runs two services:
+## MCP Servers
 
-- `chatbot`
-- `mcp-server`
+### v1 — Schema-validated, DuckDB-backed (port 8080)
 
-MCP server runtime environment variables:
+Exposes read-only tools with strict policy enforcement. All queries go through schema validation, policy checks, SQL plan generation, and DuckDB execution.
 
-- `MCP_SERVER_HOST` (default: `0.0.0.0`)
-- `MCP_SERVER_PORT` (default: `8080`)
-- `MCP_SERVER_TRANSPORT` (default: `streamable-http`, allowed: `stdio|sse|streamable-http`)
-- `MCP_SERVER_LOG_LEVEL` (default: `INFO`)
-- `MCP_DEBUG_ENRICHMENT` (default: `false`)
-- `MCP_DATA_PARQUET_PATH` (path to normalized parquet snapshot)
+**Tools:**
+- `query_data(template)` — executes a validated query on the Parquet dataset
+- `get_catalog(term=None)` — returns column metadata and allowed values
 
-### MCP tools
-
-- `query_data(template)`
-  - validates request against schema and policy
-  - plans and executes read-only query on normalized Parquet via DuckDB
-  - returns structured data payload (debug enrichment only when globally enabled)
-- `get_catalog(term=None)`
-  - returns glossary/catalog metadata for allowed columns
-  - when `term` is unknown, returns top-3 candidates and requires caller selection
-
-### Query template format
-
-The template supports:
-
-- `metrics`: list of `{column, aggregate, alias}`
-- `filters`: list of `{column, op, value}`
-- `group_by`: list of columns
-- `sort`: list of `{column, direction}`
-- `limit`: optional positive integer (defaults via policy)
-
-Valid example:
+**Query template format:**
 
 ```json
 {
@@ -212,88 +157,67 @@ Valid example:
 }
 ```
 
-Invalid example (`like` not allowed):
+Allowed aggregates: `sum`, `avg`, `min`, `max`, `count`
+Allowed operators: `eq`, `in`, `gte`, `lte`
 
-```json
-{
-  "metrics": [{"column": "Wert", "aggregate": "sum", "alias": "wert_sum"}],
-  "filters": [{"column": "Region", "op": "like", "value": "Deutsch%"}],
-  "group_by": [],
-  "sort": []
-}
-```
-
-### Error codes
-
+**Error codes:**
 - `SCHEMA_VALIDATION_ERROR` — input schema invalid
 - `POLICY_VIOLATION` — column/operator/aggregate/group/sort/limit not allowed
 - `GLOSSARY_TERM_AMBIGUOUS` — unknown glossary term, candidate selection required
 - `EXECUTION_ERROR` — validated query failed during execution
 
-### Troubleshooting
-
-- Missing runtime artifacts (`schema`, `policy`, `catalog`, parquet): verify files in `apps/mcp_server/src/mcp_server/contracts` and `apps/mcp_server/data`.
-- Empty responses: validate filter values against `get_catalog` output.
-- Debug fields missing: `MCP_DEBUG_ENRICHMENT` is global and defaults to `false`.
-
-## Development Workflow
-
-### Running Code Quality Checks
-
-Pre-commit hooks run automatically on `git commit`. To run them manually:
+**Run locally:**
 
 ```bash
-# Run all hooks on staged files
-uv run pre-commit run
-
-# Run all hooks on all files
-uv run pre-commit run --all-files
-
-# Run specific hooks
-uv run pre-commit run ruff --all-files
-uv run pre-commit run ruff-format --all-files
+uv run --package mcp-server python -m mcp_server.main
 ```
 
-### Running Tests
+**Environment variables:**
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MCP_SERVER_HOST` | `0.0.0.0` | Bind address |
+| `MCP_SERVER_PORT` | `8080` | Port |
+| `MCP_SERVER_TRANSPORT` | `streamable-http` | `stdio\|sse\|streamable-http` |
+| `MCP_SERVER_LOG_LEVEL` | `INFO` | Log verbosity |
+| `MCP_DEBUG_ENRICHMENT` | `false` | Include debug fields in responses |
+| `MCP_DATA_PARQUET_PATH` | `apps/mcp_server/data/Jahresbericht_all.parquet` | Dataset path |
+
+### v2 — Pandas-based, pivot support (port 8081)
+
+Simplified implementation using pandas DataFrame operations. Supports pivot tables. Tool name: `abfrage_jahresbericht`.
+
+**Run locally:**
 
 ```bash
-# Run all tests
-uv run pytest
-
-# Run tests with verbose output
-uv run pytest -v
-
-# Run tests with coverage (requires pytest-cov)
-uv run pytest --cov=chatbot
-
-# Run specific test file
-uv run pytest tests/test_main.py
-
-# Run specific test
-uv run pytest tests/test_main.py::TestGreet::test_greet_default
+uv run --package mcp-server python -m mcp_server_v2.main
 ```
 
-### Type Checking
+**Environment variables:**
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MCP_SERVER_V2_HOST` | `0.0.0.0` | Bind address |
+| `MCP_SERVER_V2_PORT` | `8081` | Port |
+| `MCP_SERVER_V2_TRANSPORT` | `streamable-http` | Transport protocol |
+| `MCP_DATA_V2_PARQUET_PATH` | `apps/mcp_server/data/Jahresbericht_v2.parquet` | Dataset path |
+
+## Chatbot
+
+**Environment variables:**
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OPENAI_API_KEY` | *(required)* | OpenAI API key |
+| `OPENAI_MODEL` | `gpt-4o-mini` | Model used by the agent |
+| `MCP_SERVER_URL` | `http://localhost:8081/mcp` | MCP server endpoint |
+| `GRADIO_PORT` | `7860` | Gradio web UI port |
+
+**Run locally:**
 
 ```bash
-# Run type checking with ty
-uv run ty check
-```
-
-### Linting and Formatting
-
-```bash
-# Check for linting issues
-uv run ruff check src tests
-
-# Auto-fix linting issues
-uv run ruff check --fix src tests
-
-# Format code
-uv run ruff format src tests
-
-# Check formatting without changes
-uv run ruff format --check src tests
+uv run --package chatbot python -m chatbot.main
+# Open http://localhost:7860
 ```
 
 ## Docker Setup
@@ -304,88 +228,105 @@ The only prerequisites are Docker, Docker Compose, and an OpenAI API key:
 
 ```bash
 cd poc
-cp .env.example .env           # Add your OPENAI_API_KEY
-docker compose up --build      # Builds images, downloads data, starts services
+cp .env.example .env           # add OPENAI_API_KEY
+docker compose up --build      # builds images, downloads data, starts all services
+# Open http://localhost:7860
 ```
 
-The MCP server Dockerfile uses a **multi-stage build**: the first stage automatically downloads the raw Excel files from GitHub Releases and transforms them into the Parquet file. No local Python, uv, or manual data setup is required.
+The MCP server Dockerfiles use **multi-stage builds**: stage 1 downloads the raw Excel files from GitHub Releases and transforms them into Parquet. Stage 2 is the lean production image. No local Python, uv, or manual data setup is required.
+
+### Services
+
+| Service | Port | Description |
+|---------|------|-------------|
+| `chatbot` | 7860 | Gradio web UI + OpenAI agent |
+| `mcp-server` | 8080 | MCP server v1 (DuckDB, schema-validated) |
+| `mcp-server-v2` | 8081 | MCP server v2 (pandas, pivot support) |
+
+The chatbot connects to `mcp-server-v2` by default and starts only after it reports healthy.
 
 ### Commands
 
 ```bash
-docker compose build           # Build images (downloads & generates data automatically)
-docker compose up              # Start all services
-docker compose up -d           # Start in detached mode
-docker compose logs -f         # View logs
-docker compose down            # Stop all services
+docker compose build           # build images (downloads & generates data)
+docker compose up              # start all services
+docker compose up -d           # start in detached mode
+docker compose logs -f         # view logs
+docker compose down            # stop all services
+```
+
+## Development Workflow
+
+### Running Code Quality Checks
+
+Pre-commit hooks run automatically on `git commit`. To run them manually:
+
+```bash
+uv run pre-commit run              # staged files only
+uv run pre-commit run --all-files  # all files
+uv run pre-commit run ruff --all-files
+```
+
+### Running Tests
+
+```bash
+uv run pytest          # all tests
+uv run pytest -v       # verbose
+```
+
+### Type Checking
+
+```bash
+uv run ty check
+```
+
+### Linting and Formatting
+
+```bash
+uv run ruff check .         # lint
+uv run ruff check --fix .   # lint + auto-fix
+uv run ruff format .        # format
+uv run ruff format --check .
 ```
 
 ## CI/CD Pipeline
 
-The GitHub Actions workflow (located at repo root: `/.github/workflows/poc-ci.yml`) runs on every pull request and push to `main` that affects files in the `poc/` directory:
+GitHub Actions workflow at `/.github/workflows/poc-ci.yml` runs on every push/PR to `main` affecting `poc/**`:
 
-### Jobs
-
-1. **lint-and-type-check**: Runs all pre-commit hooks including:
-   - Trailing whitespace removal
-   - End-of-file fixer
-   - YAML/TOML validation
-   - Ruff linting and formatting
-   - ty type checking
-
-2. **test**: Runs the pytest test suite
-
-### Triggering the Pipeline
-
-The CI pipeline runs automatically on:
-- Every push to the `main` branch (when `poc/**` files change)
-- Every pull request targeting `main` (when `poc/**` files change)
+1. **lint-and-type-check** — pre-commit hooks (ruff, ty, YAML/TOML validation)
+2. **test** — downloads data, transforms to Parquet, runs pytest
 
 ## Adding Dependencies
 
 ```bash
-# Add a production dependency
-uv add <package-name>
-
-# Add a development dependency
-uv add --dev <package-name>
-
-# Update the lock file
-uv lock
+uv add --package chatbot <package>     # chatbot app dependency
+uv add --package mcp-server <package>  # MCP server dependency
+uv add --dev <package>                 # shared dev dependency (workspace root)
+uv lock                                # update lock file
 ```
 
-## Common Issues and Solutions
+## Common Issues
 
 ### Pre-commit Hook Failures
 
-If pre-commit hooks fail, they often auto-fix the issues. Simply stage the changes and commit again:
+Hooks often auto-fix issues. Re-stage and commit again:
 
 ```bash
 git add -u
 git commit -m "Your message"
 ```
 
-### Type Checking Errors
-
-ty may report type errors for external libraries without type stubs. You can:
-1. Install type stubs: `uv add --dev types-<package>`
-2. Add the package to ty's ignore list in `pyproject.toml`
-
 ### Docker Build Failures
 
-The `uv.lock` file is committed to version control for reproducible builds. If it is missing or outdated, regenerate it:
+The `uv.lock` file must be up to date:
 
 ```bash
 uv lock
 docker compose build
 ```
 
-## Next Steps
+### Troubleshooting MCP Server
 
-To extend this PoC:
-
-1. **Implement the MCP server**: Add actual tools and resources to `mcp_server.py`
-2. **Build the chatbot agent**: Implement the Claude-based agent in `main.py`
-3. **Add more MCP servers**: Create additional servers for different data sources
-4. **Enhance tests**: Add integration tests for the full chatbot flow
-5. **Add logging**: Logging via Python standard library (`logging` module)
+- Missing Parquet file: run the data transformation scripts (see Data Transformation above) or let Docker build handle it.
+- Empty query results: validate filter values against `get_catalog` output.
+- Debug fields missing: set `MCP_DEBUG_ENRICHMENT=true`.
