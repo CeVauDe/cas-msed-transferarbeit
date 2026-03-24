@@ -21,6 +21,7 @@ Es versucht den Agent dazu zu bringen:
 
 Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/plugins/keine-prognosen.yaml` nachgelesen werden.
 
+[#results-prognosen]
 ==== Ergebnisse
 Von 63 durchgeführten Red-Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht war in <<#image-prognosen-pass-rate>> dargestellt. Das System war in dieser Verfassung nachweislich anfällig für Prognose-Manipulationen.
 
