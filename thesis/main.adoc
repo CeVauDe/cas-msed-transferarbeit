@@ -13,14 +13,10 @@ include::config/config.adoc[]
 [preface]
 image::cover-page.pdf[page=2]
 
-[preface]
-== Zusammenfassung
-// include::text/abstract.adoc[]
-Some sample text for the abstract. This section provides a brief overview of the research question, methodology, and key findings of the transfer thesis. The abstract should be concise and informative, giving readers a clear understanding of the scope and significance of the work.
 
-[preface]
-== Abbildungsverzeichnis
-list-of::image[enhanced_rendering=true]
+include::text/01_Zusammenfassung.adoc[]
+
+include::text/02_Verzeichnisse.adoc[]
 
 include::text/10_Einleitung.adoc[]
 
