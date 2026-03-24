@@ -7,11 +7,26 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Building thesis PDF via Docker..."
 
+SKIP_CHARTS=false
+SKIP_POST_PROCESSING=false
+
+for arg in "$@"; do
+  case $arg in
+    --no-chart-creation)  SKIP_CHARTS=true ;;
+    --no-post-processing) SKIP_POST_PROCESSING=true ;;
+    *) echo "Unknown argument: $arg"; exit 1 ;;
+  esac
+done
+
 # Ensure the generated directory exists
 mkdir -p "$SCRIPT_DIR/generated"
 
-echo "Generating charts..."
-uv run "$SCRIPT_DIR/generate_charts.py"
+if [ "$SKIP_CHARTS" = false ]; then
+  echo "Generating charts..."
+  uv run "$SCRIPT_DIR/generate_charts.py"
+else
+  echo "Skipping chart generation (--no-chart-creation)."
+fi
 
 PROBE_THEME="$SCRIPT_DIR/.theme-probe.yml"
 RUNTIME_THEME="$SCRIPT_DIR/.theme-runtime.yml"
@@ -82,16 +97,17 @@ docker run --rm \
     -o cover-page.pdf \
     cover-page.adoc
 
-echo "Calibrating page numbering so Einleitung starts at 1..."
-# We do a probe build first because Asciidoctor PDF cannot dynamically start arabic
-# page numbering at the first real chapter. The probe detects the page where
-# "1. Einleitung" appears, then the final build sets start-at to that offset.
-create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$PROBE_THEME" "body"
-build_pdf_with_theme "$PROBE_THEME" "$PROBE_PDF"
+if [ "$SKIP_POST_PROCESSING" = false ]; then
+  echo "Calibrating page numbering so Einleitung starts at 1..."
+  # We do a probe build first because Asciidoctor PDF cannot dynamically start arabic
+  # page numbering at the first real chapter. The probe detects the page where
+  # "1. Einleitung" appears, then the final build sets start-at to that offset.
+  create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$PROBE_THEME" "body"
+  build_pdf_with_theme "$PROBE_THEME" "$PROBE_PDF"
 
-if command -v pdftotext >/dev/null 2>&1; then
-  pdftotext "$PROBE_PDF" "$PROBE_TEXT"
-  INTRO_START_AT=$(python3 - "$PROBE_TEXT" <<'PY'
+  if command -v pdftotext >/dev/null 2>&1; then
+    pdftotext "$PROBE_PDF" "$PROBE_TEXT"
+    INTRO_START_AT=$(python3 - "$PROBE_TEXT" <<'PY'
 import pathlib
 import re
 import sys
@@ -110,23 +126,28 @@ for page in pages:
 print(intro_page_number or 1)
 PY
 )
+  else
+    echo "Warning: pdftotext not found, falling back to start-at=3"
+    INTRO_START_AT=3
+  fi
+
+  echo "Using page.numbering.start-at=$INTRO_START_AT"
+  create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$RUNTIME_THEME" "$INTRO_START_AT"
+
+  echo "Building final thesis PDF..."
+  build_pdf_with_theme "$RUNTIME_THEME" "$SCRIPT_DIR/main.pdf"
+
+  echo "Reordering pages (move Eidesstattliche Erklärung before ToC)..."
+  docker run --rm \
+    -v "$SCRIPT_DIR":/documents \
+    asciidoctor/docker-asciidoctor \
+    sh -c "apk add --no-cache qpdf >/dev/null 2>&1 && qpdf main.pdf --pages main.pdf 1 main.pdf 4 main.pdf 2-3 main.pdf 5-z -- main.reordered.pdf"
+  mv "$SCRIPT_DIR/main.reordered.pdf" "$SCRIPT_DIR/main.pdf"
 else
-  echo "Warning: pdftotext not found, falling back to start-at=3"
-  INTRO_START_AT=3
+  echo "Skipping post-processing (--no-post-processing): single-pass build with start-at: body."
+  create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$PROBE_THEME" "body"
+  build_pdf_with_theme "$PROBE_THEME" "$SCRIPT_DIR/main.pdf"
 fi
-
-echo "Using page.numbering.start-at=$INTRO_START_AT"
-create_theme_with_start_at "$SCRIPT_DIR/theme.yml" "$RUNTIME_THEME" "$INTRO_START_AT"
-
-echo "Building final thesis PDF..."
-build_pdf_with_theme "$RUNTIME_THEME" "$SCRIPT_DIR/main.pdf"
-
-echo "Reordering pages (move Eidesstattliche Erklärung before ToC)..."
-docker run --rm \
-  -v "$SCRIPT_DIR":/documents \
-  asciidoctor/docker-asciidoctor \
-  sh -c "apk add --no-cache qpdf >/dev/null 2>&1 && qpdf main.pdf --pages main.pdf 1 main.pdf 4 main.pdf 2-3 main.pdf 5-z -- main.reordered.pdf"
-mv "$SCRIPT_DIR/main.reordered.pdf" "$SCRIPT_DIR/main.pdf"
 
 rm -f "$PROBE_THEME" "$RUNTIME_THEME" "$PROBE_PDF" "$PROBE_TEXT" "$SCRIPT_DIR/main.reordered.pdf" #"$COVER_PDF"
 
