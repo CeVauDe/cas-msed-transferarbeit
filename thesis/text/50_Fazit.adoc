@@ -3,6 +3,8 @@
 * Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr Zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
 * Die Analyse nach den unterschiedlichen Kategorien ist sehr schwer, da diese verschwimmen und Antworten für eine Kategorie zwar Korrekt sein können, dabei aber Massgaben einer anderen Kategorie verletzen. Dieses Problem wurde in dieser Arbeit aus Aufwandsgründen nicht näher betrachtet und die Ergebnisse können durch diesen Effekt verzerrt sein.
 * Zusammenfassend lässt sich sagen, dass #...#
+* #Die Frage aus der Themeneingabe lässt sich im erstellten PoC leider nicht beantworten. Aufgrund der aufwendigen notwendigen Datenaufbereitung wurden nur TV Daten der Jahre 2018-2021 verwendet. Ziel des PoC ist nicht alle verfügbaren Daten zugänglich zu machen sondern zu testen, in welchem Rahmen die Daten über einen Chatbot wiedergegeben werden können. Sollte der PoC zu einem Chatbot weiterentwickelt werden, werden die weiteren Daten aufbereitet und dem Chatbot bereitgestellt.#
+
 
 === Tipps
 * #Zusammenfassen der Ergebnisse#
