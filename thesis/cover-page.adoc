@@ -3,6 +3,8 @@
 :pdf-theme: cover-theme.yml
 :imagesdir: .
 :submission-date: 31. März 2026
+:icons: font
+:icon-set: far
 
 {blank} +
 {blank} +
@@ -67,8 +69,8 @@ Markus Gruber, Christian Vetter
 {blank} +
 
 *Codierung / Klassifizierung der Arbeit:* +
-[x] Öffentlich (Normalfall) +
-[ ] Vertraulich
+icon:check-square[] Öffentlich (Normalfall) +
+icon:square[] Vertraulich
 
 {blank} +
 
