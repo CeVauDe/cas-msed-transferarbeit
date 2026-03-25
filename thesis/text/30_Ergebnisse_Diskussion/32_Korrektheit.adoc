@@ -15,7 +15,7 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 |*Berechnungen durchführen* (direkt oder indirekt, Veränderungen, Durchschnittswerte, Summen, Trends, Extrapolationen, ...)
 |13 * 3 Strategien
 
-|*Unmögliche Aktionen durchführen* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
+|*Unmögliche Aktionen anbieten* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
 |12 * 3 Strategien
 
 |Generiert via *Policy* Plugin
@@ -55,7 +55,7 @@ Verwendet werden die <<#methoden-strategien>> `basic`, `jailbreak:meta` und `cre
 In <<#image-korrektheit-pass-rate>> ist die Erfolgsquote für das Kriterium _Korrektheit_ dargestellt. Die Notwendigkeit der manuellen Korrektur der Ergebnisse wird in <<#korrektheit-quality-of-tests>> diskutiert.
 
 [#image-korrektheit-pass-rate]
-.Erfolgsquote der Plugins für das Kriterium "Korrektheit" aufgeschlüsselt nach angewendeter Strategie. Das Custom Plugin sind Test auf konkrete Werte. Diese werden nur in der Basic Strategie ausgeführt. Mit * gekennzeichnete Strategien sind die manuell korrigierten Ergebnisse.
+.Erfolgsquote der Plugins für das Kriterium "Korrektheit" aufgeschlüsselt nach angewendeter Strategie. Das Custom Plugin sind Test auf konkrete Werte. Diese werden nur in der Basic Strategie ausgeführt. Mit * gekennzeichnete Strategien sind die manuell korrigierten Ergebnisse. Custpm Plugin: Test auf korrekte Werte. Intent (A) Plugin: Tests auf Berechnungen. Intent (B) Plugin Tests auf Anbieten unmöglicher Aktionen.
 image::generated/korrektheit/pass-rate.svg[]
 
 Die verwendeten `intent`-Sequences funktionieren nicht gut. Ziel ist hierbei erst eine valide Anfrage zu schicken und dann im darauffolgenden Prompt eine nicht erlaubte Berechnung durchzuführen. Die Antworten auf die zweite Anfrage erwecken allerdings den Eindruck, als wäre die erste Antwort nicht mehr Teil der Unterhaltung. Da die gesamte Unterhaltungshistorie bei jeder Testanfrage immer mitgeschickt wird ist zu vermuten, dass das hier nicht korrekt passiert. Der Grund dafür wurde aus Zeitgründen nicht weiter evaluiert. Alle 9 Anfragen (nur gültig für die Basic Strategie) des `intent` Plugins mit Sequence wurden daher aus der Auswertung entfernt. Dies ist in <<#image-korrektheit-pass-rate>> bereits berücksichtigt.
@@ -115,9 +115,9 @@ ____
 
 #ToDo: Ergebnisse für Berechnungen, ggf. ein kurzes Beispiel#
 
-===== Unmögliche Aktionen durchführen
+===== Unmögliche Aktionen anbieten
 
-Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen.
+Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter Nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen. Häufig bietet er am Ende einer Nachricht auch weiterführende Aktionen an. Viele davon gehen über den Umfang dessen hinaus, was der Chatbot tatsächlich umsetzen kann und kann die Benutzer daher stark verwirren oder falsche Erwartungen wecken. Daher sind solche Vorschläge nicht gewünscht.
 
 [#korrektheit-image-ascii-chart]
 .Chatbeispiel Anfrage eines Nutzers nach einem Diagramm aus dem Policy Plugin mit Crescendo Strategie.
