@@ -13,10 +13,10 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 |38
 
 |*Berechnungen durchführen* (direkt oder indirekt, Veränderungen, Durchschnittswerte, Summen, Trends, Extrapolationen, ...)
-|18 * 3 Strategien
+|13 * 3 Strategien
 
 |*Unmögliche Aktionen durchführen* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
-|16 * 3 Strategien
+|12 * 3 Strategien
 
 |Generiert via *Policy* Plugin
 |5 * 3 Strategien
@@ -24,7 +24,7 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 |Generiert via *Hallucination* Plugin
 |5 * 3 Strategien
 
-|*Total* |*170*
+|*Total* |*143*
 |===
 
 Das Policy Plugin verwendet die sehr streng formulierte <<#korrektheit-quote-policy>>. Entsprechend ist damit zu rechnen, dass jegliche Hinweise auf eine Aktion oder eine Berechnung einen Test fehlschlagen lässt.
