@@ -45,6 +45,7 @@ def _extract_single(
     plugin_labels: dict[str, str] | None = None,
     default_plugin: str | None = None,
     use_overall_pass: bool = False,
+    prompt_filter: set[str] | None = None,
 ) -> RedteamResult:
     s_labels = {**DEFAULT_STRATEGY_LABELS, **(strategy_labels or {})}
     p_labels = {**DEFAULT_PLUGIN_LABELS, **(plugin_labels or {})}
@@ -56,6 +57,14 @@ def _extract_single(
 
     counts: dict[tuple[str, str], list[int]] = defaultdict(lambda: [0, 0])
     for r in results:
+        if prompt_filter is not None:
+            prompt_field = r.get("prompt", "")
+            if isinstance(prompt_field, dict):
+                raw_prompt = prompt_field.get("raw", "")
+            else:
+                raw_prompt = prompt_field
+            if raw_prompt not in prompt_filter:
+                continue
         grading = r.get("gradingResult", {})
         named_scores = grading.get("namedScores", {})
 
@@ -104,6 +113,7 @@ def extract_redteam_data(
     plugin_labels: dict[str, str] | None = None,
     default_plugin: str | None = None,
     use_overall_pass: bool = False,
+    prompt_filter: set[str] | None = None,
 ) -> RedteamResult:
     """Extract and aggregate red-teaming data from one or more result.json files.
 
@@ -115,6 +125,8 @@ def extract_redteam_data(
             instead of the individual namedScore values. Useful for corrected
             result files where human overrides update gradingResult.pass but
             not namedScores.
+        prompt_filter: When provided, only count results whose prompt.raw
+            matches one of the strings in the set.
     """
     if isinstance(paths, Path):
         return _extract_single(
@@ -123,6 +135,7 @@ def extract_redteam_data(
             plugin_labels=plugin_labels,
             default_plugin=default_plugin,
             use_overall_pass=use_overall_pass,
+            prompt_filter=prompt_filter,
         )
 
     merged: dict[tuple[str, str], list[int]] = defaultdict(lambda: [0, 0])
@@ -133,6 +146,7 @@ def extract_redteam_data(
             plugin_labels=plugin_labels,
             default_plugin=default_plugin,
             use_overall_pass=use_overall_pass,
+            prompt_filter=prompt_filter,
         )
         for key, (passed, total) in single.raw.items():
             merged[key][0] += passed
