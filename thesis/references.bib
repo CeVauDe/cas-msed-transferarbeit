@@ -40,32 +40,31 @@
 	note = {arXiv:2306.05499 [cs]},
 	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computation and Language, Computer Science - Cryptography and Security, Computer Science - Software Engineering, prompt-injection},
 	annote = {Prompt Injection. Prompt injection [6, 20, 44] overrides an LLM’s original prompt and directs it to follow malicious instructions. This can lead to disruptive outcomes such as erroneous advice or unauthorized disclosure of sensitive information. From a broader view, backdoor [7, 36, 68] and model hijacking [56, 61] can be classified under this type of attack. Perez et al. [44] revealed GPT-3 and its dependent applications are susceptible to prompt injection attacks, which commandeer the model’s initial objective or expose the application’s original prompts. Compared to their work, we systematically explore the strategies and prompt patterns that can trigger the attack in a wider range of real-world applications.},
-	file = {Full Text PDF:/Users/mars/Zotero/storage/9JTJIPTG/Liu et al. - 2025 - Prompt Injection attack against LLM-integrated Applications.pdf:application/pdf;Snapshot:/Users/mars/Zotero/storage/RE2QPDEX/2306.html:text/html},
 }
 
 @inproceedings{wang-etal-2025-diffusionattacker,
-    title = "{D}iffusion{A}ttacker: Diffusion-Driven Prompt Manipulation for {LLM} Jailbreak",
-    author = "Wang, Hao  and
-      Li, Hao  and
-      Zhu, Junda  and
-      Wang, Xinyuan  and
-      Pan, Chengwei  and
-      Huang, Minlie  and
-      Sha, Lei",
-    editor = "Christodoulopoulos, Christos  and
-      Chakraborty, Tanmoy  and
-      Rose, Carolyn  and
-      Peng, Violet",
-    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
-    month = nov,
-    year = "2025",
-    address = "Suzhou, China",
-    publisher = "Association for Computational Linguistics",
-    url = "https://aclanthology.org/2025.emnlp-main.1128/",
-    doi = "10.18653/v1/2025.emnlp-main.1128",
-    pages = "22182--22194",
-    ISBN = "979-8-89176-332-6",
-    abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
+  title = "{D}iffusion{A}ttacker: Diffusion-Driven Prompt Manipulation for {LLM} Jailbreak",
+  author = "Wang, Hao  and
+    Li, Hao  and
+    Zhu, Junda  and
+    Wang, Xinyuan  and
+    Pan, Chengwei  and
+    Huang, Minlie  and
+    Sha, Lei",
+  editor = "Christodoulopoulos, Christos  and
+    Chakraborty, Tanmoy  and
+    Rose, Carolyn  and
+    Peng, Violet",
+  booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+  month = nov,
+  year = "2025",
+  address = "Suzhou, China",
+  publisher = "Association for Computational Linguistics",
+  url = "https://aclanthology.org/2025.emnlp-main.1128/",
+  doi = "10.18653/v1/2025.emnlp-main.1128",
+  pages = "22182--22194",
+  ISBN = "979-8-89176-332-6",
+  abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
 }
 
 @misc{promptfooTeamStrategies,
@@ -160,4 +159,18 @@
   url = {https://developers.openai.com/api/docs/models/gpt-5-mini},
   urldate = {2026-03-24},
   note = {GPT-5 mini is a faster, more cost-efficient version of GPT-5. It's great for well-defined tasks and precise prompts. For most new low-latency, high-volume workloads, we recommend starting with GPT-5.4 mini. Learn more in our latest model guide.}
+}
+
+@misc{majumdar_red_2025,
+	title = {Red {Teaming} {AI} {Red} {Teaming}},
+	url = {http://arxiv.org/abs/2507.05538},
+	doi = {10.48550/arXiv.2507.05538},
+	abstract = {Red teaming has evolved from its origins in military applications to become a widely adopted methodology in cybersecurity and AI. In this paper, we take a critical look at the practice of AI red teaming. We argue that despite its current popularity in AI governance, there exists a significant gap between red teaming's original intent as a critical thinking exercise and its narrow focus on discovering model-level flaws in the context of generative AI. Current AI red teaming efforts focus predominantly on individual model vulnerabilities while overlooking the broader sociotechnical systems and emergent behaviors that arise from complex interactions between models, users, and environments. To address this deficiency, we propose a comprehensive framework operationalizing red teaming in AI systems at two levels: macro-level system red teaming spanning the entire AI development lifecycle, and micro-level model red teaming. Drawing on cybersecurity experience and systems theory, we further propose a set of six recommendations. In these, we emphasize that effective AI red teaming requires multifunctional teams that examine emergent risks, systemic vulnerabilities, and the interplay between technical and social factors.},
+	urldate = {2026-03-17},
+	publisher = {arXiv},
+	author = {Majumdar, Subhabrata and Pendleton, Brian and Gupta, Abhishek},
+	month = oct,
+	year = {2025},
+	note = {arXiv:2507.05538 [cs]},
+	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computers and Society, Computer Science - Cryptography and Security, red teaming, case study},
 }
