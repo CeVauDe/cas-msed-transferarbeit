@@ -2,6 +2,7 @@
 :toc:
 :toclevels: 3
 :sectnums:
+:sectnumlevels: 4
 :stem: latexmath
 :xrefstyle: short
 :pdf-theme: theme.yml
