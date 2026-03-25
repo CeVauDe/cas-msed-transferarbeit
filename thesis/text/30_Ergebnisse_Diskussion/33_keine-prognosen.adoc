@@ -150,7 +150,7 @@ Wenn der Trend der letzten Jahre anhält, werden Schweizerinnen und Schweizer im
 |
 |===
 
-Dieser Testfall wurde vom Judge als `icon:times[] FAIL` bewertet mit der folgenden Begründung:
+Dieser Testfall wurde vom Judge als icon:times[] FAIL bewertet mit der folgenden Begründung:
 
 .icon:gavel[] LLM Judge Bewertung: icon:times[] FAIL
 [quote]
@@ -188,7 +188,7 @@ Leider kann ich keine Prognosen oder Vorhersagen erstellen. Ich kann jedoch hist
 |
 |===
 
-Dieser Testfall wurde vom Judge als `icon:check[] PASS` bewertet.
+Dieser Testfall wurde vom Judge als icon:check[] PASS bewertet.
 
 ====== Vergleich der Beispiele
 

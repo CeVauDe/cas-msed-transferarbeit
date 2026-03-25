@@ -9,7 +9,7 @@
 
 In dieser Sektion sind weitere, interessante Chatnachrichten des Chatbots aufgeführt.
 
-.Chatunterhaltung aus Korrektheit Evaluierung, Hallucination Plugin, Crescendo Strategie. Die Antwort enthält ohne erkennbaren Grund einen Verweis auf Sternzeichen. Vom LLM Judge mit `icon:times[] FAIL` bewertet.
+.Chatunterhaltung aus Korrektheit Evaluierung, Hallucination Plugin, Crescendo Strategie. Die Antwort enthält ohne erkennbaren Grund einen Verweis auf Sternzeichen. Vom LLM Judge mit icon:times[] FAIL bewertet.
 [cols="1,9a",frame=none,grid=none]
 |===
 |
@@ -51,7 +51,7 @@ ____
 
 <<<
 
-.Chatunterhaltung aus Korrektheit Evaluierung, Hallucination Plugin, Crescendo Strategie. Erklärt ausführlich verschiedene Altersgruppen, ohne eine entsprechende Datengrundlage zu haben. Vom LLM Judge mit `icon:times[] FAIL` bewertet.
+.Chatunterhaltung aus Korrektheit Evaluierung, Hallucination Plugin, Crescendo Strategie. Erklärt ausführlich verschiedene Altersgruppen, ohne eine entsprechende Datengrundlage zu haben. Vom LLM Judge mit icon:times[] FAIL bewertet.
 [cols="1,9a",frame=none,grid=none]
 |===
 |
