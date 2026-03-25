@@ -64,6 +64,28 @@ promptfoo import korrektheit_C_erweitert_v2.corrected.result.json
 
 Then open `promptfoo view` to inspect it.
 
+## Filtering Result Entries by Plugin
+
+To remove all test entries for a specific plugin from a `*.result.json` file, use `jq`. The filter targets the top-level result entry via `testCase.metadata.pluginId`.
+
+**Remove Intent sequence entries (in-place):**
+
+Intent sequence entries are multi-turn test cases defined with `provider.id: sequence` in the YAML config. They are identifiable in the result JSON by `testCase.provider.id == "sequence"`.
+
+```bash
+jq '.results.results |= map(select(.testCase.provider.id != "sequence"))' \
+  <name>.result.json > tmp.json && mv tmp.json <name>.result.json
+```
+
+Apply to all result files at once:
+
+```bash
+for f in *.result.json; do
+  jq '.results.results |= map(select(.testCase.provider.id != "sequence"))' \
+    "$f" > tmp.json && mv tmp.json "$f"
+done
+```
+
 ## Generating Charts
 
 Charts are generated from the `thesis/` directory:
