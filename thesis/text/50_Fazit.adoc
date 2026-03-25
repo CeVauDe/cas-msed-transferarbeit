@@ -4,7 +4,7 @@
 * Die Analyse nach den unterschiedlichen Kategorien ist sehr schwer, da diese verschwimmen und Antworten für eine Kategorie zwar Korrekt sein können, dabei aber Massgaben einer anderen Kategorie verletzen. Dieses Problem wurde in dieser Arbeit aus Aufwandsgründen nicht näher betrachtet und die Ergebnisse können durch diesen Effekt verzerrt sein.
 * Zusammenfassend lässt sich sagen, dass #...#
 * #Die Frage aus der Themeneingabe lässt sich im erstellten PoC leider nicht beantworten. Aufgrund der aufwendigen notwendigen Datenaufbereitung wurden nur TV Daten der Jahre 2018-2021 verwendet. Ziel des PoC ist nicht alle verfügbaren Daten zugänglich zu machen sondern zu testen, in welchem Rahmen die Daten über einen Chatbot wiedergegeben werden können. Sollte der PoC zu einem Chatbot weiterentwickelt werden, werden die weiteren Daten aufbereitet und dem Chatbot bereitgestellt.#
-
+* Chatbot wird kreativ um die Useranfragen im Rahmen seiner Möglichkeiten zu erledigen
 
 === Tipps
 * #Zusammenfassen der Ergebnisse#
@@ -21,6 +21,7 @@
 ** Daten für z.B. "Andere Sender" kommen mehrfach vor und inkludieren unterschiedliche Sender, sind daher also nicht direkt vergleichbar. Hier muss entschieden werden, wie damit umzugehen ist.
 * Präsentation der Zahlen erweckt ggf. noch eine Präzision, die nicht vorhanden ist. zahlen Runden? Auf welche Stelle?
 * Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nciht den entsprechenden Kontext hat.
+* Hinzufügen einer Spalte in den Daten die angibt, ob der Wert bereits aggregiert wurde oder nicht (z.B. _SRG SSR Total_ oder _Andere Sender_)
 
 #Some ideas:#
 
