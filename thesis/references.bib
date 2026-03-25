@@ -67,19 +67,17 @@
   abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
 }
 
-@misc{promptfooTeamStrategies,
+@online{promptfooTeamStrategies,
 	author = {{Promptfoo Inc.}},
-	title = {{R}ed {T}eam {S}trategies},
-	howpublished = {\url{https://www.promptfoo.dev/docs/red-team/strategies/}},
-	year = {2026},
-	note = {[Accessed 21-03-2026]},
+	title = {Red Team Strategies},
+	url = {https://www.promptfoo.dev/docs/red-team/strategies/},
+	urldate = {2026-03-21},
 }
-@misc{promptfooTeamPlugins,
+@online{promptfooTeamPlugins,
 	author = {{Promptfoo Inc.}},
-	title = {{R}ed {T}eam {P}lugins},
-	howpublished = {\url{https://www.promptfoo.dev/docs/red-team/plugins/}},
-	year = {2026},
-	note = {[Accessed 22-03-2026]},
+	title = {Red Team Plugins},
+	url = {https://www.promptfoo.dev/docs/red-team/plugins/},
+	urldate = {2026-03-22},
 }
 
 @inproceedings{russinovich2025great,
@@ -97,12 +95,11 @@
   year={2024}
 }
 
-@misc{githubRepoTransferarbeit,
+@online{githubRepoTransferarbeit,
 	author = {Vetter, Christian and Gruber, Markus},
-	title = {{G}it{H}ub Repository diese Transferarbeit},
-	howpublished = {\url{https://github.com/CeVauDe/cas-msed-transferarbeit}},
-	year = {2026},
-	note = {[Accessed 22-03-2026]},
+	title = {GitHub Repository diese Transferarbeit},
+	url = {https://github.com/CeVauDe/cas-msed-transferarbeit},
+	urldate = {2026-03-22},
 }
 
 @online{mcpAnthropic,
