@@ -44,6 +44,7 @@ def _extract_single(
     strategy_labels: dict[str, str] | None = None,
     plugin_labels: dict[str, str] | None = None,
     default_plugin: str | None = None,
+    use_overall_pass: bool = False,
 ) -> RedteamResult:
     s_labels = {**DEFAULT_STRATEGY_LABELS, **(strategy_labels or {})}
     p_labels = {**DEFAULT_PLUGIN_LABELS, **(plugin_labels or {})}
@@ -58,7 +59,7 @@ def _extract_single(
         grading = r.get("gradingResult", {})
         named_scores = grading.get("namedScores", {})
 
-        if named_scores:
+        if named_scores and not use_overall_pass:
             for key, score in named_scores.items():
                 if "/" in key:
                     plugin_raw, strategy_raw = key.split("/", 1)
@@ -68,6 +69,20 @@ def _extract_single(
                 plugin = p_labels.get(plugin_id, plugin_id)
                 strategy = s_labels.get(strategy_raw, strategy_raw)
                 counts[(plugin, strategy)][0] += int(score)
+                counts[(plugin, strategy)][1] += 1
+        elif named_scores and use_overall_pass:
+            # Use gradingResult.pass (incorporates human overrides) but keep
+            # the plugin/strategy breakdown from namedScores keys.
+            overall_pass = int(grading.get("pass", False))
+            for key in named_scores:
+                if "/" in key:
+                    plugin_raw, strategy_raw = key.split("/", 1)
+                else:
+                    plugin_raw, strategy_raw = key, "Basic"
+                plugin_id = _parse_plugin(plugin_raw)
+                plugin = p_labels.get(plugin_id, plugin_id)
+                strategy = s_labels.get(strategy_raw, strategy_raw)
+                counts[(plugin, strategy)][0] += overall_pass
                 counts[(plugin, strategy)][1] += 1
         elif default_plugin is not None:
             # Manual tests without namedScores — use gradingResult.pass
@@ -88,6 +103,7 @@ def extract_redteam_data(
     strategy_labels: dict[str, str] | None = None,
     plugin_labels: dict[str, str] | None = None,
     default_plugin: str | None = None,
+    use_overall_pass: bool = False,
 ) -> RedteamResult:
     """Extract and aggregate red-teaming data from one or more result.json files.
 
@@ -95,6 +111,10 @@ def extract_redteam_data(
         default_plugin: Plugin name to assign to results that have no
             namedScores (e.g. manually written test cases). If None,
             such results are skipped.
+        use_overall_pass: When True, use gradingResult.pass for the pass count
+            instead of the individual namedScore values. Useful for corrected
+            result files where human overrides update gradingResult.pass but
+            not namedScores.
     """
     if isinstance(paths, Path):
         return _extract_single(
@@ -102,6 +122,7 @@ def extract_redteam_data(
             strategy_labels=strategy_labels,
             plugin_labels=plugin_labels,
             default_plugin=default_plugin,
+            use_overall_pass=use_overall_pass,
         )
 
     merged: dict[tuple[str, str], list[int]] = defaultdict(lambda: [0, 0])
@@ -111,6 +132,7 @@ def extract_redteam_data(
             strategy_labels=strategy_labels,
             plugin_labels=plugin_labels,
             default_plugin=default_plugin,
+            use_overall_pass=use_overall_pass,
         )
         for key, (passed, total) in single.raw.items():
             merged[key][0] += passed

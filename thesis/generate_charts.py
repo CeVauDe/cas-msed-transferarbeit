@@ -52,16 +52,29 @@ def chart(name: str):
 
 @chart("korrektheit/pass-rate")
 def _korrektheit_ergebnisse_heatmap(chart_name: str):
-    result = extract_redteam_data(
+    base = extract_redteam_data(
+        paths=[
+            POC_DIR / "redteam" / "korrektheit_C_erweitert_v2.result.json",
+            POC_DIR / "redteam" / "korrektheit_AB_v2.result.json",
+        ],
+        default_plugin="Custom",
+    )
+    corrected = extract_redteam_data(
         paths=[
             POC_DIR / "redteam" / "korrektheit_C_erweitert_v2.corrected.result.json",
             POC_DIR / "redteam" / "korrektheit_AB_v2.corrected.result.json",
         ],
         default_plugin="Custom",
+        use_overall_pass=True,
     )
-    plugins = result.plugins
-    strategies = result.strategies
-    raw = result.raw
+
+    strategies = sorted({k[1] for k in base.raw} | {k[1] for k in corrected.raw})
+    plugins = base.plugins
+
+    # Paired columns: plain strategy name / strategy* for each strategy
+    x_labels = [name for s in strategies for name in (s, f"{s}*")]
+    # Dividers between each strategy pair (after index 1, 3, 5, ...)
+    dividers = [i * 2 - 0.5 for i in range(1, len(strategies))]
 
     z_values = []
     cell_text = []
@@ -69,21 +82,22 @@ def _korrektheit_ergebnisse_heatmap(chart_name: str):
         z_row = []
         text_row = []
         for strategy in strategies:
-            entry = raw.get((plugin, strategy))
-            if entry is not None:
-                passed, total = entry
-                rate = passed / total
-                z_row.append(rate)
-                text_row.append(f"{rate:.0%}<br>{passed}/{total}")
-            else:
-                z_row.append(None)
-                text_row.append("")
+            for raw in (base.raw, corrected.raw):
+                entry = raw.get((plugin, strategy))
+                if entry is not None:
+                    passed, total = entry
+                    rate = passed / total
+                    z_row.append(rate)
+                    text_row.append(f"{rate:.0%}<br>{passed}/{total}")
+                else:
+                    z_row.append(None)
+                    text_row.append("")
         z_values.append(z_row)
         cell_text.append(text_row)
 
     create_heatmap(
         z_values=z_values,
-        x_labels=strategies,
+        x_labels=x_labels,
         y_labels=plugins,
         title="",
         chart_name=chart_name,
@@ -93,6 +107,7 @@ def _korrektheit_ergebnisse_heatmap(chart_name: str):
         cell_text=cell_text,
         show_colorbar=False,
         x_side="top",
+        column_dividers=dividers,
         width=700,
         height=200,
     )

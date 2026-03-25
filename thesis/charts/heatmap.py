@@ -18,6 +18,7 @@ def create_heatmap(
     y_title: str = "",
     value_format: str = ".1f",
     cell_text: list[list[str]] | None = None,
+    column_dividers: list[float] | None = None,
     width: int | None = None,
     height: int | None = None,
 ) -> None:
@@ -26,6 +27,9 @@ def create_heatmap(
     Args:
         cell_text: Optional 2D list of display strings per cell. If provided,
                    these are shown instead of the formatted z_values.
+        column_dividers: Optional list of x-axis positions (0-indexed, e.g. 1.5
+                         for between columns 1 and 2) where vertical divider
+                         lines are drawn to visually group columns.
     """
     fig = go.Figure(
         data=go.Heatmap(
@@ -62,6 +66,19 @@ def create_heatmap(
                     }
                 )
         fig.update_layout(annotations=annotations)
+
+    if column_dividers:
+        for x_pos in column_dividers:
+            fig.add_shape(
+                type="line",
+                xref="x",
+                yref="paper",
+                x0=x_pos,
+                x1=x_pos,
+                y0=0,
+                y1=1,
+                line={"color": "white", "width": 8},
+            )
 
     fig.update_layout(**THESIS_LAYOUT)
     fig.update_layout(
