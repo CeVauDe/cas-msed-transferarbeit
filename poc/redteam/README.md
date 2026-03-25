@@ -53,6 +53,17 @@ jq '{results: {results: [.body[] | .outputs[0]]}}' \
   <name>.export.json > <name>.result.json
 ```
 
+## Loading a Result File into the Local Promptfoo Database
+
+To view a stored `*.result.json` file in the promptfoo UI without re-running the eval:
+
+```bash
+# From poc/redteam/
+promptfoo import korrektheit_C_erweitert_v2.corrected.result.json
+```
+
+Then open `promptfoo view` to inspect it.
+
 ## Generating Charts
 
 Charts are generated from the `thesis/` directory:
