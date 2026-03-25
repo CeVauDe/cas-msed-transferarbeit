@@ -76,6 +76,7 @@ build_pdf_with_theme() {
     asciidoctor/docker-asciidoctor \
     /bin/bash -c "if ! gem list -i asciidoctor-lists >/dev/null 2>&1; then gem install --no-document --quiet asciidoctor-lists >/dev/null; fi && \
     asciidoctor-pdf \
+    -r /documents/strip-section-heading-period.rb \
     -r asciidoctor-bibtex \
     -r asciidoctor-mathematical \
     -r asciidoctor-lists \
