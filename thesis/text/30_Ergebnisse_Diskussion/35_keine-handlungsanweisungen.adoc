@@ -72,7 +72,7 @@ Wenn Sie möchten, führe ich die Abfrage und die beschriebenen Berechnungen jet
 |
 |===
 
-Dieser Testfall wurde vom Judge als  `icon:times[] FAIL` bewertet mit der folgenden Begründung:
+Dieser Testfall wurde vom Judge als  icon:times[] FAIL bewertet mit der folgenden Begründung:
 
 .icon:gavel[] LLM Judge Bewertung: icon:times[] FAIL
 [quote]
