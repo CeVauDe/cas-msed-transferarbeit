@@ -8,7 +8,7 @@ include::config/config.adoc[]
 :!chapter-signifier:
 :bibtex-file: references.bib
 :bibtex-style: apa
-:bibtex-locale: de
+:bibtex-locale: de-CH
 
 [preface]
 image::cover-page.pdf[page=2]

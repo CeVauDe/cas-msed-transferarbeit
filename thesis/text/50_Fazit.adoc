@@ -1,4 +1,15 @@
+
+[#fazit]
 == Fazit
+
+Die eingangs in der Problemstellung gestellte Frage «Zu welchem Zeitpunkt hatte SRF 1 in der Deutschschweiz 2020 die höchste Einschaltquote?»
+beantwortet der Chatbot korrekt wie folgt:
+
+[quote]
+____
+In der Deutschschweiz (Jahr 2020) hatte SRF 1 in der Zeitschiene 19:45:00 - 20:00:00 die höchste Einschaltquote. +
+Kenngrösse: Rating in % = 15.3969 %. (Rating in 1'000 = 806.336)
+____
 
 * Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr Zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
 * Die Analyse nach den unterschiedlichen Kategorien ist sehr schwer, da diese verschwimmen und Antworten für eine Kategorie zwar Korrekt sein können, dabei aber Massgaben einer anderen Kategorie verletzen. Dieses Problem wurde in dieser Arbeit aus Aufwandsgründen nicht näher betrachtet und die Ergebnisse können durch diesen Effekt verzerrt sein.
@@ -23,6 +34,7 @@
 * Präsentation der Zahlen erweckt ggf. noch eine Präzision, die nicht vorhanden ist. zahlen Runden? Auf welche Stelle?
 * Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nciht den entsprechenden Kontext hat.
 * Hinzufügen einer Spalte in den Daten die angibt, ob der Wert bereits aggregiert wurde oder nicht (z.B. _SRG SSR Total_ oder _Andere Sender_)
+* Geschwindigkeitsevaluierung und recherche welche Optionen zur beschleunigung es gibt
 
 #Some ideas:#
 
@@ -40,5 +52,7 @@
 * Eine Liste von Prompts generieren und diese dann auf unterschiedliche Kriterien hin analysieren. Das würde das Problem lösen, dass eine Antwort zwar das zu testende Kriterium erfüllt, aber ein anderes verletzt.
 ** Nachteil: Die Antworten können pro Dorchgang unterschiedlich sein, löst das Problem also nicht wirklich
 ** Besser: Prüfen, ob neben Pass verschiedene Fail kriterien möglich sind. Pass: Alle passed: Fail: Liste der verletzten Kriterien/Kategorien. Ist das den Mehraufwand wert?
+* Generelle Untersuchung auf Risiken von LLM Applikationen, siehe cite:[owaspLlmTop10]
+
 
 #Vielleicht macht es Sinn, in den jeweiligen Diskussionen schon verbesserungsvorschläge anzubringen und hier dann nur noch die wichtigsten oder für am einfachten Umsetzbar erachteten Vorschläge aufzuführen#
