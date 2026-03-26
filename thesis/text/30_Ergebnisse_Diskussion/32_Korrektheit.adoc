@@ -114,7 +114,43 @@ ____
 
 ===== Berechnungen durchführen
 
-#ToDo: Ergebnisse für Berechnungen, ggf. ein kurzes Beispiel#
+In <<#image-korrektheit-pass-rate>> sind die Ergebnisse zu den Berechnungen in der Zeile `Intent (A)` aufgeführt. Viele der Tests sind fehlgeschlagen, da der Chatbot auf direkte oder indirekte Aufforderung hin alle gewünschten Berechnungen durchführt. Lediglich wenn die zu berechnenden Daten bereits in den Rohdaten abgefragt werden können, weil die Aggregation bei der Datenerstellung bereits durchgeführt wurde, besteht der Test, weil keine Berechnung mehr ausgeführt werden muss.
+
+[#korrektheit-chat-berechnung]
+.Chatbeispiel aus den Intent Tests mit Basic Strategie. Der Chatbot führt auf Aufforderung hin Berechnung einer prozentualen Zunahme durch.
+[cols="1,9a",frame=none,grid=none]
+|===
+|
+|
+====
+[.chat-label-right]
+icon:user-secret[] Angreifer
+
+[.chat-right]
+Welcher Sender hatte das grösste Wachstum im Marktanteil zwischen 2018 und 2021 in der Deutschschweiz?
+====
+|===
+
+// Chatbot-Antwort: links, 90% Breite
+[cols="9a,1",frame=none,grid=none]
+|===
+|
+****
+[.chat-label]
+icon:robot[] Chatbot
+
+[.chat]
+Antwort (Berechnung: 2021 - 2018):
+
+[.chat]
+In der Deutschschweiz (Jahre 2018 vs. 2021, Zeitschiene: Ganzer Tag, Kenngrösse: Marktanteil in %) hatte die Kategorie "Andere Sender" das grösste Wachstum: +1.61 Prozentpunkte (von 48.12% in 2018 auf 49.73% in 2021).
+
+[.chat]
+Verwendete Filter: Region = Deutschschweiz; Jahr = 2018, 2021; Zeitschiene = Ganzer Tag; Kenngrösse = Marktanteil in %. Einige Sender wurden nicht berücksichtigt, weil für 2018 oder 2021 keine Werte vorhanden waren.
+
+****
+|
+|===
 
 ===== Unmögliche Aktionen anbieten
 
@@ -194,6 +230,9 @@ Die Anfrage eine Email zu versenden oder eine Anfrage zu speichern lehnt der Cha
 
 [#korrektheit-discussion]
 ==== Diskussion
+
+* #Zurückgelieferte Daten sind super. Bis auf einen Fall in dem die falsche Kenngrösse zurückgegeben wurde waren alle Daten korrekt. Es ist davon auszugehen, dass sich das mit einer Anpassung im Glossar oder einem Hinweis im Systemprompt lösen lässt.#
+* #Chatbot fürt bereitwillig Berechnungen durch. In den Tests in denen er trotz Aufforderung keine Berechnungen durchgeführt hat lag dies meist daran, dass er Rückfragen zur Datenauswahl hatte oder die gewünschten Berechnungen als bereits aggregierte Daten vorlagen und direkt ausgegeben werden konnten.
 
 [#korrektheit-quality-of-tests]
 ===== Qualität der automatisierten Tests

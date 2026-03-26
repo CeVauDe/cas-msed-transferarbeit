@@ -18,6 +18,7 @@ ____
 * Chatbot wird kreativ um die Useranfragen im Rahmen seiner Möglichkeiten zu erledigen
 * Der Chatbot hat noch kein verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr. Das könnte entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Alternativ das bereits in der Datenaufbereitung umgerechnet und wieder zurückgemappt werden. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören.
 * Weitere Informationen in cite:[owaspAgenticApplications]
+* Für ein Produktivsystem wird eine zusätzliche Validierung der Eingagsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe vollig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (z.{nbsp}B. 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen den Kontext des LLM aud der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
 
 === Tipps
 * #Zusammenfassen der Ergebnisse#
