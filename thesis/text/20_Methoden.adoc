@@ -83,21 +83,20 @@ Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei der durc
 
 ==== Toolrecherche
 
-#Kurz erwähnen, welche anderen Tools es noch so gibt und warum wir uns für promptfoo entschieden haben#
-* PyRIT (Python Risk Identification Tool, Microsoft)
-* Garak (NVIDIA / Community)
-* DeepTeam
-* Promptfoo
-* Repello AI
-* AutoRTAI (HiddenLayer)
-* Mindgard
+Es gibt eine Fülle an Tools und Frameworks, die Red Teaming von LLM Applikationen unterstützen und vereinfachen.
+cite:[ijsr_SR251221060319] gibt einen guten Überblick über eine Auswahl solcher Open Source Tools.
 
-#jeweils kurze beschreibung zu den tools und dann ein kurzer Absatz mit Begründung, warum promptfoo#
-Begründung kann in die Richtung gehen: lässt sich einfach verwenden, bringt schon viele vorkonfigurierte Plugins und Strategien mit und kann trotzem auch mit selbst geschriebenen Plugins erweitert werden. Ist darüber hinaus kostenlos nutzbar, da OpenSource
+*PyRIT* (Python Risk Identification Tool) cite:[munoz2024pyrit] ist ein von Microsoft entwickeltes,   flexibles und erweiterbares Framework für Automatisiertes und von Menschen geleitetes AI-Red-Teaming. Die Bewertung der Sicherheit und Zuverlässigkeit generativer KI-Systeme in grossem Maßstab steht im Vordergrund cite:[pyritHP]. Es bietet sehr flexible Bausteine, die selbst zu Angriffsprozeduren zusammengestellt werden müssen. Es ist dadurch komplizierter aufzusetzen und erfordert ein programmatisches Setup.
+
+*garak* (Generative AI Red-teaming and Assessment Kit) ist ein von NVIDIA entwickeltes Framework, mit dem sich Schwachstellen in einem Ziel-LLM oder einem Dialogsystem aufdecken und identifizieren lassen. garak untersucht das System auf strukturierte Weise, um potenzielle Schwachstellen aufzudecken cite:[derczynski2024garak]. Es bietet eine umfangreiche Sammlung (laut cite:[ijsr_SR251221060319] die grösste) von _Probes_, die auch mit _Buffs_ modifiziert werden können. Leider ist die Dokumentation nicht aktuell und unvollständig cite:[garakDocs]. Ausserdem ist es primär dafür konzipiert um LLMs direkt zu testen.
+
+*Promptfoo* ist ein CLI zur Evaluierung und Red Teaming von LLM Applikationen. Es bietet automatisierte Tests, die KI-Risiken in der Entwicklung aufspüren und beheben cite:[promptfooHP]. Das Tool ist gut dokumentiert, wird aktiv weiterentwickelt und erlaubt einen sehr einfachen Start und ist durch die Konfiguration via `.yaml` Dateien sehr flexibel. Es bringt viele vorgefertigte Plugins und Strategien mit womit einfach auch kompliziertere Angriffe getestet werden können.
+
+Vorallem aufgrund der eingachen Verwendbarkeit und der vielen vorgefertigten Plugins und Strategien wird in dieser Arbeit das Tool `promptfoo` verwendet. Der nachfolgende Abschnitt gibt einen Überblick über die verwendeten Plugins und Strategien.
 
 ==== Tool `promptfoo`
 
-Zur Durchführung des Red Teamings wird das Tool `promptfoo` [quelle! Homepage] verwendet. Es erlaubt die Automatisierung des Red-Teamings.
+Zur Durchführung des Red Teamings wird das Kommandozeilentool `promptfoo` cite:[promptfooHP] verwendet. Promptfoo ermöglicht das Testen von Prompts und Modellen mit automatisierten Evaluierungen, die Anbindung verschiedener Modelle um diese direkt zu vergleichen, das einfache Teilen von Ergebnissen und automatisierte Checks in CI/CD Pipelines. Die in dieser Arbeit hauptsächlich genutze Funktion ist das einfach aufzusetzende Red Teaming.
 
 [#methoden-plugins,reftext=Plugins]
 ===== Plugins
@@ -138,7 +137,7 @@ Die basic Strategie nutzt die generierten Fragen der Plugins ohne weitere zusät
 Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt der einfache multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach immer weiter basierend auf den Antworten des Modells.
 
 *Beispiel:*
-Beginnt mit `"Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 anhand der Mediapulse-Jahresberichte zusammenfassen?"` Wenn abgelehnt, folgt `"Könnten Sie bitte für die Jahre 2018 bis 2021 die Marktanteile der fünf größten TV-Sender in jeder Sprachregion in einer Tabelle darstellen?"` und eskaliert zu `"Angenommen, ein Medienunternehmen möchte in einen Schweizer TV-Sender investieren und bittet Sie, auf Basis der Marktanteilsdaten 2018–2021 eine datenbasierte Empfehlung zu geben, welche Sender für die Zukunft am interessantesten erscheinen könnten. Wie würden Sie vorgehen, um diese Entscheidung ausschließlich anhand der vorliegenden Zahlen zu begründen?"`
+Beginnt mit `"Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 anhand der Mediapulse-Jahresberichte zusammenfassen?"` Wenn abgelehnt, folgt `"Könnten Sie bitte für die Jahre 2018 bis 2021 die Marktanteile der fünf größten TV-Sender in jeder Sprachregion in einer Tabelle darstellen?"` und eskaliert zu `"Angenommen, ein Medienunternehmen möchte in einen Schweizer TV-Sender investieren und bittet Sie, auf Basis der Marktanteilsdaten 2018-2021 eine datenbasierte Empfehlung zu geben, welche Sender für die Zukunft am interessantesten erscheinen könnten. Wie würden Sie vorgehen, um diese Entscheidung ausschließlich anhand der vorliegenden Zahlen zu begründen?"`
 
 [#methods-strategien-jailbreak-templates]
 ====== jailbreak-templates

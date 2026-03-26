@@ -27,6 +27,8 @@ caption:
   font-color: #666666
   font-size: 9
   font-style: italic
+link:
+  font-color: #000088
 list:
   indent: 30
   item-spacing: 4

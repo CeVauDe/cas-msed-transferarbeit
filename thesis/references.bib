@@ -59,19 +59,28 @@
   abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
 }
 
+
+@online{promptfooHP,
+	author = {{Promptfoo Inc.}},
+	title = {Promptfoo Homepage},
+	url = {https://www.promptfoo.dev/},
+	urldate = {2026-03-26},
+	year = {2026a},
+}
+
 @online{promptfooTeamStrategies,
 	author = {{Promptfoo Inc.}},
 	title = {Red Team Strategies},
 	url = {https://www.promptfoo.dev/docs/red-team/strategies/},
 	urldate = {2026-03-21},
-	year = {2026b},
+	year = {2026c},
 }
 @online{promptfooTeamPlugins,
 	author = {{Promptfoo Inc.}},
 	title = {Red Team Plugins},
 	url = {https://www.promptfoo.dev/docs/red-team/plugins/},
 	urldate = {2026-03-22},
-	year = {2026a},
+	year = {2026b},
 }
 
 @inproceedings{russinovich2025great,
@@ -204,8 +213,77 @@
 
 @online{owaspLlmTop10,
   author = {{OWASP Foundation, Inc.}},
-  title = {LLMRisks Archive - OWQSP Gen AI Security Project},
+  title = {2025 Top 10 Risk & Mitigations for LLMs and Gen AI Apps},
   url = {https://genai.owasp.org/llm-top-10/},
 	year = {2025},
+  urldate = {2026-03-26},
+}
+
+@online{owaspAgenticApplications,
+  author = {{OWASP Foundation, Inc.}},
+  title = {OWASP Top 10 for Agentic Applications for 2026},
+  url = {https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/},
+  year = {2025},
+  month = {December},
+  urldate = {2026-03-26},
+}
+
+@article{munoz2024pyrit,
+  title={Pyrit: A framework for security risk identification and red teaming in generative ai system},
+  author={Munoz, Gary D Lopez and Minnich, Amanda J and Lutz, Roman and Lundeen, Richard and Dheekonda, Raja Sekhar Rao and Chikanov, Nina and Jagdagdorj, Bolor-Erdene and Pouliot, Martin and Chawla, Shiven and Maxwell, Whitney and others},
+  journal={arXiv preprint arXiv:2410.02828},
+  year={2024}
+}
+
+@article{ijsr_SR251221060319,
+  author = {Karthikeyan Thirumalaisamy},
+  title = {Survey of Public Red-Teaming Frameworks for LLM: Techniques, Coverage, and Gaps},
+  journal = {International Journal of Science and Research (IJSR)},
+  volume = {14},
+  number = {12},
+  year = {2025},
+  month = {December},
+  pages = {1788--1793},
+  doi = {https://dx.doi.org/10.21275/SR251221060319},
+  url = {https://www.ijsr.net/getabstract.php?paperid=SR251221060319}
+}
+
+@article{derczynski2024garak,
+  title={garak: A Framework for Security Probing Large Language Models},
+  author={Derczynski, Leon and Galinkin, Erick and Martin, Jeffrey and Majumdar, Subho and Inie, Nanna},
+  year={2024},
+  eprint={2406.11036},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  journal={arXiv preprint arXiv:2406.11036},
+  url={https://arxiv.org/abs/2406.11036},
+}
+
+
+@misc{wang2026openrt,
+      title={OpenRT: An Open-Source Red Teaming Framework for Multimodal LLMs},
+      author={Xin Wang and Yunhao Chen and Juncheng Li and Yixu Wang and Yang Yao and Tianle Gu and Jie Li and Yan Teng and Yingchun Wang and Xia Hu},
+      year={2026},
+      eprint={2601.01592},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2601.01592},
+}
+
+@online{garakDocs,
+  title = {Welcome to garak!},
+  author={Nvidia},
+  url = {https://docs.garak.ai/garak},
+  year = {2026},
+  urldate = {2026-03-26},
+}
+
+
+
+@online{pyritHP,
+  title = {Python Risk Identification Tool},
+  author={Azure},
+  url = {https://azure.github.io/PyRIT/},
+  year = {2026},
   urldate = {2026-03-26},
 }
