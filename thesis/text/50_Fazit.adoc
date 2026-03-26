@@ -17,6 +17,7 @@ ____
 * #Die Frage aus der Themeneingabe lässt sich im erstellten PoC leider nicht beantworten. Aufgrund der aufwendigen notwendigen Datenaufbereitung wurden nur TV Daten der Jahre 2018-2021 verwendet. Ziel des PoC ist nicht alle verfügbaren Daten zugänglich zu machen sondern zu testen, in welchem Rahmen die Daten über einen Chatbot wiedergegeben werden können. Sollte der PoC zu einem Chatbot weiterentwickelt werden, werden die weiteren Daten aufbereitet und dem Chatbot bereitgestellt.#
 * Chatbot wird kreativ um die Useranfragen im Rahmen seiner Möglichkeiten zu erledigen
 * Der Chatbot hat noch kein verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr. Das könnte entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Alternativ das bereits in der Datenaufbereitung umgerechnet und wieder zurückgemappt werden. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören.
+* Weitere Informationen in cite:[owaspAgenticApplications]
 
 === Tipps
 * #Zusammenfassen der Ergebnisse#
