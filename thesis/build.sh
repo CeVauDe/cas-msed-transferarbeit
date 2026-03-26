@@ -118,7 +118,7 @@ pages = text.split('\f')
 
 intro_page_number = None
 for page in pages:
-  if re.search(r'(?m)^\s*1\.\s+Einleitung\s*$', page):
+  if re.search(r'(?m)^\s*1\.?\s+Einleitung\s*$', page):
         numbers = re.findall(r'(?m)^\s*(\d+)\s*$', page)
         if numbers:
             intro_page_number = int(numbers[-1])
