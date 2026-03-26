@@ -1,49 +1,65 @@
+
+[#einleitung]
 == Einleitung
 
 
 
 === Ausgangslage
-- Bedeutung und Stellenwert des Themas in einem grösseren Kontext aufzeigen
-
-_Die Erhebung und Veröffentlichung der jährlichen Nutzungsdaten für Fernsehen und Radio in der
-Schweiz stellt eine zentrale Informationsquelle für die Medienbranche und die Öffentlichkeit dar. In der
-Vergangenheit wurden diese komplexen Daten über ein interaktives Dashboard zugänglich gemacht.
-Der Unterhalt dieses Systems erwies sich jedoch als äusserst ressourcenintensiv, da die jährliche
-Datenaktualisierung umfangreiche manuelle Anpassungen an der Visualisierungslogik erforderte.
-Aktuell liegen die Daten primär in strukturierten Tabellenformaten vor, für die es jedoch keine
-niederschwellige, intuitive Möglichkeit zur Exploration für Gelegenheitsnutzer oder Fachpersonen ohne
-vertiefte Datenbankkenntnisse gibt. Gleichzeitig besteht innerhalb der Organisation das strategische
+Die Erhebung und Veröffentlichung der jährlichen Nutzungszahlen für TV und Radio in der
+Schweiz stellt eine zentrale Informationsquelle für die Medienbranche und die Öffentlichkeit dar.
+Diese werden als PDF-Files veröffentlicht cite:[mediapulseJahresdaten]. Sie sind sehr umfangreich
+und für Laien nur sehr schwer handhabbar. In der
+Vergangenheit wurden diese komplexen Daten über ein interaktives Dashboard zugänglich gemacht, welches
+durch die grosse Datenmenge jedoch sehr langsam war.
+Ein Datenanalyse-Compagnion soll diese Herausforderungen adressieren und die Analyse und Exploration der
+Jahresdaten für die Nutzer effizienter und angenehmer gestalten. In einem ersten Schritt soll dafür die
+Machbarkeit einer Large Language Model-basierten Datenabfrage geprüft werden.
+Gleichzeitig besteht innerhalb der Organisation das strategische
 Ziel, Kompetenzen im Bereich von Large Language Models (LLM) und agentischen Systemen
-aufzubauen, um zukünftige Datenprojekte effizienter zu gestalten._
+aufzubauen, um zukünftige Datenprojekte effizienter zu gestalten.
 
 
 === Problemstellung
-_Die Kernherausforderung besteht darin, die Kluft zwischen den strukturierten Nutzungsdaten und den
+Die Kernherausforderung besteht darin, die Kluft zwischen den strukturierten Nutzungsdaten und den
 natürlichsprachlichen Fragestellungen der Nutzer zu überbrücken. Es soll ein Chatbot-System
-entwickelt werden, das in der Lage ist, komplexe Anfragen wie beispielsweise «Zu welchem Zeitpunkt
-hören die 15-24-Jährigen aus der Deutschschweiz am häufigsten Radio?» präzise zu beantworten. Die
-technische Schwierigkeit liegt hierbei in der korrekten Abbildung von Filtern (Region, Altersgruppe,
+entwickelt werden, das in der Lage ist, komplexe Anfragen wie beispielsweise «Zu welchem Zeitpunkt hatte SRF 1 in
+der Deutschschweiz 2020 die höchste Einschaltquote?» präzise zu beantworten. Die
+technische Schwierigkeit liegt hierbei in der korrekten Abbildung von Filtern (Region, Kenngrösse,
 Zeitintervall) auf die zugrunde liegende Datenstruktur, ohne dass das System zu Fehlinterpretationen
 oder Halluzinationen neigt. Eine wesentliche Anforderung ist die strikte Beschränkung auf die
 Faktenwiedergabe: Das System darf keine eigenständigen Interpretationen, Handlungsempfehlungen
 oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthaltenen Fakten textuell
-aufbereiten._
-
-==== Risiken von Applikationen mit LLMs
- siehe z.B. https://genai.owasp.org/llm-top-10/
+aufbereiten.
 
 === Zielsetzung der Arbeit
-_Das Hauptziel dieser Arbeit ist die Überprüfung der Praxistauglichkeit eines LLM-basierten Chatbots für
-die Exploration von Mediennutzungsdaten. Zu diesem Zweck wird zunächst ein MCP-Server (Model
-Context Protocol) entwickelt, der als standardisierte Schnittstelle fungiert und die strukturierten
-Jahresdaten für LLM-Agents sicher und effizient zugänglich macht. Darauf aufbauend erfolgt die
-prototypische Implementierung eines Chat-Agents, der über diesen Server auf die Daten zugreift und
-Nutzeranfragen in natürlicher Sprache verarbeitet. Ein weiteres zentrales Ziel ist die systematische
-Evaluation der Antwortqualität, wobei insbesondere die Korrektheit der Datenwiedergabe sowie die
-Einhaltung der gesetzten Leitplanken, wie der Verzicht auf eigenständige Interpretationen, überprüft
-werden. Abschliessend wird ein Massnahmenkatalog erstellt, der die identifizierten
+Das erste Ziel dieser Arbeit ist die Erstellung eines LLM-basierten Chatbots für die Exploration von Mediennutzungsdaten
+und die Überprüfung der Praxistauglichkeit. Der Proof of Concept soll lokal ausführbar sein, ein einfaches Chatinterface
+bereitstellen und die Jahresdaten für die Beantwortung von Benutzerfragen zur Verfügung stellen. Die Daten sollen strukturiert
+über einen Model Context Protocol (MCP) Server bereitgestellt werden, der als standardisierte Schnittstelle fungiert.
+Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient gestalten werden. Der LLM-Agent des Chatbots verarbeitet
+die Nutzeranfragen, ruft die zur Beantwortung einer Frage nötigen Daten ab und beantwortet die Anfrage in natürlicher Sprache.
+
+Das zweite zentrale Ziel dieser Arbeit ist die systematische Evaluierung der Antwortqualität des Chatbots. Die Natur der Daten
+erfordert einen sehr hohen Fokus auf die Qualität der Antworten und geben strenge Richtlinen vor, was der Chatbot antworten
+darf und was nicht.
+Die Antworten sollen dafür insbesondere auf die folgenden Kriterien hin überprüft werden:
+
+. *Korrektheit:*
+.. Sind die Antworten, welche der Chatbot auf der verfügbaren Datenbasis gibt korrekt?
+.. Werden die Fragen vom Chatbot korrekt verstanden?
+. *Prognosen:*
+.. Ist es möglich, Antworten zu Nutzungsprognosen zu verhindern?
+. *Interpretationen:*
+.. Lässt sich der Chatbot zu Interpretationen der Daten verleiten?
+. *Handlungsanweisungen:*
+.. Das System darf keine Handlungsanweisungen zur Verbesserung der Nutzung geben.
+
+Abschliessend wird ein Massnahmenkatalog erstellt, der die identifizierten
 Optimierungspotenziale zusammenfasst und fundierte Lösungsvorschläge für die im Prototyp erkannten
-Schwachstellen dokumentiert._
+Schwachstellen dokumentiert.
+
+Im Rahmen des Proof of Concept liegt der Schwerpunkt der Arbeit auf der Entwicklung und Evaluierung des Chatbot Systems und nicht auf
+der Datenaufbereitung aller verfügbaren Daten. Daher ist die Datenaufbereitung auf die Jahresdaten der TV-Nutzung nach Sender aller drei Sprachregionen auf die Jahre 2018 bis 2021 beschänkt.
 
 === Aufbau der Arbeit
-- Beschreibung, was in welchen Kapiteln behandelt wird
+In dieser Einleitung in <<#einleitung>> werden die Ausgangslage, Problemstellung und das Ziel der Arbeit beschrieben. <<#methoden>> gibt einen Überblick über die verwendeten Methoden und erläutert wichtige Konzepte, die im weiteren Verlauf der Arbeit verwendet werden. In <<#ergebnisse-diskussion>> werden dann für die verschiedenen Kriterien die Ergebnisse dargestellt und diskutiert. <<#section-poc>> beschreibt den entwickelten Proof of Concept. In <<#section-korrektheit>> bis <<#section-handlungsanweisungen>> werden nacheinander die Ergebnisse der Untersuchungen bezüglich der Kriterien <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> gezeigt und diskutiert. Abschliessend fasst <<#fazit>> die Ergebnisse nochmal kurz zusammen und zieht das Fazit der durchgeführten Untersuchungen. Schliesslich gibt es auch einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.

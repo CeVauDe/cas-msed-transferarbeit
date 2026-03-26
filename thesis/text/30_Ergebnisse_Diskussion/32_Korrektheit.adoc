@@ -1,4 +1,5 @@
 
+[#section-korrektheit]
 === Korrektheit
 
 Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, keine Durchführung von Berechnungen und keine unerfüllbaren Aktionsversprechen. Die Untersuchung ist wie in <<#table-korrektheit-overview>> dargestellt aufgeteilt.

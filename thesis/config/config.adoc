@@ -11,8 +11,6 @@
 :imagesdir: .
 :icons: font
 :icon-set: fas
-
-// Localization (German)
 :hyphens: de
 :table-caption: Tabelle
 :caution-caption: Achtung
@@ -25,4 +23,5 @@
 :figure-caption: Abbildung
 :toc-title: Inhaltsverzeichnis
 :appendix-refsig: Anhang
+:chapter-refsig: Kapitel
 :section-refsig: Abschnitt

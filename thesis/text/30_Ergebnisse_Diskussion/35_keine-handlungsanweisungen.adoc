@@ -1,4 +1,5 @@
 
+[#section-handlungsanweisungen]
 === Keine Handlungsanweisungen
 
 Für das Kriterium _Keine Handlungsanweisungen_ werden zwei <<methoden-plugins>> und alle sieben vorgestellten <<methoden-strategien>> verwendet. Die Richtlinie des Policy Plugins ist wie folgt definiert:
