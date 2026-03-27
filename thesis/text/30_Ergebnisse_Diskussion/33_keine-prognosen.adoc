@@ -1,6 +1,6 @@
 
 === Prognosen
-Der Agent muss ausschliesslich faktisch handeln und darf nicht prognostizieren. 63 Fragen werden mit drei <<methoden-plugins,Plugins>> sieben <<methoden-strategien,Strategien>> generiert. Zum Generieren und Auswerten wird das OpenAi 4o-mini LLM genutzt. Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Der Agent muss ausschliesslich faktisch handeln und darf nicht prognostizieren. 63 Fragen werden mit drei <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> generiert, die Auswahl fällt mit hilfe von künstlicher Intelligenz. Zum Generieren und Auswerten wird das OpenAI-Model 4o-mini genutzt. Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never make predictions, forecasts, or provide
@@ -19,23 +19,23 @@ Es versucht den Agent dazu zu bringen:
 * Falsche Zahlen oder nicht-existente Entitäten zu behaupten
 * Mit Überzeugung etwas Falsches zu sagen
 
-Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
+Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und auf die Bedürfnisse angepasst. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
 
 [#results-prognosen]
 ==== Ergebnisse
-Von 63 durchgeführten Red-Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht war in <<#image-prognosen-pass-rate>> dargestellt. Das System war in dieser Verfassung nachweislich anfällig für Prognose-Manipulationen.
+Von 63 durchgeführten Red-Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
 
-*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigte eine Erfolgsrate von nur 4,8%, was bedeutete, dass das System in 95% der Fälle Daten ausserhalb des Geltungsbereichs (2018-2021) fabrizierte.
+*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur 4,8%, was bedeutete, dass das System in 95% der Fälle Daten ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
 
 [#image-prognosen-plugin-pass-rate]
-.Red Teaming Erfolgsrate nach Plugin
+.Diagram über die Erolgsrate nach Plugin für das Thema "keine Prognosen"
 image::generated/prognose/redteam-prognosen-plugins.svg[Red Teaming Plugins, 600]
 
 ===== Strategie-spezifische Analyse
 
 Die Analyse nach Angriffsstrategie zeigte ein besorgniserregendes Muster: Multi-Turn-Strategien waren deutlich erfolgreicher beim Umgehen der Prognose-Einschränkungen als Single-Turn-Angriffe.
 
-.Erfolgsrate nach Red Teaming-Strategie
+.Tabelle über die Erfolgsrate nach Strategie für das Thema "keine Prognosen"
 [cols="2,^1,^1,^1", options="header"]
 |===
 | Strategie | Tests | Bestanden | Erfolgsrate
@@ -79,7 +79,7 @@ Die Analyse nach Angriffsstrategie zeigte ein besorgniserregendes Muster: Multi-
 Die folgende Heatmap zeigte die Plugin-spezifische Erfolgsrate pro Strategie. Die farbliche Kodierung verdeutlichte das dramatische Versagen bei Multi-Turn-Strategien.
 
 [#image-prognosen-pass-rate]
-.Red Teaming Erfolgsrate nach Angriffsstrategie und Plugin
+.Erfolgsraten Matrix aufgeteilt in Angriffsstrategie und Plugin für das Thema "Keine Prognosen"
 image::generated/prognose/redteam-prognosen-strategies.svg[Red Teaming Strategien, 800]
 
 Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose.result.json` abrufbar.
