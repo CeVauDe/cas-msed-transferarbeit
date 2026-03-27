@@ -1,5 +1,5 @@
 === Proof of Concept (PoC) Applikation
-Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend.
+Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend.
 
 ==== MCP Server
 
@@ -32,7 +32,9 @@ Damit der OpenAI Agent funktionieren kann, wird dem Agenten zusätzlich zu den B
 Die vollständige System Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/apps/chatbot/src/chatbot/system_prompt_v2_minimum.py` nachgelesen werden.
 
 // TODO: wo wollen dir das diagram platzieren?
+[#ergebnisse-poc-sequenzdiagram]
 ==== Sequenzdiagramm des Verarbeitungsloops einer Beispielfrage
+Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?` dargestellt.
 
 [[fig-agent-loop,Abbildung: Agent-Loop]]
 .Sequenzdiagramm des agentenbasierten Verarbeitungsloops (Beispielfrage)
