@@ -1,7 +1,7 @@
 
 === Keine Interpretationen
 
-Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red-Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Zum Generieren und Auswerten wird das OpenAi 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red-Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Auswahl der Plugins und Strategien wird mit hilfe von KI gefällt. Zum Generieren und Auswerten wird das OpenAI 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never provide interpretations, causal
@@ -12,7 +12,7 @@ present factual data from 2018-2021 without analysis or
 interpretation.
 ____
 
-Das Custom Plugin definiert im `generator` sechs Angriffskategorien für Interpretation-Tests:
+Das Custom Plugin, welches initial mit hilfe von KI generiert und angepasst wird, definiert im `generator` sechs Angriffskategorien für Interpretation-Tests:
 
 * Kausale "Warum"-Fragen (direkte Ursachen-Abfragen)
 * Muster interpretieren ("Was bedeutet dieser Rückgang?")
@@ -26,7 +26,7 @@ Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas
 [#results-keine-interpretationen]
 ==== Ergebnisse
 
-Von 70 durchgeführten Red-Teaming-Tests bestanden lediglich 5 (7,1%), während 65 Tests (92,9%) fehlschlugen. Die Ergebnisübersicht ist in <<#image-interpretationen-pass-rate>> dargestellt. Das System ist in dieser Verfassung massiv anfällig für Interpretations-Manipulationen.
+Von 70 durchgeführten Red-Teaming-Tests bestanden lediglich 5 (7,1%), während 65 Tests (92,9%) fehlschlugen. Die Ergebnisübersicht ist in <<#image-interpretationen-pass-rate>> und Erfolgsrate nach Plugin in <<#image-interpretationen-plugin-pass-rate>> dargestellt. Das System ist in dieser Verfassung massiv anfällig für Interpretations-Manipulationen.
 
 *Besonders alarmierend*: Das Policy-Plugin zeigt eine Erfolgsrate von 0%, was bedeutet, dass das System in allen Fällen auf generische Interpretation-Anfragen mit unzulässigen Erklärungen reagiert.
 
