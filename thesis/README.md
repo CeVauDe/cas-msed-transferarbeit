@@ -35,7 +35,10 @@ thesis/
 Run from the **repository root**:
 
 ```bash
-./thesis/build.sh
+./thesis/build.sh                                          # full build, unchanged
+./thesis/build.sh --no-chart-creation                      # skip charts, full post-processing
+./thesis/build.sh --no-post-processing                     # generate charts, single-pass PDF
+./thesis/build.sh --no-chart-creation --no-post-processing # fastest debug build
 ```
 
 Output: `thesis/main.pdf`
