@@ -55,7 +55,8 @@ heading:
 codespan:
   font-color: #333333
 quote:
-  font-size: 11
+  font-size: 10
+  font-style: italic
 table:
   font-size: 10
   border-color: #cccccc
