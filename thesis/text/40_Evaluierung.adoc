@@ -2,11 +2,26 @@
 [#chapter-evaluierung]
 == Evaluierung
 
-#ToDo: Einleitung anpassen#
-In diesem Kapitel werden die Ergebniss der Arbeit vorgestellt und diskutiert. <<#chapter-poc>> beschreibt den implementierten Proof-of-Concept und das Zusammennspiel der Komponenten MCP Server und Chatbot. Die weiteren Abschnitte präsentieren die Ergebnisse der Red Teaming Evaluierung. Im <<#section-korrektheit,"Abschnitt Korrektheit">> wird gezeigt, wie gut der Chatbot Anfragen mit korrekten Daten beantworten kann. Das Verhalten des Chatbots bezüglich Prognosen und Interpretationen wird in <<#section-prognosen>> und <<#section-interpretation>> untersucht und Vorschläge gemacht, wie dies verbessert werden kann. Abschliesend wird das Kriterium <<#section-handlungsanweisungen,Handlungsanweisungen>> untersucht und diskutiert, bei dem es darum geht, ob der Chatbot dem Benutzer unerwünschter Weise Handlungsanweisungen gibt und wie dies gegebenenfalls vermindert werden kann.
+Während Large Language Models die Erstelung von Chatbots erheblich vereinfachen und sprachlich sehr gute Antworten liefern, haben sie keine wirkliche Intelligenz und sind sehr anfällig für diverse Fehler. In cite:[llmHallucinationExamples] sind 5 Beispiele aufgeführt, in denen ein Chatbot unerwünschtes Verhalten gezeigt hat, teils mit erheblichen rechtlichen Konsequenzen oder einem Imageverlust der anbietenden Firma. Beispielsweise sollte ein Support Chatbot keinen Python Code schreiben, wie in <<#llm-hallucination-fail>> geschehen.
 
-include::40_Red_Teaming/41_Tooling.adoc[]
-include::40_Red_Teaming/42_Korrektheit.adoc[]
-include::40_Red_Teaming/43_keine-prognosen.adoc[]
-include::40_Red_Teaming/44_keine-interpretationen.adoc[]
-include::40_Red_Teaming/45_keine-handlungsanweisungen.adoc[]
+[#llm-hallucination-fail]
+.LLM Hallucination Fail gepostet auf x.com von cite:[llmHallucinationExamplePythonList] am 28. Februar 2024
+image::images/screenshot-x-llm-hallucination.png[pdfwidth=40%,align=center]
+
+Um einen robusten Chatbot zu entwickeln ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methodik verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Siicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheident bewertete, Kriterien hin geprüft:
+
+*<<#section-korrektheit,Korrektheit>>:* Antwortet der Chatbot auf die gestellten Fragen mit den richtigen Daten? Führt er Berechnungen durch oder schlägt am Ende der Nachricht weitere Aktionen vor, die er mangels entsprechender Tools garnicht ausführen kann?
+
+*<<#section-prognosen,Prognosen>>:* Gibt der Chatbot basierend auf den Daten oder auch unabhängig davon Prognosen für die Zukunft? Da der Chatbot neutrale und nicht wertende Antworten geben soll ist ein solches Verhalten unerwünscht.
+
+*<<#section-interpretation,Interpretationen>>:* Lässt sich der Chatbot zu Interpretationen oder Wertungen der Daten verleiten? Für einen neutralen Chatbot ist dies ebenso ein unerwünschtes Verhalten.
+
+*<<#section-handlungsanweisungen,Handlungsanweisungen>>:* Gibt der Chatbot dem Nutzer Handlungsanweisungen oder kann sich der Benutzer enstprechende Pläne erstellen lassen? Auch dies ist für einen neutralen Chatbot unerwünschtes Verhalten.
+
+
+
+include::40_Evaluierung/41_Tooling.adoc[]
+include::40_Evaluierung/42_Korrektheit.adoc[]
+include::40_Evaluierung/43_keine-prognosen.adoc[]
+include::40_Evaluierung/44_keine-interpretationen.adoc[]
+include::40_Evaluierung/45_keine-handlungsanweisungen.adoc[]
