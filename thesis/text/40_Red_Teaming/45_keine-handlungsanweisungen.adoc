@@ -12,6 +12,11 @@ ____
 
 Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden.
 
+[#handlungsanweisungen-methodik]
+==== Methodik
+
+#ToDo: write something#
+
 [#results-keine-handlungsanweisungen]
 ==== Ergebnisse
 
@@ -156,3 +161,8 @@ Wie in <<#handlungsanweisungen-beispiel1>> dargestellt, neigt der Chatbot zu seh
 image::generated/antwortlaenge-handlungsanweisungen.svg[]
 
 #ToDo: hier noch ein bisschen weiter diskutieren#
+
+
+==== Fazit
+
+#ToDo#

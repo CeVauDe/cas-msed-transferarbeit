@@ -1,8 +1,12 @@
 
-[#fazit]
-== Fazit
+[#chapter-zusammenfassung-ausblick]
+== Zusammenfassung und Ausblick
 
-#ToDo: Ggf. umstroturieren: Kapitel: Fazit & Ausblick und dann zwei Abschnitte für PoC und Red Teaming#
+#ToDo: umstrukturieren: je ein Abschnitt für PoC und Red Teaming#
+
+=== Proof of Concept
+
+=== Evaluierung
 
 Die eingangs in der Problemstellung gestellte Frage «Zu welchem Zeitpunkt hatte SRF 1 in der Deutschschweiz 2020 die höchste Einschaltquote?»
 beantwortet der Chatbot korrekt wie folgt:

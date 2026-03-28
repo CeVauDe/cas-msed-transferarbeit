@@ -1,0 +1,12 @@
+
+[#chapter-evaluierung]
+== Evaluierung
+
+#ToDo: Einleitung anpassen#
+In diesem Kapitel werden die Ergebniss der Arbeit vorgestellt und diskutiert. <<#chapter-poc>> beschreibt den implementierten Proof-of-Concept und das Zusammennspiel der Komponenten MCP Server und Chatbot. Die weiteren Abschnitte präsentieren die Ergebnisse der Red Teaming Evaluierung. Im <<#section-korrektheit,"Abschnitt Korrektheit">> wird gezeigt, wie gut der Chatbot Anfragen mit korrekten Daten beantworten kann. Das Verhalten des Chatbots bezüglich Prognosen und Interpretationen wird in <<#section-prognosen>> und <<#section-interpretation>> untersucht und Vorschläge gemacht, wie dies verbessert werden kann. Abschliesend wird das Kriterium <<#section-handlungsanweisungen,Handlungsanweisungen>> untersucht und diskutiert, bei dem es darum geht, ob der Chatbot dem Benutzer unerwünschter Weise Handlungsanweisungen gibt und wie dies gegebenenfalls vermindert werden kann.
+
+include::40_Red_Teaming/41_Tooling.adoc[]
+include::40_Red_Teaming/42_Korrektheit.adoc[]
+include::40_Red_Teaming/43_keine-prognosen.adoc[]
+include::40_Red_Teaming/44_keine-interpretationen.adoc[]
+include::40_Red_Teaming/45_keine-handlungsanweisungen.adoc[]
