@@ -4,11 +4,18 @@
 
 Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, das Verhalten auf Berechnungsanfragen und das Anbieten von unmöglichen Aktionen durch den Chatbot. Für die Untersuchung werden die in <<#table-korrektheit-overview>> dargestellten Testfälle durchgeführt. Bei den Tests in diesem Kapitel wird der Chatbot mit dem LLM `gpt-5-mini` von OpenAI betrieben.
 
+
+[#korrektheit-methodik]
+==== Methodik
+
+#ToDo: write something#
+
+
 [#table-korrektheit-overview]
 .Anzahl Testfälle pro Kategorie bei der Überprüfung auf Korrektheit.
 [cols="5,^2"]
 |===
-|Kategorie |Anzahl Tests |Plugin
+|Kategorie |Anzahl Tests
 
 |*Korrekte Werte anzeigen* (Einzelwerte, (Vergleichs-)Tabellen, Ablehnung Anfragen zu nichtexistierender Daten, Widerlegen von Falschaussagen des Nutzers)
 |38
@@ -16,7 +23,7 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 |*Berechnungen durchführen* (direkt oder indirekt, Veränderungen, Durchschnittswerte, Summen, Trends, Extrapolationen, ...)
 |13 * 3 Strategien
 
-|*Unmögliche Aktionen anbieten* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
+|*Unmögliche Aktionen durchführen* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
 |12 * 3 Strategien
 
 |Generiert via *Policy* Plugin
@@ -28,7 +35,8 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 |*Total* |*143*
 |===
 
-Für die
+
+Für die #ToDo: finish#
 
 Das Policy Plugin verwendet die sehr streng formulierte <<#korrektheit-quote-policy>>. Entsprechend ist damit zu rechnen, dass jegliche Hinweise auf eine Aktion oder eine Berechnung einen Test fehlschlagen lässt.
 
@@ -350,3 +358,7 @@ ____
 * #Der Agent rechnet munter Veränderungen, Trends oder Korrelationen#
 * #Die Richtlinie, mit keinen Berechnungen ist sehr streng. Ggf kann diese nach Überprüfung der berechneten Werte etwas gelockert werden. Auf den ersten Blick erscheinen die berechneten Ergebnisse korrekt, dies wird aber aus Zeitgründen in  dieser Arbeit nicht systematisch untersucht.#
 * #Wenn er keine Daten hat, dann gibt er das korrekt an, macht aber Vorschläge was er sonst tun könnte#
+
+==== Fazit
+
+#ToDo#

@@ -1,0 +1,45 @@
+
+[#methoden]
+== Grundlagen und Stand der Technik
+
+#ToDo:#
+
+* Mit Veröffentlichung von ChatGPT im Jahr XXX beginnnt neues Kapitel, Verarbeitung von natürlicher Sprache ist plötzlich viel besser und leicht zugänglich
+** Vorteile
+** Nachteile
+
+
+=== Large Language Model (LLM)
+
+#ToDo: Kurze beschreibung, was sind LLMs und wie funktionieren sie? Quellen?#
+
+* Problem ist die Bereitstelung von Daten, die nach dem Traingingsdaten Cut Off angefallen sind oder die ohne ein refinement training verwendet werden sollen
+* RAG erklären
+Eine weitere Möglichkeit um die Fähigkeiten von LLMs zu erweitern bietet das von Anthropic eingeführte <<#methoden-mcp,"Model Context Protocol">>, das im folgenden Abschnitt genauer erläutert wird.
+
+[#methoden-mcp]
+=== Model Context Protocol
+Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen cite:[mcpAnthropic]. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder Streamable HTTP erfolgen. Das Protokoll erzwingt eine saubere Trennung zwischen Datenzugriff und Agenten.
+
+* tools
+Wird z.B. in coding agents wie Claude Code oder GitHub Copilot sehr viel verwendet
+
+==== MCP Server
+Um dem <<#methoden-mcp-client,MCP Client>> Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
+Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) #ToDO: kein vollständiger Satz#
+
+* Liste von veröffentlichten MCP Servern: https://registry.modelcontextprotocol.io/
+* Von der MCP Steering Group gepflegte MCP Server: https://github.com/modelcontextprotocol/servers
+
+==== MCP Client
+#ToDo: MCP Client#
+
+[#methoden-mcp-client]
+=== Chatbot
+Der Chatbot fungiert als visuelle, webbasierte Applikation (MCP Client) der die Kommunikation zwischen Benutzer und MCP Server übernimmt. Die Benutzerinteraktion wird von der Chat Completions API cite:[openaiChat] und eines LLMs.
+#ToDo: Make more general#
+
+[#methode-red-teaming]
+=== Red Teaming
+LLMs sind nicht-deterministisch, das bedeutet, dass auf die selbe Frage jeweils eine andere Antwort zurückgegeben wird. Ein Test bei dem 20 mal die selbe Frage gestellt wird, hat ausnahmslos eine anders formuliere Antwort geliefert und dies bestätigt. Somit sind Unit und Integration Tests unbrauchbar, denn dafür sind vorhersehbare Ergebnisse essentiell. Auch der Fakt, dass LLMs sehr stark auf Sprache trainiert wurde, hilft nicht um mit Pattern-Tests auf erwartete Wörter in der Antwort zu prüfen. Das ganze wird noch komplizierter, wenn mehrere Sprachen ermöglicht werden. Es braucht eine innovative Alternative um LLMs sinvoll, qualitativ sowie auf funktionalität zu verifizieren. Mit
+Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei dem durch Zusammenarbeit verschiedener Teams die grundlegende Frage, ob ein System im Interesse des Erbauers funktioniert oder sogar das Gegenteil der Fall ist, geprüft werden kann cite:[majumdar_red_2025]. Es entstand Anfang des 19. Jahrhunderts aus den taktischen Kriegsspielen des preussischen Militärs und entwickelte sich im Kalten Krieg zu einer Methode zum analysieren von Schwachstellen und ausnutzbaren Gefahren einer Strategie. Die preussische Armee konstruierte davon eine Tischsimulation, in der blaue Spielfiguren die eigene Armee und rote den Feind repräsentierten. Der Name "Red Team" ist entstanden. Im KI-Bereich ist das Ziel, durch strukturierte Tests Fehlverhalten oder Schwachstellen eines LLMs in einer kontrollierten Umgebung zu finden. Über ein zweites LLM ("Red Team") werden automatisiert provozierende Testfragen generiert, unser Chatbot damit gefüttert und die Antworten ausgewertet. Die Auswertung der Antworten gibt ausschluss über die qualität der LLM. Diese Methode ist mit End-to-End testing vergleichbar und testet somit das gesamte System und nicht nur Teile. Red Teaming ist zum manuellem Testing eine ergänzende Methode.

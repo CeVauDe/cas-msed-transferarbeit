@@ -1,92 +1,14 @@
 
-[#methoden]
-== Methoden
+[#section-tooling]
+=== Red Team Tooling
 
-In diesem Kapitel werden die in der Arbeit angewendeten Methoden vorgestellt und kurz erklärt. Der erste Abschnitt geht dabei auf die Hintergründe des <<#methoden-poc,"Proof-of-concept">> ein und erläutert wichtige Fachbegriffe. Der zweite Abschnitt gibt einen theoretischen Überblick über die Methodik des <<#methode-red-teaming,"Red Teamings">>, das zur Evaluierung des Chatbots verwendet wird.
+Für umfangreiche und reproduzierbare Evaluierungen ist es nicht praktikabel, das Red Teaming vollständig manuell durchzuführen. Ein solch manueller Test wäre sehr zeitaufwändig und das Ergebnis sehr stark von der durchführenden Person abhängig. Es bietet sich die Verwendung eines Tools an, welches diesen Prozess unterstützt und vereinfacht und nach der Einrichtung auch von anderen Personen wiederholt werden kann.
 
+==== Recherche
 
-[#methoden-poc]
-=== Proof-of-Concept
-Im Kompositionsstrukturdiagramm in <<#image-methoden-poc-overview>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und Basis für die Evaluation genutzt wird. #optional: grafik überarbeiten und etwas ausführlicher beschreiben#
+Es gibt eine Fülle an Tools und Frameworks, die Red Teaming von LLM Applikationen zum Ziel haben. cite:[ijsr_SR251221060319] gibt einen guten Überblick über eine Auswahl solcher Open Source Tools. Hier ein Überblick über drei häufig verwendete Tools:
 
-[#image-methoden-poc-overview]
-.Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
-[plantuml, svg]
-....
-@startuml
-!theme plain
-skinparam componentStyle rectangle
-
-frame "OpenAI" {
-  rectangle "OpenAI API" <<external service>> {
-    component "Chat Completion API" as openai_api
-  }
-}
-
-frame "PoC System" {
-
-  rectangle "Chatbot Service" <<component>> {
-    port "HTTP" as http_in
-    component "Web UI" as webui
-    component "Agent" as agent
-    component "MCP Client" as client
-
-    http_in -right-> webui
-    webui -right-> agent : "User Input"
-    agent -right-> client : "Tool Calls"
-  }
-
-  rectangle "MCP Server" <<component>> {
-    port "MCP\nstreamable HTTP" as mcp_port
-    component "Tool Handler" as tool
-    component "Glossar" as glossar
-    component "Pandas Engine" as pandas
-
-    mcp_port -right-> tool
-    mcp_port -down-> glossar
-    tool -right-> pandas : "Filter & Query"
-  }
-
-  database "Parquet Files" as data
-
-  client -right-> mcp_port : "JSON-RPC"
-  pandas -right-> data : "Read"
-}
-
-actor User
-User -down-> http_in : "Web\nBrowser"
-agent <-up-> openai_api : "HTTPS"
-
-@enduml
-....
-
-
-==== Large Language Model (LLM)
-
-#ToDo: Kurze beschreibung, was sind LLMs und wie funktionieren sie? Quellen?#
-
-==== Model Context Protocol
-Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen cite:[mcpAnthropic]. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder Streamable HTTP erfolgen. Das Protokoll erzwingt eine saubere Trennung zwischen Datenzugriff und Agenten.
-
-[#methoden-mcp-client]
-==== Chatbot
-Der Chatbot fungiert als visuelle, webbasierte Applikation (MCP Client) der die Kommunikation zwischen Benutzer und MCP Server übernimmt. Die Benutzerinteraktion wird von der Chat Completions API cite:[openaiChat] und eines LLMs.
-
-==== MCP Server
-Um dem <<#methoden-mcp-client,MCP Client>> Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
-Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) #ToDO: kein vollständiger Satz#
-
-[#methode-red-teaming]
-=== Red Teaming
-LLMs sind nicht-deterministisch, das bedeutet, dass auf die selbe Frage jeweils eine andere Antwort zurückgegeben wird. Ein Test bei dem 20 mal die selbe Frage gestellt wird, hat ausnahmslos eine anders formuliere Antwort geliefert und dies bestätigt. Somit sind Unit und Integration Tests unbrauchbar, denn dafür sind vorhersehbare Ergebnisse essentiell. Auch der Fakt, dass LLMs sehr stark auf Sprache trainiert wurde, hilft nicht um mit Pattern-Tests auf erwartete Wörter in der Antwort zu prüfen. Das ganze wird noch komplizierter, wenn mehrere Sprachen ermöglicht werden. Es braucht eine innovative Alternative um LLMs sinvoll, qualitativ sowie auf funktionalität zu verifizieren. Mit
-Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei dem durch Zusammenarbeit verschiedener Teams die grundlegende Frage, ob ein System im Interesse des Erbauers funktioniert oder sogar das Gegenteil der Fall ist, geprüft werden kann cite:[majumdar_red_2025]. Es entstand Anfang des 19. Jahrhunderts aus den taktischen Kriegsspielen des preussischen Militärs und entwickelte sich im Kalten Krieg zu einer Methode zum analysieren von Schwachstellen und ausnutzbaren Gefahren einer Strategie. Die preussische Armee konstruierte davon eine Tischsimulation, in der blaue Spielfiguren die eigene Armee und rote den Feind repräsentierten. Der Name "Red Team" ist entstanden. Im KI-Bereich ist das Ziel, durch strukturierte Tests Fehlverhalten oder Schwachstellen eines LLMs in einer kontrollierten Umgebung zu finden. Über ein zweites LLM ("Red Team") werden automatisiert provozierende Testfragen generiert, unser Chatbot damit gefüttert und die Antworten ausgewertet. Die Auswertung der Antworten gibt ausschluss über die qualität der LLM. Diese Methode ist mit End-to-End testing vergleichbar und testet somit das gesamte System und nicht nur Teile. Red Teaming ist zum manuellem Testing eine ergänzende Methode.
-
-==== Toolrecherche
-
-Es gibt eine Fülle an Tools und Frameworks, die Red Teaming von LLM Applikationen unterstützen und vereinfachen.
-cite:[ijsr_SR251221060319] gibt einen guten Überblick über eine Auswahl solcher Open Source Tools.
-
-*PyRIT* (Python Risk Identification Tool) cite:[munoz2024pyrit] ist ein von Microsoft entwickeltes,   flexibles und erweiterbares Framework für Automatisiertes und von Menschen geleitetes AI-Red-Teaming. Die Bewertung der Sicherheit und Zuverlässigkeit generativer KI-Systeme in grossem Massstab steht im Vordergrund cite:[pyritHP]. Es bietet sehr flexible Bausteine, die selbst zu Angriffsprozeduren zusammengestellt werden müssen. Es ist dadurch komplizierter aufzusetzen und erfordert ein programmatisches Setup.
+*PyRIT* (Python Risk Identification Tool) cite:[munoz2024pyrit] ist ein von Microsoft entwickeltes, flexibles und erweiterbares Framework für Automatisiertes und von Menschen geleitetes AI-Red-Teaming. Die Bewertung der Sicherheit und Zuverlässigkeit generativer KI-Systeme in grossem Massstab steht im Vordergrund cite:[pyritHP]. Es bietet sehr flexible Bausteine, die selbst zu Angriffsprozeduren zusammengestellt werden müssen. Es ist dadurch komplizierter aufzusetzen und erfordert ein programmatisches Setup.
 
 *garak* (Generative AI Red-teaming and Assessment Kit) ist ein von NVIDIA entwickeltes Framework, mit dem sich Schwachstellen in einem Ziel-LLM oder einem Dialogsystem aufdecken und identifizieren lassen. garak untersucht das System auf strukturierte Weise, um potenzielle Schwachstellen aufzudecken cite:[derczynski2024garak]. Es bietet eine umfangreiche Sammlung (laut cite:[ijsr_SR251221060319] die grösste) von _Probes_, die auch mit _Buffs_ modifiziert werden können. Leider ist die Dokumentation nicht aktuell und unvollständig cite:[garakDocs]. Ausserdem ist es primär dafür konzipiert um LLMs direkt zu testen.
 
@@ -94,7 +16,7 @@ cite:[ijsr_SR251221060319] gibt einen guten Überblick über eine Auswahl solche
 
 Vor allem aufgrund der einfachen Verwendbarkeit und der vielen vorgefertigten Plugins und Strategien wird in dieser Arbeit das Tool `promptfoo` verwendet. Der nachfolgende Abschnitt gibt einen Überblick über die verwendeten Plugins und Strategien.
 
-==== Tool `promptfoo`
+==== Promptfoo
 
 Zur Durchführung des Red Teamings wird das Kommandozeilentool `promptfoo` cite:[promptfooHP] verwendet. Promptfoo ermöglicht das Testen von Prompts und Modellen mit automatisierten Evaluierungen, die Anbindung verschiedener Modelle um diese direkt zu vergleichen, das einfache Teilen von Ergebnissen und automatisierte Checks in CI/CD Pipelines. Die in dieser Arbeit hauptsächlich genutzte Funktion ist das einfach aufzusetzende Red Teaming.
 

@@ -20,11 +20,13 @@ include::text/02_Verzeichnisse.adoc[]
 
 include::text/10_Einleitung.adoc[]
 
-include::text/20_Methoden.adoc[]
+include::text/20_Grundlagen_Stand_der_Technik.adoc[]
 
-include::text/30_Ergebnisse_Diskussion.adoc[]
+include::text/30_Proof_of_Concept.adoc[]
 
-include::text/50_Fazit.adoc[]
+include::text/40_Evaluierung.adoc[]
+
+include::text/50_Zusammenfassung_Ausblick.adoc[]
 
 [bibliography]
 == Literaturverzeichnis

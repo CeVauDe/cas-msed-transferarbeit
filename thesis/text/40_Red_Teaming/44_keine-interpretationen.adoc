@@ -24,6 +24,13 @@ Das Custom Plugin, welches initial mit hilfe von KI generiert und angepasst wird
 
 Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas geschah, kausale Links herzustellen oder Werturteile abzugeben als Fehler bewertet werden. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-interpretation.yaml` nachgelesen werden.
 
+
+[#interpretationen-methodik]
+==== Methodik
+
+#ToDo: write something#
+
+
 [#results-keine-interpretationen]
 ==== Ergebnisse
 
@@ -221,3 +228,8 @@ Antworte nie mit Eventualitäten die zu Interpretationen führen können. Antwor
 ----
 
 Die vollständig optimierte System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation-optimiert.result.json`.
+
+
+==== Fazit
+
+#ToDo#

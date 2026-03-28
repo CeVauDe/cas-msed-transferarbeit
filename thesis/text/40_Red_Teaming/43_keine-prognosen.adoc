@@ -22,6 +22,13 @@ Es versucht den Agent dazu zu bringen:
 
 Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und auf die Bedürfnisse angepasst. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
 
+
+[#prognosen-methodik]
+==== Methodik
+
+#ToDo: write something#
+
+
 [#results-prognosen]
 ==== Ergebnisse
 Von 63 durchgeführten Red-Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
@@ -258,3 +265,7 @@ Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf die 
 ----
 
 Die angepasste System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose-optimiert.result.json`.
+
+==== Fazit
+
+#ToDo#

@@ -2,9 +2,6 @@
 [#einleitung]
 == Einleitung
 
-
-
-=== Ausgangslage
 Die Erhebung und Veröffentlichung der jährlichen Nutzungszahlen für TV und Radio in der
 Schweiz stellt eine zentrale Informationsquelle für die Medienbranche und die Öffentlichkeit dar.
 Diese werden als PDF-Files veröffentlicht cite:[mediapulseJahresdaten]. Sie sind sehr umfangreich
@@ -18,8 +15,6 @@ Gleichzeitig besteht innerhalb der Organisation das strategische
 Ziel, Kompetenzen im Bereich von Large Language Models (LLM) und agentischen Systemen
 aufzubauen, um zukünftige Datenprojekte effizienter zu gestalten.
 
-
-=== Problemstellung
 Die Kernherausforderung besteht darin, die Kluft zwischen den strukturierten Nutzungsdaten und den
 natürlichsprachlichen Fragestellungen der Nutzer zu überbrücken. Es soll ein Chatbot-System
 entwickelt werden, das in der Lage ist, komplexe Anfragen wie beispielsweise «Zu welchem Zeitpunkt hatte SRF 1 in
@@ -31,7 +26,6 @@ Faktenwiedergabe: Das System darf keine eigenständigen Interpretationen, Handlu
 oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthaltenen Fakten textuell
 aufbereiten.
 
-=== Zielsetzung der Arbeit
 Das erste Ziel dieser Arbeit ist die Erstellung eines LLM-basierten Chatbots für die Exploration von Mediennutzungsdaten
 und die Überprüfung der Praxistauglichkeit. Der Proof of Concept soll lokal ausführbar sein, ein einfaches Chatinterface
 bereitstellen und die Jahresdaten für die Beantwortung von Benutzerfragen zur Verfügung stellen. Die Daten sollen strukturiert
@@ -61,5 +55,5 @@ Schwachstellen dokumentiert.
 Im Rahmen des Proof of Concept liegt der Schwerpunkt der Arbeit auf der Entwicklung und Evaluierung des Chatbot Systems und nicht auf
 der Datenaufbereitung aller verfügbaren Daten. Daher ist die Datenaufbereitung auf die Jahresdaten der TV-Nutzung nach Sender aller drei Sprachregionen auf die Jahre 2018 bis 2021 beschränkt.
 
-=== Aufbau der Arbeit
-In dieser Einleitung in <<#einleitung>> werden die Ausgangslage, Problemstellung und das Ziel der Arbeit beschrieben. <<#methoden>> gibt einen Überblick über die verwendeten Methoden und erläutert wichtige Konzepte, die im weiteren Verlauf der Arbeit verwendet werden. In <<#ergebnisse-diskussion>> werden dann für die verschiedenen Kriterien die Ergebnisse dargestellt und diskutiert. <<#section-poc>> beschreibt den entwickelten Proof of Concept. In <<#section-korrektheit>> bis <<#section-handlungsanweisungen>> werden nacheinander die Ergebnisse der Untersuchungen bezüglich der Kriterien <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> gezeigt und diskutiert. Abschliessend fasst <<#fazit>> die Ergebnisse nochmal kurz zusammen und zieht das Fazit der durchgeführten Untersuchungen. Schliesslich gibt es auch einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.
+#ToDo: Überarbeiten#
+In dieser Einleitung in <<#einleitung>> werden die Ausgangslage, Problemstellung und das Ziel der Arbeit beschrieben. <<#methoden>> gibt einen Überblick über die verwendeten Methoden und erläutert wichtige Konzepte, die im weiteren Verlauf der Arbeit verwendet werden. In <<#chapter-evaluierung>> werden dann für die verschiedenen Kriterien die Ergebnisse dargestellt und diskutiert. <<#chapter-poc>> beschreibt den entwickelten Proof of Concept. In <<#section-korrektheit>> bis <<#section-handlungsanweisungen>> werden nacheinander die Ergebnisse der Untersuchungen bezüglich der Kriterien <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> gezeigt und diskutiert. Abschliessend fasst <<#chapter-zusammenfassung-ausblick>> die Ergebnisse nochmal kurz zusammen und zieht das Fazit der durchgeführten Untersuchungen. Schliesslich gibt es auch einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.
