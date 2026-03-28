@@ -280,7 +280,7 @@ def _prognosen_strategien(chart_name: str):
 @chart("handlungsanweisungen/pass-rate")
 def _handlungsanweisungen_pass_rate(chart_name: str):
     result = extract_redteam_data(
-        POC_DIR / "redteam" / "handlundsanweisungen.result.json",
+        POC_DIR / "redteam" / "handlungsanweisungen.result.json",
     )
     plugins = result.plugins
     strategies = result.strategies
