@@ -46,6 +46,8 @@ Die vollständige System Prompt kann im GitHub Repository cite:[githubRepoTransf
 ==== Sequenzdiagramm des Verarbeitungsloops einer Beispielfrage
 Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?` dargestellt.
 
+#ToDo: Hier fehlt noch text der das Diagramm erläutert und erklärt, bzw. zumindest darauf Bezug nimmt#
+
 [[fig-agent-loop,Abbildung: Agent-Loop]]
 .Sequenzdiagramm des agentenbasierten Verarbeitungsloops (Beispielfrage)
 [plantuml, agent-loop, svg]

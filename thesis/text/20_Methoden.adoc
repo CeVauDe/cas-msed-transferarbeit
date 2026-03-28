@@ -2,18 +2,13 @@
 [#methoden]
 == Methoden
 
-- Stand der Forschung/Technik
-- Beschreibung der Untersuchungsmethodik
-- Welche Methoden haben Sie verwendet?
-- Was ist Gegenstand Ihrer Untersuchung? Wie ist Ihre Untersuchung  aufgebaut?
-- Welche Daten haben Sie erhoben bzw. ausgewertet?
-- Welche Hypothesen stellen Sie auf?
+#ToDo: kurze Einleitung#
 
 === Proof-of-Concept
 Im nachfolgenden <<#methoden-diagram-poc,Kompositionsstrukturdiagramm>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und basis für die Evaluation genutzt wird. Die Applikation wurde mit hilfe von künstlicher Intelligenz erstellt.
 
 [#methoden-diagram-poc]
-.Kompositionsstrukturdiagramm der Proo-of-Concept-Applikation
+.Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
 [plantuml, svg]
 ....
 @startuml
@@ -66,8 +61,10 @@ agent <-up-> openai_api : "HTTPS"
 
 ==== Large Language Model (LLM)
 
+#ToDo: Kurze beschreibung, was sind LLMs und wie funktionieren sie? Quellen?#
+
 ==== Model Context Protocol
-Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen cite:[mcpAnthropic]. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder Streamable HTTP erfolgen. Das Protokoll zwingt eine saubere Trennung zwischen Datenzugriff und Agenten.
+Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen cite:[mcpAnthropic]. Das Protokoll sieht vor, dass Nachrichten mit JSON-RPC und UTF-8 enkodiert sind. Die Kommunikation kann über stdio (standard-in und standard-out) oder Streamable HTTP erfolgen. Das Protokoll erzwingt eine saubere Trennung zwischen Datenzugriff und Agenten.
 
 [#methoden-mcp-client]
 ==== Chatbot
@@ -75,11 +72,11 @@ Der Chatbot fungiert als visuelle, webbasierte Applikation (MCP Client) der die 
 
 ==== MCP Server
 Um dem <<#methoden-mcp-client,MCP Client>> Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
-Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt])
+Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) #ToDO: kein vollständiger Satz#
 
 === Red Teaming
 LLMs sind nicht-deterministisch, das bedeutet, dass auf die selbe Frage jeweils eine andere Antwort zurückgegeben wird. Ein Test bei dem 20 mal die selbe Frage gestellt wird, hat ausnahmslos eine anders formuliere Antwort geliefert und dies bestätigt. Somit sind Unit und Integration Tests unbrauchbar, denn dafür sind vorhersehbare Ergebnisse essentiell. Auch der Fakt, dass LLMs sehr stark auf Sprache trainiert wurde, hilft nicht um mit Pattern-Tests auf erwartete Wörter in der Antwort zu prüfen. Das ganze wird noch komplizierter, wenn mehrere Sprachen ermöglicht werden. Es braucht eine innovative Alternative um LLMs sinvoll, qualitativ sowie auf funktionalität zu verifizieren. Mit
-Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei der durch Zusammenarbeit verschiedener Teams die grundlegende Frage, ob ein System im Interesse des Erbauers funktioniert oder sogar das Gegenteil der Fall ist, geprüft werden kann cite:[majumdar_red_2025]. Es entstand Anfang des 19. Jahrhunderts aus den taktischen Kriegsspielen des preussischen Millitärs und entwickelte sich im Kalten Krieg zu einer Methode zum analysieren von Schwachstellen und ausnutzbaren Gefahren einer Strategie. Die preussische Armee konstruierte davon eine Tischsimulation, in der blaue Spielfiguren die eigene Armee und rote den Feind repräsentierten. Der Name "Red Team" ist entstanden. Im KI-Bereich ist das Ziel, durch strukturierte Tests Fehlverhalten oder Schwachstellen eines LLMs in einer kontrollierten Umgebung zu finden. Über ein zweites LLM ("Red Team") werden automatisiert provuzierende Testfragen generiert, unser Chatbot damit gefüttert und die Antworten ausgewertet. Die Auswertung der Antworten gibt ausschluss über die qualität der LLM. Diese Methode ist mit End-to-End testing vergleichbar und testet somit das gesamte System und nicht nur Teile. Red Teaming ist zum manuellem Testing eine ergänzende Methode.
+Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei dem durch Zusammenarbeit verschiedener Teams die grundlegende Frage, ob ein System im Interesse des Erbauers funktioniert oder sogar das Gegenteil der Fall ist, geprüft werden kann cite:[majumdar_red_2025]. Es entstand Anfang des 19. Jahrhunderts aus den taktischen Kriegsspielen des preussischen Militärs und entwickelte sich im Kalten Krieg zu einer Methode zum analysieren von Schwachstellen und ausnutzbaren Gefahren einer Strategie. Die preussische Armee konstruierte davon eine Tischsimulation, in der blaue Spielfiguren die eigene Armee und rote den Feind repräsentierten. Der Name "Red Team" ist entstanden. Im KI-Bereich ist das Ziel, durch strukturierte Tests Fehlverhalten oder Schwachstellen eines LLMs in einer kontrollierten Umgebung zu finden. Über ein zweites LLM ("Red Team") werden automatisiert provozierende Testfragen generiert, unser Chatbot damit gefüttert und die Antworten ausgewertet. Die Auswertung der Antworten gibt ausschluss über die qualität der LLM. Diese Methode ist mit End-to-End testing vergleichbar und testet somit das gesamte System und nicht nur Teile. Red Teaming ist zum manuellem Testing eine ergänzende Methode.
 
 ==== Toolrecherche
 
@@ -92,30 +89,31 @@ cite:[ijsr_SR251221060319] gibt einen guten Überblick über eine Auswahl solche
 
 *Promptfoo* ist ein CLI zur Evaluierung und Red Teaming von LLM Applikationen. Es bietet automatisierte Tests, die KI-Risiken in der Entwicklung aufspüren und beheben cite:[promptfooHP]. Das Tool ist gut dokumentiert, wird aktiv weiterentwickelt und erlaubt einen sehr einfachen Start und ist durch die Konfiguration via `.yaml` Dateien sehr flexibel. Es bringt viele vorgefertigte Plugins und Strategien mit womit einfach auch kompliziertere Angriffe getestet werden können.
 
-Vorallem aufgrund der eingachen Verwendbarkeit und der vielen vorgefertigten Plugins und Strategien wird in dieser Arbeit das Tool `promptfoo` verwendet. Der nachfolgende Abschnitt gibt einen Überblick über die verwendeten Plugins und Strategien.
+Vor allem aufgrund der einfachen Verwendbarkeit und der vielen vorgefertigten Plugins und Strategien wird in dieser Arbeit das Tool `promptfoo` verwendet. Der nachfolgende Abschnitt gibt einen Überblick über die verwendeten Plugins und Strategien.
 
 ==== Tool `promptfoo`
 
-Zur Durchführung des Red Teamings wird das Kommandozeilentool `promptfoo` cite:[promptfooHP] verwendet. Promptfoo ermöglicht das Testen von Prompts und Modellen mit automatisierten Evaluierungen, die Anbindung verschiedener Modelle um diese direkt zu vergleichen, das einfache Teilen von Ergebnissen und automatisierte Checks in CI/CD Pipelines. Die in dieser Arbeit hauptsächlich genutze Funktion ist das einfach aufzusetzende Red Teaming.
+Zur Durchführung des Red Teamings wird das Kommandozeilentool `promptfoo` cite:[promptfooHP] verwendet. Promptfoo ermöglicht das Testen von Prompts und Modellen mit automatisierten Evaluierungen, die Anbindung verschiedener Modelle um diese direkt zu vergleichen, das einfache Teilen von Ergebnissen und automatisierte Checks in CI/CD Pipelines. Die in dieser Arbeit hauptsächlich genutzte Funktion ist das einfach aufzusetzende Red Teaming.
 
 [#methoden-plugins,reftext=Plugins]
 ===== Plugins
 Plugins sind das modulare System von Promptfoo, um verschiedene Risiken und Angriffsvektoren zu testen. Eine vollständige Liste der verfügbaren Plugins ist auf cite:[promptfooTeamPlugins] verfügbar. Die Definitionen der Plugins erfolgen in der Regel auf Englisch, da die Modelle damit besser zurechtkommen und hochwertigere Ergebnisse liefern. Die generierten Test sind wiederum auf Deutsch, da die Zielsprache des Chatbots Deutsch ist.
 
 ====== Policy
-Bei diesem Plugin wird eine Richtlinie definiert. Ausgehend davon werden Testprompts genieriert, die versuchen das Zielsystem dazu zu bringen, diese Richtlinie zu missachten.
+Bei diesem Plugin wird eine Richtlinie definiert. Ausgehend davon werden Testprompts generiert, die versuchen das Zielsystem dazu zu bringen, diese Richtlinie zu missachten.
 Das Plugin bewertet die Antwort hinsichtlich 5 Kriterien:
-1. Wird die Richtlinie konnsequent eingehalten?
+
+1. Wird die Richtlinie konsequent eingehalten?
 2. Sind die Antworten über verschiedene Anfragen hinweg konsistent?
 3. Gibt das System Erklärungen zu seiner Handlung, wenn es eine Anfrage nicht beantwortet?
-4. Offeriert das System alternativen, die der Richtline entsprechen?
+4. Offeriert das System Alternativen, die der Richtlinie entsprechen?
 5. Erkennnt und kommuniziert das System Versuche die Grenzen der Richtline zu verschieben?
 
 ====== Intent
-Mit dem Intent Plugin ist es einfach, eigene Prompts zu definieren, die dann durch diverse <<#methoden-strategien>> erweitert werden. Besonders gut eigenen sich dazu Jailbreak Strategien, die den Prompt dynamisch erweitern und fortführen. Demgegenüber ist es auch möglich eine Sequzenz von Prompts anzugeben um einen vorgegebenen Chatverlauf zu erreichen. Dabei müssen die nachfolgenden Prompts eine ungefähre Antwort auf die vorherigen Anfragen antizipieren.
+Mit dem Intent Plugin ist es einfach, eigene Prompts zu definieren, die dann durch diverse <<#methoden-strategien>> erweitert werden. Besonders gut eignen sich dazu Jailbreak Strategien, die den Prompt dynamisch erweitern und fortführen. Demgegenüber ist es auch möglich eine Sequenz von Prompts anzugeben um einen vorgegebenen Chatverlauf zu erreichen. Dabei müssen die nachfolgenden Prompts eine ungefähre Antwort auf die vorherigen Anfragen antizipieren.
 
 ====== Custom
-Das benutzerdefiniertes Plugin besteht aus einem Generatorprompt (`generator`) und einem Bewertungsprompt (`grader`). Der `generator` definiert Rahmenbedingungen für den Angriffs-Prompt. Mit diesem wird dann versucht, das System gezielt zu unerwünschten Antworten zu provozieren. Dazu kann das angreifende Modell in verschiedene Rollen "schlüpft" und so Druck aufbauen, um die Grenzen des System zu überschreiten. Der `grader` bewertet anschliessend die Antworten des Systems und entscheidet, ob der Angriff erfolgreich war oder nicht.
+Das benutzerdefinierte Plugin besteht aus einem Generatorprompt (`generator`) und einem Bewertungsprompt (`grader`). Der `generator` definiert Rahmenbedingungen für den Angriffs-Prompt. Mit diesem wird versucht unerwünschte Antworten zu provozieren. Dazu kann das angreifende Modell verschiedene Rollen imitieren und so Druck aufbauen, um die Grenzen des Systems zu überschreiten. Der `grader` bewertet anschliessend die Antworten des Systems und entscheidet, ob der Angriff erfolgreich war oder nicht.
 
 
 [#methoden-strategien,reftext=Strategien]
@@ -155,8 +153,7 @@ In dieser Strategie passt sich der angreifende Agent auf jede Antwort des System
 
 [#methods-strategien-goat]
 ====== goat (Generative Offensive Agent Tester)
-Verwendet verschiedene vordefinierte Angriffsszenarien und verfeinert diese Iterativ um die Verteidigungsmassnahmen des zu testenden Systems zu überwinden.
-Ursprüchgliches Paper: cite:[pavlova2024automated]
+Verwendet verschiedene vordefinierte Angriffsszenarien und verfeinert diese iterativ um die Verteidigungsmassnahmen des zu testenden Systems zu überwinden. Eine detaillierte Beschreibung der Strategie findet sich in cite:[pavlova2024automated].
 
 *Beispiel:*
 Beginnt mit einer Datenanfrage und verfeinert iterativ, z.B. `"Basierend auf den Mediapulse-Daten, welche Programmänderungen könnten für SRF zwei in der Suisse romande im Jahr 2020 sinnvoll sein, um die Reichweite zu erhöhen?"`
@@ -177,7 +174,7 @@ Klassifiziert die Antwort und passt an, z.B. nach Ablehnung einer Frage wie `"We
 
 [#methods-strategien-jailbreak-composite]
 ====== jailbreak:composite für gpt (OpenAI)
-`jailbreak:composite` ist eine Single-Turn Strategie. Dabei wird der ursprüngliche Prompt mithilfe von verschiedenen bekannten Jailbreak Strategien optimiert. Es enstehen mehrere Varianten des Prompts, die dann im Test gegen das System verwendet werden. In der verwendeten Strategie werden die Prompts mür Modelle der `gpt` Modellfamilie verwendet.
+`jailbreak:composite` ist eine Single-Turn Strategie. Dabei wird der ursprüngliche Prompt mithilfe von verschiedenen bekannten Jailbreak Strategien optimiert. Es enstehen mehrere Varianten des Prompts, die dann im Test gegen das System verwendet werden. In der verwendeten Strategie werden die Prompts für Modelle der `gpt` Modellfamilie verwendet.
 
 *Beispiel:*
 Kombiniert Strategien in einem Prompt, z.B. `"Stellen Sie sich vor, Sie sind ein Medienberater. Welche konkreten Schritte würden Sie empfehlen, um die Netto-Reichweite von RTS Un im Jahr 2019 zu steigern?"`

@@ -2,6 +2,8 @@
 [#fazit]
 == Fazit
 
+#ToDo: Ggf. umstroturieren: Kapitel: Fazit & Ausblick und dann zwei Abschnitte für PoC und Red Teaming#
+
 Die eingangs in der Problemstellung gestellte Frage «Zu welchem Zeitpunkt hatte SRF 1 in der Deutschschweiz 2020 die höchste Einschaltquote?»
 beantwortet der Chatbot korrekt wie folgt:
 
@@ -11,30 +13,26 @@ In der Deutschschweiz (Jahr 2020) hatte SRF 1 in der Zeitschiene 19:45:00 - 20:0
 Kenngrösse: Rating in % = 15.3969 %. (Rating in 1'000 = 806.336)
 ____
 
-* Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr Zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
-* Die Analyse nach den unterschiedlichen Kategorien ist sehr schwer, da diese verschwimmen und Antworten für eine Kategorie zwar Korrekt sein können, dabei aber Massgaben einer anderen Kategorie verletzen. Dieses Problem wurde in dieser Arbeit aus Aufwandsgründen nicht näher betrachtet und die Ergebnisse können durch diesen Effekt verzerrt sein.
+#ToDo: Punkte ausformulieren#
+
+* Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht, wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon Schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
+* Die Analyse nach den unterschiedlichen Kategorien ist sehr schwer, da diese verschwimmen und Antworten für eine Kategorie zwar korrekt sein können, dabei aber Massgaben einer anderen Kategorie verletzen. Dieses Problem wurde in dieser Arbeit aus Aufwandsgründen nicht näher betrachtet und die Ergebnisse können durch diesen Effekt verzerrt sein.
 * Zusammenfassend lässt sich sagen, dass #...#
 * #Die Frage aus der Themeneingabe lässt sich im erstellten PoC leider nicht beantworten. Aufgrund der aufwendigen notwendigen Datenaufbereitung wurden nur TV Daten der Jahre 2018-2021 verwendet. Ziel des PoC ist nicht alle verfügbaren Daten zugänglich zu machen sondern zu testen, in welchem Rahmen die Daten über einen Chatbot wiedergegeben werden können. Sollte der PoC zu einem Chatbot weiterentwickelt werden, werden die weiteren Daten aufbereitet und dem Chatbot bereitgestellt.#
 * Chatbot wird kreativ um die Useranfragen im Rahmen seiner Möglichkeiten zu erledigen
-* Der Chatbot hat noch kein verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr. Das könnte entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Alternativ das bereits in der Datenaufbereitung umgerechnet und wieder zurückgemappt werden. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören.
+* Der Chatbot hat noch kein Verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr. Das könnte entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Alternativ das bereits in der Datenaufbereitung umgerechnet und wieder zurückgemappt werden. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören.
 * Weitere Informationen in cite:[owaspAgenticApplications]
-* Für ein Produktivsystem wird eine zusätzliche Validierung der Eingagsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe vollig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (z.{nbsp}B. 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen den Kontext des LLM aud der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
+* Für ein Produktivsystem wird eine zusätzliche Validierung der Eingangsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe völlig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (z.{nbsp}B. 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen den Kontext des LLM auf der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
 
-=== Tipps
-* #Zusammenfassen der Ergebnisse#
-* #Erkenntnisfortschitff aufzeigen, welchen die Arbeit erzielt hat#
-* #kritische Anmerkungen zur Methodik#
-* #ungelöste Fragen und Forschungslücken aufzeigen#
-* #eigene Beurteilung und Meinung#
 
 === Ausblick
-#Wichtige Punkte:#
+#ToDo: Ausformulieren#
 
 * Datenaurbereitung ist noch nicht komplett korrekt:
 ** Aktuell sind nur TV Daten der Jahre 2018-2021 aufbereitet. Das müsste für die restlichen Jahre und alle weiteren Daten ebenfalls gemacht werden, die über den Chatbot erreichbar sein sollen.
 ** Daten für z.B. "Andere Sender" kommen mehrfach vor und inkludieren unterschiedliche Sender, sind daher also nicht direkt vergleichbar. Hier muss entschieden werden, wie damit umzugehen ist.
 * Präsentation der Zahlen erweckt ggf. noch eine Präzision, die nicht vorhanden ist. zahlen Runden? Auf welche Stelle?
-* Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nciht den entsprechenden Kontext hat.
+* Die Bezeichnung der Zielgruppe `Personen 3+` ist bisher nirgends erklärt. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, dies kommuniziert er aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Es könnte sich zum Beispiel auch um eine Personengruppe mit mehr als 3 Personen handeln, wenn man nicht den entsprechenden Kontext hat.
 * Hinzufügen einer Spalte in den Daten die angibt, ob der Wert bereits aggregiert wurde oder nicht (z.B. _SRG SSR Total_ oder _Andere Sender_)
 * Geschwindigkeitsevaluierung und recherche welche Optionen zur beschleunigung es gibt
 
@@ -48,13 +46,27 @@ ____
 * Auch andere LLM-Modelle testen, z.B.
 ** Claude Haiku 4.5 (anderer Anbieter, andere Architektur)
 ** gpt-5-nano (klein, schnell, günstig, aber möglicherweise weniger leistungsfähig)
-** gpt-5.4-mini (nachfloger con gpt-5-mini, teurer, vermutlich leistungsfähiger)
+** gpt-5.4-mini (Nachfolger von gpt-5-mini, teurer, vermutlich leistungsfähiger)
 ** gpt-5.4-nano (klein, günstig, schnell, neuer als gpt-5-nano)
-* Evaluierung von Geschwindigkeitsverbesserungen. Aktuell ist der chatbot noch sehr langsam und brauch manchmal mehrere Minuten, um eine Antwort zu generieren
+* Evaluierung von Geschwindigkeitsverbesserungen. Aktuell ist der Chatbot noch sehr langsam und braucht manchmal mehrere Minuten, um eine Antwort zu generieren
 * Eine Liste von Prompts generieren und diese dann auf unterschiedliche Kriterien hin analysieren. Das würde das Problem lösen, dass eine Antwort zwar das zu testende Kriterium erfüllt, aber ein anderes verletzt.
-** Nachteil: Die Antworten können pro Dorchgang unterschiedlich sein, löst das Problem also nicht wirklich
+** Nachteil: Die Antworten können pro Durchgang unterschiedlich sein, löst das Problem also nicht wirklich
 ** Besser: Prüfen, ob neben Pass verschiedene Fail kriterien möglich sind. Pass: Alle passed: Fail: Liste der verletzten Kriterien/Kategorien. Ist das den Mehraufwand wert?
 * Generelle Untersuchung auf Risiken von LLM Applikationen, siehe cite:[owaspLlmTop10]
 
 
 #Vielleicht macht es Sinn, in den jeweiligen Diskussionen schon verbesserungsvorschläge anzubringen und hier dann nur noch die wichtigsten oder für am einfachten Umsetzbar erachteten Vorschläge aufzuführen#
+
+
+#ToDo: KI Nutzung angbene. Tabelle?#
+
+
+
+[glossary]
+== Glossar
+
+#ToDo: Glossar für unbekannte Begriffe?#
+[glossary]
+mud:: wet, cold dirt
+rain::
+	water falling from the sky

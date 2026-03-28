@@ -1,15 +1,8 @@
 
 [#ergebnisse-diskussion]
 == Ergebnisse und Diskussionen
-- Was sind die Ergebnisse des Red Teaming?
-- Hier noch keine Interpretation oder Einordnung der Ergebnisse, die erfolgt im Diskussionsteil
 
-Beim Evaluieren des Chatbots mittels des Red Teaming Frameworks wird das Hauptaugenmerk auf Kriterien gelegt, die zur Erforschung der Praxistauglichkeit des Chatbots essentiell sind. Die Kriterien sind wie folgt:
-
-. <<results-korrektheit,Korrektheit>>
-. <<results-prognosen,Keine Prognosen>>
-. <<results-keine-interpretationen,Keine Interpretationen>>
-. <<results-keine-handlungsanweisungen,Keine Handlungsanweisungen>>
+#ToDo: Kurze Einführung in den Ergebnisse und Diskussionen Teil#
 
 include::30_Ergebnisse_Diskussion/31_poc.adoc[]
 include::30_Ergebnisse_Diskussion/32_Korrektheit.adoc[]

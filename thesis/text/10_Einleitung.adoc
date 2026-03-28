@@ -11,7 +11,7 @@ Diese werden als PDF-Files veröffentlicht cite:[mediapulseJahresdaten]. Sie sin
 und für Laien nur sehr schwer handhabbar. In der
 Vergangenheit wurden diese komplexen Daten über ein interaktives Dashboard zugänglich gemacht, welches
 durch die grosse Datenmenge jedoch sehr langsam war.
-Ein Datenanalyse-Compagnion soll diese Herausforderungen adressieren und die Analyse und Exploration der
+Ein Datenanalyse-Companion soll diese Herausforderungen adressieren und die Analyse und Exploration der
 Jahresdaten für die Nutzer effizienter und angenehmer gestalten. In einem ersten Schritt soll dafür die
 Machbarkeit einer Large Language Model-basierten Datenabfrage geprüft werden.
 Gleichzeitig besteht innerhalb der Organisation das strategische
@@ -40,7 +40,7 @@ Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient ges
 die Nutzeranfragen, ruft die zur Beantwortung einer Frage nötigen Daten ab und beantwortet die Anfrage in natürlicher Sprache.
 
 Das zweite zentrale Ziel dieser Arbeit ist die systematische Evaluierung der Antwortqualität des Chatbots. Die Natur der Daten
-erfordert einen sehr hohen Fokus auf die Qualität der Antworten und geben strenge Richtlinen vor, was der Chatbot antworten
+erfordert einen sehr hohen Fokus auf die Qualität der Antworten und geben strenge Richtlinien vor, was der Chatbot antworten
 darf und was nicht.
 Die Antworten sollen dafür insbesondere auf die folgenden Kriterien hin überprüft werden:
 
@@ -59,7 +59,7 @@ Optimierungspotenziale zusammenfasst und fundierte Lösungsvorschläge für die 
 Schwachstellen dokumentiert.
 
 Im Rahmen des Proof of Concept liegt der Schwerpunkt der Arbeit auf der Entwicklung und Evaluierung des Chatbot Systems und nicht auf
-der Datenaufbereitung aller verfügbaren Daten. Daher ist die Datenaufbereitung auf die Jahresdaten der TV-Nutzung nach Sender aller drei Sprachregionen auf die Jahre 2018 bis 2021 beschänkt.
+der Datenaufbereitung aller verfügbaren Daten. Daher ist die Datenaufbereitung auf die Jahresdaten der TV-Nutzung nach Sender aller drei Sprachregionen auf die Jahre 2018 bis 2021 beschränkt.
 
 === Aufbau der Arbeit
 In dieser Einleitung in <<#einleitung>> werden die Ausgangslage, Problemstellung und das Ziel der Arbeit beschrieben. <<#methoden>> gibt einen Überblick über die verwendeten Methoden und erläutert wichtige Konzepte, die im weiteren Verlauf der Arbeit verwendet werden. In <<#ergebnisse-diskussion>> werden dann für die verschiedenen Kriterien die Ergebnisse dargestellt und diskutiert. <<#section-poc>> beschreibt den entwickelten Proof of Concept. In <<#section-korrektheit>> bis <<#section-handlungsanweisungen>> werden nacheinander die Ergebnisse der Untersuchungen bezüglich der Kriterien <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> gezeigt und diskutiert. Abschliessend fasst <<#fazit>> die Ergebnisse nochmal kurz zusammen und zieht das Fazit der durchgeführten Untersuchungen. Schliesslich gibt es auch einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.

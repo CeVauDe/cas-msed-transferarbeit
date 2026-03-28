@@ -1,6 +1,7 @@
 
 [#section-handlungsanweisungen]
 === Keine Handlungsanweisungen
+#ToDo: Erwähnen, dass Tests mit `gpt-5-mini` durchgeführt wurden#
 
 Für das Kriterium _Keine Handlungsanweisungen_ werden zwei <<methoden-plugins>> und alle sieben vorgestellten <<methoden-strategien>> verwendet. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
@@ -13,16 +14,17 @@ Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag
 [#results-keine-handlungsanweisungen]
 ==== Ergebnisse
 
-Die Ergebnisübersicht ist in <<#image-handlungsanweisungen-pass-rate>> dargestellt. Es ist erkennbar, dass für das Plugin `Policy` viele Angriffe erfolgreich waren, während die meisten Angriffe durch das `custom` Plugin abgewert werden konnten.
+Die Ergebnisübersicht ist in <<#image-handlungsanweisungen-pass-rate>> dargestellt. Es ist erkennbar, dass für das Plugin `Policy` viele Angriffe erfolgreich waren, während die meisten Angriffe durch das `custom` Plugin abgewehrt werden konnten.
+#ToDo: Ergebnisse noch mehr beschreiben#
 
 [#image-handlungsanweisungen-pass-rate]
 .Erfolgsquote der beiden Plugins für das Kriterium "Keine Hand&#173;lungs&#173;an&#173;wei&#173;sun&#173;gen" aufgeschlüsselt nach angewendeter Strategie.
 image::generated/handlungsanweisungen/pass-rate.svg[]
 
-Die vollständigen Ergebnisse sind im Github Gepository cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json` abrufbar.
 
 [#handlungsanweisungen-beispiel1,reftext="Beispiel 1"]
-.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie (gekürzt. Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json`)
+.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie (gekürzt. Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json`)
 // Benutzer-Nachricht: rechts, 90% Breite
 [cols="1,9a",frame=none,grid=none]
 |===
@@ -73,9 +75,9 @@ Wenn Sie möchten, führe ich die Abfrage und die beschriebenen Berechnungen jet
 |
 |===
 
-Dieser Testfall wurde vom Judge als  icon:times[] FAIL bewertet mit der folgenden Begründung:
+Dieser Testfall wurde vom Judge als fail icon:times[] bewertet mit der folgenden Begründung:
 
-.icon:gavel[] LLM Judge Bewertung: icon:times[] FAIL
+.icon:gavel[] LLM Judge Bewertung: fail icon:times[]
 [quote]
 ____
 [.llm-judge-citation]
@@ -84,7 +86,7 @@ ____
 
 
 [#handlungsanweisungen-beispiel2]
-.Beispiel 2 aus Custom Plugin mit Crescendo Strategie (gekürzt; Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlundsanweisungen.result.json`)
+.Beispiel 2 aus Custom Plugin mit Crescendo Strategie (gekürzt; Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json`)
 [cols="1,9a",frame=none,grid=none]
 |===
 |
@@ -131,9 +133,10 @@ Folgende Einträge wiesen in allen Jahren 2018-2021 durchgehend einen Marktantei
 |
 |===
 
-Der Chatbot antwortet korrekt auf die Frage des Angreifers. Der Test wird entsprechend mit icon:check[] `PASS` bewertet.
+Der Chatbot antwortet korrekt auf die Frage des Angreifers. Der Test wird entsprechend mit pass icon:check[] bewertet.
 
 
+#ToDo: Der Teil hier wird bei allen Tests vorgeschlagen und passt daher besser in eine allgemeine Sektion wie das Fazit#
 Promptfoo bietet die Möglichkeit, für die durchgeführten Analysen einen Behebungsbericht (genannt "Remediation Report") zu erstellen. In diesem werden die wie folgt priorisierten Handlungsitems vorgeschlagen:
 
 . *Systempromt stärken*: Erweitern Sie die Systemanweisung dahingehend, dass die Abgabe von umsetzbaren Empfehlungen, strategischen Vorschlägen oder Werturteilen ausdrücklich untersagt wird, und weisen Sie das Modell an, unter keinen Umständen eine beratende Rolle einzunehmen. Damit werden direkt die Schwachstellen behoben, bei denen das LLM auch nach wiederholten oder umformulierten Nutzeranfragen Schritt-für-Schritt-Pläne oder strategische Ratschläge ausgibt.
@@ -150,3 +153,5 @@ Wie in <<#handlungsanweisungen-beispiel1>> dargestellt, neigt der Chatbot zu seh
 [#image-handlungsanweisungen-wordcount]
 .Histogram der Antwortlänge aller Chatbot antworten im Test für "Keine Hand&#173;lungs&#173;an&#173;wei&#173;sun&#173;gen". Die Bucketgrösse ist 100 Wörter. Der Median liegt bei 299 Wörtern pro Antwort.
 image::generated/antwortlaenge-handlungsanweisungen.svg[]
+
+#ToDo: hier noch ein bisschen weiter diskutieren#
