@@ -329,7 +329,7 @@ def _handlungsanweisungen_antwortlaenge(chart_name: str):
         Path(__file__).resolve().parent.parent
         / "poc"
         / "redteam"
-        / "handlundsanweisungen.result.json"
+        / "handlungsanweisungen.result.json"
     )
     data = json.loads(json_path.read_text(encoding="utf-8"))
 
