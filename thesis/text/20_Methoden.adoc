@@ -2,12 +2,14 @@
 [#methoden]
 == Methoden
 
-#ToDo: kurze Einleitung#
+In diesem Kapitel werden die in der Arbeit angewendeten Methoden vorgestellt und kurz erklärt. Der erste Abschnitt geht dabei auf die Hintergründe des <<#methoden-poc,"Proof-of-concept">> ein und erläutert wichtige Fachbegriffe. Der zweite Abschnitt gibt einen theoretischen Überblick über die Methodik des <<#methode-red-teaming,"Red Teamings">>, das zur Evaluierung des Chatbots verwendet wird.
 
+
+[#methoden-poc]
 === Proof-of-Concept
-Im nachfolgenden <<#methoden-diagram-poc,Kompositionsstrukturdiagramm>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und basis für die Evaluation genutzt wird. Die Applikation wurde mit hilfe von künstlicher Intelligenz erstellt.
+Im Kompositionsstrukturdiagramm in <<#image-methoden-poc-overview>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und Basis für die Evaluation genutzt wird. #optional: grafik überarbeiten und etwas ausführlicher beschreiben#
 
-[#methoden-diagram-poc]
+[#image-methoden-poc-overview]
 .Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
 [plantuml, svg]
 ....
@@ -74,6 +76,7 @@ Der Chatbot fungiert als visuelle, webbasierte Applikation (MCP Client) der die 
 Um dem <<#methoden-mcp-client,MCP Client>> Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
 Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) #ToDO: kein vollständiger Satz#
 
+[#methode-red-teaming]
 === Red Teaming
 LLMs sind nicht-deterministisch, das bedeutet, dass auf die selbe Frage jeweils eine andere Antwort zurückgegeben wird. Ein Test bei dem 20 mal die selbe Frage gestellt wird, hat ausnahmslos eine anders formuliere Antwort geliefert und dies bestätigt. Somit sind Unit und Integration Tests unbrauchbar, denn dafür sind vorhersehbare Ergebnisse essentiell. Auch der Fakt, dass LLMs sehr stark auf Sprache trainiert wurde, hilft nicht um mit Pattern-Tests auf erwartete Wörter in der Antwort zu prüfen. Das ganze wird noch komplizierter, wenn mehrere Sprachen ermöglicht werden. Es braucht eine innovative Alternative um LLMs sinvoll, qualitativ sowie auf funktionalität zu verifizieren. Mit
 Red Teaming für künstliche Intelligenz (KI) existiert ein Konzept bei dem durch Zusammenarbeit verschiedener Teams die grundlegende Frage, ob ein System im Interesse des Erbauers funktioniert oder sogar das Gegenteil der Fall ist, geprüft werden kann cite:[majumdar_red_2025]. Es entstand Anfang des 19. Jahrhunderts aus den taktischen Kriegsspielen des preussischen Militärs und entwickelte sich im Kalten Krieg zu einer Methode zum analysieren von Schwachstellen und ausnutzbaren Gefahren einer Strategie. Die preussische Armee konstruierte davon eine Tischsimulation, in der blaue Spielfiguren die eigene Armee und rote den Feind repräsentierten. Der Name "Red Team" ist entstanden. Im KI-Bereich ist das Ziel, durch strukturierte Tests Fehlverhalten oder Schwachstellen eines LLMs in einer kontrollierten Umgebung zu finden. Über ein zweites LLM ("Red Team") werden automatisiert provozierende Testfragen generiert, unser Chatbot damit gefüttert und die Antworten ausgewertet. Die Auswertung der Antworten gibt ausschluss über die qualität der LLM. Diese Methode ist mit End-to-End testing vergleichbar und testet somit das gesamte System und nicht nur Teile. Red Teaming ist zum manuellem Testing eine ergänzende Methode.

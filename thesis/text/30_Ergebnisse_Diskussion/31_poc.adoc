@@ -1,7 +1,7 @@
 
 [#section-poc]
 === Proof of Concept (PoC) Applikation
-Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend.
+Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche Software Development Kits (SDK), die vonnöten sind. Für die Applikation wird Python genutzt, die schnelle Verfügbarkeit von KI-SDKs und die etablierte Toolchain begründen die Wahl hinreichend. Die Applikation wurde mit Hilfe von künstlicher Intelligenz erstellt.
 
 ==== MCP Server
 
