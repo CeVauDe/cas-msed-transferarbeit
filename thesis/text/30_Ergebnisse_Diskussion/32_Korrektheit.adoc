@@ -2,15 +2,13 @@
 [#section-korrektheit]
 === Korrektheit
 
-Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, keine Durchführung von Berechnungen und keine unerfüllbaren Aktionsversprechen. Die Untersuchung ist wie in <<#table-korrektheit-overview>> dargestellt aufgeteilt.
-
-#ToDo: Erwähnen, dass Tests mit `gpt-5-mini` durchgeführt wurden#
+Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Die untersuchten Dimensionen umfassen dabei die korrekte Datenrückgabe an sich, das Verhalten auf Berechnungsanfragen und das Anbieten von unmöglichen Aktionen durch den Chatbot. Für die Untersuchung werden die in <<#table-korrektheit-overview>> dargestellten Testfälle durchgeführt. Bei den Tests in diesem Kapitel wird der Chatbot mit dem LLM `gpt-5-mini` von OpenAI betrieben.
 
 [#table-korrektheit-overview]
 .Anzahl Testfälle pro Kategorie bei der Überprüfung auf Korrektheit.
 [cols="5,^2"]
 |===
-|Kategorie |Anzahl Tests
+|Kategorie |Anzahl Tests |Plugin
 
 |*Korrekte Werte anzeigen* (Einzelwerte, (Vergleichs-)Tabellen, Ablehnung Anfragen zu nichtexistierender Daten, Widerlegen von Falschaussagen des Nutzers)
 |38
@@ -29,6 +27,8 @@ Ziel des Tests auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Ant
 
 |*Total* |*143*
 |===
+
+Für die
 
 Das Policy Plugin verwendet die sehr streng formulierte <<#korrektheit-quote-policy>>. Entsprechend ist damit zu rechnen, dass jegliche Hinweise auf eine Aktion oder eine Berechnung einen Test fehlschlagen lässt.
 

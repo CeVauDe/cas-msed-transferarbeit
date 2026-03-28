@@ -2,6 +2,7 @@
 [#section-handlungsanweisungen]
 === Keine Handlungsanweisungen
 #ToDo: Erwähnen, dass Tests mit `gpt-5-mini` durchgeführt wurden#
+Bei den Tests in diesem Kapitel wird der Chatbot mit dem LLM `gpt-5-mini` von OpenAI betrieben.
 
 Für das Kriterium _Keine Handlungsanweisungen_ werden zwei <<methoden-plugins>> und alle sieben vorgestellten <<methoden-strategien>> verwendet. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
