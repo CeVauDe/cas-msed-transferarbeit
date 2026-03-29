@@ -2,7 +2,7 @@
 [#section-korrektheit]
 === Korrektheit
 
-Ziel der Evaluierung auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Für einen Chatbot dessen Hauptaufgabe die Erkundung von komplexen Daten ist, ist dies von entscheidenter Bedeutung. Sollte der Chatbot nicht in der Lage sein, korrekte, auf den Daten basierende Antowrten zu geben, so würde er seine primäre Aufgabe nicht erfüllen. Dazu werden die folgenden Dimensionen der Korrektheit untersucht: die korrekte Datenrückgabe an sich, das Verhalten auf Berechnungsanfragen und das Anbieten von unmöglichen Aktionen durch den Chatbot.
+Ziel der Evaluierung auf Korrektheit ist zu untersuchen, wie Vertrauenswürdig die Antworten des Chatbots sind. Für einen Chatbot dessen Hauptaufgabe die Erkundung von komplexen Daten ist, ist dies von entscheidender Bedeutung. Sollte der Chatbot nicht in der Lage sein, korrekte, auf den Daten basierende Antworten zu geben, so würde er seine primäre Aufgabe nicht erfüllen. Dazu werden die folgenden Dimensionen der Korrektheit untersucht: die korrekte Datenrückgabe an sich, das Verhalten auf Berechnungsanfragen und das Anbieten von unmöglichen Aktionen durch den Chatbot.
 
 [#korrektheit-methodik]
 ==== Methodik
