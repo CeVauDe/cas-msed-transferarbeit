@@ -2,13 +2,13 @@
 [#chapter-evaluierung]
 == Evaluierung
 
-Während Large Language Models die Erstelung von Chatbots erheblich vereinfachen und sprachlich sehr gute Antworten liefern, haben sie keine wirkliche Intelligenz und sind sehr anfällig für diverse Fehler. In cite:[llmHallucinationExamples] sind 5 Beispiele aufgeführt, in denen ein Chatbot unerwünschtes Verhalten gezeigt hat, teils mit erheblichen rechtlichen Konsequenzen oder einem Imageverlust der anbietenden Firma. Beispielsweise sollte ein Support Chatbot keinen Python Code schreiben, wie in <<#llm-hallucination-fail>> geschehen.
+Während Large Language Models die Erstellung von Chatbots erheblich vereinfachen und sprachlich sehr gute Antworten liefern, haben sie keine wirkliche Intelligenz und sind sehr anfällig für diverse Fehler. In cite:[llmHallucinationExamples] sind 5 Beispiele aufgeführt, in denen ein Chatbot unerwünschtes Verhalten gezeigt hat, teils mit erheblichen rechtlichen Konsequenzen oder einem Imageverlust der anbietenden Firma. Beispielsweise sollte ein Support Chatbot keinen Python Code schreiben, wie in <<#llm-hallucination-fail>> geschehen.
 
 [#llm-hallucination-fail]
 .LLM Hallucination Fail gepostet auf x.com von cite:[llmHallucinationExamplePythonList] am 28. Februar 2024
 image::images/screenshot-x-llm-hallucination.png[pdfwidth=40%,align=center]
 
-Um einen robusten Chatbot zu entwickeln ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methodik verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Siicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheident bewertete, Kriterien hin geprüft:
+Um einen robusten Chatbot zu entwickeln ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methodik verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Sicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheidend bewertete, Kriterien hin geprüft:
 
 *<<#section-korrektheit,Korrektheit>>:* Antwortet der Chatbot auf die gestellten Fragen mit den richtigen Daten? Führt er Berechnungen durch oder schlägt am Ende der Nachricht weitere Aktionen vor, die er mangels entsprechender Tools garnicht ausführen kann?
 

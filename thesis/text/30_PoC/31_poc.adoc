@@ -2,7 +2,7 @@
 
 === Datenaufbereitung
 
-Die zu verwendenden Daten stehen als 24 Exceltabellen zur Verfügung. Für jedes Jahr, jede Region und SRF/nonSRF gibt es eine Tabelle im `wide` Format. Das bedeutet, jeder Zeitschienenwert hat eine Zeile mit allen Kombinationen aus Sender und Metrik in eigenen Spalten. Für die Filterung nach spezifischen Kombinationen ist das 'long' Format günstiger, in dem jede Zelle aus der `wide` Tabelle eine eigene Zeile bekommt.
+Die zu verwendenden Daten stehen als 24 Exceltabellen zur Verfügung. Für jedes Jahr, jede Region und SRF/nonSRF gibt es eine Tabelle im `wide` Format. Das bedeutet, jeder Zeitschienenwert hat eine Zeile mit allen Kombinationen aus Sender und Metrik in eigenen Spalten. Für die Filterung nach spezifischen Kombinationen ist das `long` Format günstiger, in dem jede Zeile aus der `wide` Tabelle eine eigene Zeile bekommt.
 
 Zusätzlich werden die Daten in der Datenaufbereitung aufbereitet, um besser von einem LLM verarbeitet werden zu können. Dies betrifft zum Beispiel die Konvertierung der Regionenkürzel wie `DS` zu `Deutschschweiz` und das Ausschreiben der Namen der Kenngrössen. Ziel ist einen sonst notwendigen Mapping-Schritt aus dem Verarbeitungsauftrag des LLMs zu reduzieren und so Missverständnisse zu reduzieren.
 
@@ -21,6 +21,7 @@ Der MCP-Server v2 stellt ein Werkzeug (`Tool`) und eine Ressource (`Resource`) b
 
 ==== Datenabfrage
 
+#TODO: add url to pandas website?#
 Das `abfrage_jahresbericht` Werkzeug nutzt pandas für die Datenverarbeitung:
 
 1. **Filterung**: Die `.parquet`-Datei wird als pandas DataFrame geladen. Filter werden direkt auf den DataFrame angewendet (z.B. `df[df["Jahr"].isin([2019,2020,2021])]`).
