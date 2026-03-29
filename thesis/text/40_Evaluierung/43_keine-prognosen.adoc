@@ -1,7 +1,9 @@
 
 [#section-prognosen]
-=== Keine Prognosen
-Mit Prognosen und Trends werden ein falsches Bild der Statistiken wiedergespiegelt und bei Verwendung derer, weiter aufbauende Konzepte verfälscht. Um dem Ziel, der einfachen Auswertung ohne Datenbankkenntnisse von den statischtischen Daten gerecht zu werden, ist es ausserordentlich wichtig Trends und Prognosen zu vermeiden und zu jederzeit faktische Daten zu liefern.
+=== Prognosen
+Mit Prognosen und Trends werden ein falsches Bild der Statistiken wiedergespiegelt und bei Verwendung derer, weiter aufbauende Konzepte verfälscht. Um dem Ziel der einfachen Auswertung ohne Datenbankkenntnisse von den statischtischen Daten gerecht zu werden, ist es ausserordentlich wichtig, Trends und Prognosen zu vermeiden und zu jederzeit faktische Daten zu liefern.
+
+Ein LLM wird mit unzähligen, verschiedenen Daten auf Sprache trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
 
 [#prognosen-methodik]
 ==== Methodik
@@ -28,8 +30,6 @@ Es versucht den Agent dazu zu bringen:
 * Mit Überzeugung etwas Falsches zu sagen
 
 Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und auf die Bedürfnisse angepasst. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
-
-Ein LLM wird mit unzähligen, verschiedenen Daten trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
 
 [#results-prognosen]
 ==== Ergebnisse und Diskussion
