@@ -9,46 +9,22 @@ Im Kompositionsstrukturdiagramm in <<#image-methoden-poc-overview>> wird die Pro
 @startuml
 !theme plain
 skinparam componentStyle rectangle
+left to right direction
 
-frame "OpenAI" {
-  rectangle "OpenAI API" <<external service>> {
-    component "Chat Completion API" as openai_api
-  }
-}
+actor Benutzer as user
 
 frame "PoC System" {
-
-  rectangle "Chatbot Service" <<component>> {
-    port "HTTP" as http_in
-    component "Web UI" as webui
-    component "Agent" as agent
-    component "MCP Client" as client
-
-    http_in -right-> webui
-    webui -right-> agent : "User Input"
-    agent -right-> client : "Tool Calls"
-  }
-
-  rectangle "MCP Server" <<component>> {
-    port "MCP\nstreamable HTTP" as mcp_port
-    component "Tool Handler" as tool
-    component "Glossar" as glossar
-    component "Pandas Engine" as pandas
-
-    mcp_port -right-> tool
-    mcp_port -down-> glossar
-    tool -right-> pandas : "Filter & Query"
-  }
-
+  rectangle "Chatbot Service" <<component>> as chatbot
+  rectangle "MCP Server" <<component>> as mcp
   database "Parquet Files" as data
-
-  client -right-> mcp_port : "JSON-RPC"
-  pandas -right-> data : "Read"
 }
 
-actor User
-User -down-> http_in : "Web\nBrowser"
-agent <-up-> openai_api : "HTTPS"
+cloud "OpenAI API" <<external>> as openai_api
+
+user --> chatbot : "HTTP"
+chatbot --> mcp : "MCP\n(JSON-RPC)"
+mcp --> data : "Read"
+chatbot ..> openai_api : "HTTPS"
 
 @enduml
 ....
@@ -65,58 +41,42 @@ skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 
 actor Benutzer
-participant "Gradio\nChatInterface" as Gradio
-participant "OpenAI Agent" as LLM
-participant "MCP Client" as MCPClient
-participant "MCP Server v2" as MCPServer
+participant "Chatbot" as Chatbot
+participant "MCP Server" as MCPServer
+participant "OpenAI API" as OpenAI
 
-Benutzer -> Gradio: "Wie hat sich der Marktanteil von\nSRF 1 in der DS von 2019 bis 2021 entwickelt?"
-activate Gradio
+Benutzer -> Chatbot: Benutzerfrage
+activate Chatbot
 
-Gradio -> MCPClient: Neue MCP-Session öffnen
-activate MCPClient
+== Initialisierung ==
 
-MCPClient -> MCPServer: list_resources()
-MCPServer --> MCPClient: [glossar]
+Chatbot -> MCPServer: list_tools()
+MCPServer --> Chatbot: Tool-Definitionen
 
-MCPClient -> MCPServer: read_resource("glossar")
-MCPServer --> MCPClient: Glossar-Text\n(Fachbegriffe:\nMarktanteil, Rating, ...)
+Chatbot -> MCPServer: list_resources()\n+ read_resource()
+MCPServer --> Chatbot: Glossar
 
-MCPClient -> MCPServer: list_tools()
-MCPServer --> MCPClient: [abfrage_jahresbericht]
+== Tool-Runde (max. 15×) ==
 
-MCPClient --> Gradio: Tools + Glossar
+Chatbot -> OpenAI: chat.completions.create()\n(System-Prompt + Glossar\n+ Benutzerfrage + Tools)
+activate OpenAI
+OpenAI --> Chatbot: tool_calls
+deactivate OpenAI
 
-Gradio -> LLM: System-Prompt + Glossar +\nNachricht + Tool-Definitionen
-activate LLM
-
-== Tool-Runde 1 ==
-
-LLM -> LLM: Analysiere Anfrage:\nFilter: sender=[SRF 1], region=[Deutschschweiz],\njahr=[2019,2020,2021], kenngrösse=[Marktanteil in %]\nPivot: zeilen=Jahr
-
-LLM -> MCPClient: tool_call: abfrage_jahresbericht(\n  sender=["SRF 1"],\n  region=["Deutschschweiz"],\n  jahr=[2019,2020,2021],\n  kenngrösse=["Marktanteil in %"],\n  zeitschiene=["Ganzer Tag"],\n  zeilen="Jahr",\n  spalten=["Jahr","Wert"])
-
-MCPClient -> MCPServer: abfrage_jahresbericht
+Chatbot -> MCPServer: call_tool("abfrage_jahresbericht", …)
 activate MCPServer
-
-MCPServer -> MCPServer: Pandas DataFrame filtern:\n- Jahr in [2019,2020,2021]\n- Region = Deutschschweiz\n- Sender = SRF 1\n- Kenngrösse = Marktanteil in %
-
-MCPServer --> MCPClient: Tool-Ergebnis (Markdown-Tabelle)
+MCPServer --> Chatbot: Tool-Ergebnis\n(Markdown-Tabelle)
 deactivate MCPServer
 
-MCPClient --> LLM: Tool-Ergebnis (Markdown-Tabelle)
+== Antwort ==
 
-== Analyse & Antwort ==
+Chatbot -> OpenAI: chat.completions.create()\n(Nachrichten + Tool-Ergebnis)
+activate OpenAI
+OpenAI --> Chatbot: Textantwort
+deactivate OpenAI
 
-LLM -> LLM: Daten vorhanden? \nKeine weiteren tool_calls nötig? \nAntwort formulieren
-
-LLM -> Gradio: LLM formulierte Antwort
-
-deactivate LLM
-deactivate MCPClient
-
-Gradio -> Benutzer: Antwort anzeigen
-deactivate Gradio
+Chatbot --> Benutzer: Antwort
+deactivate Chatbot
 
 @enduml
 ....
