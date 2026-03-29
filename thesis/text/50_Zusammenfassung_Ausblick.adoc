@@ -6,13 +6,11 @@
 
 === Proof of Concept
 
-==== Zusammenfassung
 Es wurde ein funktionsfähiger Chatbot entwickelt, der dem Benutzer basierend auf den zur Verfügung stehenden Daten Antworten zu den Jahreszahlen der TV Nutzung in der Schweiz geben kann. Der agent-basierte Chatbot ruft die gewünschten Daten von einem dafür implementierten MCP Server ab und gibt sie korrekt an den Benutzer zurück. Der Chatbot kann lokal in einer Docker Compose Umgebung ausgeführt werden, bringt die Daten bereits passend aufbereitet mit und benötigt nur Internetzugriff und einen OpenAI API Key für den Zugriff auf das konfigurierte LLM.
 
-==== Ausblick
-Da es sich nur um einen Prototypen handelt, sind für ein funktionales System noch viele Aufgaben zu erledigen. Aus zeitgründen wurde in der Arbeit nur ein kleiner Ausschnitt der TV und Radionutzungsdaten der Schweiz aus den Jahren 2018--2021 für den Chatbot aufbereitet. Dies müsste auch für den Rest der Daten durchgeführt werden. Für Daten unterschiedlicher Typen ist zu überlegen, wie diese im MCP Server eingebunden werden. Neben weiteren Spalten im vorhandenen Tool mit zusätzlichen Filtern ist auch denkbar, weitere Tools hinzuzufügen. Die zweite Version des MCP Servers hat im Vergleich zur ersten Version deutlich gemacht, wie wichtig ein logischer Aufbau der Datenstruktur und eine präzise Beschreibung der Tools und deren Argumente ist.
+Da es sich um einen Prototypen handelt, sind für ein funktionales System noch viele Aufgaben zu erledigen. In der Arbeit wird nur ein kleiner Ausschnitt der TV und Radionutzungsdaten der Schweiz aus den Jahren 2018--2021 für den Chatbot aufbereitet. Dies muss auch für den Rest der Daten durchgeführt werden. Für Daten unterschiedlicher Typen muss überlegt werdenn, wie diese in den MCP Server eingebunden werden. Neben weiteren Spalten im vorhandenen Tool mit zusätzlichen Filtern ist auch denkbar, weitere Tools hinzuzufügen. Die zweite Version des MCP Servers hat im Vergleich zur ersten Version deutlich gemacht, wie wichtig ein logischer Aufbau der Datenstruktur und eine präzise Beschreibung der Tools und deren Parameter ist.
 
-Ebenso wichtig ist die Aufbereitung der Daten in ein Format, dass der Chatbot möglichst wenige Transformationen oder Mappings machen muss. Diese erweisen sich als Fehleranfällig, erhöhen die Dauer für Antworten und reduzieren die Qualität der Antworten. Ein Beispiel dafür ist, dass der Chatbot noch kein Verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr hat. Es müsste entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Die vorgeschlagene Alternative ist, dies bereits in der Datenaufbereitung zurückzumappen. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören. Generell empfielt es sich, das Glossar und Begriffserklärungen die implizites Wissen voraussetzen zu überarbeiten und explizit anzugeben. Ein Beispiel wäre die Zielguppe `Personen 3+`, die bisher nirgends erklärt ist. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, kommuniziert dies aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Ein Benutzer ohne den entsprechenden Kontext könnte auch annehmen, dass es sich zum Beispiel um eine Personengruppe mit mehr als 3 Personen handelt.
+Ebenso wichtig ist die Aufbereitung der Daten in ein leicht verständliches Format, damit der Chatbot möglichst wenige Transformationen oder Mappings anwenden muss. Diese erwiesen sich der ersten Version als fehleranfällig, erhöhten die Dauer für Antworten und reduzierten die Qualität der Antworten. Ein Beispiel dafür ist, dass der Chatbot noch kein Verständnis der Zeitschiene von 02:00 Uhr bis 26:00 Uhr hat. Es müsste entweder im Systemprompt oder Glossary erklärt werden, dass die Zeiten von 00:00 bis 02:00 auf 24:00 bis 26:00 gemappt sind. Die vorgeschlagene Alternative ist, dies bereits in der Datenaufbereitung zurückzumappen. Da die Zahlen ohnehin über das gesamte Jahr aggregiert sind, ist es nicht entscheident, zu welchem Tag sie gehören. Generell empfielt es sich, das Glossar und Begriffserklärungen die implizites Wissen voraussetzen zu überarbeiten und explizit anzugeben. Ein Beispiel wäre die Zielguppe `Personen 3+`, die bisher nirgends erklärt ist. Der Chatbot scheint in den meisten fällen korrekt abzuleiten, dass es hier um Personen mit dem Alter 3 und älter geht, kommuniziert dies aber in der Regel nicht und setzt entsprechendes Wissen beim Benutzer voraus. Ein Benutzer ohne den entsprechenden Kontext könnte auch annehmen, dass es sich zum Beispiel um eine Personengruppe mit mehr als 3 Personen handelt.
 
 Manche Daten sind in der aktuellen Datenaufbereitung nicht in sich konsistent. So ist zum Beispiel der Sender "Andere Sender" eine aggregierte Spalte, die in den Rohdatentabellen SRF und nonSRF vorkommen, dabei aber jeweils unterschiedliche Sender meinen. Diese Unstimmigkeit muss für den Produktiveinsatz auf jeden Fall aufgelöst werden. Es ist zu entscheiden, ob das zum Beispiel durch eine Umbenennung, Entfernung der Spalten oder Daten zu den aggregierten Sendern gemacht wird. Zusätzlich könnte es für manche Anfragen sinnvoll sein anzugeben, ob ein Wert bereits aggregiert ist, wie zum Beispiel die Sender _SRG SSR Total_ oder _Andere Sender_.
 
@@ -24,14 +22,13 @@ Für den Chatbot an sich bietet es sich an, eine Geschwindigkeitsevaluierung dur
 * `gpt-5.4-mini` (Nachfolger von gpt-5-mini, teurer, vermutlich leistungsfähiger)
 * `gpt-5.4-nano` (klein, günstig, schnell, neuer als gpt-5-nano)
 
-Für ein Produktivsystem wird eine zusätzliche Validierung der Eingangsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe völlig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (zum Beispiel 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen den Kontext des LLM auf der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts hinweg nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
+Für ein Produktivsystem wird eine zusätzliche Validierung der Eingangsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe völlig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (zum Beispiel 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen, den Kontext des LLMs auf der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts hinweg nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
 
 === Evaluierung
 
 ==== Zusammenfassung
 
-Die eingangs in der Problemstellung gestellte Frage «Zu welchem Zeitpunkt hatte SRF 1 in der Deutschschweiz 2020 die höchste Einschaltquote?»
-beantwortet der Chatbot korrekt wie folgt:
+Die Eingangs in der Problemstellung gestellte Frage «Zu welchem Zeitpunkt hatte SRF 1 in der Deutschschweiz 2020 die höchste Einschaltquote?» beantwortet der Chatbot korrekt wie folgt:
 
 [quote]
 ____
@@ -39,6 +36,12 @@ In der Deutschschweiz (Jahr 2020) hatte SRF 1 in der Zeitschiene 19:45:00 - 20:0
 Kenngrösse: Rating in % = 15.3969 %. (Rating in 1'000 = 806.336)
 ____
 
+Die Evaluierung der Korrektheit der Chatbotantworten ist sehr vielversprechend. Die zurückgegebenen Antworten sind, abgsehen von einem Konfigurationsfehler im System Prompt, korrekt und beantworten die gestellten Fragen. Der Chatbot bietet unmögliche weiterführende Aktionen an und führt Berechnungen durch. Dieses unerwünschte Verhalten wird aktuell im System Prompt noch nicht eingeschränkt. Es werden Anpassungen vorgeschlagen, die den Chatbot diesbezüglich verbessern können.
+
+* #ToDo: Ergebnisse prognosen#
+* #ToDo: Ergebnisse Interpretationen#
+
+Wenn darum gebeten oder durch andere Limitierungen im System Prompt dazu gedrängt, erstellt der Chatbot, teilweise sehr umfangreiche und detaillierte, Handlungsempfehlungen. Dies ist im System Prompt bisher nicht ausgeschlossen. Es wird eine enstrprechende Anpassung des System Prompt vorgeschlagen.
 
 * Chatbot wird kreativ um die Useranfragen im Rahmen seiner Möglichkeiten zu erledigen
 * Die generierten Test sind teilweise schlecht oder unspezifisch. Das reduziert die Aussagekraft und macht die Auswertung sehr zeitaufwendig, da die Tests alle einzeln analysiert werden müssen. Die Erwartung, dass alle Testfälle super relevant sind und nur die High-Level Auswertung der Ergebnisse reicht, wird nicht erfüllt. Dem entgegenzuhalten ist der erheblich reduzierte Aufwand, der für die Ergebnisse betrieben werden muss. Auch wenn die Ergebnisse der Tests nicht von höchster Qualität sind, so zeigen sie doch schon Schwächen des Systems auf, die es sich lohnt zu beheben. Durch den automatisierten Prozess lässt sich dann einfach die Wirksamkeit der ergriffenen Massnahmen überprüfen.
@@ -59,25 +62,3 @@ Promptfoo bietet die Möglichkeit, für die durchgeführten Analysen einen Beheb
 . *Eingabeschutz implementieren*: Setzen Sie Eingabefilter ein, um Benutzeranfragen zu erkennen und zu blockieren, die umsetzbare Empfehlungen, strategische Ratschläge, operative Pläne oder Werturteile erfordern. Dadurch wird verhindert, dass das LLM Anfragen verarbeitet, die wahrscheinlich zu unzulässigen Ausgaben führen, insbesondere solche, bei denen Social-Engineering- oder iterative Jailbreak-Techniken zum Einsatz kommen.
 . *Ausgabeschutz implementieren*: Wenden Sie eine Ausgabefilterung an, um Antworten zu erkennen und zu blockieren, die umsetzbare Empfehlungen, Schritt-für-Schritt-Anleitungen, strategische Vorschläge oder Werturteile enthalten, selbst wenn die Eingabe die ersten Filter umgeht. Dadurch wird sichergestellt, dass eingeschränkte Inhalte dem Nutzer nicht bereitgestellt werden, selbst bei mehrstufigen oder iterativen Angriffsszenarien.
 . *Enforce Access Controls*: Beschränken Sie den Zugriff auf erweiterte LLM-Funktionen und sensible Datenausgaben ausschliesslich auf autorisierte Benutzer. Dadurch wird das Risiko eines Missbrauchs verringert, indem eingeschränkt wird, wer mit dem System in einer Weise interagieren kann, die zu unerwünschten Ausgaben führen könnte -- insbesondere in einer selbst gehosteten oder benutzerdefinierten Umgebung.
-
-
-
-== Deklarierung der Nutzung generativer KI
-
-Wir haben LLMs, auch in Form von LLM Agents wie Claude Code oder GitHub Copilot, in folgenden Bereichen der Arbeit verwendet:
-
-* Erstellung des Proof-of-Concept Chatbots und MCP-Servers
-* Der Chatbot des Proof-of-Concept basiert auf einem LLM
-* In der Generierung der promptfoo Konfigurationen
-* via Promptfoo in der Erstellung der Red Teaming Angriffe und der Bewertung der Antwortenn
-* Unterstützung bei der Erstellung der UML Diagramme
-* Erstellung des Toolings zum Rendern der Arbeit und Arbeiten im Reposiitory
-
-
-[glossary]
-== Glossar
-
-#optional: Glossar für unbekannte Begriffe?#
-[glossary]
-[#Konfundierung]Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
-System Prompt:: #ToDo: describe#
