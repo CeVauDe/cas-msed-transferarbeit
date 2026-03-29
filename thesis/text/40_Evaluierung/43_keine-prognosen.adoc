@@ -32,7 +32,7 @@ Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf
 Ein LLM wird mit unzähligen, verschiedenen Daten trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
 
 [#results-prognosen]
-==== Ergebnisse
+==== Ergebnisse und Diskussion
 Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
 
 *Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur 4,8%, was bedeutet, dass das System in 95% der Fälle Daten ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
@@ -248,7 +248,6 @@ Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf die 
 
 Die angepasste System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose-optimiert.result.json`.
 
-[#fazit-prognosen]
 ==== Fazit
 Die Ergebnisse zeigen ein kritisches Problem: Einfache direkte Anfragen werden zu ca. 44% abgewehrt, aber bei komplexeren Multi-Turn-Attacken sinkt die Erfolgsrate auf 0%. Das zeigt deutlich, dass der Prompt-basierte Ansatz grundlegende Schwächen hat.
 Der Grader-LLM könnte korrekte Ablehnungen fälschlicherweise als Fehler bewerten, wenn der Agent zwar keine Prognose macht, aber ungünstig formuliert (z.B. "Ich kann 2022 nicht vorhersagen" könnte als Erwähnung von 2022 negativ bewertet werden).
