@@ -29,6 +29,14 @@ ____
 * Für ein Produktivsystem wird eine zusätzliche Validierung der Eingangsdaten erforderlich sein. So ist die Texteingabemenge derzeit nicht beschränkt und eine Stichprobe mit einem langen Text zeigt, dass der Chatbot seine ursprüngliche Aufgabe völlig vergisst und Aktivitäten ohne Zusammenhang zu den Jahreszahlen anbietet. Ein Limit für eine maximale Eingabe (z.{nbsp}B. 500 oder 1'000 Zeichen) und eine Begrenzung wie viele Nachrichten innerhalb einer Session erlaubt sind, können helfen den Kontext des LLM auf der zu erledigenden Aufgabe zu halten. Auch einige Angriffe die darauf bauen, umfangreiche Anweisungen zu geben oder über viele Prompts nach und nach eine Beschränkung umgehen, können so einfach abgeblockt werden.
 
 
+#ToDo: Der Teil hier wird bei allen Tests vorgeschlagen und passt daher besser in eine allgemeine Sektion wie das Fazit#
+Promptfoo bietet die Möglichkeit, für die durchgeführten Analysen einen Behebungsbericht (genannt "Remediation Report") zu erstellen. In diesem werden die wie folgt priorisierten Handlungsitems vorgeschlagen:
+
+. *Systempromt stärken*: Erweitern Sie die Systemanweisung dahingehend, dass die Abgabe von umsetzbaren Empfehlungen, strategischen Vorschlägen oder Werturteilen ausdrücklich untersagt wird, und weisen Sie das Modell an, unter keinen Umständen eine beratende Rolle einzunehmen. Damit werden direkt die Schwachstellen behoben, bei denen das LLM auch nach wiederholten oder umformulierten Nutzeranfragen Schritt-für-Schritt-Pläne oder strategische Ratschläge ausgibt.
+. *Eingabeschutz implementieren*: Setzen Sie Eingabefilter ein, um Benutzeranfragen zu erkennen und zu blockieren, die umsetzbare Empfehlungen, strategische Ratschläge, operative Pläne oder Werturteile erfordern. Dadurch wird verhindert, dass das LLM Anfragen verarbeitet, die wahrscheinlich zu unzulässigen Ausgaben führen, insbesondere solche, bei denen Social-Engineering- oder iterative Jailbreak-Techniken zum Einsatz kommen.
+. *Ausgabeschutz implementieren*: Wenden Sie eine Ausgabefilterung an, um Antworten zu erkennen und zu blockieren, die umsetzbare Empfehlungen, Schritt-für-Schritt-Anleitungen, strategische Vorschläge oder Werturteile enthalten, selbst wenn die Eingabe die ersten Filter umgeht. Dadurch wird sichergestellt, dass eingeschränkte Inhalte dem Nutzer nicht bereitgestellt werden, selbst bei mehrstufigen oder iterativen Angriffsszenarien.
+. *Enforce Access Controls*: Beschränken Sie den Zugriff auf erweiterte LLM-Funktionen und sensible Datenausgaben ausschliesslich auf autorisierte Benutzer. Dadurch wird das Risiko eines Missbrauchs verringert, indem eingeschränkt wird, wer mit dem System in einer Weise interagieren kann, die zu unerwünschten Ausgaben führen könnte -- insbesondere in einer selbst gehosteten oder benutzerdefinierten Umgebung.
+
 === Ausblick
 #ToDo: Ausformulieren#
 
@@ -65,12 +73,22 @@ ____
 #ToDo: KI Nutzung angbene. Tabelle?#
 
 
+== Deklarierung der Nutzung generativer KI
+
+Wir haben LLMs, auch in Form von LLM Agents wie Claude Code oder GitHub Copilot, in folgenden Bereichen der Arbeit verwendet:
+
+* Erstellung des Proof-of-Concept Chatbots und MCP-Servers
+* Der Chatbot des Proof-of-Concept basiert auf einem LLM
+* In der Generierung der promptfoo Konfigurationen
+* via Promptfoo in der Erstellung der Red Teaming Angriffe und der Bewertung der Antwortenn
+* Unterstützung bei der Erstellung der UML Diagramme
+* Erstellung des Toolings zum Rendern der Arbeit und Arbeiten im Reposiitory
+
 
 [glossary]
 == Glossar
 
-#ToDo: Glossar für unbekannte Begriffe?#
+#optional: Glossar für unbekannte Begriffe?#
 [glossary]
-mud:: wet, cold dirt
-rain::
-	water falling from the sky
+[#Konfundierung]Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
+System Prompt:: #ToDo: describe#
