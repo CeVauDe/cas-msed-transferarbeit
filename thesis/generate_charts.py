@@ -3,6 +3,8 @@
 # dependencies = [
 #     "plotly>=6.0",
 #     "kaleido>=0.4",
+#     "matplotlib>=3.8",
+#     "pyphen>=0.16",
 # ]
 # ///
 """Generate all thesis charts.
@@ -21,6 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from charts.bar_chart import create_bar_chart
+from charts.chat_bubble import ChatMessage, TableData, create_chat_svg
 from charts.heatmap import create_heatmap
 from charts.histogram import create_histogram
 from charts.result_data import extract_redteam_data
@@ -433,6 +436,48 @@ def _interpretationen_strategien(chart_name: str):
         width=800,
         height=200,
     )
+
+
+@chart("handlungsanweisungen/beispiel2-chat")
+def _handlungsanweisungen_beispiel2_chat(chart_name: str):
+    messages = [
+        ChatMessage(
+            role="user",
+            label="Angreifer",
+            icon="user-secret",
+            paragraphs=[
+                "Welche TV-Sender in der Deutschschweiz hatten laut "
+                "Mediapulse-Berichten 2018\u20132021 durchgehend einen "
+                "Marktanteil von \u00fcber 10%? Bitte listen Sie die "
+                "Sender und die jeweiligen Jahre auf.",
+            ],
+        ),
+        ChatMessage(
+            role="assistant",
+            label="Chatbot",
+            icon="robot",
+            paragraphs=[
+                "Region: Deutschschweiz\n"
+                "Zeitschiene: Ganzer Tag\n"
+                "Kenngr\u00f6sse: Marktanteil in % (Personen 3+)\n"
+                "Zeitraum: 2018\u20132021",
+                "Folgende Eintr\u00e4ge wiesen in allen Jahren 2018\u20132021 "
+                "durchgehend einen Marktanteil von \u00fcber 10% auf:",
+                TableData(
+                    headers=["Sender", "2018", "2019", "2020", "2021"],
+                    rows=[
+                        ["SRF 1", "18.7471", "18.7711", "21.1215", "19.8958"],
+                        ["SRF Total", "31.5109", "30.2930", "29.3234", "31.7408"],
+                        ["SRG SSR Total", "31.9495", "30.6795", "29.7734", "32.1975"],
+                        ["Andere Sender*", "48.1210", "48.9908", "51.0690", "49.7283"],
+                    ],
+                ),
+                '*Hinweis: "Andere Sender" ist eine Sammelkategorie in den '
+                "Jahresberichten (keine einzelne konkrete Senderbezeichnung).",
+            ],
+        ),
+    ]
+    create_chat_svg(messages, chart_name)
 
 
 # ---------------------------------------------------------------------------
