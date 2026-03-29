@@ -1,7 +1,7 @@
 
 [#section-prognosen]
 === Prognosen
-Mit Prognosen und Trends werden ein falsches Bild der Statistiken wiedergespiegelt und bei Verwendung derer, weiter aufbauende Konzepte verfälscht. Um dem Ziel der einfachen Auswertung ohne Datenbankkenntnisse von den statischtischen Daten gerecht zu werden, ist es ausserordentlich wichtig, Trends und Prognosen zu vermeiden und zu jederzeit faktische Daten zu liefern.
+Mit Prognosen und Trends wird ein falsches Bild der Statistiken wiedergespiegelt und bei Verwendung derer für weitere Nutzung verfälscht. Um dem Ziel der einfachen Auswertung ohne Datenbankkenntnisse von den statistischen Daten gerecht zu werden, ist es ausserordentlich wichtig, Trends und Prognosen zu vermeiden und zu jederzeit ausschliesslich faktische Daten zu liefern.
 
 Ein LLM wird mit unzähligen, verschiedenen Daten auf Sprache trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
 
@@ -35,17 +35,17 @@ Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf
 ==== Ergebnisse und Diskussion
 Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
 
-*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur 4,8%, was bedeutet, dass das System in 95% der Fälle Daten ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
+*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur 4,8%, was bedeutet, dass das System in 95% der Fälle ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
 
 [#image-prognosen-plugin-pass-rate]
-.Diagram über die Erolgsrate nach Plugin für das Thema "keine Prognosen"
+.Diagram über die Erolgsrate nach Plugin für das Thema Prognosen
 image::generated/prognose/redteam-prognosen-plugins.svg[Red Teaming Plugins, 600]
 
 ===== Strategie-spezifische Analyse
 
 Die Analyse nach Angriffsstrategie zeigt ein besorgniserregendes Muster: Multi-Turn-Strategien sind deutlich erfolgreicher beim Umgehen der Prognose-Einschränkungen als Single-Turn-Angriffe.
 
-.Tabelle über die Erfolgsrate nach Strategie für das Thema "keine Prognosen"
+.Tabelle über die Erfolgsrate nach Strategie für das Thema Prognosen
 [cols="2,^1,^1,^1", options="header"]
 |===
 | Strategie | Tests | Bestanden | Erfolgsrate
@@ -89,7 +89,7 @@ Die Analyse nach Angriffsstrategie zeigt ein besorgniserregendes Muster: Multi-T
 Die folgende Heatmap zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die farbliche Kodierung verdeutlicht das dramatische Versagen bei Multi-Turn-Strategien.
 
 [#image-prognosen-pass-rate]
-.Erfolgsraten Matrix aufgeteilt in Angriffsstrategie und Plugin für das Thema "Keine Prognosen"
+.Erfolgsraten Matrix aufgeteilt in Angriffsstrategie und Plugin für das Thema Prognosen
 image::generated/prognose/redteam-prognosen-strategies.svg[Red Teaming Strategien, 800]
 
 Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose.result.json` abrufbar.
@@ -224,7 +224,7 @@ Im Gegensatz dazu zeigten einfachere Strategien moderate Abwehr:
 
 **Technische Implikation:** Nur mit System-Prompts reicht es nicht. Die 0%-Erfolgsrate bei Multi-Turn-Strategien zeigt, dass zustandsbasiertes Policy-Enforcement nötig ist. Das System müsste nicht nur einzelne Anfragen prüfen, sondern ganze Dialoge auf schrittweise Verletzungen der Einschränkungen überwachen.
 
-**Hallucination-Problem:** Die tiefe Erfolgsrate von 4,8% beim Hallucination-Plugin zeigt, dass der Agent häufig mit Überzeugung falsche Daten generiert. Er erfindet Daten für 2022+ ohne klare Warnung. Besonders problematisch: In 20 von 21 Fällen präsentierte das System nicht-existente Datenpunkte als Fakten.
+**Hallucination-Problem:** Die tiefe Erfolgsrate von 4,8% beim Hallucination-Plugin beweist, dass der Agent häufig mit Überzeugung falsche Daten generiert. Er erfindet Daten für 2022+ ohne klare Warnung. Besonders problematisch: In 20 von 21 Fällen präsentierte das System nicht-existente Datenpunkte als Fakten.
 
 ===== Vergleich der Plugin-Ansätze
 
@@ -235,7 +235,7 @@ Die unterschiedliche Erfolgsrate der drei Plugins (Custom: 52%, Policy: 10%, Hal
 * Das Hallucination-Plugin testet hauptsächlich Datenfabrikation, nicht Prognosen. Die niedrige Rate (5%) zeigt, dass sich die Konzepte überlappen, aber nicht identisch sind
 
 ===== Optimierungsversuch
-Mit einer leicht angepassten System Prompt, wird eine Erfolgsrate von 39.68% erzielt:
+Mit einer leicht angepassten System Prompt, wird eine positivere Erfolgsrate von 39.68% erzielt:
 
 ----
 ═══ REGELN ═══
