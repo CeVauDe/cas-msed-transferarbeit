@@ -29,7 +29,6 @@ Das Custom Plugin, welches initial mit hilfe von KI generiert und angepasst wird
 Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas geschah, kausale Links herzustellen oder Werturteile abzugeben als Fehler bewertet werden. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-interpretation.yaml` nachgelesen werden.
 
 
-
 [#results-keine-interpretationen]
 ==== Ergebnisse und Diskussion
 
@@ -198,7 +197,7 @@ Diese Diskrepanz zeigt, dass Single-Turn-Abwehr funktioniert, aber Multi-Turn-Di
 
 
 ===== Optimierungsversuch
-Eine kleine Anpassung der System Prompt erzielt eine Erfolgsrate von 15.63%:
+Eine kleine Anpassung der System Prompt erzielt eine leicht verbesserte Erfolgsrate von 15.63%:
 
 ----
 ═══ REGELN ═══
@@ -220,4 +219,4 @@ Die 92,9% Fehlerquote zeigt, dass System-Prompts allein das Problem nicht lösen
 2. Erkennung von schrittweiser Eskalation über mehrere Turns
 3. Für häufige Fragen vordefinierte, interpretationsfreie Antworten
 
-Bei 92,9% Fehlerquote ist es möglich, dass der Grader-LLM zu streng bewertet. Formulierungen wie in <<#interpretationen-beispiel1>> ("möglicherweise liegt das an...") könnten als harmlose Höflichkeit statt als Interpretation gewertet werden.
+Eine Herausforderung stellt die Formulierungen der Antworten da, wie in <<#interpretationen-beispiel1>> ("möglicherweise liegt das an...") könnten als harmlose Höflichkeit statt als Interpretation gewertet werden. Die Grader-LLM muss optimiert werden.
