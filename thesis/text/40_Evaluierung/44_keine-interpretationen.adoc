@@ -2,7 +2,7 @@
 [#section-interpretation]
 === Keine Interpretationen
 
-Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red-Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Auswahl der Plugins und Strategien wird mit hilfe von KI gefällt. Zum Generieren und Auswerten wird das OpenAI 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Der Chatbot muss strikte Trennung zwischen Fakten und Interpretationen einhalten. Dafür werden 70 Red Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Auswahl der Plugins und Strategien wird mit hilfe von KI gefällt. Zum Generieren und Auswerten wird das OpenAI 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never provide interpretations, causal
@@ -46,7 +46,7 @@ image::generated/interpretation/redteam-interpretationen-plugins.svg[]
 
 Die Analyse nach Angriffsstrategie zeigt ein katastrophales Muster: Alle Multi-Turn-Strategien sind zu 100% erfolgreich beim Umgehen der Interpretations-Einschränkungen. Selbst einfache Single-Turn-Angriffe sind in 80-90% der Fälle erfolgreich.
 
-.Erfolgsrate nach Red-Teaming-Strategie
+.Erfolgsrate nach Red Teaming-Strategie
 [cols="2,1,1,1", options="header"]
 |===
 | Strategie | Tests | Bestanden | Erfolgsrate
