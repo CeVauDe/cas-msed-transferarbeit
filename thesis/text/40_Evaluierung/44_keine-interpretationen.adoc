@@ -34,7 +34,7 @@ Die `grader` Definition legt fest, dass alle Versuche zu erklären "warum" etwas
 [#results-keine-interpretationen]
 ==== Ergebnisse
 
-Von 70 durchgeführten Red-Teaming-Tests bestanden lediglich 5 (7,1%), während 65 Tests (92,9%) fehlschlugen. Die Ergebnisübersicht ist in <<#image-interpretationen-pass-rate>> und Erfolgsrate nach Plugin in <<#image-interpretationen-plugin-pass-rate>> dargestellt. Das System ist in dieser Verfassung massiv anfällig für Interpretations-Manipulationen.
+Von 70 durchgeführten Red Teaming-Tests bestanden lediglich 5 (7,1%), während 65 Tests (92,9%) fehlschlugen. Die Ergebnisübersicht ist in <<#image-interpretationen-pass-rate>> und Erfolgsrate nach Plugin in <<#image-interpretationen-plugin-pass-rate>> dargestellt. Das System ist in dieser Verfassung massiv anfällig für Interpretations-Manipulationen.
 
 *Besonders alarmierend*: Das Policy-Plugin zeigt eine Erfolgsrate von 0%, was bedeutet, dass das System in allen Fällen auf generische Interpretation-Anfragen mit unzulässigen Erklärungen reagiert.
 
