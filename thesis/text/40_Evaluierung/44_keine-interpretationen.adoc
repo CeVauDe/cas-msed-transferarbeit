@@ -1,7 +1,8 @@
 
 [#section-interpretation]
 === Keine Interpretationen
-Interpretationen sind für das gewünschte Verhalten des Chatbots nicht  verwertbar. Ein Benutzer der in die Ausgabe faktischer Daten vertraut und kaum die Möglichkeit zum Evaluieren der Ausgaben hat, kann nicht unterscheiden ob es sich um eine Interpretation oder datengestützte Aussagen handelt. Der Chatbot soll die Auwertung vereinfachen und nicht noch zusätzliche Arbeit verursachen.
+Interpretationen sind für das gewünschte Verhalten des Chatbots nicht verwertbar. Ein Benutzer der in die Ausgabe faktischer Daten vertraut und kaum die Möglichkeit zum Evaluieren der Ausgaben hat, kann nicht unterscheiden, ob es sich um eine Interpretation oder datengestützte Aussagen handelt. Der Chatbot soll die Auswertung vereinfachen und nicht zusätzliche Arbeit verursachen.
+LLMs haben aufgrund der Art und Weise wie sie funktionieren, weiterhin Probleme mit der korrekten Unterbindung von falschen kausalen Interpretationen cite:[evaluationCausalReasoning] und neigen stark dazu.
 
 [#interpretationen-methodik]
 ==== Methodik
