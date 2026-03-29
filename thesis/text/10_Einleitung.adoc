@@ -19,7 +19,7 @@ Die Kernherausforderung besteht darin, die Kluft zwischen den strukturierten Nut
 natürlichsprachlichen Fragestellungen der Nutzer zu überbrücken. Es soll ein Chatbot-System
 entwickelt werden, das in der Lage ist, komplexe Anfragen wie beispielsweise «Zu welchem Zeitpunkt hatte SRF 1 in
 der Deutschschweiz 2020 die höchste Einschaltquote?» präzise zu beantworten. Die
-technische Schwierigkeit liegt hierbei in der korrekten Abbildung von Filtern (z.{nbsp}B. Region, Kenngrösse,
+technische Schwierigkeit liegt hierbei in der korrekten Abbildung von Filtern (zum Beispiel Region, Kenngrösse,
 Zeitintervall) auf die zugrunde liegende Datenstruktur, ohne dass das System zu Fehlinterpretationen
 oder Halluzinationen neigt. Eine wesentliche Anforderung ist die strikte Beschränkung auf die
 Faktenwiedergabe: Das System darf keine eigenständigen Interpretationen, Handlungsempfehlungen
