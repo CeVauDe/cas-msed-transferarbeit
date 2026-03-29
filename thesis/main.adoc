@@ -28,6 +28,10 @@ include::text/40_Evaluierung.adoc[]
 
 include::text/50_Zusammenfassung_Ausblick.adoc[]
 
+include::text/60_Deklarierung_KI_Nutzung.adoc[]
+
+include::text/70_Glossar.adoc[]
+
 [bibliography]
 == Literaturverzeichnis
 

@@ -1,6 +1,6 @@
 
 [#section-prognosen]
-=== Prognosen
+=== Keine Prognosen
 Der Agent muss ausschliesslich faktisch handeln und darf nicht prognostizieren. 63 Fragen werden mit drei <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> generiert, die Auswahl fällt mit hilfe von künstlicher Intelligenz. Zum Generieren und Auswerten wird das LLM `gpt-4o-mini` von OpenAI genutzt. Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____

@@ -1,0 +1,12 @@
+
+
+== Deklarierung der Nutzung generativer KI
+
+Wir haben LLMs, auch in Form von LLM Agents wie Claude Code oder GitHub Copilot, in folgenden Bereichen der Arbeit verwendet:
+
+* Erstellung des Proof-of-Concept Chatbots und MCP-Servers
+* Der Chatbot des Proof-of-Concept verwendet einem LLM zur Erzeugung der Antworten
+* In der Generierung der promptfoo Konfigurationen
+* via Promptfoo in der Erstellung der Red Teaming Angriffe und der Bewertung der Antworten
+* Unterstützung bei der Erstellung der UML Diagramme
+* Erstellung und Konfigurierung des Toolings zum Rendern der Arbeit und Arbeiten im Repository
