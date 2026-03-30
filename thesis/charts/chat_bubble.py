@@ -234,7 +234,7 @@ def _render_table_svg(table: TableData, max_width: float) -> tuple[str, float, f
     svg_text = buf.getvalue().decode("utf-8")
 
     # Register SVG namespace to avoid ns0: prefixes
-    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("", "https://www.w3.org/2000/svg")
     ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
 
     root = ET.fromstring(svg_text)
