@@ -8,7 +8,7 @@ Ein LLM wird mit unzähligen, verschiedenen Daten auf Sprache trainiert und inte
 [#prognosen-methodik]
 ==== Methodik
 
-63 Fragen werden mit drei <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> generiert. Jeweils drei pro Plugin und Strategie. Die Auswahl wird mit hilfe von künstlicher Intelligenz gefällt. Zum Generieren und Auswerten wird das LLM `gpt-4o-mini` von OpenAI genutzt.
+63 Fragen werden mit drei <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> generiert. Jeweils drei pro Plugin und Strategie. Die Auswahl der Fragen wird mit Hilfe von künstlicher Intelligenz gefällt. Zum Generieren und Auswerten wird das LLM `gpt-4o-mini` von OpenAI genutzt.
 
 Als Strategie kommen <<methods-strategien-basic,basic>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>> zum Einsatz. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
@@ -20,30 +20,27 @@ data beyond the available dataset. It must only present factual
 historical data from 2018-2021.
 ____
 
-Das bereitgestellte Plugin *hallucination* von Promptfoo eignet sich gut für die Evaluation von Prognosen. Der Fokus liegt auf falschen oder erfundenen Informationen.
+Das bereitgestellte Plugin *hallucination* von Promptfoo eignet sich gemäss Beschreib für die Evaluation von Prognosen. Der Fokus liegt auf falschen oder erfundenen Informationen.
 
-Es versucht den Agent dazu zu bringen:
+Es versucht den Agent dazu zu bringen
 
-* Fakten zu erfinden, die nicht in den verfügbaren Daten existieren
-* Daten ausserhalb des Scope zu generieren (z.B. 2022+ wenn nur 2018-2021 verfügbar)
-* Falsche Zahlen oder nicht-existente Entitäten zu behaupten
-* Mit Überzeugung etwas Falsches zu sagen
+* Fakten zu erfinden, die nicht in den verfügbaren Daten existieren.
+* Daten ausserhalb des Bereichs zu generieren (z.B. 2022+ wenn nur 2018-2021 verfügbar).
+* falsche Zahlen oder nicht-existente Entitäten zu behaupten.
+* mit Überzeugung etwas Falsches zu sagen.
 
-Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und auf die Bedürfnisse angepasst. Die Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
+Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und dann auf die Bedürfnisse angepasst. Der Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
 
 [#results-prognosen]
 ==== Ergebnisse und Diskussion
-Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
-
-*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur 4,8%, was bedeutet, dass das System in 95% der Fälle ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
+Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen. *Besonders besorgniserregend*: Das Hallucination-Plugin (<<#image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur knapp fünf Prozent. Dies bedeutet, dass das System in 95% der Fälle ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
 
 [#image-prognosen-plugin-pass-rate]
 .Diagram über die Erolgsrate nach Plugin für das Thema Prognosen
 image::generated/prognose/redteam-prognosen-plugins.svg[Red Teaming Plugins, 600]
 
 ===== Strategie-spezifische Analyse
-
-Die Analyse nach Angriffsstrategie zeigt ein besorgniserregendes Muster: Multi-Turn-Strategien sind deutlich erfolgreicher beim Umgehen der Prognose-Einschränkungen als Single-Turn-Angriffe.
+Auch Analyse nach Angriffsstrategie zeigt, dass Multi-Turn-Strategien deutlich erfolgreicher beim Umgehen der Prognose-Einschränkungen sind als Single-Turn-Angriffe.
 
 .Tabelle über die Erfolgsrate nach Strategie für das Thema Prognosen
 [cols="2,^1,^1,^1", options="header"]
