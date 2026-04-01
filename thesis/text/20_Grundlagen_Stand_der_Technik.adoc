@@ -26,7 +26,7 @@ Wird z.B. in coding agents wie Claude Code oder GitHub Copilot sehr viel verwend
 
 ==== MCP Server
 Um dem <<#methoden-mcp-client,MCP Client>> Datenabfragen zu ermöglichen, wird ein Server nach MCP Standard entwickelt.
-Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwicklern oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) zur Verfügung.
+Die Implementation nach Standard ist aufgrund der flexiblen Auswahl eines LLM-Anbieter (Drop-in Replacement möglich) sinnvoll. Ausserdem bietet ein Standard einheitliche Terminologie für die Kommunikation mit anderen Entwickler:innen oder der KI und Lösungen für Probleme, die typischerweise auftreten. Ein MCP Server stellt Ressourcen (`resource` cite:[mcpTool]), Werkzeuge (`tool` cite:[mcpResource]) sowie Prompts (`prompt` cite:[mcpPrompt]) zur Verfügung.
 
 * Liste von veröffentlichten MCP Servern: https://registry.modelcontextprotocol.io/
 * Von der MCP Steering Group gepflegte MCP Server: https://github.com/modelcontextprotocol/servers

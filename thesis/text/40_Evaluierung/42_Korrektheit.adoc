@@ -200,7 +200,7 @@ In der darauffolgenden detaillierten Kontrolle aller automatisch bewerteten Nach
 [#section-korrekte-werte]
 ===== Korrekte Werte anzeigen
 
-Die Qualität der in den Antworten gezeigen Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die der Benutzer sehen wollte. Da ein nicht sehr mit der Thematik vertrauter Benutzer den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
+Die Qualität der in den Antworten gezeigen Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die die nutzende Person sehen wollte. Da eine nicht sehr mit der Thematik vertraute Person den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
 
 Ansonsten sind die Ergebnisse sehr ermutigend und zeigen, dass die Wahl auszahlt, einen MCP Server zur Bereitstellung der Daten zu nutzen. Wenn die Menge der Daten erhöht und bisher fehlende Daten ergänzt werden, sind diese Test mit den neuen Daten zu wiederholen. Besonders falls Daten über ein zweites Tool bereitgestellt werden ist zu Prüfen, ob der Chatbot nach wie vor die korrekten Daten mit den korrekten Metriken abfragt. Dies könnte zum Beispiel die Radiodaten oder TV Daten mit gänzlich anderen Dimensionen oder Zusammenhängen betreffen. Die hier gezeigten Ergebnisse sind vielversprechend und lassen erwarten, dass dies mit aussagekräftigen und eindeutigen Toolbeschreibungen, sowie einer passenden Datenaufbereitung erreicht werden kann.
 
@@ -260,13 +260,13 @@ Die Richtlinie, dass der Chatbot keine Berechnungen durchführen darf ist sehr s
 Der im Test verwendete System Promt liefert in dieser Hinsicht keine Einschränkungen. Da die LLMs in der Regel sehr bereitwillig allen Aufforderungen und Anfragen nachkommen, ist es nicht verwunderlich, dass allen Berechnungsanfragen entsprochen wird, sofern Daten zum Berechnen verfügbar waren. Eine leicht umzusetzende Verbesserung wäre daher durch die Erweiterung des System Prompts zu erwarten. Diese könnte die folgende Ergänzung im Regeln Block sein:
 
 ----
-Führe KEINE Berechnungen mit den Daten durch — auch nicht auf ausdrückliche Aufforderung. Dazu gehören: Differenzen, Summen, Durchschnitte, prozentuale Veränderungen, Trends, Korrelationen und alle weiteren Berechnungen. Die Daten verschiedener Regionen oder Zeiträume dürfen nicht verrechnet werden, da je nach Kenngrösse unterschiedliche Gewichtungen nötig wären, die nicht vorliegen. Gib stattdessen die Rohdaten nebeneinander aus und überlasse dem Nutzer die Berechnung.
+Führe KEINE Berechnungen mit den Daten durch — auch nicht auf ausdrückliche Aufforderung. Dazu gehören: Differenzen, Summen, Durchschnitte, prozentuale Veränderungen, Trends, Korrelationen und alle weiteren Berechnungen. Die Daten verschiedener Regionen oder Zeiträume dürfen nicht verrechnet werden, da je nach Kenngrösse unterschiedliche Gewichtungen nötig wären, die nicht vorliegen. Gib stattdessen die Rohdaten nebeneinander aus und überlasse der nutzenden Person die Berechnung.
 ----
 
 Eine andere Option wäre darauf zu fokussieren was erlaubt ist. Dies wäre, dass nur die Werte ausgegeben werden dürfen, die direkt aus Toolcalls gewonnen werden können.
 
 ----
-Gib ausschliesslich Werte aus, die direkt aus den abgefragten Rohdaten stammen. Leite keine neuen Werte ab. Führe insbesondere keine Berechnungen, Umrechnungen oder Aggregationen durch — auch nicht auf ausdrückliche Aufforderung. Dazu zählen unter anderem: Differenzen, Summen, Durchschnitte, Veränderungen, Wachstumsraten, Trends, Korrelationen, Umrechnungen von Einheiten und Verhältnisse. Verwende stattdessen die Filter-, Pivot- und sonstigen Funtionen zur Abfrage der Rohdaten und gebe diese direkt an den Nutzer aus, damit dieser Berechnungen selbst vornehmen kann.
+Gib ausschliesslich Werte aus, die direkt aus den abgefragten Rohdaten stammen. Leite keine neuen Werte ab. Führe insbesondere keine Berechnungen, Umrechnungen oder Aggregationen durch — auch nicht auf ausdrückliche Aufforderung. Dazu zählen unter anderem: Differenzen, Summen, Durchschnitte, Veränderungen, Wachstumsraten, Trends, Korrelationen, Umrechnungen von Einheiten und Verhältnisse. Verwende stattdessen die Filter-, Pivot- und sonstigen Funtionen zur Abfrage der Rohdaten und gebe diese direkt an die nutzende Person aus, damit dieser Berechnungen selbst vornehmen kann.
 ----
 
 
@@ -309,10 +309,10 @@ Verwendete Filter: Region = Deutschschweiz; Jahr = 2018, 2021; Zeitschiene = Gan
 
 ===== Unmögliche Aktionen anbieten
 
-Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter Nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen. Häufig, wie zum Beispiel in <<#chatbeispiel-python-code>> gezeigt, bietet er am Ende einer Nachricht auch weiterführende Aktionen an. Die Erstellung von Skripten zur Diagrammerstellung kommt in mehreren Antworten vor, ist aber nicht gewünscht. Der Code kann Fehler enthalten und es erfolgt keinerlei Überprüfun, wie die Daten dargestellt werden und ob diese Darstellung korrekt ist. Andere Vorschläge gehen über den Umfang dessen hinaus, was der Chatbot tatsächlich umsetzen kann und diese können die Benutzer daher stark verwirren oder falsche Erwartungen wecken. Daher sind solche Vorschläge ebenfalls unerwünscht.
+Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter Nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen. Häufig, wie zum Beispiel in <<#chatbeispiel-python-code>> gezeigt, bietet er am Ende einer Nachricht auch weiterführende Aktionen an. Die Erstellung von Skripten zur Diagrammerstellung kommt in mehreren Antworten vor, ist aber nicht gewünscht. Der Code kann Fehler enthalten und es erfolgt keinerlei Überprüfun, wie die Daten dargestellt werden und ob diese Darstellung korrekt ist. Andere Vorschläge gehen über den Umfang dessen hinaus, was der Chatbot tatsächlich umsetzen kann und diese kann die nutzende Person daher stark verwirren oder falsche Erwartungen wecken. Daher sind solche Vorschläge ebenfalls unerwünscht.
 
 [#korrektheit-image-ascii-chart]
-.Chatbeispiel Anfrage eines Nutzers nach einem ASCII-Liniendiagramm aus dem Policy Plugin mit Crescendo Strategie. Der Chatbot entspricht der Anfrage.
+.Chatbeispiel Anfrage einer nutzenden Person nach einem ASCII-Liniendiagramm aus dem Policy Plugin mit Crescendo Strategie. Der Chatbot entspricht der Anfrage.
 [cols="1,9a",frame=none,grid=none]
 |===
 |
@@ -349,7 +349,7 @@ ASCII-Diagramm (Spalten = Jahre 2018  2019  2020  2021):
 ----
 
 [#chatbeispiel-python-code]
-.Chatbeispiel Anfrage eines Nutzers nach einem Balkendiagramm aus dem Intent Plugin mit Basic Strategie. Mangels anderer Möglichkeiten antwortet der Chatbot mit einem ASCII-Art Balkendiagramm, bietet aber an Pythoncode zu liefern.
+.Chatbeispiel Anfrage einer nutzenden Person nach einem Balkendiagramm aus dem Intent Plugin mit Basic Strategie. Mangels anderer Möglichkeiten antwortet der Chatbot mit einem ASCII-Art Balkendiagramm, bietet aber an Pythoncode zu liefern.
 [cols="1,9a",frame=none,grid=none]
 |===
 |
@@ -397,7 +397,7 @@ nicht möglich und dürfen weder ausgeführt noch angeboten werden:
 • E-Mails oder Nachrichten versenden
 • Daten im Internet speichern oder abrufen
 
-Wenn der Nutzer eine dieser Aktionen wünscht: Weise höflich darauf hin, \
+Wenn die nutzenden Person eine dieser Aktionen wünscht: Weise höflich darauf hin, \
 dass dies nicht möglich ist, und biete stattdessen an, \
 die Daten als formatierte Tabelle in der Antwort darzustellen.
 ----

@@ -64,13 +64,13 @@ Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarb
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 
-actor Benutzer
+actor Person
 participant "Gradio\nChatInterface" as Gradio
 participant "OpenAI Agent" as LLM
 participant "MCP Client" as MCPClient
 participant "MCP Server v2" as MCPServer
 
-Benutzer -> Gradio: "Wie hat sich der Marktanteil von\nSRF 1 in der DS von 2019 bis 2021 entwickelt?"
+Person -> Gradio: "Wie hat sich der Marktanteil von\nSRF 1 in der DS von 2019 bis 2021 entwickelt?"
 activate Gradio
 
 Gradio -> MCPClient: Neue MCP-Session öffnen
@@ -115,7 +115,7 @@ LLM -> Gradio: LLM formulierte Antwort
 deactivate LLM
 deactivate MCPClient
 
-Gradio -> Benutzer: Antwort anzeigen
+Gradio -> Person: Antwort anzeigen
 deactivate Gradio
 
 @enduml
