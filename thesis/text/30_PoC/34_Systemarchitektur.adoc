@@ -53,7 +53,7 @@ agent <-up-> openai_api : "HTTPS"
 @enduml
 ....
 
-Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?` dargestellt.
+Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `"Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?"` dargestellt.
 
 [[fig-agent-loop,Abbildung: Agent-Loop]]
 .Sequenzdiagramm des agentenbasierten Verarbeitungsloops (Beispielfrage)
