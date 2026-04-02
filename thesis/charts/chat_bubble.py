@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import io
 import re
-import textwrap
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -101,6 +100,14 @@ class TableData:
 
     headers: list[str]
     rows: list[list[str]]
+    col_widths: list[float] | None = None  # relative widths, e.g. [2, 1, 1, 3, 1.5]
+
+
+MONO_FONT = "Courier New, Courier, monospace"
+MONO_FONT_SIZE = 7.5
+MONO_LINE_HEIGHT = 10
+MONO_WRAP_CHARS = 75  # monospace chars are wider
+MONO_CHAR_WIDTH = MONO_FONT_SIZE * 0.6  # Courier advance width: 600/1000 em
 
 
 @dataclass
@@ -110,31 +117,29 @@ class ChatMessage:
     role: str  # "user" or "assistant"
     label: str  # e.g. "Angreifer", "Chatbot"
     icon: str = ""  # "user-secret" or "robot"
+    monospace: bool = False  # render text in monospace font
     paragraphs: list[str | TableData] = field(default_factory=list)
 
 
 _HYPHENATOR = pyphen.Pyphen(lang="de_CH")
 
 
-def _wrap_text(text: str, max_chars: int = WRAP_CHARS) -> list[str]:
-    """Wrap text with German hyphenation, respecting explicit newlines."""
+def _wrap_text(
+    text: str,
+    max_chars: int = WRAP_CHARS,
+    preserve_whitespace: bool = False,
+) -> list[str]:
+    """Wrap text with German hyphenation, respecting explicit newlines.
+
+    If *preserve_whitespace* is True, lines are split on newlines only
+    (no re-wrapping, leading spaces kept).  Use this for monospace /
+    pre-formatted content.
+    """
+    if preserve_whitespace:
+        return text.split("\n") or [""]
+
     lines: list[str] = []
     for paragraph in text.split("\n"):
-        wrapped = textwrap.wrap(
-            paragraph,
-            width=max_chars,
-            break_on_hyphens=True,
-            break_long_words=False,
-        )
-        # Second pass: try to hyphenate words that push a line over
-        result: list[str] = []
-        for line in wrapped:
-            if len(line) <= max_chars:
-                result.append(line)
-                continue
-            result.append(line)
-
-        # Now re-wrap with hyphenation: build lines word by word
         result = _hyphenate_wrap(paragraph, max_chars)
         lines.extend(result if result else [""])
     return lines or [""]
@@ -181,6 +186,58 @@ def _escape_xml(text: str) -> str:
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _render_mono_line_with_blocks(
+    text: str, x: float, y: float, fill: str
+) -> list[str]:
+    """Render a monospace line, overlaying <rect> elements over █ (U+2588) runs.
+
+    A normal <text> element is emitted first so the font handles all character
+    spacing correctly. Filled <rect> elements are then drawn on top of each run
+    of U+2588 FULL BLOCK characters, so they render correctly even if the font
+    does not contain that glyph.
+    """
+    char_w = MONO_CHAR_WIDTH
+    rect_top = y - MONO_FONT_SIZE + 1
+    rect_h = MONO_FONT_SIZE
+
+    elements: list[str] = [
+        f'<text x="{x}" y="{y}" '
+        f'font-family="{MONO_FONT}" font-size="{MONO_FONT_SIZE}" '
+        f'fill="{fill}" xml:space="preserve">{_escape_xml(text)}</text>'
+    ]
+
+    i = 0
+    while i < len(text):
+        if text[i] != "\u2588":
+            i += 1
+            continue
+        run_start = i
+        while i < len(text) and text[i] == "\u2588":
+            i += 1
+        run_len = i - run_start
+        rect_x = x + run_start * char_w
+        rect_w = run_len * char_w
+        elements.append(
+            f'<rect x="{rect_x:.1f}" y="{rect_top:.1f}" '
+            f'width="{rect_w:.1f}" height="{rect_h:.1f}" fill="{fill}"/>'
+        )
+
+    return elements
+
+
+def _render_inline(text: str) -> str:
+    """Render **bold** markers as <tspan> elements. Text outside markers is escaped."""
+    parts = re.split(r"(\*\*.*?\*\*)", text)
+    result: list[str] = []
+    for part in parts:
+        if part.startswith("**") and part.endswith("**"):
+            inner = part[2:-2]
+            result.append(f'<tspan font-weight="bold">{_escape_xml(inner)}</tspan>')
+        else:
+            result.append(_escape_xml(part))
+    return "".join(result)
+
+
 def _fix_path_d(svg: str) -> str:
     """Ensure all <path> elements have a d attribute (prawn-svg requirement)."""
 
@@ -212,6 +269,14 @@ def _render_table_svg(table: TableData, max_width: float) -> tuple[str, float, f
     tbl.set_fontsize(7)
     tbl.scale(1, 1.1)
 
+    # Apply custom column widths if provided
+    if table.col_widths:
+        total = sum(table.col_widths)
+        normalized = [w / total for w in table.col_widths]
+        for i in range(n_rows + 1):  # header (0) + data rows
+            for j in range(n_cols):
+                tbl[i, j].set_width(normalized[j])
+
     # Style header
     for j in range(n_cols):
         cell = tbl[0, j]
@@ -234,8 +299,8 @@ def _render_table_svg(table: TableData, max_width: float) -> tuple[str, float, f
     svg_text = buf.getvalue().decode("utf-8")
 
     # Register SVG namespace to avoid ns0: prefixes
-    ET.register_namespace("", "https://www.w3.org/2000/svg")
-    ET.register_namespace("xlink", "https://www.w3.org/1999/xlink")
+    ET.register_namespace("", "http://www.w3.org/2000/svg")
+    ET.register_namespace("xlink", "http://www.w3.org/1999/xlink")
 
     root = ET.fromstring(svg_text)
 
@@ -269,10 +334,11 @@ def _render_table_svg(table: TableData, max_width: float) -> tuple[str, float, f
     return fragment, actual_w, actual_h
 
 
-def _calc_text_block_height(text: str) -> float:
+def _calc_text_block_height(text: str, monospace: bool = False) -> float:
     """Calculate height needed for a wrapped text block."""
-    lines = _wrap_text(text)
-    return len(lines) * LINE_HEIGHT
+    lh = MONO_LINE_HEIGHT if monospace else LINE_HEIGHT
+    lines = _wrap_text(text, preserve_whitespace=monospace)
+    return len(lines) * lh
 
 
 def create_chat_svg(
@@ -306,10 +372,12 @@ def create_chat_svg(
                 table_renders[(msg_idx, para_idx)] = (frag, tw, th)
                 content_h += th
             else:
-                content_h += _calc_text_block_height(para)
+                content_h += _calc_text_block_height(para, monospace=msg.monospace)
 
         bubble_h = content_h + 2 * BUBBLE_PADDING
-        bubble_infos.append((is_right, msg.label, msg.icon, msg.paragraphs, bubble_h))
+        bubble_infos.append(
+            (is_right, msg.label, msg.icon, msg.monospace, msg.paragraphs, bubble_h)
+        )
 
         y_cursor += bubble_h + BUBBLE_GAP
 
@@ -319,7 +387,7 @@ def create_chat_svg(
     elements = []
     y = CANVAS_PADDING
 
-    for msg_idx, (is_right, label, icon, paragraphs, bubble_h) in enumerate(
+    for msg_idx, (is_right, label, icon, mono, paragraphs, bubble_h) in enumerate(
         bubble_infos
     ):
         # Position
@@ -404,14 +472,24 @@ def create_chat_svg(
                 elements.append(f'<g transform="translate({table_x}, {cy})">{frag}</g>')
                 cy += th
             else:
-                lines = _wrap_text(para)
+                if mono:
+                    lh, ff, fs = MONO_LINE_HEIGHT, MONO_FONT, MONO_FONT_SIZE
+                else:
+                    lh, ff, fs = LINE_HEIGHT, DEFAULT_FONT, FONT_SIZE
+                lines = _wrap_text(para, preserve_whitespace=mono)
+                space_attr = ' xml:space="preserve"' if mono else ""
                 for line in lines:
-                    cy += LINE_HEIGHT
-                    elements.append(
-                        f'<text x="{tx}" y="{cy - 2}" '
-                        f'font-family="{DEFAULT_FONT}" font-size="{FONT_SIZE}" '
-                        f'fill="{COLOR_TEXT}">{_escape_xml(line)}</text>'
-                    )
+                    cy += lh
+                    if mono and "\u2588" in line:
+                        elements.extend(
+                            _render_mono_line_with_blocks(line, tx, cy - 2, COLOR_TEXT)
+                        )
+                    else:
+                        elements.append(
+                            f'<text x="{tx}" y="{cy - 2}" '
+                            f'font-family="{ff}" font-size="{fs}" '
+                            f'fill="{COLOR_TEXT}"{space_attr}>{_render_inline(line)}</text>'
+                        )
 
         y += bubble_h + BUBBLE_GAP
 
