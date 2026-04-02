@@ -30,13 +30,14 @@ def create_bar_chart(
         ]
     )
 
+    fig.update_layout(**THESIS_LAYOUT)
     fig.update_layout(
-        title={"text": title, "x": 0.5, "xanchor": "center"},
+        title={"text": title, "x": 0.5, "xanchor": "center"} if title else None,
         xaxis_title=x_label,
         yaxis_title=y_label,
         xaxis={"showgrid": False},
         yaxis={"showgrid": True, "gridcolor": "lightgrey"},
-        **THESIS_LAYOUT,
+        margin={"l": 0, "r": 0, "t": 0, "b": 0, "autoexpand": True},
     )
 
     kwargs: dict = {}
