@@ -133,7 +133,7 @@ In der darauffolgenden detaillierten Kontrolle aller automatisch bewerteten Nach
 [#section-korrekte-werte]
 ===== Korrekte Werte anzeigen
 
-Die Qualität der in den Antworten gezeigen Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die die nutzende Person sehen wollte. Da eine nicht sehr mit der Thematik vertraute Person den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
+Die Qualität der in den Antworten gezeigen Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die die nutzende Person sehen wollte. Da eine nicht sehr mit der Thematik vertraute Person den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System-Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
 
 Ansonsten sind die Ergebnisse sehr ermutigend und zeigen, dass die Wahl auszahlt, einen MCP Server zur Bereitstellung der Daten zu nutzen. Wenn die Menge der Daten erhöht und bisher fehlende Daten ergänzt werden, sind diese Test mit den neuen Daten zu wiederholen. Besonders falls Daten über ein zweites Tool bereitgestellt werden ist zu Prüfen, ob der Chatbot nach wie vor die korrekten Daten mit den korrekten Metriken abfragt. Dies könnte zum Beispiel die Radiodaten oder TV Daten mit gänzlich anderen Dimensionen oder Zusammenhängen betreffen. Die hier gezeigten Ergebnisse sind vielversprechend und lassen erwarten, dass dies mit aussagekräftigen und eindeutigen Toolbeschreibungen, sowie einer passenden Datenaufbereitung erreicht werden kann.
 
@@ -190,9 +190,9 @@ Auf die Frage nach einer `.csv`` Datei liefert der Chatbot eine korrekt formatie
 
 Die Anfrage eine Email zu versenden oder eine Anfrage zu speichern lehnt der Chatbot korrekt ab. Er bietet an die Antwort entsprechend aufzubereiten was in Ordnung ist, solange die Antwort keine Interpretation der Ergebnisse oder Handlungsaufrufe enthält.
 
-Auch hier enthält der System Prompt bisher keine Anweisungen, dass solche Aktionen nicht erlaubt oder erwünscht sind. Ein einfacher Ansatz um dieses Verhalten zu unterbinden oder zumindest abzuschwächen ist eine Anpassung des System Prompts. Diese könnte wie folgt aussehen:
+Auch hier enthält der System-Prompt bisher keine Anweisungen, dass solche Aktionen nicht erlaubt oder erwünscht sind. Ein einfacher Ansatz um dieses Verhalten zu unterbinden oder zumindest abzuschwächen ist eine Anpassung des System Prompts. Diese könnte wie folgt aussehen:
 
-.Mögliche Erweiterung des System Prompt um unmögliche Aktionen zu unterbinden.
+.Mögliche Erweiterung des System-Prompt um unmögliche Aktionen zu unterbinden.
 ----
 ═══ UNMÖGLICHE AKTIONEN ═══
 Du kannst ausschliesslich Textantworten liefern. Alle anderen \
@@ -212,6 +212,6 @@ die Daten als formatierte Tabelle in der Antwort darzustellen.
 
 ==== Fazit
 
-Die Ergebnisse zum Kriterium _Korrektheit_ sind sehr vielversprechend. Die zurückgegebenen Daten sind korrekt und beantworten die gestellten Fragen. Weiterführende Aktionen wie Berechnungen durchführen oder Diagramme erstellen bietet der Chatbot bereitwillig an und führt diese auch durch, zum Beispiel durch ASCII-Art Diagramme. Der verwendete System Prompt enthält keine expliziten Vorgaben zu diesen Themen und es wird daher erwartet, dass duch eine Anpassung eine deutliche Verbesserung in diesen Bereichen erreicht werden kann.
+Die Ergebnisse zum Kriterium _Korrektheit_ sind sehr vielversprechend. Die zurückgegebenen Daten sind korrekt und beantworten die gestellten Fragen. Weiterführende Aktionen wie Berechnungen durchführen oder Diagramme erstellen bietet der Chatbot bereitwillig an und führt diese auch durch, zum Beispiel durch ASCII-Art Diagramme. Der verwendete System-Prompt enthält keine expliziten Vorgaben zu diesen Themen und es wird daher erwartet, dass duch eine Anpassung eine deutliche Verbesserung in diesen Bereichen erreicht werden kann.
 
 Wie gut der Chatbot auf komplexere Anfragen antwortet wenn auch mehr verschiedene Daten zur Verfügung stehen bleibt zu Überprüfen, wenn die entsprechenden Daten aufbereitet wurden und dem Chatbot zur Verfügung stehen.

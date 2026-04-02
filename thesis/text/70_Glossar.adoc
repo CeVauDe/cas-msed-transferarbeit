@@ -9,4 +9,4 @@ LLM:: Large Language Model, sehr grosses Neuronales Netz, häufig zur Verarbeitu
 LLM-Anwednung:: Eine Anwendung, die intern für mindestens eine Aufgabe ein LLM verwendet
 [#Konfundierung]Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
 Red Teaming:: #ToDo: describe#
-System Prompt:: #ToDo: describe#
+System-Prompt:: #ToDo: describe#

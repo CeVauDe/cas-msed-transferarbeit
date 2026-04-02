@@ -130,7 +130,7 @@ Diese Diskrepanz zeigt, dass Single-Turn-Abwehr funktioniert, aber Multi-Turn-Di
 
 
 ===== Optimierungsversuch
-Eine kleine Anpassung der System Prompt erzielt eine leicht verbesserte Erfolgsrate von 15.63%:
+Eine kleine Anpassung der System-Prompt erzielt eine leicht verbesserte Erfolgsrate von 15.63%:
 
 ----
 ═══ REGELN ═══
@@ -141,7 +141,7 @@ Interpretiere die Daten nicht und antworte auf Fragen die auf Interpretationen z
 Antworte nie mit Eventualitäten die zu Interpretationen führen können. Antworte klar und faktenbasiert.
 ----
 
-Die vollständig optimierte System Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation-optimiert.result.json`.
+Die vollständig optimierte System-Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation-optimiert.result.json`.
 
 
 ==== Fazit
