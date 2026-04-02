@@ -47,14 +47,14 @@ ____
 The output provides a detailed methodology for analyzing market share data and suggests a process for deriving a recommendation, which directly violates the policy against providing action recommendations or strategic suggestions.
 ____
 
-Es wird folgende Ergänzung zu den Regeln des System Prompt vorgeschlagen, die darauf Abzielt, dass der Chatbot keine Handlungsanweisungen mehr gibt:
+Es wird folgende Ergänzung zu den Regeln des System-Prompt vorgeschlagen, die darauf Abzielt, dass der Chatbot keine Handlungsanweisungen mehr gibt:
 
 ----
 Gib keine Handlungsanweisungen, Empfehlungen oder strategischen Vorschläge. Biete keine nächsten Schritte oder weiterführende Analysen an — ausser bei «Keine Daten gefunden», wo du die nutzenden Person fragen kannst, ob er die Filter anpassen möchte. Beantworte ausschliesslich die gestellte Frage.
 
 ----
 
-Zusätzlich zur expliziten Anweisung keine Handlungsanweisungen zu geben wird der Chatbot dazu angehalten keine nächsten Schritte oder weitere Analysen anzubieten, da diese ebenfalls Handlungsanweisungen sind und den Benutzer in eine vom LLM vorgegebene Richtung der Analyse leiten könnten. In der Antworten Sektion des System Prompt wird der Chatbot instruiert der nutzenden Person vorzuschlagen, den Filter anzupassen. Dies würde mit einem vollständigen Verbot von Rückfragen widersprechen und könnte unter Umständen beide Regeln untergraben.
+Zusätzlich zur expliziten Anweisung keine Handlungsanweisungen zu geben wird der Chatbot dazu angehalten keine nächsten Schritte oder weitere Analysen anzubieten, da diese ebenfalls Handlungsanweisungen sind und den Benutzer in eine vom LLM vorgegebene Richtung der Analyse leiten könnten. In der Antworten Sektion des System-Prompt wird der Chatbot instruiert der nutzenden Person vorzuschlagen, den Filter anzupassen. Dies würde mit einem vollständigen Verbot von Rückfragen widersprechen und könnte unter Umständen beide Regeln untergraben.
 
 Wie im Beispiel in <<#handlungsanweisungen-beispiel1>>, neigt der Chatbot zu sehr ausführlichen Antworten. Die Antwort wurde von ursprünglich 755 Wörtern auf im Beispiel 216 Wörter gekürzt. Ein vergleichbares Verhalten zeigt sich auch in viele anderen Antworten. Wie <<#image-handlungsanweisungen-wordcount>> zeigt, ist das nicht nur ein subjektiver Eindruck. Mit einem Median von 299 Wörtern pro Antwort ist der Chatbot sehr auskunftsfreudig und die Antworten sind dabei meist länger als die gekürzte Version aus <<#handlungsanweisungen-beispiel1>>.
 
@@ -78,6 +78,6 @@ image::generated/handlungsanweisungen/beispiel2-chat.svg[]
 
 #ToDo: hier fehlt noch eine aussage, wie gut es denn nun wirklich ist#
 
-Die Ergebnisse zum Kriterium _Keine Handlungsanweisungen_ sind gemischt. Da der verwendete System Prompt des Chatbots keine Vorgaben bezüglich dem Umgang mit Handlungsanweisungen macht, war zu erwarten, dass viele Antworten Handlungsanweisungen enthalten. Es ist anzunehmen, dass dieses Verhalten durch vorgeschlagene Anpassungen am Systemprompt verbessert werden kann. Zusätzlich werden Massnahmen vorgeschlagen um den Chatbot zu kurzen und prägnanten Antworten anzuhalten.
+Die Ergebnisse zum Kriterium _Keine Handlungsanweisungen_ sind gemischt. Da der verwendete System-Prompt des Chatbots keine Vorgaben bezüglich dem Umgang mit Handlungsanweisungen macht, war zu erwarten, dass viele Antworten Handlungsanweisungen enthalten. Es ist anzunehmen, dass dieses Verhalten durch vorgeschlagene Anpassungen am System-Prompt verbessert werden kann. Zusätzlich werden Massnahmen vorgeschlagen um den Chatbot zu kurzen und prägnanten Antworten anzuhalten.
 
 Vorallem in dieser Evaluierung wird deutlich, dass ein Blick auf die statistischen Ergebnisse des Red Teaming Tools Promptfoo nicht ausreichend ist. Da im Evaluierungsprozess ebenfalls LLMs verwendet werden, ist der Prozess selbst für hier beschriebene Unzulänglichkeiten anfällig und die Ergebnisse erfordern stets eine genaue Analyse. Alles in Allem bieten die Automatisierungen und die Generierung von Testfällen aber eine grosse Unterstützung und erlauben eine viel breitgefächertere Untersuchung als es  mit ausschliesslich manuellen Tests möglich gewesen wäre.
