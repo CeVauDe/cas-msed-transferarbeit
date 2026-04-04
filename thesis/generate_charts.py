@@ -857,7 +857,7 @@ def _prognosen_beispiel1_chat(chart_name: str):
                 "   2200.70 + (2 \u00d7 72.35) = 2200.70 + 144.70 = 2345.40 Sekunden\n"
                 "\n"
                 "Um die Sehdauer in Minuten zu berechnen, teilen wir durch 60:\n"
-                "2345.40 / 60 \u2248 39.09 Minuten",
+                "2345.40 / 60 ~ 39.09 Minuten",
                 "**Fazit:**\n"
                 "Wenn der Trend der letzten Jahre anh\u00e4lt, werden "
                 "Schweizerinnen und Schweizer im Jahr 2023 sch\u00e4tzungsweise "
@@ -932,21 +932,21 @@ def _interpretation_beispiel1_chat(chart_name: str):
                 "und die Nachfrage nach Fernsehinhalten stieg. Sender wie "
                 "SRG SSR profitierten von diesem Trend, wobei ihre "
                 "Nettoreichweiten in dieser Zeit anstiegen.",
-                "**Wachstum bei Streaming-Diensten:** Streaming-Dienste gewannen an"
-                "Beliebtheit, was die Präsenz der traditionellen TV-Sender beeinflusste. Es ist wahrscheinlich, dass einige Zuschauer"
-                "von Sendern wie ProSieben und Canale 5 zu Streamingplattformen übergewechselt sind, insbesondere während der"
+                "**Wachstum bei Streaming-Diensten:** Streaming-Dienste gewannen an "
+                "Beliebtheit, was die Präsenz der traditionellen TV-Sender beeinflusste. Es ist wahrscheinlich, dass einige Zuschauer "
+                "von Sendern wie ProSieben und Canale 5 zu Streamingplattformen übergewechselt sind, insbesondere während der "
                 "Lockdowns, als mehr Inhalte online konsumiert wurden.",
-                "**Inhaltliche Zuschneidung:** Der Erfolg von Sendern war"
-                "auch von den Programminhalten und -formaten abhängig. Wenn eine Station es schafft, relevante und aufregende"
-                "Inhalte während der Pandemie anzubieten, kann dies zu einer erhöhten Zuschauerinteresse führen, während das"
+                "**Inhaltliche Zuschneidung:** Der Erfolg von Sendern war "
+                "auch von den Programminhalten und -formaten abhängig. Wenn eine Station es schafft, relevante und aufregende "
+                "Inhalte während der Pandemie anzubieten, kann dies zu einer erhöhten Zuschauerinteresse führen, während das "
                 "Fehlen von ansprechendem Inhalt zu einem Rückgang führen kann.",
-                "**Gesellschaftliche Trends:** Die Veränderungen"
+                "**Gesellschaftliche Trends:** Die Veränderungen "
                 "im gesellschaftlichen Sein gestalten auch das Sehverhalten. Ein verstärktes Interesse an Reisen, Sport und "
-                "gesellschaftlichen Themen kann dazu führen, dass bestimmte Formate relevanter oder weniger relevant werden.",
-                "Da ich keine spezifischen Daten zur durchschnittlichen Sehdauer in den Jahren 2020 und 2021 abrufen konnte, ist es"
-                "schwierig, weitere gezielte Einflussfaktoren zu bestimmen. Es wäre hilfreich, zusätzliche Analysen durchzuführen, um"
-                "eine fundiertere Schlussfolgerung über den Einfluss von Streaming-Diensten und spezifischen gesellschaftlichen"
-                "Ereignissen auf die TV-Nutzung zu ziehen. Wenn Sie an weiteren Informationen oder spezifischen Anderen Daten"
+                "gesellschaftlichen Themen kann dazu führen, dass bestimmte Formate relevanter oder weniger relevant werden. ",
+                "Da ich keine spezifischen Daten zur durchschnittlichen Sehdauer in den Jahren 2020 und 2021 abrufen konnte, ist es "
+                "schwierig, weitere gezielte Einflussfaktoren zu bestimmen. Es wäre hilfreich, zusätzliche Analysen durchzuführen, um "
+                "eine fundiertere Schlussfolgerung über den Einfluss von Streaming-Diensten und spezifischen gesellschaftlichen "
+                "Ereignissen auf die TV-Nutzung zu ziehen. Wenn Sie an weiteren Informationen oder spezifischen Anderen Daten "
                 "interessiert sind, lassen Sie es mich wissen!",
                 "[...]",
             ],

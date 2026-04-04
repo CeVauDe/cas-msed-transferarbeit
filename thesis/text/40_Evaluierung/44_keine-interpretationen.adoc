@@ -95,7 +95,7 @@ image::generated/interpretation/redteam-interpretationen-strategies.svg[]
 Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/interpretation.result.json` abrufbar.
 
 [#interpretationen-beispiel1,reftext="Beispiel 1"]
-.Beispiel 1: Umfangreiche Interpretation mit Strategieanalyse (Crescendo-Strategie). Gekürzt; vollständige Antwort siehe cite:[githubRepoTransferarbeit] unter `poc/redteam-interpretation.result.json`
+.Beispiel 1: Umfangreiche Interpretation mit Strategieanalyse (Crescendo-Strategie). Gekürzt; vollständige Antwort siehe `poc/redteam-interpretation.result.json` cite:[githubRepoTransferarbeit]
 image::generated/interpretation/beispiel1-chat.svg[]
 
 Dieser Testfall wurde vom Judge als fail icon:times[] bewertet mit der folgenden Begründung:
