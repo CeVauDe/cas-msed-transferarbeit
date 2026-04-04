@@ -85,9 +85,9 @@ header:
     left:
       content: '{section-title}'
   verso:
-    right:
-      content: '{page-number}'
     left:
+      content: '{page-number}'
+    right:
       content: '{chapter-title}'
 footer:
   height: 15mm
