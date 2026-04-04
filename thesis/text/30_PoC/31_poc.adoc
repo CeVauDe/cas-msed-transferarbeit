@@ -10,26 +10,6 @@ Als Output der Datenaufbereitung wird eine `.parquet`-Datei geschrieben, die dem
 
 === MCP Server
 
-#ToDo: Kurz noch was zu MCP Server V1 schreiben, damit ich in der Zusammenfgassung drauf verweisen kann#
-V1 wurde nicht für die Evaluierung in Betracht gezogen, da sie in den allermeisten Fällen keine erfolgreiche Datenabfragen produzieren konnten.
+Im Rahmen der Arbeit wurden zwei Versionen des MCP Servers entwickelt. Version eins verwendet ein komplexes System aus aus Richtlinien, Katalogen erlaubter Daten und Validierung um die Anfragen zu prüfen und um nur erlaubte Aktionen auszuführen. Diese Komplexität führte in ersten Tests dazu, dass der Agent mehrere Anfragen stellen musste, bis die Anfrage dem Schema entsprach. Mit der verwendeten Datenaufbereitung stellte sich weiter die Herausforderung, dass oft keine Daten zurückgegeben wurden, weil die Selektion und Filter trotz Validierung und Schema nicht wie gewünscht war. In dieser Form war der Chatbot nicht verwendbar. Diese Version wird für die Evaluierung daher nicht in Betracht gezogen.
 
-Der MCP-Server stellt ein Werkzeug (`Tool`) und eine Ressource (`Resource`) bereit:
-
-* **Tool `abfrage_jahresbericht`**: Strukturierte Datenabfrage mit Filterung nach Jahr, Region, Zeitschiene, Kenngrösse und Sender. Unterstützt Pivot-Tabellen und Sortierung. Gibt Markdown-Tabellen zurück.
-
-* **Ressource `glossar`**: Glossar mit Fachbegriffen der TV-Forschung (Marktanteil, Rating, Nettoreichweite, Sehdauer, etc.).
-
-==== Datenabfrage
-
-#TODO: add url to pandas website?#
-Das `abfrage_jahresbericht` Werkzeug nutzt pandas für die Datenverarbeitung:
-
-1. **Filterung**: Die `.parquet`-Datei wird als pandas DataFrame geladen. Filter werden direkt auf den DataFrame angewendet (z.B. `df[df["Jahr"].isin([2019,2020,2021])]`).
-
-2. **Pivot-Tabellen**: Bei Vergleichen über mehrere Dimensionen (z.B. mehrere Jahre oder Sender) werden Pivot-Tabellen erstellt (`pivot_table` mit `index` und `columns`).
-
-3. **Sortierung**: Ergebnisse können nach beliebigen Spalten aufsteigend oder absteigend sortiert werden (`sort_values`).
-
-4. **Ausgabe**: Das Ergebnis wird als Markdown-Tabelle formatiert und zurückgegeben (`to_markdown`).
-
-Die Glossar-Ressource wird dem MCP-Client als statischer Markdown-Text bereitgestellt und enthält Definitionen für alle wichtigen Kennzahlen der TV-Forschung.
+Version zwei basiert auf den daraus gewonnenen Erkenntnissen. Statt über ein eigenes Tool, wird das Glossar mit Fachbegriffen der TV-Forschung (Marktanteil, Rating, Nettoreichweite, Sehdauer, etc.) als Ressource bereitgestellt und direkt bei der Initialisierung einer MCP-Session geladen. Die Daten können über das Tool `abfrage_jahresbericht` in strukturierter Form abgefragt werden. Es erlaubt die Filterung nach Jahr, Region, Zeitschiene, Kenngrösse und Sender und unterstützt Sortierung und die Erstellung von Pivot-Tabellen. Als Ergebniss gibt das Tool eine Markdown-Tabelle zurück. Diese kann vom Agent einfacher verarbeitet werden als zum Beispiel Daten, die im `json` Format zurückgegeben werden. In ersten Test funktioniert dieser MCP-Server viel besser und liefert in der Regel im ersten Versuch die gewünschten Daten.
