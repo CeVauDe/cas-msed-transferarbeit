@@ -1,13 +1,12 @@
 
 [#chapter-poc]
 == Proof of Concept
-Der Chatbot sowie der MCP-Server sind eigenständige Services, die über die streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker Compose orchestriert. Als Programmiersprache wird Python eingesetzt. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche notwendingen Software Development Kits (SDK). Auch für die Applikation wird Python genutzt, weil SDKs und die etablierte Toolchain schnell verfügbar sind. Sie wurde mit Hilfe von künstlicher Intelligenz erstellt.
+Als Basis dieser Arbeit wird ein Proof of Concept erstellt, mit dem die Jahreszahlen der TV-Nutzung interaktiv erkundbar sind. Dieses Kapitel beschreibt die Systemarchitektur und die einzelnen Komponenten.
 
-#ToDo: Einleitung anpassen#
-In diesem Kapitel werden die Ergebniss der Arbeit vorgestellt und diskutiert. <<#chapter-poc>> beschreibt den implementierten Proof-of-Concept und das Zusammennspiel der Komponenten MCP Server und Chatbot.
 
-include::30_PoC/31_poc.adoc[]
-include::30_PoC/32_Chatbot.adoc[]
-include::30_PoC/33_System_Prompt.adoc[]
-include::30_PoC/34_Systemarchitektur.adoc[]
-include::30_PoC/35_Fazit.adoc[]
+include::30_PoC/301_Systemarchitektur.adoc[]
+include::30_PoC/310_poc.adoc[]
+include::30_PoC/320_Chatbot.adoc[]
+include::30_PoC/330_System_Prompt.adoc[]
+include::30_PoC/340_Chatablauf.adoc[]
+include::30_PoC/350_Fazit.adoc[]

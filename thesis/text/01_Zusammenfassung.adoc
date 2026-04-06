@@ -1,4 +1,0 @@
-[preface]
-== Zusammenfassung
-
-#ToDo: schreiben#

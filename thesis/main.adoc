@@ -14,7 +14,7 @@ include::config/config.adoc[]
 image::cover-page.pdf[page=2]
 
 
-include::text/01_Zusammenfassung.adoc[]
+include::text/01_Kurzzusammenfassung.adoc[]
 
 include::text/02_Verzeichnisse.adoc[]
 

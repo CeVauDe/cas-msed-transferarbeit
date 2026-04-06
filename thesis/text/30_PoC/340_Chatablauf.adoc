@@ -1,57 +1,5 @@
 
-=== Systemarchitektur
-Im Kompositionsstrukturdiagramm in <<#image-methoden-poc-overview>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und Basis für die Evaluation genutzt wird. #optional: grafik überarbeiten und etwas ausführlicher beschreiben#
-
-[#image-methoden-poc-overview]
-.Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
-[plantuml, svg]
-....
-@startuml
-!theme plain
-skinparam componentStyle rectangle
-
-frame "OpenAI" {
-  rectangle "OpenAI API" <<external service>> {
-    component "Chat Completion API" as openai_api
-  }
-}
-
-frame "PoC System" {
-
-  rectangle "Chatbot Service" <<component>> {
-    port "HTTP" as http_in
-    component "Web UI" as webui
-    component "Agent" as agent
-    component "MCP Client" as client
-
-    http_in -right-> webui
-    webui -right-> agent : "User Input"
-    agent -right-> client : "Tool Calls"
-  }
-
-  rectangle "MCP Server" <<component>> {
-    port "MCP\nstreamable HTTP" as mcp_port
-    component "Tool Handler" as tool
-    component "Glossar" as glossar
-    component "Pandas Engine" as pandas
-
-    mcp_port -right-> tool
-    mcp_port -down-> glossar
-    tool -right-> pandas : "Filter & Query"
-  }
-
-  database "Parquet Files" as data
-
-  client -right-> mcp_port : "JSON-RPC"
-  pandas -right-> data : "Read"
-}
-
-actor User
-User -down-> http_in : "Web\nBrowser"
-agent <-up-> openai_api : "HTTPS"
-
-@enduml
-....
+=== Chatablauf
 
 Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `"Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?"` dargestellt.
 
