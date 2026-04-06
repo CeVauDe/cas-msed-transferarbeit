@@ -6,9 +6,12 @@
 #optional: Glossar für unbekannte Begriffe?#
 [glossary]
 API:: #ToDo: describe#
+Halluzinationen:: Glaubwürdige, aber falsche Antworten oder Teile derer cite:[oche2025systematicreviewkeyretrievalaugmented]
 LLM:: Large Language Model, sehr grosses Neuronales Netz, häufig zur Verarbeitung natürlicher Sprache eingesetzt
 LLM-Anwednung:: Eine Anwendung, die intern für mindestens eine Aufgabe ein LLM verwendet
-[#Konfundierung]Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
+Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
 Red Teaming:: #ToDo: describe#
+Retrieval-Augmented Generation:: Verfahren um einem LLM Wissen verfügbar zu machen, das über die Trainingsdaten hinaus geht. Erlaubt Wissensupdates ohne Nachtrainieren und die Angabe von Quellen cite:[oche2025systematicreviewkeyretrievalaugmented]
 SDK:: Software Development Kit; vorgefertigte Bibliothek mit Funktionen, damit diese nicht selbst implementiert werden müssen.
 System-Prompt:: #ToDo: describe#
+Trainings Data Cutoff:: Termin bis zu dem ein LLM Informationen in den Trainingsdaten hat. Alles was danach passiert ist, ist dem Modell unbekannt und muss über andere Wege verfügbar gemacht werden.

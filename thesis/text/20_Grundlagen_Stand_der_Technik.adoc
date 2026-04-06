@@ -8,15 +8,19 @@
 ** Vorteile
 ** Nachteile
 
+=== Large Language Model
 
-=== Large Language Model (LLM)
+Large Language Models (LLM) sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf gigantischen Mengen textueller Daten trainiert. Die zeigen starke Fähigkeiten natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
 
-Large Language Models sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf giganitschen Mengen von textueller Daten trainiert. Die zeigen starke Fähigkeiten natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
+Auf der anderen Seite sind diese Modelle nicht ohne Fehler. Neben Halluzinationen cite:[tonmoy2024comprehensive] neigen state-of-the-art Modelle auch zu übergrossem Selbstvertrauen in falsche Lösungen und grundlegendem Zusammenbrechen der Begründungsführung auch bei einfachen Problemen cite:[nezhurina2025alicewonderlandsimpletasks].
 
+=== Datenbereitstellung
+Soll ein LLM spezifische Daten verarbeiten oder Daten wiedergeben, die erst nach dem Trainings Data Cutoff entstanden sind, so braucht das LLM einen Mechanismus, um solche Daten abzurufen.
 
-* Problem ist die Bereitstelung von Daten, die nach dem Traingingsdaten Cut Off angefallen sind oder die ohne ein refinement training verwendet werden sollen
-* RAG erklären
-Eine weitere Möglichkeit um die Fähigkeiten von LLMs zu erweitern bietet das von Anthropic eingeführte <<#methoden-mcp,"Model Context Protocol">>, das im folgenden Abschnitt genauer erläutert wird.
+Eine Möglichkeit dafür ist Retrieval-Augmented Generation (RAG). Dabei werden die zur Verfügung stehenden Daten indexiert. Die Daten werden in Stücken von einem Encodermodell hochdimensional vektorisiert und als Index in einer Vektordatenbank gespeichert. Bei der Abfrage wird die Anfrage vom gleichen Encodermodell wieder vektorisiert und mit den in der Vektordatenbank gespeicherten Einträgen verglichen. Das System beruht auf der Annahme, dass ähnliche Themen ähnliche Vektoren erzeugen. Damit können die Stücke mit vergleichbaren Vektoren herausgesucht und zur Beantwortung der Anfrage verwendet werden
+cite:[oche2025systematicreviewkeyretrievalaugmented].
+
+Das funktioniert gut für das Durchsuchen unstrukturierter Datenbestände, die ebenfalls wie die Anfragen in natürlicher Sprache vorliegen. Für das Filtern oder Zugriff auf grosse Mengen strukturierter Daten ist das Model Context Protocol besser geeignet. Es erlaubt den Zugriff auf die Daten von externen Systemen in Echtzeit cite:[mcpAndRag].
 
 [#methoden-mcp]
 === Model Context Protocol
