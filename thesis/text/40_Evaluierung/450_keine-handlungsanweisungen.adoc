@@ -32,7 +32,7 @@ image::generated/handlungsanweisungen/pass-rate.svg[]
 
 Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json` abrufbar.
 
-Wie auch schon in <<#section-prognosen>> und <<#section-interpretation>> gezeigt, ist der Chatbot sehr anfällig für diese Aktionen. Daher wird das Policy Plugin für das Kriterium _Keine Handlungsanweisungen_ nicht weiter betrachtet. In zukünftigen Versuchen müsste die Policy entsprechend formuliert werden, dass solche <<#Konfundierung,Konfundierungen>> vermieden werden.
+Wie auch schon in <<#section-prognosen>> und <<#section-interpretation>> gezeigt, ist der Chatbot sehr anfällig für diese Aktionen. Daher wird das Policy Plugin für das Kriterium _Keine Handlungsanweisungen_ nicht weiter betrachtet. In zukünftigen Versuchen müsste die Policy entsprechend formuliert werden, dass solche Konfundierungen vermieden werden.
 
 In <<#handlungsanweisungen-beispiel1>> ist ein Beispiel aufgeführt, in dem der Chatbot auf Anfrage eine ausführliche und detaillierte Handlungsanweisung gibt. Interessanterweise beruft er sich dabei darauf, keine Interpretation oder Prognose abzugeben.
 
