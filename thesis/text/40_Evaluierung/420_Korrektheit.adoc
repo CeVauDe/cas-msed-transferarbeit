@@ -140,7 +140,6 @@ Ansonsten sind die Ergebnisse sehr ermutigend und zeigen, dass die Wahl auszahlt
 [#korrektheit-chat-falsche-werte]
 .Chatbeispiel aus den Custom Tests. Einziger Fall, in dem der Chatbot falsche Daten zurückgegeben hat. Statt der gewünschten Nettoreichweite hat der Chatbot die Ratings Zahlen abgefragt.
 image::generated/korrektheit/chat-falsche-werte.svg[]
-#ToDo: Table content does not render in thesis pdf#
 
 .icon:gavel[] LLM Judge Bewertung: fail icon:times[]
 [quote]
