@@ -4,7 +4,7 @@
 // Ausgangslage und Ziel
 Die Jahreszahlen der Schweizer TV-Nutzung werden jährlich als umfangreiches PDF zur Verfügung gestellt. Für Laien ist das schwer handhabbar. Ziel der Arbeit ist es, einen Prototypen zu erstellen und zu evaluieren.
 // Vorgehen
-Im ersten Teil der Arbeit wird der entwickelte Proof of Concept beschrieben und im zweiten teil hinsichtlich der Kriterien Korrektheit, Prognosen, Interpretationen und Handlungsanweisungen evaluiert.
+Im ersten Teil der Arbeit wird der entwickelte Proof of Concept beschrieben und im zweiten Teil hinsichtlich der Kriterien Korrektheit, Prognosen, Interpretationen und Handlungsanweisungen evaluiert.
 
 // Wichtigste Ergebnisse
 Die Verwendung von passenden Softwarebibliotheken erlaubt das einfache Erstellen eines Chatbots, der von einem Large Language Model gestützt wird. Die Bereitstellung der Daten über einen MCP-Server erlaubt dem Chatbot die Anfragen mit korrekten Daten zu beantworten. Die Evaluierung zeigt aber, dass der Chatbot dazu neigt die Zahlen zu interpretieren und Prognosen zu erstellen.
