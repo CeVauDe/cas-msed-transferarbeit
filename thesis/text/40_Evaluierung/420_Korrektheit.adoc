@@ -38,7 +38,7 @@ Die Dimensionen gliedern sich in die in <<#table-korrektheit-overview>> dargeste
 |*Total* |*143*|
 |===
 
-Zur Ermittlung ob der Chatbot korrekte Werte zurückliefert, sind automatisch generierte Tests nicht geeignet oder nur sehr aufwändig umsetzbar, da diese die tatsächlichen Werte kennen müssen um beurteilen zu können, ob die Daten der Antwort korrekt sind oder nicht. Hierfür wurde daher mittels KI-Unterstützung Testfälle erstellt, in denen auch die zu erwartenden Daten als Prüfkriterium hinterlegt sind. Siehe <<#korrektheit-test-sample,"Manuell erstellter Testcase">> für ein Beispiel. Für diese Testfälle macht die Diversifizierung mittels unterschiedlicher Strategien keinen Sinn und es wird daher nur die `basic` <<#methoden-strategien,Strategien>> mit den definierten Prompts verwendet. Alle Testfälle sind im Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/korrektheit_C.yaml` nachzulesen.
+Zur Ermittlung ob der Chatbot korrekte Werte zurückliefert, sind automatisch generierte Tests nicht geeignet oder nur sehr aufwändig umsetzbar, da diese die tatsächlichen Werte kennen müssen um beurteilen zu können, ob die Daten der Antwort korrekt sind oder nicht. Hierfür wurde daher mittels KI-Unterstützung Testfälle erstellt, in denen auch die zu erwartenden Daten als Prüfkriterium hinterlegt sind. Siehe <<#korrektheit-test-sample,"Manuell erstellter Testcase">> für ein Beispiel. Für diese Testfälle macht die Diversifizierung mittels unterschiedlicher Strategien keinen Sinn und es wird daher nur die `basic` <<#methoden-strategien,Strategien>> mit den definierten Prompts verwendet. Alle Testfälle sind im Repository unter `poc/redteam/korrektheit_C.yaml` nachzulesen cite:[githubRepoTransferarbeit].
 
 [#korrektheit-test-sample]
 .Manuell erstellter Testcase mit `enthält` Prüfbedingung
@@ -53,7 +53,7 @@ ____
 Für alle nachfolgenden Testfälle werden zur Diversifizierung die drei <<#methoden-strategien,Strategien>> `basic`, `jailbreak:meta` und `crescendo` angewendet.
 
 
-Die Dimensionen _Berechnungen durchführen_ und _unmögliche Aktionen anbieten_ können nicht durch einen einfachen Vergleich der Form "Antwort enthält Wert X" geprüft werden. Hierfür wird daher das `intent` Plugin verwendet, bei dem ein LLM Judge die Antwort des Chatbots bewertet. Dazu wird für jeden Testfall ein eigener Intent, wie im <<#intent-sample>>, formuliert und im Test an den Chatbot gesendet. Die Intents wurden mittels KI-Unterstützung generiert und sind im Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/korrektheit_AB.config.yaml` nachzulesen.
+Die Dimensionen _Berechnungen durchführen_ und _unmögliche Aktionen anbieten_ können nicht durch einen einfachen Vergleich der Form "Antwort enthält Wert X" geprüft werden. Hierfür wird daher das `intent` Plugin verwendet, bei dem ein LLM Judge die Antwort des Chatbots bewertet. Dazu wird für jeden Testfall ein eigener Intent, wie im <<#intent-sample>>, formuliert und im Test an den Chatbot gesendet. Die Intents wurden mittels KI-Unterstützung generiert und sind im Repository unter `poc/redteam/korrektheit_AB.config.yaml` nachzulesen cite:[githubRepoTransferarbeit].
 
 [#intent-sample]
 .Beispiel Intent Berechnungsaufforderung
