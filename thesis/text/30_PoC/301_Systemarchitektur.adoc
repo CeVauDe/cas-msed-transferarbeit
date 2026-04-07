@@ -7,7 +7,7 @@ Der Chatbot sowie der MCP-Server sind eigenständige Services, die über eine st
 
 [#image-methoden-poc-overview]
 .Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
-[plantuml, svg]
+[plantuml,system-overview, svg]
 ....
 @startuml
 !theme plain
