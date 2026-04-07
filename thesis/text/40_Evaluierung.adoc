@@ -2,7 +2,7 @@
 [#chapter-evaluierung]
 == Evaluierung
 
-Während Large Language Models die Erstellung von Chatbots erheblich vereinfachen und sprachlich sehr gute Antworten liefern, haben sie keine wirkliche Intelligenz und sind sehr anfällig für diverse Fehler. In cite:[llmHallucinationExamples] sind 5 Beispiele aufgeführt, in denen ein Chatbot unerwünschtes Verhalten gezeigt hat, teils mit erheblichen rechtlichen Konsequenzen oder einem Imageverlust der anbietenden Firma. Beispielsweise sollte ein Support Chatbot keinen Python Code schreiben, wie in <<#llm-hallucination-fail>> geschehen.
+Während Large Language Models die Erstellung von Chatbots erheblich vereinfachen und sprachlich sehr gute Antworten liefern, haben sie keine wirkliche Intelligenz und sind sehr anfällig für diverse Fehler. Im Internet kursieren zahlreiche Beispiele, in denen ein Chatbot unerwünschtes Verhalten gezeigt hat, teils mit erheblichen rechtlichen Konsequenzen oder einem Imageverlust der anbietenden Firma cite:[llmHallucinationExamples]. Beispielsweise sollte ein Support Chatbot keinen Python Code schreiben, wie in <<#llm-hallucination-fail>> geschehen.
 
 [#llm-hallucination-fail]
 .LLM Hallucination Fail gepostet auf x.com von cite:[llmHallucinationExamplePythonList] am 28. Februar 2024

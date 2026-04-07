@@ -59,7 +59,6 @@
   abstract = "Large Language Models (LLMs) are susceptible to generating harmful content when prompted with carefully crafted inputs, a vulnerability known as LLM jailbreaking. As LLMs become more powerful, studying jailbreak methods is critical to enhancing security and aligning models with human values. Traditionally, jailbreak techniques have relied on suffix addition or prompt templates, but these methods suffer from limited attack diversity. This paper introduces DiffusionAttacker, an end-to-end generative approach for jailbreak rewriting inspired by diffusion models. Our method employs a sequence-to-sequence (seq2seq) text diffusion model as a generator, conditioning on the original prompt and guiding the denoising process with a novel attack loss. Unlike previous approaches that use autoregressive LLMs to generate jailbreak prompts, which limit the modification of already generated tokens and restrict the rewriting space, DiffusionAttacker utilizes a seq2seq diffusion model, allowing more flexible token modifications. This approach preserves the semantic content of the original prompt while producing harmful content. Additionally, we leverage the Gumbel-Softmax technique to make the sampling process from the diffusion model{'}s output distribution differentiable, eliminating the need for iterative token search. Extensive experiments on Advbench and Harmbench demonstrate that DiffusionAttacker outperforms previous methods across various evaluation metrics, including attack success rate (ASR), fluency, and diversity."
 }
 
-
 @online{promptfooHP,
 	author = {{Promptfoo Inc.}},
 	title = {Promptfoo Homepage},
@@ -123,13 +122,12 @@
 	year = {2026e}
 }
 
-
 @online{mcpServer,
   author = {{LF Projects, LLC.}},
   title = {Understanding MCP servers},
   url = {https://modelcontextprotocol.io/docs/learn/server-concepts},
   urldate = {2026-03-24},
-	year = {2026c},
+	year = {2026b},
   note = {Tools enable AI models to perform actions. Each tool defines a specific operation with typed inputs and outputs. The model requests tool execution based on context.}
 }
 
@@ -138,15 +136,15 @@
   title = {Official MCP Registry},
   url = {https://registry.modelcontextprotocol.io/},
   urldate = {2026-03-24},
-	year = {2026d}
+	year = {2026c}
 }
 
 @online{mcpClient,
   author = {{LF Projects, LLC.}},
   title = {Understanding MCP clients},
-  url = {https://modelcontextprotocol.io/docs/learn/client-conceptshttps://modelcontextprotocol.io/docs/learn/client-conceptshttps://modelcontextprotocol.io/docs/learn/client-concepts},
+  url = {https://modelcontextprotocol.io/docs/learn/client-concepts},
   urldate = {2026-03-24},
-	year = {2026b},
+	year = {2026a},
   note = {Resources provide structured access to information that the AI application can retrieve and provide to models as context.}
 }
 
@@ -155,16 +153,7 @@
   title = {Chatbot},
   url = {https://de.wikipedia.org/wiki/Chatbot},
   urldate = {2026-04-06},
-	year = {2026}
-}
-
-@online{openaiChat,
-  author = {OpenAI},
-  title = {Chat Completions API},
-  url = {https://developers.openai.com/api/reference/resources/chat},
-  urldate = {2026-03-24},
-	year = {2026a},
-  note = {The Chat Completions API endpoint will generate a model response from a list of messages comprising a conversation.}
+	year = {2026a}
 }
 
 @online{llmGpt4oMini,
@@ -172,7 +161,7 @@
   title = {Large-Language-Model GPT-4o mini},
   url = {https://developers.openai.com/api/docs/models/gpt-4o-mini},
   urldate = {2026-03-24},
-	year = {2026b},
+	year = {2026a},
   note = {GPT-4o mini (“o” for “omni”) is a fast, affordable small model for focused tasks. It accepts both text and image inputs, and produces text outputs (including Structured Outputs). It is ideal for fine-tuning, and model outputs from a larger model like GPT-4o can be distilled to GPT-4o-mini to produce similar results at lower cost and latency.}
 }
 
@@ -181,7 +170,7 @@
   title = {Large-Language-Model GPT-5 mini},
   url = {https://developers.openai.com/api/docs/models/gpt-5-mini},
   urldate = {2026-03-24},
-	year = {2026c},
+	year = {2026b},
   note = {GPT-5 mini is a faster, more cost-efficient version of GPT-5. It's great for well-defined tasks and precise prompts. For most new low-latency, high-volume workloads, we recommend starting with GPT-5.4 mini. Learn more in our latest model guide.}
 }
 
@@ -198,7 +187,6 @@
 	note = {arXiv:2507.05538 [cs]},
 	keywords = {Computer Science - Artificial Intelligence, Computer Science - Computers and Society, Computer Science - Cryptography and Security, red teaming, case study},
 }
-
 
 @article{nguyen_machine_2019,
 	title = {Machine {Learning} and {Deep} {Learning} frameworks and libraries for large-scale data mining: a survey},
@@ -275,7 +263,6 @@
   url={https://arxiv.org/abs/2406.11036},
 }
 
-
 @misc{wang2026openrt,
       title={OpenRT: An Open-Source Red Teaming Framework for Multimodal LLMs},
       author={Xin Wang and Yunhao Chen and Juncheng Li and Yixu Wang and Yang Yao and Tianle Gu and Jie Li and Yan Teng and Yingchun Wang and Xia Hu},
@@ -294,8 +281,6 @@
   urldate = {2026-03-26},
 }
 
-
-
 @online{pyritHP,
   title = {Python Risk Identification Tool},
   author={Azure},
@@ -303,7 +288,6 @@
   year = {2026},
   urldate = {2026-03-26},
 }
-
 
 @online{llmHallucinationExamples,
   title = {LLM hallucinations and failures: lessons from 5 examples},
@@ -325,7 +309,7 @@
   title = {Wiktionary -- Das freie Wörterbuch},
   author = {{Wikimedia Foundation}},
   url = {https://de.wiktionary.org/wiki/Wiktionary:Hauptseite},
-  year = {2026},
+  year = {2026b},
   urldate = {2026-03-29}
 }
 
@@ -411,6 +395,6 @@
   title = {ChatGPT ist da},
   author = {{OpenAI}},
   url = {https://openai.com/de-DE/index/chatgpt/},
-  year = {202},
+  year = {2022},
   urldate = {2026-04-07}
 }
