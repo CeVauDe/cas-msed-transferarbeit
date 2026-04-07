@@ -1,9 +1,9 @@
 
 [#section-prognosen]
 === Prognosen
-Mit Prognosen und Trends wird ein falsches Bild der Statistiken wiedergespiegelt und bei Verwendung derer für weitere Nutzung verfälscht. Um dem Ziel der einfachen Auswertung ohne Datenbankkenntnisse von den statistischen Daten gerecht zu werden, ist es ausserordentlich wichtig, Trends und Prognosen zu vermeiden und zu jederzeit ausschliesslich faktische Daten zu liefern.
+Mit Prognosen und Trends wird ein falsches Bild der Statistiken widergespiegelt und bei Verwendung derer für weitere Nutzung verfälscht. Um dem Ziel der einfachen Auswertung ohne Datenbankkenntnisse von den statistischen Daten gerecht zu werden, ist es ausserordentlich wichtig, Trends und Prognosen zu vermeiden und jederzeit ausschliesslich faktische Daten zu liefern.
 
-Ein LLM wird mit unzähligen, verschiedenen Daten auf Sprache trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
+Ein LLM wird mit unzähligen, verschiedenen Daten auf Sprache trainiert und interpretiert diese als Fakten/die Wahrheit. Das Ziel des Trainings ist, so natürlich wie möglich zu wirken und nicht die Trainingsdaten zu prüfen. Dies führt zu Halluzinationen cite:[surveyOfHallucination].
 
 [#prognosen-methodik]
 ==== Methodik
@@ -148,7 +148,7 @@ Die unterschiedliche Erfolgsrate der drei Plugins (Custom: 52%, Policy: 10%, Hal
 * Das Hallucination-Plugin testet hauptsächlich Datenfabrikation, nicht Prognosen. Die niedrige Rate (5%) zeigt, dass sich die Konzepte überlappen, aber nicht identisch sind
 
 ===== Optimierungsversuch
-Mit einer leicht angepassten System-Prompt, wird eine positivere Erfolgsrate von 39.68% erzielt:
+Mit einer leicht angepassten System-Prompt wird eine positivere Erfolgsrate von 39.68% erzielt:
 
 ----
 ═══ REGELN ═══

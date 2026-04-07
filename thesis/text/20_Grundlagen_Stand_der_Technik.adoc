@@ -2,13 +2,13 @@
 [#methoden]
 == Grundlagen und Stand der Technik
 
-Mit Veröffentlichung von ChatGPT im November 2022 beginnt ein neues Kapitel in der Verarbeitung von natürlicher Sprache: sie ist plötzlich viel besser und leicht für jedermann zugänglich cite:[introducingChatGPT]. Konnten Sprachmodelle zuvor spezifische Aufgaben lösen, sind sie nun in der Lage diverse reale Aufgaben zu erledigen cite:[zhao2023survey].
+Mit der Veröffentlichung von ChatGPT im November 2022 beginnt ein neues Kapitel in der Verarbeitung von natürlicher Sprache: sie ist plötzlich viel besser und leicht für jedermann zugänglich cite:[introducingChatGPT]. Konnten Sprachmodelle zuvor spezifische Aufgaben lösen, sind sie nun in der Lage, diverse reale Aufgaben zu erledigen cite:[zhao2023survey].
 
 === Large Language Model
 
-Large Language Models (LLM) sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf gigantischen Mengen textueller Daten trainiert. Sie zeigen starke Fähigkeiten natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
+Large Language Models (LLM) sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf gigantischen Mengen textueller Daten trainiert. Sie zeigen starke Fähigkeiten, natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
 
-Auf der anderen Seite sind diese Modelle nicht ohne Fehler. Neben Halluzinationen cite:[tonmoy2024comprehensive] neigen Flaggschiff-Modelle auch zu übergrossem Selbstvertrauen in falsche Lösungen und auch bei einfachen Problemen kann die Begründungsführung grundlegend zusammenbrechen cite:[nezhurina2025alicewonderlandsimpletasks].
+Auf der anderen Seite sind diese Modelle nicht ohne Fehler. Neben Halluzinationen cite:[tonmoy2024comprehensive] neigen Flaggschiffmodelle auch zu übergrossem Selbstvertrauen in falsche Lösungen und auch bei einfachen Problemen kann die Begründungsführung grundlegend zusammenbrechen cite:[nezhurina2025alicewonderlandsimpletasks].
 
 === Datenbereitstellung
 Soll ein LLM spezifische Daten verarbeiten oder Informationen wiedergeben, die nicht in den Trainingsdaten enthalten sind, so braucht das LLM einen Mechanismus, um solche Daten abzurufen.
@@ -32,7 +32,7 @@ Tools sind Funktionen, die das LLM basierend auf der Benutzereingabe gezielt auf
 Viele Dienste stellen MCP-Server bereit, damit Nutzer:innen diese in LLM-basierte Workflows einbinden können. Dazu gibt es umfangreiche Sammlungen, die diese einfach auffindbar machen cite:[mcpServerList].
 
 ==== MCP-Client
-MCP-Clients werden von der LLM Applikation verwendet um mit bestimmten MCP-Servern zu kommunizieren. Jeder Client ist dabei für die direkte Kommunikation mit einem Server zuständig. Sie bilden die Schnittstelle der Applikation zum Model Context Protocol cite:[mcpClient].
+MCP-Clients werden von der LLM-Applikation verwendet, um mit bestimmten MCP-Servern zu kommunizieren. Jeder Client ist dabei für die direkte Kommunikation mit einem Server zuständig. Sie bilden die Schnittstelle der Applikation zum Model Context Protocol cite:[mcpClient].
 
 === Chatbot
 Ein Chatbot ist ein textbasiertes Dialogsystem, mit dem eine Person in natürlicher Sprache mit dem System kommunizieren kann. Ab den 1960er Jahren wurden erste regelbasierte Chatbots entwickelt, welche anhand von Schlüsselwörtern vordefinierte Antworten geben konnten. Seit Large Language Models im grossen Rahmen verfügbar sind, bieten diese ein ausreichendes Sprachverständnis, sodass Personen komplexere Unterhaltungen mit den Chatbots führen können cite:[wikipediaChatbot].

@@ -42,7 +42,7 @@ image::generated/interpretation/redteam-interpretationen-plugins.svg[]
 
 ===== Strategie-spezifische Analyse
 
-Die Analyse nach Angriffsstrategie dargestellt in <<#interpretation-image-prognosen-plugin-pass-rate>>, zeigt ein katastrophales Muster: Alle Multi-Turn-Strategien sind zu 100% erfolgreich beim Umgehen der Interpretations-Einschränkungen. Selbst einfache Single-Turn-Angriffe sind in 80-90% der Fälle erfolgreich.
+Die Analyse nach Angriffsstrategie, dargestellt in <<#interpretation-image-prognosen-plugin-pass-rate>>, zeigt ein katastrophales Muster: Alle Multi-Turn-Strategien sind zu 100% erfolgreich beim Umgehen der Interpretations-Einschränkungen. Selbst einfache Single-Turn-Angriffe sind in 80-90% der Fälle erfolgreich.
 
 [#interpretation-image-prognosen-plugin-pass-rate]
 .Übersicht über die Erfolgsrate nach Strategie für die Dimension Interpretationen
@@ -152,4 +152,4 @@ Die 92,9% Fehlerquote zeigt, dass System-Prompts allein das Problem nicht lösen
 2. Erkennung von schrittweiser Eskalation über mehrere Turns
 3. Für häufige Fragen vordefinierte, interpretationsfreie Antworten
 
-Eine Herausforderung stellt die Formulierungen der Antworten dar, wie in <<#interpretationen-beispiel1>> ("möglicherweise liegt das an...") könnten als harmlose Höflichkeit statt als Interpretation gewertet werden. Die Grader-LLM muss optimiert werden.
+Eine Herausforderung stellt die Formulierung der Antworten dar. Wie in <<#interpretationen-beispiel1>> gezeigt ("möglicherweise liegt das an...") können die als harmlose Höflichkeit statt als Interpretation gewertet werden. Die Grader-LLM muss optimiert werden.

@@ -24,7 +24,7 @@ oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthalte
 aufbereiten.
 
 Das erste Ziel dieser Arbeit ist, einen LLM-basierten Chatbot für die Exploration von Mediennutzungsdaten zu erstellen und die Praxistauglichkeit zu überprüfen. Der Proof of Concept soll lokal ausführbar sein, ein einfaches Chatinterface bereitstellen und Zugriff auf die Jahresdaten für die Beantwortung von Fragen der Nutzer:innen haben. Die Daten sollen standardisiert und strukturiert über einen Model Context Protocol (MCP) Server bereitgestellt werden.
-Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient gestaltet werden. Der LLM-Agent des Chatbots verarbeitet
+Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient erfolgen. Der LLM-Agent des Chatbots verarbeitet
 die Anfragen, ruft die zur Beantwortung einer Frage nötigen Daten ab und beantwortet die Anfrage in natürlicher Sprache.
 
 Das zweite zentrale Ziel dieser Arbeit ist die systematische Evaluierung der Antwortqualität des Chatbots. Die Natur der Daten

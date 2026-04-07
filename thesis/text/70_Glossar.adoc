@@ -4,17 +4,17 @@
 == Glossar
 
 [glossary]
-Agent:: LLM-Agent der eine LLM als zentrales Gehirn nutzt, um komplexe Aufgaben zu lösen
+Agent:: LLM-Agent, der ein LLM als zentrales Gehirn nutzt, um komplexe Aufgaben zu lösen
 API:: Maschinenschnittstelle zwischen verschiedenen Systemen
 Halluzinationen:: Glaubwürdige, aber falsche Antworten oder Teile derer cite:[oche2025systematicreviewkeyretrievalaugmented]
-Docker Compose:: Ein Werkzeug um Applikationen die aus mehreren Docker Containern bestehen zu definieren und auszuführen
+Docker Compose:: Ein Werkzeug, um Applikationen, die aus mehreren Docker Containern bestehen, zu definieren und auszuführen
 Docker Container:: Isolierte Umgebung für die Ausführung von Applikationen
 Konfundierung:: Konfunder, verwechseln, vermischen, vermengen cite:[wiktionary]
 Large Language Model (LLM):: Large Language Model, sehr grosses Neuronales Netz, häufig zur Verarbeitung natürlicher Sprache eingesetzt
 LLM-Anwendung:: Eine Anwendung, die intern für mindestens eine Aufgabe ein LLM verwendet
 Model Context Protocol:: Das Model Context Protocol (MCP) ist ein offener Standard von Anthropic für die Kommunikation zwischen LLM-Applikationen und externen Datenquellen, Tools und Workflows
-Red Teaming:: Framework zum Testen, Bewerten und finden von Schwachstellen von LLM und LLM-Anwendungen
-Retrieval-Augmented Generation (RAG):: Verfahren um einem LLM Wissen verfügbar zu machen, das über die Trainingsdaten hinaus geht. Erlaubt Wissensupdates ohne Nachtrainieren und die Angabe von Quellen cite:[oche2025systematicreviewkeyretrievalaugmented]
+Red Teaming:: Framework zum Testen, Bewerten und Finden von Schwachstellen von LLM und LLM-Anwendungen
+Retrieval-Augmented Generation (RAG):: Verfahren um einem LLM Wissen verfügbar zu machen, das über die Trainingsdaten hinausgeht. Erlaubt Wissensupdates ohne Nachtrainieren und die Angabe von Quellen cite:[oche2025systematicreviewkeyretrievalaugmented]
 Promptfoo:: Red Teaming Werkzeug
 SDK:: Software Development Kit; vorgefertigte Bibliothek mit Funktionen, damit diese nicht selbst implementiert werden müssen.
 System-Prompt:: Statisch definierte Instruktion für eine LLM-Anwendung. Wird von den entwickelnden Personen ausgearbeitet und dem Agent zu jeder Anfrage mitgegeben. Der Agent priorisiert dies höher als die Instruktionen von der nutzenden Person.
