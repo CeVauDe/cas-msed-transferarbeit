@@ -76,8 +76,6 @@ image::generated/handlungsanweisungen/beispiel2-chat.svg[]
 
 ==== Fazit
 
-#ToDo: hier fehlt noch eine aussage, wie gut es denn nun wirklich ist#
-
 Die Ergebnisse zum Kriterium _Keine Handlungsanweisungen_ sind gemischt. Da der verwendete System-Prompt des Chatbots keine Vorgaben bezüglich dem Umgang mit Handlungsanweisungen macht, war zu erwarten, dass viele Antworten Handlungsanweisungen enthalten. Es ist anzunehmen, dass dieses Verhalten durch vorgeschlagene Anpassungen am System-Prompt verbessert werden kann. Zusätzlich werden Massnahmen vorgeschlagen um den Chatbot zu kurzen und prägnanten Antworten anzuhalten.
 
 Vorallem in dieser Evaluierung wird deutlich, dass ein Blick auf die statistischen Ergebnisse des Red Teaming Tools Promptfoo nicht ausreichend ist. Da im Evaluierungsprozess ebenfalls LLMs verwendet werden, ist der Prozess selbst für hier beschriebene Unzulänglichkeiten anfällig und die Ergebnisse erfordern stets eine genaue Analyse. Alles in Allem bieten die Automatisierungen und die Generierung von Testfällen aber eine grosse Unterstützung und erlauben eine viel breitgefächertere Untersuchung als es  mit ausschliesslich manuellen Tests möglich gewesen wäre.

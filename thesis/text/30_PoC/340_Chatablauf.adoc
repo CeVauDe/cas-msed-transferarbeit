@@ -1,10 +1,10 @@
 
 === Chatsequenz
 
-Im nachfolgenden <<ergebnisse-poc-sequenzdiagram,Sequenzdiagram>> ist die Verarbeitungsloop der Beispielfrage `"Wie hat sich der Marktanteil von SRF 1 in der DS von 2019 bis 2021 entwickelt?"` dargestellt.
+In <<#sequenzdiagramm-agent-loop> ist die Verarbeitungsloop einer Chatantwort als Sequenzdiagramm dargestellt. Mit absenden der Benutzerfrage initialisiert der Chatbot den MCP-Client und erstellt eine MCP-Session mit dem MCP-Server. Dabei werden die verfügbaren Toools und Ressourcen geladen. In der Tool-Runde werden die vorhandenen Informationen wie System-Prompt, Benutzerfrage, Tool-Definition und Ressourcen and das LLM übermittelt. Das LLM verarbeitet die Informationen und erstellt bei Bedarf Tool-Aufrufe um Daten abzufragen. Diese werden anschliessend vom Chatbot über den MCP-Clienten ausgeführt und die Ergebnisse in der nächsten Tool-Runde an das LLM übermittelt. Es werden so viele Tool-Runden durchgeführt, bis das LLM keine Tool-Aufrufe mehr erstellt. Der letzte LLM Aufruf liefert dann die Antwort, die dem Benutzer im Chatinterface angezeigt wird.
 
-[[fig-agent-loop,Abbildung: Agent-Loop]]
-.Sequenzdiagramm des agentenbasierten Verarbeitungsloops (Beispielfrage)
+[#sequenzdiagramm-agent-loop]
+.Sequenzdiagramm des agentenbasierten Verarbeitungsloops
 [plantuml, agent-loop, svg]
 ....
 @startuml
@@ -32,7 +32,7 @@ MCPServer --> Chatbot: Glossar
 
 Chatbot -> OpenAI: chat.completions.create()\n(System-Prompt + Glossar\n+ Benutzerfrage + Tool-Definitionen)
 activate OpenAI
-OpenAI --> Chatbot: Auszuführende tool_calls
+OpenAI --> Chatbot: Auszuführende Tool-Aufrufe
 deactivate OpenAI
 
 Chatbot -> MCPServer: call_tool("abfrage_jahresbericht", …)
