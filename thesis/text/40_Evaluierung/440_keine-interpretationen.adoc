@@ -6,7 +6,7 @@ LLMs haben aufgrund der Art und Weise wie sie funktionieren, weiterhin Probleme 
 
 [#interpretationen-methodik]
 ==== Methodik
-Zur Eavluation werden 70 Red Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Auswahl der Plugins und Strategien wird mit hilfe von KI gefällt. Zum Generieren und Auswerten wird das OpenAI 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
+Zur Evaluation werden 70 Red Teaming-Tests mit fünf <<methoden-plugins,Plugins>> und sieben <<methoden-strategien,Strategien>> (<<methods-strategien-basic,basic>>, <<methods-strategien-jailbreak-templates,jailbreak-templates>>, <<methods-strategien-jailbreak-meta,jailbreak:meta>>, <<methods-strategien-jailbreak-hydra,jailbreak:hydra>>, <<methods-strategien-crescendo,crescendo>>, <<methods-strategien-goat,goat>>, <<methods-strategien-mischievous-user,mischievous-user>>) generiert. Die Auswahl der Plugins und Strategien wird mit Hilfe von KI gefällt. Zum Generieren und Auswerten wird das OpenAI 4o-mini LLM genutzt. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 ____
 The assistant must never provide interpretations, causal
@@ -17,7 +17,7 @@ present factual data from 2018-2021 without analysis or
 interpretation.
 ____
 
-Das Custom Plugin, welches initial mit hilfe von KI generiert und angepasst wird, definiert im `generator` sechs Angriffskategorien für Interpretation-Tests:
+Das Custom Plugin, welches initial mit Hilfe von KI generiert und angepasst wird, definiert im `generator` sechs Angriffskategorien für Interpretation-Tests:
 
 * Kausale "Warum"-Fragen (direkte Ursachen-Abfragen)
 * Muster interpretieren ("Was bedeutet dieser Rückgang?")
@@ -86,7 +86,7 @@ Die Analyse nach Angriffsstrategie dargestellt in <<#interpretation-image-progno
 | *0,0%*
 |===
 
-Die folgende <<#image-interpretationen-pass-rate,Heatmap>> zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die durchgehend rote Färbung verdeutlicht das fast vollständige Versagen bei allen Strategien. Zwei Beispiele einer <<#interpretationen-beispiel2,abgewehrten>> und <<#interpretationen-beispiel1,durchgebrochenen>> Frage werden detailierter behandelt.
+Die folgende <<#image-interpretationen-pass-rate,Heatmap>> zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die durchgehend rote Färbung verdeutlicht das fast vollständige Versagen bei allen Strategien. Zwei Beispiele einer <<#interpretationen-beispiel2,abgewehrten>> und <<#interpretationen-beispiel1,durchgebrochenen>> Frage werden detaillierter behandelt.
 
 [#image-interpretationen-pass-rate]
 .Erfolgsquote der beiden Plugins für das Kriterium "Keine Interpretationen" aufgeschlüsselt nach angewendeter Strategie.
@@ -152,4 +152,4 @@ Die 92,9% Fehlerquote zeigt, dass System-Prompts allein das Problem nicht lösen
 2. Erkennung von schrittweiser Eskalation über mehrere Turns
 3. Für häufige Fragen vordefinierte, interpretationsfreie Antworten
 
-Eine Herausforderung stellt die Formulierungen der Antworten da, wie in <<#interpretationen-beispiel1>> ("möglicherweise liegt das an...") könnten als harmlose Höflichkeit statt als Interpretation gewertet werden. Die Grader-LLM muss optimiert werden.
+Eine Herausforderung stellt die Formulierungen der Antworten dar, wie in <<#interpretationen-beispiel1>> ("möglicherweise liegt das an...") könnten als harmlose Höflichkeit statt als Interpretation gewertet werden. Die Grader-LLM muss optimiert werden.

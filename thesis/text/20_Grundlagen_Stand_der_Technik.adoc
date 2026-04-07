@@ -2,13 +2,13 @@
 [#methoden]
 == Grundlagen und Stand der Technik
 
-Mit Veröffentlichung von ChatGPT im November 2022 beginnnt neues Kapitel in der Verarbeitung von natürlicher Sprache: sie ist plötzlich viel besser und leicht für jedermann zugänglich cite:[introducingChatGPT]. Konnten Sprachmodelle zuvor spezifische Aufgaben lösen, sind sie nun in der Lage diverse reale Aufgaben zu erledigen cite:[zhao2023survey].
+Mit Veröffentlichung von ChatGPT im November 2022 beginnt ein neues Kapitel in der Verarbeitung von natürlicher Sprache: sie ist plötzlich viel besser und leicht für jedermann zugänglich cite:[introducingChatGPT]. Konnten Sprachmodelle zuvor spezifische Aufgaben lösen, sind sie nun in der Lage diverse reale Aufgaben zu erledigen cite:[zhao2023survey].
 
 === Large Language Model
 
-Large Language Models (LLM) sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf gigantischen Mengen textueller Daten trainiert. Die zeigen starke Fähigkeiten natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
+Large Language Models (LLM) sind typischerweise Transformer Language Models und enthalten hunderte Milliarden Parameter. Diese werden basierend auf gigantischen Mengen textueller Daten trainiert. Sie zeigen starke Fähigkeiten natürliche Sprache zu verstehen und sind mittels Textgenerierung in der Lage, komplexe Aufgaben zu lösen cite:[zhao2023survey].
 
-Auf der anderen Seite sind diese Modelle nicht ohne Fehler. Neben Halluzinationen cite:[tonmoy2024comprehensive] neigen Flaggschiff-Modelle auch zu übergrossem Selbstvertrauen in falsche Lösungenund auch bei einfachen Problemen kann die Begründungsführung grundlegend zusammenbrechen cite:[nezhurina2025alicewonderlandsimpletasks].
+Auf der anderen Seite sind diese Modelle nicht ohne Fehler. Neben Halluzinationen cite:[tonmoy2024comprehensive] neigen Flaggschiff-Modelle auch zu übergrossem Selbstvertrauen in falsche Lösungen und auch bei einfachen Problemen kann die Begründungsführung grundlegend zusammenbrechen cite:[nezhurina2025alicewonderlandsimpletasks].
 
 === Datenbereitstellung
 Soll ein LLM spezifische Daten verarbeiten oder Informationen wiedergeben, die nicht in den Trainingsdaten enthalten sind, so braucht das LLM einen Mechanismus, um solche Daten abzurufen.

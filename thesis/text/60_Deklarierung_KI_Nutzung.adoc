@@ -5,7 +5,7 @@
 Wir haben LLMs, auch in Form von LLM Agents wie Claude Code oder GitHub Copilot, in folgenden Bereichen der Arbeit verwendet:
 
 * Erstellung des Proof of Concept Chatbots und MCP-Servers
-* Der Chatbot des Proof of Concept verwendet einem LLM zur Erzeugung der Antworten
+* Der Chatbot des Proof of Concept verwendet ein LLM zur Erzeugung der Antworten
 * In der Generierung der promptfoo Konfigurationen und Testfälle
 * via Promptfoo in der Erstellung der Red Teaming Angriffe und der Bewertung der Antworten
 * Als Unterstützung bei der Erstellung der Diagramme

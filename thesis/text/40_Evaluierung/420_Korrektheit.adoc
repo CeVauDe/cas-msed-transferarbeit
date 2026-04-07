@@ -7,7 +7,7 @@ Ziel der Evaluierung auf Korrektheit ist zu untersuchen, wie vertrauenswürdig d
 [#korrektheit-methodik]
 ==== Methodik
 
-Die Dimensionen gliedern sich in die in <<#table-korrektheit-overview>> dargestellten Testfälle. Die Tests, die in diesem Kapitel entstanden sind, werden mittels mit dem LLM `gpt-5-mini` von OpenAI ausgeführt.
+Die Dimensionen gliedern sich in die in <<#table-korrektheit-overview>> dargestellten Testfälle. Die Tests, die in diesem Kapitel entstanden sind, werden mit dem LLM `gpt-5-mini` von OpenAI ausgeführt.
 
 [#table-korrektheit-overview]
 .Anzahl Testfälle pro Kategorie bei der Überprüfung auf Korrektheit.
@@ -23,7 +23,7 @@ Die Dimensionen gliedern sich in die in <<#table-korrektheit-overview>> dargeste
 |13 * 3 Strategien
 |Intent
 
-|*Unmögliche Aktionen anbieten* (Plots Grafiken oder Dokumente wie csv erstellen E-Mails senden, Daten im Internet speichern oder abrufen, ...)
+|*Unmögliche Aktionen anbieten* (Plots, Grafiken oder Dokumente wie csv erstellen, E-Mails senden, Daten im Internet speichern oder abrufen, ...)
 |12 * 3 Strategien
 |Intent
 
@@ -131,7 +131,7 @@ In der darauffolgenden detaillierten Kontrolle aller automatisch bewerteten Nach
 [#section-korrekte-werte]
 ===== Korrekte Werte anzeigen
 
-Die Qualität der in den Antworten gezeigen Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die die nutzende Person sehen wollte. Da eine nicht sehr mit der Thematik vertraute Person den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System-Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
+Die Qualität der in den Antworten gezeigten Daten wird mit manuell erstellten Testfällen geprüft. Diese sind in <<#image-korrektheit-pass-rate>> als `custom` Plugin aufgeführt. Betrachtet werden hier ausschliesslich die korrigierten Ergebnisse in Spalte `Basic *`. Lediglich im in <<#korrektheit-chat-falsche-werte>> gezeigten Fall hat der Chatbot die falschen Daten ausgegeben. In allen anderen 37 Testfällen hat er mit den korrekten Daten geantwortet. Und selbst in diesem Fall sind die Daten an sich korrekt, es sind lediglich nicht die Daten, die die nutzende Person sehen wollte. Da eine nicht sehr mit der Thematik vertraute Person den Unterschied gegebenenfalls nicht bemerken würde, ist dieser Fall trotzdem als kritisch zu bewerten und es sollte versucht werden, solche Fälle in Zukunft zu vermeiden. Die Ursache dafür liegt vermutlich im System-Prompt, in dem die Reichweite auf die Kenngrösse `Rating` gemappt wird. Eine Korrektur dieses Mappings sollte das Ergebnis verbessern.
 
 [#korrektheit-chat-falsche-werte]
 .Chatbeispiel aus den Custom Tests. Einziger Fall, in dem der Chatbot falsche Daten zurückgegeben hat. Statt der gewünschten Nettoreichweite hat der Chatbot die Ratings Zahlen abgefragt.
@@ -162,7 +162,7 @@ Führe KEINE Berechnungen mit den Daten durch — auch nicht auf ausdrückliche 
 Eine andere Option wäre darauf zu fokussieren was erlaubt ist. Dies wäre, dass nur die Werte ausgegeben werden dürfen, die direkt aus Toolcalls gewonnen werden können.
 
 ----
-Gib ausschliesslich Werte aus, die direkt aus den abgefragten Rohdaten stammen. Leite keine neuen Werte ab. Führe insbesondere keine Berechnungen, Umrechnungen oder Aggregationen durch — auch nicht auf ausdrückliche Aufforderung. Dazu zählen unter anderem: Differenzen, Summen, Durchschnitte, Veränderungen, Wachstumsraten, Trends, Korrelationen, Umrechnungen von Einheiten und Verhältnisse. Verwende stattdessen die Filter-, Pivot- und sonstigen Funtionen zur Abfrage der Rohdaten und gebe diese direkt an die nutzende Person aus, damit dieser Berechnungen selbst vornehmen kann.
+Gib ausschliesslich Werte aus, die direkt aus den abgefragten Rohdaten stammen. Leite keine neuen Werte ab. Führe insbesondere keine Berechnungen, Umrechnungen oder Aggregationen durch — auch nicht auf ausdrückliche Aufforderung. Dazu zählen unter anderem: Differenzen, Summen, Durchschnitte, Veränderungen, Wachstumsraten, Trends, Korrelationen, Umrechnungen von Einheiten und Verhältnisse. Verwende stattdessen die Filter-, Pivot- und sonstigen Funktionen zur Abfrage der Rohdaten und gebe diese direkt an die nutzende Person aus, damit dieser Berechnungen selbst vornehmen kann.
 ----
 
 
@@ -173,7 +173,7 @@ image::generated/korrektheit/chat-berechnung.svg[]
 
 ===== Unmögliche Aktionen anbieten
 
-Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter Nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen. Häufig, wie zum Beispiel in <<#chatbeispiel-python-code>> gezeigt, bietet er am Ende einer Nachricht auch weiterführende Aktionen an. Die Erstellung von Skripten zur Diagrammerstellung kommt in mehreren Antworten vor, ist aber nicht gewünscht. Der Code kann Fehler enthalten und es erfolgt keinerlei Überprüfun, wie die Daten dargestellt werden und ob diese Darstellung korrekt ist. Andere Vorschläge gehen über den Umfang dessen hinaus, was der Chatbot tatsächlich umsetzen kann und diese kann die nutzende Person daher stark verwirren oder falsche Erwartungen wecken. Daher sind solche Vorschläge ebenfalls unerwünscht.
+Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot bei gezielter Nachfrage auf die (durchaus kreative) Methode zurück, ein ASCII Chart zu erstellen (siehe <<#korrektheit-image-ascii-chart>>). Auf die Frage nach einem Linienchart oder einer interaktiven Karte erstellt er ein Python Skipt mit der Aufforderung an den User, dieses auszuführen. Häufig, wie zum Beispiel in <<#chatbeispiel-python-code>> gezeigt, bietet er am Ende einer Nachricht auch weiterführende Aktionen an. Die Erstellung von Skripten zur Diagrammerstellung kommt in mehreren Antworten vor, ist aber nicht gewünscht. Der Code kann Fehler enthalten und es erfolgt keinerlei Überprüfung, wie die Daten dargestellt werden und ob diese Darstellung korrekt ist. Andere Vorschläge gehen über den Umfang dessen hinaus, was der Chatbot tatsächlich umsetzen kann und diese kann die nutzende Person daher stark verwirren oder falsche Erwartungen wecken. Daher sind solche Vorschläge ebenfalls unerwünscht.
 
 [#korrektheit-image-ascii-chart]
 .Chatbeispiel Anfrage einer nutzenden Person nach einem ASCII-Liniendiagramm aus dem Policy Plugin mit Crescendo Strategie. Der Chatbot entspricht der Anfrage.

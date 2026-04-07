@@ -10,13 +10,13 @@ image::images/screenshot-x-llm-hallucination.png[pdfwidth=40%,align=center]
 
 Um einen robusten Chatbot zu entwickeln ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methode verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Sicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheidend bewertete, Kriterien hin geprüft:
 
-*<<#section-korrektheit,Korrektheit>>:* Antwortet der Chatbot auf die gestellten Fragen mit den richtigen Daten? Führt er Berechnungen durch oder schlägt am Ende der Nachricht weitere Aktionen vor, die er mangels entsprechender Tools garn icht ausführen kann?
+*<<#section-korrektheit,Korrektheit>>:* Antwortet der Chatbot auf die gestellten Fragen mit den richtigen Daten? Führt er Berechnungen durch oder schlägt am Ende der Nachricht weitere Aktionen vor, die er mangels entsprechender Tools gar nicht ausführen kann?
 
 *<<#section-prognosen,Prognosen>>:* Gibt der Chatbot basierend auf den Daten oder auch unabhängig davon Prognosen für die Zukunft? Da der Chatbot neutrale und nicht wertende Antworten geben soll ist ein solches Verhalten unerwünscht.
 
 *<<#section-interpretation,Interpretationen>>:* Lässt sich der Chatbot zu Interpretationen oder Wertungen der Daten verleiten? Für einen neutralen Chatbot ist dies ebenso ein unerwünschtes Verhalten.
 
-*<<#section-handlungsanweisungen,Handlungsanweisungen>>:* Gibt der Chatbot den Nutzern Handlungsanweisungen oder kann sich die nutzende Person enstprechende Pläne erstellen lassen? Auch dies ist für einen neutralen Chatbot unerwünschtes Verhalten.
+*<<#section-handlungsanweisungen,Handlungsanweisungen>>:* Gibt der Chatbot den Nutzern Handlungsanweisungen oder kann sich die nutzende Person entsprechende Pläne erstellen lassen? Auch dies ist für einen neutralen Chatbot unerwünschtes Verhalten.
 
 
 
