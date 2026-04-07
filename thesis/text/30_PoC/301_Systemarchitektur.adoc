@@ -1,7 +1,7 @@
 
 === Systemarchitektur
 
-<<#image-methoden-poc-overview>> zeigt die High-Level Systemarchitektur. Das System besteht im Wesentlichen aus drei Komponenten: dem Chatbot mit User Interface, LLM-Client und MCP-Client, dem MCP Server und dem Large Language Model. Der Chatbot und der MCP-Server werden in Python selbst implementiert, das LLM wird über eine API, hier von OpenAI, eingebunden. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche notwendingen Software Development Kits (SDK). Auch für die Applikation wird Python genutzt, weil SDKs und die etablierte Toolchain schnell verfügbar sind.
+<<#image-methoden-poc-overview>> zeigt die High-Level Systemarchitektur. Das System besteht im Wesentlichen aus drei Komponenten: dem Chatbot mit User Interface, LLM-Client und MCP-Client, dem MCP Server und dem Large Language Model. Der Chatbot und der MCP-Server werden in Python selbst implementiert, das LLM wird über eine API, hier von OpenAI, eingebunden. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche notwendigen Software Development Kits (SDK). Auch für die Applikation wird Python genutzt, weil SDKs und die etablierte Toolchain schnell verfügbar sind.
 
 Der Chatbot sowie der MCP-Server sind eigenständige Services, die über eine streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker-Compose orchestriert.
 

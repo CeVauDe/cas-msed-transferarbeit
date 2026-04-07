@@ -24,7 +24,7 @@ oder Prognosen erstellen, sondern muss ausschliesslich die in den Daten enthalte
 aufbereiten.
 
 Das erste Ziel dieser Arbeit ist, einen LLM-basierten Chatbot für die Exploration von Mediennutzungsdaten zu erstellen und die Praxistauglichkeit zu überprüfen. Der Proof of Concept soll lokal ausführbar sein, ein einfaches Chatinterface bereitstellen und Zugriff auf die Jahresdaten für die Beantwortung von Fragen der Nutzer:innen haben. Die Daten sollen standardisiert und strukturiert über einen Model Context Protocol (MCP) Server bereitgestellt werden.
-Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient gestalten werden. Der LLM-Agent des Chatbots verarbeitet
+Der Zugriff des LLM-Agents auf die Jahreszahlen soll so sicher und effizient gestaltet werden. Der LLM-Agent des Chatbots verarbeitet
 die Anfragen, ruft die zur Beantwortung einer Frage nötigen Daten ab und beantwortet die Anfrage in natürlicher Sprache.
 
 Das zweite zentrale Ziel dieser Arbeit ist die systematische Evaluierung der Antwortqualität des Chatbots. Die Natur der Daten
@@ -35,9 +35,9 @@ Die Antworten sollen dafür insbesondere auf die folgenden Kriterien hin überpr
 . *Korrektheit:* Sind die Antworten, welche der Chatbot auf der verfügbaren Datenbasis gibt, korrekt und werden sie vollständig verstanden?
 . *Prognosen:* Macht der Chatbot keine Prognosen?
 . *Interpretationen:* Lässt sich der Chatbot zu Interpretationen der Daten verleiten?
-. *Handlungsanweisungen:* Werden Handlungsanweisungen zur Verbesserung der Nutzung geben vermieden?
+. *Handlungsanweisungen:* Werden Handlungsanweisungen zur Verbesserung der Nutzung vermieden?
 
 Im Rahmen des Proof of Concept liegt der Schwerpunkt der Arbeit auf der Entwicklung und Evaluierung des Chatbot Systems und nicht auf
 der Datenaufbereitung aller verfügbaren Daten. Daher beschränkt sich die Datenaufbereitung auf die Jahresdaten der TV-Nutzung nach Sender aller drei Sprachregionen auf die Jahre 2018 bis 2021.
 
-Der Rest der Arbeit is wie folgt strukturiert. <<#methoden>> gibt einen Überblick über die Grundlagen und erläutert den Stand der Technik. <<#chapter-poc>> beschreibt den entwickelten Proof of Concept.  In <<#chapter-evaluierung>> werden die Ergebnisse der verschiedenen Kriterien  dargestellt und diskutiert. Die einzelnen Abschnitte <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> enthalten jeweils auch ein Fazit. Abschliessend fasst <<#chapter-zusammenfassung-ausblick>> die Ergebnisse kurz zusammen gibt einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.
+Der Rest der Arbeit ist wie folgt strukturiert. <<#methoden>> gibt einen Überblick über die Grundlagen und erläutert den Stand der Technik. <<#chapter-poc>> beschreibt den entwickelten Proof of Concept.  In <<#chapter-evaluierung>> werden die Ergebnisse der verschiedenen Kriterien  dargestellt und diskutiert. Die einzelnen Abschnitte <<#section-korrektheit,Korrektheit>>, <<#section-prognosen,Prognosen>>, <<#section-interpretation,Interpretation>> und <<#section-handlungsanweisungen,Handlungsanweisungen>> enthalten jeweils auch ein Fazit. Abschliessend fasst <<#chapter-zusammenfassung-ausblick>> die Ergebnisse kurz zusammen und gibt einen Ausblick auf noch durchzuführende Arbeiten und Verbesserungsmöglichkeiten des Chatbot Systems.
