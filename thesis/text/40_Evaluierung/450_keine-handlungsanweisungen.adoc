@@ -10,7 +10,7 @@ Das vierte Kriterium untersucht, in welchem Rahmen der Chatbot der nutzenden Per
 Für das Kriterium _Keine Handlungsanweisungen_ werden zwei <<methoden-plugins>> und alle sieben vorgestellten <<methoden-strategien>> verwendet. Die Richtlinie des Policy Plugins ist wie folgt definiert:
 
 [#handlungsanweisungen-policy]
-.Policy Plugin Richtline
+.Policy Plugin Richtlinie
 [quote]
 ____
 The assistant must never provide action recommendations, investment advice, strategic suggestions, predictions, or value judgments. It must only present factual data without interpretation.
@@ -50,7 +50,7 @@ Gib keine Handlungsanweisungen, Empfehlungen oder strategischen Vorschläge. Bie
 
 ----
 
-Zusätzlich zur expliziten Anweisung keine Handlungsanweisungen zu geben wird der Chatbot dazu angehalten keine nächsten Schritte oder weitere Analysen anzubieten, da diese ebenfalls Handlungsanweisungen sind und den Benutzer in eine vom LLM vorgegebene Richtung der Analyse leiten könnten. In der Antworten Sektion des System-Prompt wird der Chatbot instruiert der nutzenden Person vorzuschlagen, den Filter anzupassen. Dies würde mit einem vollständigen Verbot von Rückfragen widersprechen und könnte unter Umständen beide Regeln untergraben.
+Zusätzlich zur expliziten Anweisung keine Handlungsanweisungen zu geben wird der Chatbot dazu angehalten keine nächsten Schritte oder weitere Analysen anzubieten, da diese ebenfalls Handlungsanweisungen sind und den Benutzer in eine vom LLM vorgegebene Richtung der Analyse leiten könnten. In der Antworten Sektion des System-Prompt wird der Chatbot instruiert der nutzenden Person vorzuschlagen, den Filter anzupassen. Dies würde einem vollständigen Verbot von Rückfragen widersprechen und könnte unter Umständen beide Regeln untergraben.
 
 [#image-handlungsanweisungen-wordcount]
 .Histogram der Antwortlänge aller Chatbot antworten im Test für "Keine Handlungsanweisungen". Die Bucketgrösse ist 100 Wörter. Der Median liegt bei 299 Wörtern pro Antwort.
@@ -74,4 +74,4 @@ image::generated/handlungsanweisungen/beispiel2-chat.svg[]
 
 Die Ergebnisse zum Kriterium _Keine Handlungsanweisungen_ sind gemischt. Da der verwendete System-Prompt des Chatbots keine Vorgaben bezüglich dem Umgang mit Handlungsanweisungen macht, war zu erwarten, dass viele Antworten Handlungsanweisungen enthalten. Es ist anzunehmen, dass dieses Verhalten durch vorgeschlagene Anpassungen am System-Prompt verbessert werden kann. Zusätzlich werden Massnahmen vorgeschlagen um den Chatbot zu kurzen und prägnanten Antworten anzuhalten.
 
-Vorallem in dieser Evaluierung wird deutlich, dass ein Blick auf die statistischen Ergebnisse des Red Teaming Tools Promptfoo nicht ausreichend ist. Da im Evaluierungsprozess ebenfalls LLMs verwendet werden, ist der Prozess selbst für hier beschriebene Unzulänglichkeiten anfällig und die Ergebnisse erfordern stets eine genaue Analyse. Alles in allem bieten die Automatisierungen und die Generierung von Testfällen aber eine grosse Unterstützung und erlauben eine viel breitgefächertere Untersuchung als es  mit ausschliesslich manuellen Tests möglich gewesen wäre.
+Vor allem in dieser Evaluierung wird deutlich, dass ein Blick auf die statistischen Ergebnisse des Red Teaming Tools Promptfoo nicht ausreichend ist. Da im Evaluierungsprozess ebenfalls LLMs verwendet werden, ist der Prozess selbst für hier beschriebene Unzulänglichkeiten anfällig und die Ergebnisse erfordern stets eine genaue Analyse. Alles in allem bieten die Automatisierungen und die Generierung von Testfällen aber eine grosse Unterstützung und erlauben eine viel breitgefächertere Untersuchung als es  mit ausschliesslich manuellen Tests möglich gewesen wäre.

@@ -4,7 +4,7 @@
 
 Die zu verwendenden Daten stehen als 24 Exceltabellen zur Verfügung. Für jedes Jahr, jede Region und SRF/andere gibt es eine Tabelle im `wide` Format. Das bedeutet, jeder Zeitschienenwert hat eine Zeile mit allen Kombinationen aus Sender und Metrik in eigenen Spalten. Für die Filterung nach spezifischen Kombinationen ist das `long` Format nötig, in dem jede Zelle aus der `wide` Tabelle eine eigene Zeile bekommt.
 
-Zusätzlich werden die Daten so aufbereitet, dass sie besser von einem LLM verarbeitet werden können. Zum Beispiel werden Regionenkürzel wie `DS` zu `Deutschschweiz` und die Namen der Kenngrössen ausgeschrieben. Ziel ist es, den sonst notwendige Mapping-Schritt im Verarbeitungsauftrag des LLM zu überspringen und so Missverständnisse zu reduzieren.
+Zusätzlich werden die Daten so aufbereitet, dass sie besser von einem LLM verarbeitet werden können. Zum Beispiel werden Regionenkürzel wie `DS` zu `Deutschschweiz` und die Namen der Kenngrössen ausgeschrieben. Ziel ist es, den sonst notwendigen Mapping-Schritt im Verarbeitungsauftrag des LLM zu überspringen und so Missverständnisse zu reduzieren.
 
 Als Output der Datenaufbereitung wird eine `.parquet`-Datei geschrieben, die dem MCP-Server bereitgestellt wird.
 
