@@ -8,7 +8,7 @@ Während Large Language Models die Erstellung von Chatbots erheblich vereinfache
 .LLM Hallucination Fail gepostet auf x.com von cite:[llmHallucinationExamplePythonList] am 28. Februar 2024
 image::images/screenshot-x-llm-hallucination.png[pdfwidth=40%,align=center]
 
-Um einen robusten Chatbot zu entwickeln ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methode verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Sicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheidend bewertete, Kriterien hin geprüft:
+Um einen robusten Chatbot zu entwickeln, ist es wichtig, diesen auch auf entsprechende Schwachstellen hin zu untersuchen. Wie in <<#methode-red-teaming>> beschrieben, kann dafür die Red Teaming Methode verwendet werden. Auch wenn es, wie zum Beispiel in cite:[owaspAgenticApplications] aufgelistet, viele Sicherheitsrisiken in LLM-basierten Anwendungen gibt, liegt der Fokus dieser Arbeit auf der Entwicklung eines neutralen Chatbots. In dieser Arbeit wird der entwickelte Chatbot auf vier, als entscheidend bewertete, Kriterien hin geprüft:
 
 *<<#section-korrektheit,Korrektheit>>:* Antwortet der Chatbot auf die gestellten Fragen mit den richtigen Daten? Führt er Berechnungen durch oder schlägt am Ende der Nachricht weitere Aktionen vor, die er mangels entsprechender Tools gar nicht ausführen kann?
 

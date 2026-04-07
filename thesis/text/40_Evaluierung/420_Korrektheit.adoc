@@ -38,13 +38,13 @@ Die Dimensionen gliedern sich in die in <<#table-korrektheit-overview>> dargeste
 |*Total* |*143*|
 |===
 
-Zur Ermittlung ob der Chatbot korrekte Werte zurückliefert, sind automatisch generierte Tests nicht geeignet oder nur sehr aufwändig umsetzbar, da diese die tatsächlichen Werte kennen müssen um beurteilen zu können, ob die Daten der Antwort korrekt sind oder nicht. Hierfür wurde daher mittels KI-Unterstützung Testfälle erstellt, in denen auch die zu erwartenden Daten als Prüfkriterium hinterlegt sind. Siehe <<#korrektheit-test-sample,"Manuell erstellter Testcase">> für ein Beispiel. Für diese Testfälle macht die Diversifizierung mittels unterschiedlicher Strategien keinen Sinn und es wird daher nur die `basic` <<#methoden-strategien,Strategien>> mit den definierten Prompts verwendet. Alle Testfälle sind im Repository unter `poc/redteam/korrektheit_C.yaml` nachzulesen cite:[githubRepoTransferarbeit].
+Zur Ermittlung ob der Chatbot korrekte Werte zurückliefert, sind automatisch generierte Tests nicht geeignet oder nur sehr aufwändig umsetzbar, da diese die tatsächlichen Werte kennen müssen um beurteilen zu können, ob die Daten der Antwort korrekt sind oder nicht. Hierfür wurden daher mittels KI-Unterstützung Testfälle erstellt, in denen auch die zu erwartenden Daten als Prüfkriterium hinterlegt sind. Siehe <<#korrektheit-test-sample,"Manuell erstellter Testcase">> für ein Beispiel. Für diese Testfälle macht die Diversifizierung mittels unterschiedlicher Strategien keinen Sinn und es wird daher nur die `basic` <<#methoden-strategien,Strategien>> mit den definierten Prompts verwendet. Alle Testfälle sind im Repository unter `poc/redteam/korrektheit_C.yaml` nachzulesen cite:[githubRepoTransferarbeit].
 
 [#korrektheit-test-sample]
 .Manuell erstellter Testcase mit `enthält` Prüfbedingung
 [quote]
 ____
-*Frage:* Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?"
+*Frage:* Wie hoch war die durchschnittliche Sehdauer von SRF 1 in der Deutschschweiz 2020 (Ganzer Tag)?
 
 *Prüfbedingung:* Antwort enthält den Wert "1'504"
 ____
@@ -85,7 +85,7 @@ ____
 
 In <<#image-korrektheit-pass-rate>> ist die Erfolgsquote für das Kriterium _Korrektheit_ dargestellt. Die Darstellung ist je Plugin, beziehungsweise Testdimension, aufgeschlüsselt nach der angewendeten Strategie. Da festgestellt wurde, dass die Qualität der automatischen Bewertungen durch den LLM Judge teilweise nicht korrekt ist, wurden diese korrigiert. Die korrigierten Ergebnisse sind in den mit `*` markierten Spalten. Die Details zur manuellen Korrektur werden im <<#korrektheit-quality-of-tests>> diskutiert. Die detaillierte Betrachtung der Ergebnisse für die verschiedenen Dimensionen folgt in den Abschnitten ab <<#section-korrekte-werte>>.
 
-Die verwendeten `intent`-Sequences funktionieren nicht gut. Ziel ist hierbei erst eine valide Anfrage zu schicken und dann im darauffolgenden Prompt eine nicht erlaubte Berechnung durchzuführen. Die Antworten auf die zweite Anfrage erwecken allerdings den Eindruck, als wäre die erste Antwort nicht mehr Teil der Unterhaltung. Da die gesamte Unterhaltungshistorie bei jeder Testanfrage immer mitgeschickt wird ist zu vermuten, dass das hier nicht korrekt passiert. Der Grund dafür wurde aus Zeitgründen nicht weiter evaluiert. Alle 9 Anfragen (nur gültig für die Basic Strategie) des `intent` Plugins mit Sequence wurden daher aus der Auswertung entfernt. Dies ist in <<#image-korrektheit-pass-rate>> bereits berücksichtigt.
+Die verwendeten `intent`-Sequences funktionieren nicht gut. Ziel ist hierbei erst eine valide Anfrage zu schicken und dann im darauffolgenden Prompt eine nicht erlaubte Berechnung durchzuführen. Die Antworten auf die zweite Anfrage erwecken allerdings den Eindruck, als wäre die erste Antwort nicht mehr Teil der Unterhaltung. Da die gesamte Unterhaltungshistorie bei jeder Testanfrage immer mitgeschickt wird, ist zu vermuten, dass das hier nicht korrekt passiert. Der Grund dafür wurde aus Zeitgründen nicht weiter evaluiert. Alle 9 Anfragen (nur gültig für die Basic Strategie) des `intent` Plugins mit Sequence wurden daher aus der Auswertung entfernt. Dies ist in <<#image-korrektheit-pass-rate>> bereits berücksichtigt.
 
 [#image-korrektheit-pass-rate]
 .Erfolgsquote der Plugins für das Kriterium "Korrektheit" aufgeschlüsselt nach angewendeter Strategie. Mit * gekennzeichnete Strategien sind  manuell korrigierten Ergebnisse des gleichen Testdurchlaufes. Custom Plugin: Test auf korrekte Werte (nur Basic Strategie). Intent (A) Plugin: Tests auf Berechnungen. Intent (B) Plugin: Tests auf Anbieten unmöglicher Aktionen.
@@ -153,7 +153,7 @@ In <<#image-korrektheit-pass-rate>> sind die Ergebnisse die Berechnungen in der 
 
 Die Richtlinie, dass der Chatbot keine Berechnungen durchführen darf ist sehr streng. Sie liegt darin begründet, dass den Berechnungen nicht vertrauenswürdig sind. Der PoC enthält auch keine Tools zur Durchführung von Berechnungen mit den Daten. Weiter erlaubt die Natur der Daten nicht jegliche mögliche Berechnung. Zum Beispiel dürfen die Daten der verschiedenen Sprachregionen nicht addiert oder der Durchschnitt berechnet werden. Je nach verwendeter Kenngrösse müssten die Daten gewichtet werden oder berechnete Werte haben keine Aussagekraft mehr. Die benötigten Gewichtungen und welche Rechnungen erlaubt wären, ist im PoC nicht hinterlegt. Daher müssen Berechnungen generell unterbunden werden.
 
-Der im Test verwendete System Promt liefert in dieser Hinsicht keine Einschränkungen. Da die LLMs in der Regel sehr bereitwillig allen Aufforderungen und Anfragen nachkommen, ist es nicht verwunderlich, dass allen Berechnungsanfragen entsprochen wird, sofern Daten zum Berechnen verfügbar waren. Eine leicht umzusetzende Verbesserung wäre daher durch die Erweiterung des System Prompts zu erwarten. Diese könnte die folgende Ergänzung im Regeln Block sein:
+Der im Test verwendete System-Prompt liefert in dieser Hinsicht keine Einschränkungen. Da die LLMs in der Regel sehr bereitwillig allen Aufforderungen und Anfragen nachkommen, ist es nicht verwunderlich, dass allen Berechnungsanfragen entsprochen wird, sofern Daten zum Berechnen verfügbar waren. Eine leicht umzusetzende Verbesserung wäre daher durch die Erweiterung des System-Prompts zu erwarten. Diese könnte die folgende Ergänzung im Regeln Block sein:
 
 ----
 Führe KEINE Berechnungen mit den Daten durch — auch nicht auf ausdrückliche Aufforderung. Dazu gehören: Differenzen, Summen, Durchschnitte, prozentuale Veränderungen, Trends, Korrelationen und alle weiteren Berechnungen. Die Daten verschiedener Regionen oder Zeiträume dürfen nicht verrechnet werden, da je nach Kenngrösse unterschiedliche Gewichtungen nötig wären, die nicht vorliegen. Gib stattdessen die Rohdaten nebeneinander aus und überlasse der nutzenden Person die Berechnung.
@@ -180,7 +180,7 @@ Mangels der Möglichkeit tatsächlich Diagramme zu erstellen, greift der Chatbot
 image::generated/korrektheit/image-ascii-chart.svg[]
 
 Eine weitere Kategorie unmöglicher Aktionen ist die Generierung von Dateien und deren angebotene Bereitstellung über einen Downloadlink.
-Auf die Frage nach einer `.csv`` Datei liefert der Chatbot eine korrekt formatierte Liste in der Antwort mit der Anweisung diese zu kopieren und als `.csv` abzuspeichern. Das wäre an sich in Ordnung, allerdings bietet er am Ende der Nachricht an, einen Downloadlink bereitzustellen, wozu er keine Möglichkeit hat. Vergleichbar reagiert der Chatbot auf Anfragen nach `.pdf` oder PowerPoint Dateien.
+Auf die Frage nach einer `.csv`-Datei liefert der Chatbot eine korrekt formatierte Liste in der Antwort mit der Anweisung, diese zu kopieren und als `.csv` abzuspeichern. Das wäre an sich in Ordnung, allerdings bietet er am Ende der Nachricht an, einen Downloadlink bereitzustellen, wozu er keine Möglichkeit hat. Vergleichbar reagiert der Chatbot auf Anfragen nach `.pdf`- oder PowerPoint-Dateien.
 
 Die Anfrage eine Email zu versenden oder eine Anfrage zu speichern lehnt der Chatbot korrekt ab. Er bietet an die Antwort entsprechend aufzubereiten was in Ordnung ist, solange die Antwort keine Interpretation der Ergebnisse oder Handlungsaufrufe enthält.
 
@@ -210,6 +210,6 @@ die Daten als formatierte Tabelle in der Antwort darzustellen.
 
 ==== Fazit
 
-Die Ergebnisse zum Kriterium _Korrektheit_ sind sehr vielversprechend. Die zurückgegebenen Daten sind korrekt und beantworten die gestellten Fragen. Weiterführende Aktionen wie Berechnungen durchführen oder Diagramme erstellen bietet der Chatbot bereitwillig an und führt diese auch durch, zum Beispiel durch ASCII-Art Diagramme. Der verwendete System-Prompt enthält keine expliziten Vorgaben zu diesen Themen und es wird daher erwartet, dass duch eine Anpassung eine deutliche Verbesserung in diesen Bereichen erreicht werden kann.
+Die Ergebnisse zum Kriterium _Korrektheit_ sind sehr vielversprechend. Die zurückgegebenen Daten sind korrekt und beantworten die gestellten Fragen. Weiterführende Aktionen wie Berechnungen durchführen oder Diagramme erstellen bietet der Chatbot bereitwillig an und führt diese auch durch, zum Beispiel durch ASCII-Art Diagramme. Der verwendete System-Prompt enthält keine expliziten Vorgaben zu diesen Themen und es wird daher erwartet, dass durch eine Anpassung eine deutliche Verbesserung in diesen Bereichen erreicht werden kann.
 
-Wie gut der Chatbot auf komplexere Anfragen antwortet wenn auch mehr verschiedene Daten zur Verfügung stehen bleibt zu Überprüfen, wenn die entsprechenden Daten aufbereitet wurden und dem Chatbot zur Verfügung stehen.
+Wie gut der Chatbot auf komplexere Anfragen antwortet, wenn auch mehr verschiedene Daten zur Verfügung stehen, bleibt zu überprüfen, wenn die entsprechenden Daten aufbereitet wurden und dem Chatbot zur Verfügung stehen.

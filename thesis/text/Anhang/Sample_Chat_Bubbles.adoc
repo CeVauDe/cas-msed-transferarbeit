@@ -33,7 +33,7 @@ ANFRAGE USER
 icon:robot[] Chatbot
 
 [.chat]
-ANNTWORT CHATBOT
+ANTWORT CHATBOT
 
 ****
 |

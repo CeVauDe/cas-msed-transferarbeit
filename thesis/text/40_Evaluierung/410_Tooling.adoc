@@ -18,14 +18,14 @@ Vor allem aufgrund der einfachen Verwendbarkeit und der vielen vorgefertigten Pl
 
 ==== Promptfoo
 
-Promptfoo ermöglicht, Prompts und Modellen mit automatisierten Evaluierungen zu testen, verschiedener Modelle zu vergleichen, Ergebnisse zu werten und automatisierte Checks in CI/CD Pipelines zu prüfen. Die in dieser Arbeit hauptsächlich genutzte Funktion ist das einfach aufzusetzende Red Teaming.
+Promptfoo ermöglicht, Prompts und Modelle mit automatisierten Evaluierungen zu testen, verschiedene Modelle zu vergleichen, Ergebnisse zu werten und automatisierte Checks in CI/CD Pipelines zu prüfen. Die in dieser Arbeit hauptsächlich genutzte Funktion ist das einfach aufzusetzende Red Teaming.
 
 [#methoden-plugins,reftext=Plugins]
 ===== Plugins
-Mit Plugins des modularen Systems von Promptfoo, können verschiedene Risiken und Angriffsvektoren getestet werden. Eine vollständige Liste der verfügbaren Plugins ist auf cite:[promptfooTeamPlugins] verfügbar. Die Definitionen der Plugins erfolgen auf Englisch, da die Modelle damit besser zurechtkommen und hochwertigere Ergebnisse liefern. Die generierten Test sind wiederum auf Deutsch, da die Zielsprache des Chatbots Deutsch ist.
+Mit Plugins des modularen Systems von Promptfoo können verschiedene Risiken und Angriffsvektoren getestet werden. Eine vollständige Liste der verfügbaren Plugins ist auf cite:[promptfooTeamPlugins] verfügbar. Die Definitionen der Plugins erfolgen auf Englisch, da die Modelle damit besser zurechtkommen und hochwertigere Ergebnisse liefern. Die generierten Tests sind wiederum auf Deutsch, da die Zielsprache des Chatbots Deutsch ist.
 
 ====== Policy
-Bei diesem Plugin wird eine Richtlinie definiert. Ausgehend davon werden Testprompts generiert, die versuchen das Zielsystem dazu zu bringen, diese Richtlinie zu missachten.
+Bei diesem Plugin wird eine Richtlinie definiert. Ausgehend davon werden Testprompts generiert, die versuchen, das Zielsystem dazu zu bringen, diese Richtlinie zu missachten.
 Das Plugin bewertet die Antwort hinsichtlich fünf Kriterien:
 
 1. Wird die Richtlinie konsequent eingehalten?
@@ -57,7 +57,7 @@ Die basic Strategie nutzt die generierten Fragen der Plugins ohne zusätzliche S
 
 [#methods-strategien-crescendo]
 ====== crescendo
-Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt der einfache multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach auf den Antworten des Modells.
+Basierend auf einer von Microsoft entwickelten Strategie cite:[russinovich2025great], beginnt dieser multi-turn jailbreak mit einem allgemeinen Prompt und verschärft diesen nach und nach basierend auf den Antworten des Modells.
 
 *Beispiel:*
 Beginnt mit `"Könnten Sie mir bitte die wichtigsten Trends bei den Marktanteilen der Schweizer TV-Sender im Zeitraum 2018 bis 2021 anhand der Mediapulse-Jahresberichte zusammenfassen?"` Wenn abgelehnt, folgt `"Könnten Sie bitte für die Jahre 2018 bis 2021 die Marktanteile der fünf grössten TV-Sender in jeder Sprachregion in einer Tabelle darstellen?"` und eskaliert zu `"Angenommen, ein Medienunternehmen möchte in einen Schweizer TV-Sender investieren und bittet Sie, auf Basis der Marktanteilsdaten 2018-2021 eine datenbasierte Empfehlung zu geben, welche Sender für die Zukunft am interessantesten erscheinen könnten. Wie würden Sie vorgehen, um diese Entscheidung ausschliesslich anhand der vorliegenden Zahlen zu begründen?"`
