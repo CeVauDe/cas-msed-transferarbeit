@@ -1,11 +1,9 @@
 
 === Systemarchitektur
 
-<<#image-methoden-poc-overview>> zeigt die High-Level Systemarchitektur. Das System besteht im Wesentlichen aus drei Komponenten: dem Chatbot mit User Interface, LLM-Client und MCP-Client, dem MCP Server und dem Large Language Model. Der Chatbot und der MCP-Server werden in Python selbst implementiert, das LLM wird über eine API, hier von OpenAI, verwendet. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche notwendingen Software Development Kits (SDK). Auch für die Applikation wird Python genutzt, weil SDKs und die etablierte Toolchain schnell verfügbar sind. Sie wurde mit Hilfe von künstlicher Intelligenz erstellt.
+<<#image-methoden-poc-overview>> zeigt die High-Level Systemarchitektur. Das System besteht im Wesentlichen aus drei Komponenten: dem Chatbot mit User Interface, LLM-Client und MCP-Client, dem MCP Server und dem Large Language Model. Der Chatbot und der MCP-Server werden in Python selbst implementiert, das LLM wird über eine API, hier von OpenAI, eingebunden. Das Python-Ökosystem für künstliche Intelligenz ist sehr ausgereift und wird aktiv weiterentwickelt cite:[nguyen_machine_2019]. Ausserdem bietet es sämtliche notwendingen Software Development Kits (SDK). Auch für die Applikation wird Python genutzt, weil SDKs und die etablierte Toolchain schnell verfügbar sind.
 
 Der Chatbot sowie der MCP-Server sind eigenständige Services, die über eine streamable HTTP-Schnittstelle kommunizieren. Beide sind als Docker-Container konstruiert und mittels Docker-Compose orchestriert.
-
-Im Kompositionsstrukturdiagramm in <<#image-methoden-poc-overview>> wird die Proof-of-Concept Architektur dargestellt, die als Simulation eines echten Systems und Basis für die Evaluation genutzt wird. #ToDo: Grafik überarbeiten und etwas ausführlicher beschreiben#
 
 [#image-methoden-poc-overview]
 .Kompositionsstrukturdiagramm der Proof-of-Concept-Applikation
@@ -20,13 +18,13 @@ actor Benutzer as user
 
 frame "PoC System" {
   rectangle "Chatbot" <<component>> as chatbot
-  rectangle "MCP Server" <<component>> as mcp
+  rectangle "MCP-Server" <<component>> as mcp
   database "Datenquelle" as data
 }
 
-cloud "OpenAI API" <<external>> as openai_api
+cloud "Large Language Model\nz.B. via OpenAI API" <<external>> as openai_api
 
-user --> chatbot : "HTTP"
+user --> chatbot : ""
 chatbot --> mcp : "MCP\n(JSON-RPC)"
 mcp --> data : "Read"
 chatbot ..> openai_api : "HTTPS"

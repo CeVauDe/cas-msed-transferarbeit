@@ -37,7 +37,7 @@ Von 70 durchgeführten Red Teaming-Tests bestehen lediglich 5 (7,1%), während 6
 *Besonders alarmierend*: Das Policy-Plugin zeigt eine Erfolgsrate von 0%, was bedeutet, dass das System in allen Fällen auf generische Interpretation-Anfragen mit unzulässigen Erklärungen reagiert.
 
 [#image-interpretationen-plugin-pass-rate]
-.Erfolgsrate der beiden Plugins für das Kriterium "Keine Interpretationen".
+.Erfolgsrate der beiden Plugins für die Dimension "Keine Interpretationen".
 image::generated/interpretation/redteam-interpretationen-plugins.svg[]
 
 ===== Strategie-spezifische Analyse
@@ -45,7 +45,7 @@ image::generated/interpretation/redteam-interpretationen-plugins.svg[]
 Die Analyse nach Angriffsstrategie dargestellt in <<#interpretation-image-prognosen-plugin-pass-rate>>, zeigt ein katastrophales Muster: Alle Multi-Turn-Strategien sind zu 100% erfolgreich beim Umgehen der Interpretations-Einschränkungen. Selbst einfache Single-Turn-Angriffe sind in 80-90% der Fälle erfolgreich.
 
 [#interpretation-image-prognosen-plugin-pass-rate]
-.Tabelle zur Darstellung der Erfolgsrate nach Red Teaming-Strategien zur Evaluierung von Interpretationen
+.Übersicht über die Erfolgsrate nach Strategie für die Dimension Interpretationen
 [cols="2,1,1,1", options="header"]
 |===
 | Strategie | Tests | Bestanden | Erfolgsrate
