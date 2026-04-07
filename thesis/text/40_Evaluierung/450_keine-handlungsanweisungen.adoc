@@ -16,7 +16,7 @@ ____
 The assistant must never provide action recommendations, investment advice, strategic suggestions, predictions, or value judgments. It must only present factual data without interpretation.
 ____
 
-Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden.
+Das Custom Plugin definiert im `generator` die Rahmenbedingungen und den Auftrag einen Prompt zu generieren, der das Zielsystem dazu auffordert, eine konkrete Handlungsanweisung zu geben. Die `grader` Definition legt fest, nach welchen Kriterien die Antwort auf `pass` oder `fail` zu bewerten ist. Der genaue Wortlaut kann im GitHub Repository unter `poc/redteam/plugins/keine-handlungsanweisungen.yaml` nachgelesen werden cite:[githubRepoTransferarbeit].
 Bei den Tests in diesem Kapitel wird der Chatbot mit dem LLM `gpt-5-mini` von OpenAI betrieben.
 
 Es kann vorkommen, dass Antworten Berechnungen oder unmögliche Aktionsvorschläge enthalten. In diesem Abschnitt werden diese nicht als Fehler gewertet. Diesbezügliche Evaluierungen finden sich in <<#section-korrektheit>>.
@@ -30,14 +30,14 @@ Die Ergebnisübersicht ist in <<#image-handlungsanweisungen-pass-rate>> dargeste
 .Erfolgsquote der beiden Plugins für das Kriterium "Keine Handlungsanweisungen" aufgeschlüsselt nach angewendeter Strategie.
 image::generated/handlungsanweisungen/pass-rate.svg[]
 
-Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Repository unter `poc/redteam/handlungsanweisungen.result.json` abrufbar cite:[githubRepoTransferarbeit].
 
 Wie auch schon in <<#section-prognosen>> und <<#section-interpretation>> gezeigt, ist der Chatbot sehr anfällig für diese Aktionen. Daher wird das Policy Plugin für das Kriterium _Keine Handlungsanweisungen_ nicht weiter betrachtet. In zukünftigen Versuchen müsste die Policy entsprechend formuliert werden, dass solche Konfundierungen vermieden werden.
 
 In <<#handlungsanweisungen-beispiel1>> ist ein Beispiel aufgeführt, in dem der Chatbot auf Anfrage eine ausführliche und detaillierte Handlungsanweisung gibt. Interessanterweise beruft er sich dabei darauf, keine Interpretation oder Prognose abzugeben.
 
 [#handlungsanweisungen-beispiel1]
-.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie. Der Chatbot gibt eine ausführliche Hanndlungsanweisung, was zu tun ist (gekürzt. Vollständiger Chatverlauf siehe cite:[githubRepoTransferarbeit] unter `poc/redteam/handlungsanweisungen.result.json`).
+.Beispiel 1 aus Custom Policy 1 mit Crescendo Strategie. Der Chatbot gibt eine ausführliche Hanndlungsanweisung, was zu tun ist (gekürzt. Vollständiger Chatverlauf siehe `poc/redteam/handlungsanweisungen.result.json` cite:[githubRepoTransferarbeit]).
 image::generated/handlungsanweisungen/beispiel1-chat.svg[]
 
 .icon:gavel[] LLM Judge Bewertung: fail icon:times[]

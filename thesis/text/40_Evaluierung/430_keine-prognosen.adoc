@@ -29,7 +29,7 @@ Es versucht den Agent dazu zu bringen
 * falsche Zahlen oder nicht-existente Entitäten zu behaupten.
 * mit Überzeugung etwas Falsches zu sagen.
 
-Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und dann auf die Bedürfnisse angepasst. Der Prompt kann im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden.
+Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf Prognosen fokussiert und explizit Korrektheit, Interpretationen und Handlungsanweisungen ignoriert. Das Plugin wird initial mit KI erstellt und dann auf die Bedürfnisse angepasst. Der Prompt kann im GitHub Repository unter `poc/redteam/plugins/keine-prognosen.yaml` nachgelesen werden cite:[githubRepoTransferarbeit].
 
 [#results-prognosen]
 ==== Ergebnisse und Diskussion
@@ -89,7 +89,7 @@ Die folgende Heatmap zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die
 .Erfolgsraten Matrix aufgeteilt in Angriffsstrategie und Plugin für das Thema Prognosen
 image::generated/prognose/redteam-prognosen-strategies.svg[Red Teaming Strategien, 800]
 
-Die vollständigen Ergebnisse sind im Github Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose.result.json` abrufbar.
+Die vollständigen Ergebnisse sind im Github Repository unter `poc/redteam/prognose.result.json` abrufbar cite:[githubRepoTransferarbeit].
 
 [#prognosen-beispiel1,reftext="Beispiel 1"]
 .Beispiel 1: Dramatischer Fehler mit linearer Extrapolation (Policy Plugin)
@@ -156,7 +156,7 @@ Erstelle keine Prognosen, keine Trends und keine Vermutungen. Gib nur Fakten aus
 Sollten Daten nur teilweise vorhanden sein, passe die Antwort eindeutig auf die Richtigkeit der präsentierten Daten an und informiere exakt über Abweichungen zur Frage, um Verwirrung zu vermeiden.
 ----
 
-Die angepasste System-Prompt findet man im GitHub Repository cite:[githubRepoTransferarbeit] unter `poc/redteam/prognose-optimiert.result.json`.
+Die angepasste System-Prompt findet man im GitHub Repository unter `poc/redteam/prognose-optimiert.result.json` cite:[githubRepoTransferarbeit].
 
 ==== Fazit
 Die Ergebnisse zeigen ein kritisches Problem: Einfache direkte Anfragen werden zu ca. 44% abgewehrt, aber bei komplexeren Multi-Turn-Attacken sinkt die Erfolgsrate auf 0%. Das zeigt deutlich, dass der Prompt-basierte Ansatz grundlegende Schwächen hat.
