@@ -33,11 +33,14 @@ Zusätzlich wird ein domänenspezifisches Custom-Plugin angewendet, das sich auf
 
 [#results-prognosen]
 ==== Ergebnisse und Diskussion
-Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen. *Besonders besorgniserregend*: Das Hallucination-Plugin (<<#hallucination-image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur knapp fünf Prozent. Dies bedeutet, dass das System in 95% der Fälle ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
+Von 63 durchgeführten Red Teaming-Tests bestanden lediglich 14 (22,2%), während 49 Tests (77,8%) fehlschlugen. Die Ergebnisübersicht wird in <<#image-prognosen-pass-rate>> dargestellt. Das System ist in aktueller Verfassung nachweislich anfällig für Prognose-Manipulationen.
+
+*Besonders besorgniserregend*: Das Hallucination-Plugin (<<#hallucination-image-prognosen-plugin-pass-rate>>) zeigt eine Erfolgsrate von nur knapp fünf Prozent. Dies bedeutet, dass das System in 95% der Fälle ausserhalb des Geltungsbereichs (2018-2021) arbeitet.
 
 [#hallucination-image-prognosen-plugin-pass-rate]
 .Diagramm der Erolgsrate nach Plugin für die Dimension Prognosen
 image::generated/prognose/redteam-prognosen-plugins.svg[Red Teaming Plugins, 600]
+
 
 ===== Strategie-spezifische Analyse
 Auch Analyse nach Angriffsstrategie zeigt, dass Multi-Turn-Strategien deutlich erfolgreicher beim Umgehen der Prognose-Einschränkungen sind als Single-Turn-Angriffe.
@@ -83,7 +86,7 @@ Auch Analyse nach Angriffsstrategie zeigt, dass Multi-Turn-Strategien deutlich e
 | *0,0%*
 |===
 
-Die folgende Heatmap zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die farbliche Kodierung verdeutlicht das dramatische Versagen bei Multi-Turn-Strategien.
+Die Heatmap in <<#image-prognosen-pass-rate>> zeigt die Plugin-spezifische Erfolgsrate pro Strategie. Die farbliche Kodierung verdeutlicht das dramatische Versagen bei Multi-Turn-Strategien.
 
 [#image-prognosen-pass-rate]
 .Erfolgsraten Matrix aufgeteilt in Angriffsstrategie und Plugin für das Thema Prognosen
