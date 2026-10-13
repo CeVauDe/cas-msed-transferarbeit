@@ -1,7 +1,7 @@
 # ============================================================
 # Stage 1: Download raw data and transform to Parquet (v2)
 # ============================================================
-FROM python:3.14-slim AS data-builder
+FROM python:3.15-slim AS data-builder
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
@@ -25,7 +25,7 @@ RUN uv run --package mcp-server python apps/mcp_server/src/tools/download_data.p
 # ============================================================
 # Stage 2: Production image
 # ============================================================
-FROM python:3.14-slim
+FROM python:3.15-slim
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
